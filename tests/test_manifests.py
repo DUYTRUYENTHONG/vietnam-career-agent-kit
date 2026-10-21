@@ -49,6 +49,7 @@ class ManifestTests(unittest.TestCase):
         entry=result['manifest']['entries'][0]
         intent={key:entry[key] for key in ['job_id','destination','document_sha256','answers_sha256','consents_sha256']}
         intent['action']='upload'
+        intent['schema_version']='1.0'
         self.assertTrue(self.work.check_manifest(result['fingerprint'],intent).data['approved'])
         for key in ['destination','document_sha256','answers_sha256','consents_sha256']:
             bad={**intent,key:'different'}
@@ -109,11 +110,18 @@ class ManifestTests(unittest.TestCase):
         self.assertTrue(self.work.create_manifest(plan).data['approved'])
         self.assertTrue(self.work.check_manifest(result['fingerprint']).data['approved'])
 
-    def test_changed_export_profile_job_and_removed_review_block_existing_approval(self):
+    def test_changed_export_and_closed_job_block_existing_approval(self):
         result=self.work.create_manifest(self.plan()).data;self.approve(result)
         exported=self.root/result['file']['path']
         exported.write_text('{}',encoding='utf8')
         with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])
         exported.write_text(json.dumps(result['manifest']),encoding='utf8')
         self.work.set_liveness(1,'closed',self.work.get_job(1)['version'])
+        with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])
+
+    def test_changed_candidate_preferences_invalidate_existing_scope(self):
+        result=self.work.create_manifest(self.plan()).data;self.approve(result)
+        profile=self.work.inspect_profile().data['profile']
+        profile['preferences']['availability']='Different fictional availability'
+        self.work.import_profile(profile)
         with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])

@@ -62,8 +62,10 @@ class DocumentTests(unittest.TestCase):
             with self.assertRaises(WorkflowError):self.work.review_documents(result['render_id'],file)
 
     def test_renderer_failure_does_not_register_partial_artifacts(self):
-        with patch('core.documents.render_files',side_effect=WorkflowError('failed','fictional converter timeout')):
-            with self.assertRaises(WorkflowError):self.work.render(1)
+        for error in [WorkflowError('failed','fictional converter timeout'),RuntimeError('fictional native library failure')]:
+            with patch('core.documents.render_files',side_effect=error):
+                with self.assertRaises(WorkflowError) as failure:self.work.render(1)
+                self.assertEqual('failed',failure.exception.outcome)
         with self.work._db() as db:
             self.assertEqual(0,db.execute('SELECT count(*) FROM document_sets').fetchone()[0])
         self.assertEqual('review_required',self.work.get_job(1)['state'])

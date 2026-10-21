@@ -131,6 +131,16 @@ def execute(args) -> Outcome:
                 '| Job | State | Draft stale |','|---|---|---|']
             for job in result.data['jobs']:
                 lines.append(f"| {work.literal(job['employer']+' — '+job['title'])} | {job['state']} | {job['draft_stale']} |")
+            if result.data.get('document_sets'):
+                lines += ['','## '+('Tài liệu' if vi else 'Documents'),'',
+                    '| Render | Reviewed | Stale |','|---|---|---|']
+                for item in result.data['document_sets']:
+                    lines.append(f"| {item['render_id']} | {item.get('reviewed',False)} | {item['stale']} |")
+            if result.data.get('manifests'):
+                lines += ['','## '+('Phê duyệt cục bộ' if vi else 'Local approvals'),'',
+                    '| Manifest | Approved | Execution enabled |','|---|---|---|']
+                for item in result.data['manifests']:
+                    lines.append(f"| {item['fingerprint']} | {item['approved']} | False |")
             content='\n'.join(lines)+'\n'
         target=work.atomic_text(args.output,content)
         return Outcome(result.outcome,{'path':str(target.relative_to(work.data_dir)),

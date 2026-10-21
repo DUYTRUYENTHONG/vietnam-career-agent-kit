@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Slice 2 review and manifest plan inputs 1.0",
+  "description": "Editor input shapes; shared core additionally checks source/current artifact hashes, complete ordered pages, UTC/freshness/expiry, finite modes/limits, exact hosts and candidate evidence. Select a named definition.",
+  "schema_version": "1.0",
+  "$defs": {
+    "document_review": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "render_fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewed_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "checks": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "const": true
+            },
+            "layout": {
+              "const": true
+            },
+            "glyphs": {
+              "const": true
+            },
+            "language": {
+              "const": true
+            }
+          },
+          "required": [
+            "content",
+            "layout",
+            "glyphs",
+            "language"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "render_fingerprint",
+        "reviewed_pages",
+        "checks"
+      ],
+      "additionalProperties": false
+    },
+    "campaign_plan": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "campaign_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "mode": {
+          "enum": [
+            "ASSIST",
+            "APPROVED_BATCH"
+          ]
+        },
+        "expires_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "submission_limit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "job_id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "render_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "format": {
+                "enum": [
+                  "docx",
+                  "pdf"
+                ]
+              },
+              "destination": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://"
+              },
+              "operations": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "fill",
+                    "upload",
+                    "submit"
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 3,
+                "uniqueItems": true
+              },
+              "answers": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "source": {
+                      "enum": [
+                        "profile_fact",
+                        "candidate_confirmed"
+                      ]
+                    },
+                    "fact_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "\\S"
+                      },
+                      "uniqueItems": true
+                    },
+                    "kind": {
+                      "const": "ordinary"
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "source",
+                    "fact_ids",
+                    "kind"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required_answers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "uniqueItems": true
+              },
+              "consents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "\\S"
+                    },
+                    "text": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "\\S"
+                    },
+                    "choice": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "text",
+                    "choice"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "policy": {
+                "type": "object",
+                "properties": {
+                  "permission": {
+                    "const": "permitted"
+                  },
+                  "source": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://"
+                  },
+                  "checked_utc": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "allowed_operations": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "fill",
+                        "upload",
+                        "submit"
+                      ]
+                    },
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "permission",
+                  "source",
+                  "checked_utc",
+                  "allowed_operations"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "job_id",
+              "render_id",
+              "format",
+              "destination",
+              "operations",
+              "answers",
+              "required_answers",
+              "consents",
+              "policy"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "schema_version",
+        "campaign_id",
+        "mode",
+        "expires_utc",
+        "submission_limit",
+        "entries"
+      ],
+      "additionalProperties": false
+    },
+    "intent": {
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "destination": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "action": {
+          "enum": [
+            "fill",
+            "upload",
+            "submit"
+          ]
+        },
+        "document_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "answers_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "consents_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "schema_version": {
+          "const": "1.0"
+        }
+      },
+      "required": [
+        "job_id",
+        "destination",
+        "action",
+        "document_sha256",
+        "answers_sha256",
+        "consents_sha256",
+        "schema_version"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

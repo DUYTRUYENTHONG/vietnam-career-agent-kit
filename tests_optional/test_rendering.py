@@ -42,9 +42,19 @@ class RenderTests(unittest.TestCase):
         soffice=os.environ['CAREER_KIT_SOFFICE']
         for candidate in ['a','b']:
             with self.subTest(candidate=candidate):
-                private=self.root/candidate;demo(private,candidate)
-                self.cli(private,'init')
-                rendered=self.cli(private,'render','--job-id','1','--soffice',soffice)
+                private=self.root/candidate
+                if candidate=='b':
+                    result=subprocess.run([sys.executable,str(ROOT/'scripts/demo_slice2.py'),
+                        '--candidate','b','--data-dir',str(private),'--soffice',soffice],
+                        capture_output=True,encoding='utf8',timeout=120,cwd=self.root)
+                    self.assertEqual(0,result.returncode,result.stdout+result.stderr)
+                    rendered=json.loads(result.stdout)['data']['render']
+                    template=json.loads((private/'document-review.json').read_text(encoding='utf8'))
+                    self.assertFalse(any(template['checks'].values()))
+                else:
+                    demo(private,candidate)
+                    self.cli(private,'init')
+                    rendered=self.cli(private,'render','--job-id','1','--soffice',soffice)
                 self.assertGreaterEqual(rendered['page_count'],1)
                 self.export_qa('candidate-'+candidate,private/rendered['files']['pdf']['path'].rsplit('/',1)[0],rendered)
                 # This assertion is a fictional test input, not a claim of human visual review.
@@ -66,6 +76,8 @@ class RenderTests(unittest.TestCase):
                 proof=private/'approval.txt';proof.write_text('APPROVE MANIFEST '+manifest['fingerprint'],encoding='utf8')
                 self.cli(private,'approve-manifest','--fingerprint',manifest['fingerprint'],'--confirmation',str(proof))
                 self.assertFalse(self.cli(private,'check-manifest','--fingerprint',manifest['fingerprint'])['execution_enabled'])
+                report=self.cli(private,'report','--format','md','--output','reports/rendered.md')
+                self.assertIn(manifest['fingerprint'],(private/report['path']).read_text(encoding='utf8'))
                 self.assertEqual(2,len(self.cli(private,'handoff','--job-id','1',code=2)['documents']))
                 self.cli(private,'reject-documents','--render-id',rendered['render_id'],'--reason','Fictional rejection test')
                 self.cli(private,'check-manifest','--fingerprint',manifest['fingerprint'],code=2)
@@ -85,7 +97,9 @@ class RenderTests(unittest.TestCase):
         work=Documents(private);work.init()
         with self.assertRaises(WorkflowError) as absent:work.render(1,self.root/'missing-converter')
         self.assertEqual('manual_required',absent.exception.outcome)
-        with patch('core.rendering.subprocess.run',side_effect=subprocess.TimeoutExpired('fixture',90)):
+        with patch('core.rendering.subprocess.run',side_effect=[
+                subprocess.CompletedProcess('fixture',0,stdout='Fictional converter'),
+                subprocess.TimeoutExpired('fixture',90)]):
             with self.assertRaises(WorkflowError) as timed:work.render(1,Path(sys.executable))
         self.assertEqual('failed',timed.exception.outcome)
         with work._db() as db:self.assertEqual(0,db.execute('SELECT count(*) FROM document_sets').fetchone()[0])

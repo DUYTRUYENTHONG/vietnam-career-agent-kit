@@ -184,12 +184,13 @@ class Campaign(Documents):
         if not approval or approval['revoked_utc']:
             raise WorkflowError('blocked','No current explicit approval for this exact manifest')
         if intent is not None:
-            keys={'job_id','destination','action','document_sha256','answers_sha256','consents_sha256'}
+            keys={'schema_version','job_id','destination','action','document_sha256','answers_sha256','consents_sha256'}
             object_fields(intent,keys,set(),'disclosure intent')
+            version(intent,'disclosure intent')
             choice(intent['action'],OPERATIONS,'intent.action')
             entry=next((r for r in manifest['entries'] if type(intent['job_id']) is int and r['job_id']==intent['job_id']),None)
             if (not entry or intent['action'] not in entry['operations'] or
-                    any(intent[key]!=entry[key] for key in keys-{'action'})):
+                    any(intent[key]!=entry[key] for key in keys-{'action','schema_version'})):
                 raise WorkflowError('blocked','Intent differs from the approved job, destination, CV, answers, consents or operation')
         return Outcome('ok',{'fingerprint':fingerprint,'approved':True,'execution_enabled':False,
             'mode':manifest['mode'],'submission_limit':manifest['submission_limit'],'expires_utc':manifest['expires_utc']},
