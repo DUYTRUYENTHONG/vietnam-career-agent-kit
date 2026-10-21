@@ -263,7 +263,7 @@ class Preparation(Kit):
         if job['country'].upper()!='VN' or job['liveness']=='closed':classification='Ineligible'
         if job['employer'].casefold() in [x.casefold() for x in prefs.get('excluded_employers') or []]:
             constraints.append('Explicit employer exclusion');classification='Ineligible'
-        if job.get('industry','').casefold() in [x.casefold() for x in prefs.get('excluded_industries') or []]:
+        if (job.get('industry') or '').casefold() in [x.casefold() for x in prefs.get('excluded_industries') or []]:
             constraints.append('Explicit industry exclusion');classification='Ineligible'
         for pref,field in [('work_models','work_model'),('employment_types','employment_type')]:
             allowed=prefs.get(pref)
@@ -307,6 +307,8 @@ class Preparation(Kit):
     def prepare(self, job_id: int, raw: Any) -> Outcome:
         profile=self.confirmed_profile()
         job,job_hash=self.job_document(job_id)
+        if self.get_job(job_id)['state'] in {'confirmed_submitted','user_reported_submitted','submission_uncertain'}:
+            raise WorkflowError('blocked','Existing submitted/uncertain application requires reconciliation, not another draft')
         plan=object_fields(raw,{'schema_version','language','fact_ids'},set(),'draft plan')
         version(plan,'draft plan')
         choice(plan['language'],{'en','vi'},'draft language')
@@ -381,6 +383,8 @@ class Preparation(Kit):
             'Trạng thái được khôi phục; chưa gửi hồ sơ.' if self.language()=='vi' else 'Checkpoint loaded; no application inferred.')
 
     def handoff(self, job_id: int) -> Outcome:
+        if self.get_job(job_id)['state'] in {'confirmed_submitted','user_reported_submitted','submission_uncertain'}:
+            raise WorkflowError('blocked','Existing submitted/uncertain application must not receive another application handoff')
         state=self.resume()
         row=next((job for job in state.data['jobs'] if job['id']==job_id),None)
         if row is None or row['draft'] is None:
@@ -388,7 +392,9 @@ class Preparation(Kit):
         if row['draft_stale']:
             raise WorkflowError('blocked','Draft/profile/JD bytes changed; review and regenerate the affected package')
         return Outcome('manual_required',{'job_id':job_id,'employer':row['employer'],'source_url':row['url'],
-            'application_destination':None,'documents':row['draft']['files'],'approved':False,'submitted':False,
+            'application_destination':None,'documents':{'cv':row['draft']['files']['cv']},
+            'review_artifacts':{key:value for key,value in row['draft']['files'].items() if key!='cv'},
+            'approved':False,'submitted':False,
             'next_steps':['Review Markdown and source matrix; render the employer-required file format.',
                 'Manually verify the actual application destination, vacancy and form questions.',
                 'Approve exact disclosures/consents before any upload. No live browser adapter is enabled.']},

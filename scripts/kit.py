@@ -91,6 +91,12 @@ def execute(args) -> Outcome:
     if command=='resume':return work.resume()
     if command=='handoff':return work.handoff(args.job_id)
     if command=='report':
+        if args.output:
+            target=work.inside(args.output)
+            expected_suffix='.'+args.format
+            if (Path(args.output).is_absolute() or not target.is_relative_to(work.data_dir/'reports') or
+                    target.suffix!=expected_suffix):
+                raise WorkflowError('blocked','Report output must be a relative reports/ path with the selected .json or .md extension; tracker/evidence/drafts are protected')
         result=work.resume()
         if not args.output:return result
         if args.format=='json':content=json.dumps(result.json(),ensure_ascii=False,indent=2)

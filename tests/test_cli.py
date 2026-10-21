@@ -52,3 +52,10 @@ class CLITests(unittest.TestCase):
         self.assertEqual('Unsupported',doctor['data']['native_compatibility'])
         self.assertFalse(doctor['data']['browser_execution'])
         self.run_cli('prepare','--job-id','invalid','--plan',str(FIX/'plan.json'),code=2)
+
+    def test_report_cannot_overwrite_tracker_or_evidence(self):
+        self.run_cli('init')
+        for target in ['workflow.sqlite3','evidence/source.txt','../other-person/report.md']:
+            result=self.run_cli('report','--output',target,code=2)
+            self.assertEqual('blocked',result['outcome'])
+        self.assertEqual(0,self.run_cli('status')['data']['jobs'])
