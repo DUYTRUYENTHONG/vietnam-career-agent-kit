@@ -21,6 +21,13 @@ Local resume/report and SQLite schema 3. Execution records distinguish durable a
 
 Read resume before continuing. Check current source/profile/JD/artifact fingerprints and prior applications. Keep prepared/approved/confirmed/user-reported/unknown distinct. Report exceptions/coverage and next action. Preserve submitted snapshots and never infer submission from a draft/upload/click.
 
+For a campaign spanning batches, follow ../../../docs/campaign-continuity.md.
+Keep a user-requested persistent goal and private checkpoint tied to the same
+canonical ledger. Count only qualifying confirmed new submissions toward the
+target; keep prior reports and uncertain attempts separate. A finished batch is
+a checkpoint, not campaign completion. Continue independent authorized work past
+blocked vacancies without widening execution scope or repeating final attempts.
+
 ## Outputs
 
 Return a timestamped Markdown tracker table after every application pass, including

@@ -15,6 +15,11 @@ Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job sea
 catch-up table. [Measurements and architecture](docs/PERFORMANCE.md) distinguish
 local gains from unmeasured live-browser time.
 
+**Campaign continuity:** [goals and checkpoints](docs/campaign-continuity.md)
+guide successive finite batches, resume from one private ledger, and count only
+confirmed new submissions toward a user-selected target. Persistent goals require
+a supported host; this guidance does not add a scheduler or browser worker.
+
 **Not yet implemented:** PDF/DOCX CV extraction, network job connectors, standalone unattended browser workers and verified employer-specific adapters. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice

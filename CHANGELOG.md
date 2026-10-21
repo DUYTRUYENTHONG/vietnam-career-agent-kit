@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Document campaign continuity across finite batches: explicit host goals, private checkpoints, confirmed-new counting, duplicate recovery and continued independent work past blocked vacancies. Update discovery/tracking skills and startup guidance without adding a scheduler, changing execution authorization or publishing candidate data.
+
 - Establish a standing skill/feature update workflow, descriptive commit convention and GitHub PR template covering documentation, source evidence, checks and publication status.
 
 - Replace full-workspace scans on selected CV/render/handoff paths with shared targeted draft validation. A 100-draft fictional benchmark reduces JD reads from 101 to 2 per content check.
