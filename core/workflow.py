@@ -32,7 +32,7 @@ class Preparation(Kit):
         if self.db_path.exists():
             with self._db() as db:
                 current = db.execute('PRAGMA user_version').fetchone()[0]
-                if current > 1:
+                if current > 2:
                     raise WorkflowError('blocked', 'Workspace schema is newer than this toolkit; use a compatible version')
         super().init()
         statements = [
@@ -48,7 +48,8 @@ class Preparation(Kit):
             for statement in statements:
                 db.execute(statement)
             db.execute('INSERT OR IGNORE INTO workspace_meta VALUES(?,?)', ('language', language))
-            db.execute('PRAGMA user_version=1')
+            if db.execute('PRAGMA user_version').fetchone()[0]<1:
+                db.execute('PRAGMA user_version=1')
             self._event(db, 'workspace_initialized', 'workspace', 'schema1 additive; no external operations')
             db.commit()
         return Outcome('ok', {'workspace':str(self.data_dir),'schema':1,'language':self.language()}, [],
