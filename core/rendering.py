@@ -41,6 +41,11 @@ def build_docx(content, path):
     document.add_paragraph(content['section'],'Heading 1')
     for claim in content['claims']:
         document.add_paragraph('- '+claim)
+    # The library template may carry inherited blue Title rules. Whitespace,
+    # rather than theme-dependent borders, separates this simple CV layout.
+    for element in [document.styles.element,document.element]:
+        for border in element.xpath('.//w:pBdr'):
+            border.getparent().remove(border)
     document.save(path)
     reopened=Document(path)
     if [p.text for p in reopened.paragraphs]!=paragraphs(content):

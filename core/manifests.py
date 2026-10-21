@@ -133,8 +133,10 @@ class Campaign(Documents):
             self._event(db,'manifest_prepared',fingerprint,'local finite scope; no external action')
             db.commit()
         path=self.atomic_text('manifests/'+fingerprint+'.json',json.dumps(manifest,ensure_ascii=False,indent=2))
+        with self._db() as db:
+            existing=db.execute('SELECT revoked_utc FROM campaign_approvals WHERE fingerprint=?',(fingerprint,)).fetchone()
         return Outcome('ok',{'fingerprint':fingerprint,'manifest':manifest,'file':self.file_record(path),
-            'approved':False,'execution_enabled':False},[])
+            'approved':bool(existing and existing['revoked_utc'] is None),'execution_enabled':False},[])
 
     def current_manifest(self,fingerprint):
         text(fingerprint,'fingerprint')
@@ -167,6 +169,9 @@ class Campaign(Documents):
             raise WorkflowError('blocked','Exact approval proof must be inside this private workspace and match the reviewed manifest fingerprint')
         with self._db() as db:
             db.execute('BEGIN IMMEDIATE');self.current_manifest(fingerprint)
+            previous=db.execute('SELECT revoked_utc FROM campaign_approvals WHERE fingerprint=?',(fingerprint,)).fetchone()
+            if previous and previous['revoked_utc'] is not None:
+                raise WorkflowError('blocked','Revoked/superseded scope cannot reuse an old confirmation; create and review a new manifest with a fresh expiry')
             db.execute('INSERT OR REPLACE INTO campaign_approvals VALUES(?,?,NULL,NULL)',(fingerprint,utc_now()))
             self._event(db,'manifest_approved',fingerprint,'local bookkeeping; human provenance not authenticated; execution unavailable')
             db.commit()

@@ -55,6 +55,7 @@ class ManifestTests(unittest.TestCase):
             with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'],bad)
         self.work.revoke_manifest(result['fingerprint'],'Candidate revoked')
         with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])
+        with self.assertRaises(WorkflowError):self.approve(result)
 
     def test_expired_unknown_salary_manual_policy_and_assist_submit_are_blocked(self):
         invalid=[]
@@ -101,3 +102,18 @@ class ManifestTests(unittest.TestCase):
         self.work.reject_documents(self.render['render_id'],'Fictional layout issue found')
         with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])
         self.assertFalse(self.work.resume().data['manifests'][0]['approved'])
+
+    def test_idempotent_creation_and_upgrade_preserve_unchanged_approval(self):
+        plan=self.plan();result=self.work.create_manifest(plan).data;self.approve(result)
+        self.work.init('vi')
+        self.assertTrue(self.work.create_manifest(plan).data['approved'])
+        self.assertTrue(self.work.check_manifest(result['fingerprint']).data['approved'])
+
+    def test_changed_export_profile_job_and_removed_review_block_existing_approval(self):
+        result=self.work.create_manifest(self.plan()).data;self.approve(result)
+        exported=self.root/result['file']['path']
+        exported.write_text('{}',encoding='utf8')
+        with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])
+        exported.write_text(json.dumps(result['manifest']),encoding='utf8')
+        self.work.set_liveness(1,'closed',self.work.get_job(1)['version'])
+        with self.assertRaises(WorkflowError):self.work.check_manifest(result['fingerprint'])
