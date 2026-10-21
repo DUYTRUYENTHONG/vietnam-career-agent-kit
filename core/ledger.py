@@ -326,5 +326,3 @@ class Kit:
         if not isinstance(value, dict):
             raise ValueError("JSON document must be an object")
         return value
-
-
