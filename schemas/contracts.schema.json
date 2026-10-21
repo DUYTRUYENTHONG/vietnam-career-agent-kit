@@ -1,0 +1,783 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vietnam Career Agent Kit contracts 1.0",
+  "description": "Editor/tool input shapes. core/contracts.py also enforces source quotes, stable IDs, exact matrix coverage and cross-record constraints. Select a named $defs entry.",
+  "schema_version": "1.0",
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "language": {
+          "enum": [
+            "en",
+            "vi"
+          ]
+        },
+        "contacts": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "phone": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "portfolio": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "preferences": {
+          "type": "object",
+          "properties": {
+            "target_roles": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "preferred_cities": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "work_models": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "employment_types": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "excluded_employers": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "excluded_industries": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "existing_applications": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "seniority": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "relocation": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "remote_eligibility": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "notice_period": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "availability": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "work_authorization": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "document_language": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "salary": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0
+                    },
+                    "currency": {
+                      "enum": [
+                        null,
+                        "VND",
+                        "USD"
+                      ]
+                    },
+                    "period": {
+                      "enum": [
+                        null,
+                        "monthly",
+                        "annual"
+                      ]
+                    },
+                    "gross_net": {
+                      "enum": [
+                        null,
+                        "gross",
+                        "net"
+                      ]
+                    },
+                    "bonus": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1,
+                          "pattern": "\\S"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "amount",
+                    "currency",
+                    "period",
+                    "gross_net",
+                    "bonus"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "field": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "claim": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "source_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "locator": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "status": {
+                "enum": [
+                  "confirmed",
+                  "pending",
+                  "rejected"
+                ]
+              },
+              "conflict_key": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "field",
+              "value",
+              "claim",
+              "source_id",
+              "quote",
+              "locator",
+              "status"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "candidate_id",
+        "name",
+        "language",
+        "preferences",
+        "facts"
+      ],
+      "additionalProperties": false
+    },
+    "job": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "platform_job_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "employer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "city": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "country": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "raw_jd": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "schema_version": {
+          "const": "1.0"
+        },
+        "req_id": {
+          "type": "string"
+        },
+        "work_model": {
+          "enum": [
+            null,
+            "onsite",
+            "hybrid",
+            "remote"
+          ]
+        },
+        "employment_type": {
+          "enum": [
+            null,
+            "full_time",
+            "part_time",
+            "contract",
+            "internship"
+          ]
+        },
+        "document_language": {
+          "enum": [
+            null,
+            "en",
+            "vi"
+          ]
+        },
+        "liveness": {
+          "enum": [
+            "active",
+            "closed",
+            "unverified"
+          ]
+        },
+        "readable": {
+          "type": "boolean"
+        },
+        "salary": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "currency": {
+              "enum": [
+                null,
+                "VND",
+                "USD"
+              ]
+            },
+            "period": {
+              "enum": [
+                null,
+                "monthly",
+                "annual"
+              ]
+            },
+            "gross_net": {
+              "enum": [
+                null,
+                "gross",
+                "net"
+              ]
+            },
+            "bonus": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "amount",
+            "currency",
+            "period",
+            "gross_net",
+            "bonus"
+          ],
+          "additionalProperties": false
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "field": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "mandatory": {
+                "type": "boolean"
+              },
+              "hard": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "field",
+              "value",
+              "mandatory",
+              "hard"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "industry": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "posted": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "deadline": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "platform",
+        "platform_job_id",
+        "employer",
+        "title",
+        "url",
+        "city",
+        "country",
+        "raw_jd",
+        "schema_version",
+        "req_id",
+        "work_model",
+        "employment_type",
+        "document_language",
+        "liveness",
+        "readable",
+        "salary",
+        "requirements"
+      ],
+      "additionalProperties": false
+    },
+    "matrix": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "requirement_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "match": {
+                "enum": [
+                  "direct",
+                  "partial",
+                  "missing",
+                  "unknown"
+                ]
+              },
+              "fact_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "\\S"
+                },
+                "uniqueItems": true
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "requirement_id",
+              "match",
+              "fact_ids",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "language": {
+          "enum": [
+            "en",
+            "vi"
+          ]
+        },
+        "fact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "language",
+        "fact_ids"
+      ],
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "outcome": {
+          "enum": [
+            "ok",
+            "blocked",
+            "needs_input",
+            "manual_required",
+            "failed",
+            "submission_unknown"
+          ]
+        },
+        "data": {
+          "type": "object"
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "outcome",
+        "data",
+        "issues",
+        "message"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

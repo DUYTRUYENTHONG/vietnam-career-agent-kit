@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "language": "vi",
+  "fact_ids": [
+    "B1",
+    "B2"
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "id": "manual-jd",
+      "name": "User-supplied structured JD",
+      "implementation_status": "Implemented",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "implemented_local_import",
+        "extract": "implemented_local_import",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": "Explicitly supplied authorized file; no remote source is accessed",
+      "checked_utc": "2026-10-21T06:09:50.908020+00:00",
+      "authentication": "none",
+      "rate_limits": {
+        "max_input_bytes": 2000000
+      },
+      "supported_fields": [
+        "platform",
+        "platform_job_id",
+        "employer",
+        "req_id",
+        "title",
+        "url",
+        "city",
+        "country",
+        "work_model",
+        "employment_type",
+        "document_language",
+        "salary",
+        "requirements",
+        "liveness",
+        "readable"
+      ],
+      "tests": [
+        "tests/test_preparation.py",
+        "tests/test_cli.py"
+      ],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "Structured validation is not independent vacancy/liveness verification"
+    },
+    {
+      "id": "employer-careers",
+      "name": "Employer career pages",
+      "implementation_status": "Instruction-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "public-feed",
+      "name": "Documented public feeds or APIs",
+      "implementation_status": "Planned",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "search-provider",
+      "name": "Search-provider results",
+      "implementation_status": "Host-supplied",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "university-alumni",
+      "name": "University and alumni career pages",
+      "implementation_status": "Planned",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "indeed",
+      "name": "Indeed",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "jobsgo",
+      "name": "JobsGO",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "itviec",
+      "name": "ITviec",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "topcv",
+      "name": "TopCV",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "vietnamworks",
+      "name": "VietnamWorks",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "careerviet",
+      "name": "CareerViet",
+      "implementation_status": "Manual-only",
+      "operations": {
+        "discover": "manual_or_unimplemented",
+        "read": "manual_or_unimplemented",
+        "extract": "manual_or_unimplemented",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": null,
+      "checked_utc": null,
+      "authentication": "not configured or verified",
+      "rate_limits": null,
+      "supported_fields": [],
+      "tests": [],
+      "default_write_mode": "manual",
+      "policy_source": null,
+      "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    }
+  ],
+  "coverage_claim": "Only declared executed searches count; this registry does not represent all Vietnam jobs."
+}

@@ -40,7 +40,10 @@ def main():
             try:json.loads(content)
             except json.JSONDecodeError:errors.append(raw+': invalid JSON')
     shared=sorted((ROOT/'.agents/skills').glob('*/SKILL.md'))
-    if len(shared)!=6:errors.append('expected six bounded shared skills')
+    expected_skills={'onboarding','candidate-evidence','vietnam-job-discovery','job-normalization',
+                     'fit-assessment','application-tailoring','document-review','campaign-approval',
+                     'browser-application','application-tracking'}
+    if {path.parent.name for path in shared}!=expected_skills:errors.append('expected ten canonical product skills')
     for path in shared:
         text=path.read_text(encoding='utf8')
         if not text.startswith('---\n') or not re.search(r'^name: [a-z0-9-]+$',text,re.M) or not re.search(r'^description: .+$',text,re.M):
@@ -52,7 +55,7 @@ def main():
         if path.exists():errors.append('active host configuration must not be bundled: '+str(path.relative_to(ROOT)))
     if errors:
         print('\n'.join(errors));return 1
-    print(f'PASS: {len(paths)} UTF-8 source files, six shared skills/adapters, no flagged artifacts or credential patterns.')
+    print(f'PASS: {len(paths)} UTF-8 source files, ten shared skills/adapters, no flagged artifacts or credential patterns.')
     print('Bounded check only: inspect the staged diff and sources before publication.')
     return 0
 

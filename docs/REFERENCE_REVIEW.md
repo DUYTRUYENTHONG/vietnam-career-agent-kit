@@ -24,3 +24,24 @@ Static review performed 21 October 2026. These exact commits were inspected as u
 One original Python private ledger replaces four competing orchestrators. Canonical shared skill text has Codex/Claude adapters. Browser actions are provided by the current host and evaluated independently; this is not a modification claiming existing-session support in career-ops. Vietnam locations, exact compensation bases and destination permission gates are explicit. No author biographies, salaries, exclusions or example candidates were imported.
 
 The audit covers primary manifests, browser/render/update paths, declared integrations and tracked hook/settings inventories. It is not an exhaustive vulnerability audit, signed provenance check, transitive dependency review or permanent authorization to install. New revisions/dependencies/templates require review. Preserve the original license notices if copying code later.
+
+## Product-slice reinspection
+
+On 21 October 2026 the pinned files below were retrieved through GitHub's contents API and dependency/browser/license-relevant lines were inspected again. The web reader could not open pinned tree URLs; GitHub CLI supplied read-only public source. No reference code was executed, installed or copied. Hashes describe retrieved file bytes.
+
+| Repository | Exact inspected file | SHA-256 |
+|---|---|---|
+| job-apply-assistant | LICENSE | 694af8d1e98e12b1fc55fe67676631f5916f5bb8f1260fb730dc77cd862d6e38 |
+| job-apply-assistant | requirements.txt | 0cdc43560951cd68bc3151b7ee3dbef7825ee560be8d81cb16f718b7fcb437fb |
+| job-apply-assistant | skills/job-apply-assistant/scripts/open_jobs.py | eef1d05ce377e31772aa7e583bb47c3dd9da44bd4eab953ef0def63e08835456 |
+| career-ops | LICENSE | 51989d2589b2aa87ca6cbb253391bcb476a21cbafdc71eea4410548538510870 |
+| career-ops | package.json | 32febbd01b690af8980931bde4bc3415ffa8b3d71fe72e30a701ddbe19256e50 |
+| career-ops | apply-scope.mjs | 6ace71ca7e9c1fc8b1e4d9f617035d7c6b4b17a41f14f7fae1e3dc59e892e53f |
+| ai-job-search | LICENSE | accbf0accb87b7b905dd7ee0c7013075f0453637acf354ddae6fc0e4d8282e8e |
+| ai-job-search | .agents/skills/linkedin-search/SKILL.md | f7d0a742b12c57340e3d5c23b7c154e153f7e64ce37a168b73e0196de0c41e30 |
+| ai-job-search | README.md | 0e295c5f268bc7b6bc6f218b6b1fe3a826c8b5b70564a9499f8ab74237d1f5e4 |
+| claude-resume-kit | LICENSE | d6031b6830e5aa1b04dc536c575d443c62bf3cf56d2a7ccd492f0077279d8019 |
+| claude-resume-kit | resume_builder/templates/cv.cls | 30bf0ca5b3d0b7185d6ee42be20c146dd3853e4212d73176acdf5d7e6b0db42c |
+| claude-resume-kit | resume_builder/templates/resume.cls | 721ed8d5e80fcc54d829eba481b8b37b7d2e18574758828eed8b94551879e69e |
+
+Retained ideas are provenance/deduplication, one private tracker, separate critique and rendering checks. Ranged dependencies, Playwright install lifecycle, browser-attachment refusal, market-specific defaults and class notices support using original bounded modules rather than combining orchestrators. This is not a full-source/transitive security certificate. THIRD_PARTY_NOTICES.md records that no reference code/assets are bundled.

@@ -1,5 +1,9 @@
 # Local tools and document workflow
 
+Current Slice 1 adds a working preparation CLI: TXT/Markdown CV import, versioned profile/JD/matrix/plan validation, explicit profile confirmation, source-preserving Markdown drafts, checkpoint/report export and manual handoff. See DATA_CONTRACT.md and setup.md for actual commands/envelopes.
+
+Core/test/demo dependencies are standard library only, recorded in dependency-lock.json. Optional document libraries below are not an implemented rendering/extraction pipeline. No browser executor or native integration is implied by shared skills.
+
 The core CLI and hook helper use Python 3.11+ standard library only: argparse, pathlib, sqlite3, hashlib, json and datetime. They do not call an AI API, install packages, open a browser or submit an application. Use `python scripts/kit.py --help` and each subcommand's help for exact arguments.
 
 The selected agent supplies reasoning, policy-permitted web research and optional browser/computer control. A search result is a discovery lead, not proof that a role is live. No scraped private API, session reuse helper or unrestricted portal collector is bundled.
@@ -10,4 +14,4 @@ Required verification: reopen generated files; extract text and compare with the
 
 For Unicode PDF output use an appropriate locally licensed TrueType font. Do not bundle a proprietary system font in this public repository. For TeX, use Unicode-capable compilation, escape supplied text and disable shell escape. Never run a compile command from an untrusted JD.
 
-No generic submit CLI is supplied. The supervised-browser skill describes how a capable host can assist a permitted flow after exact approval; unknown permissions or missing required answers switch to manual preparation.
+No generic submit CLI is supplied. The browser-application skill documents the planned permitted workflow and current manual handoff. Unknown permissions or missing required answers require manual preparation. A handoff separates the CV from private source-map review artifacts; the source map is not an employer attachment.

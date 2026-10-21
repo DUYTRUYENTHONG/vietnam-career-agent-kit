@@ -1,5 +1,7 @@
 # Bounded release review
 
+Historical review of the v0.1.0 starter kit. This does not certify the later product/Slice 1 implementation; use GOAL.md, roadmap.md and current slice evidence.
+
 Reviewed 21 October 2026. Scope: public README/entrypoints, master prompt, six shared skills and adapters, optional hooks, local CLI, templates, tests, documentation and CI. Only public-kit source and disposable fictional fixtures were used. No network requests, native host callbacks, live applications or external writes were exercised.
 
 ## Historical findings — resolved

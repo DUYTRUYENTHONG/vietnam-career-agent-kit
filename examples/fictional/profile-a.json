@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "candidate_id": "fictional-minh-anh",
+  "name": "Nguyễn Thị Minh Anh Thảo",
+  "language": "en",
+  "contacts": {"email": "minh-anh@example.invalid"},
+  "preferences": {
+    "target_roles": ["Junior Data Analyst"],
+    "seniority": "junior",
+    "preferred_cities": ["HCMC"],
+    "relocation": null,
+    "work_models": ["onsite", "hybrid"],
+    "remote_eligibility": null,
+    "employment_types": ["full_time"],
+    "excluded_employers": ["Example Excluded Cooperative"],
+    "excluded_industries": [],
+    "salary": {"amount": null, "currency": null, "period": null, "gross_net": null, "bonus": null},
+    "notice_period": null,
+    "availability": null,
+    "document_language": "en",
+    "work_authorization": null,
+    "existing_applications": []
+  },
+  "facts": [
+    {"id":"F1","field":"skill","value":"SQL","claim":"Used SQL to query a fictional sales dataset.","source_id":"CV1","quote":"Used SQL to query a fictional sales dataset.","locator":"line 5","status":"confirmed"},
+    {"id":"F2","field":"capability","value":"requirements","claim":"Documented requirements for a classroom web project.","source_id":"CV1","quote":"Documented requirements for a classroom web project.","locator":"line 6","status":"confirmed"},
+    {"id":"F3","field":"education","value":"Bachelor","claim":"Completed a fictional Bachelor of Information Systems.","source_id":"CV1","quote":"Completed a fictional Bachelor of Information Systems.","locator":"line 7","status":"confirmed"},
+    {"id":"F4","field":"skill","value":"Python","claim":"Python proficiency has not been confirmed.","source_id":"CV1","quote":"Python proficiency has not been confirmed.","locator":"line 8","status":"pending"}
+  ]
+}

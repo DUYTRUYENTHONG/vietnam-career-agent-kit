@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "platform": "manual",
+  "platform_job_id": "fictional-operations-02",
+  "employer": "Example Cooperative",
+  "req_id": "EX-OPS-02",
+  "title": "Trợ lý vận hành",
+  "url": "https://jobs.example.test/EX-OPS-02",
+  "city": "Đà Nẵng",
+  "country": "VN",
+  "work_model": "onsite",
+  "employment_type": "internship",
+  "document_language": "vi",
+  "raw_jd": "VÍ DỤ HƯ CẤU. Cần Excel, ưu tiên ghi chép quy trình. Không có nơi ứng tuyển thật.",
+  "liveness": "active",
+  "readable": true,
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "Excel trong bài tập",
+      "field": "skill",
+      "value": "Excel",
+      "mandatory": true,
+      "hard": false
+    },
+    {
+      "id": "R2",
+      "text": "Ghi chép quy trình",
+      "field": "capability",
+      "value": "quy trình",
+      "mandatory": false,
+      "hard": false
+    }
+  ],
+  "salary": {
+    "amount": null,
+    "currency": null,
+    "period": null,
+    "gross_net": null,
+    "bonus": null
+  }
+}

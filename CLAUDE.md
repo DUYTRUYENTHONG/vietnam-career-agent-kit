@@ -1,5 +1,5 @@
-# Claude Code entrypoint
+# Claude Code maintainer entrypoint
 
-Read AGENTS.md, README.md and prompts/MASTER_PROMPT.md. The shared skill bodies are under .agents/skills; project Claude skill adapters are under .claude/skills. Read the relevant shared body when invoked. No settings, browser connection, hook trust or tool permission is granted by these files. Optional native hook examples live under hooks/, outside active settings.
+Read AGENTS.md for product development. Do not initiate candidate intake or a campaign during coding work. Only an explicit job-seeker request activates prompts/MASTER_PROMPT.md and docs/job-seeker-policy.md. Shared skill bodies live in .agents/skills; generated .claude/skills adapters point to them. Run python scripts/generate_adapters.py --check to check synchronization. No global settings, tool allowlists, browser access or hook trust is granted.
 
 Use the installed Claude Code documentation/version to verify hook and tool schemas. Never reinterpret Codex tools or settings as Claude capabilities. Without supported browser control, prepare a manual application pack.

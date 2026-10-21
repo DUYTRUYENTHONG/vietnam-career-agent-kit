@@ -1,5 +1,32 @@
 # Private data contract
 
+## Preparation contract 1.0
+
+The current CLI returns `schema_version`, `outcome`, `data`, `issues`, `message`. Legacy payloads now live under `data`; callers must inspect the outcome. Exit 0 is `ok`; other structured outcomes exit 2. Existing Python `Kit` imports remain compatible through scripts/kit.py and core/ledger.py.
+
+Input shapes live in schemas/contracts.schema.json ($defs profile/job/matrix/plan/outcome); core/contracts.py adds cross-record invariants. Explicit CV/profile/JD/matrix/plan imports may read the exact supplied external file or fictional fixture. Legacy approval package/confirmation files remain restricted to the selected private directory. No directory scan is authorized.
+
+| Operation | Persisted authority |
+|---|---|
+| `init --language en/vi` | Additive SQLite schema 1 and interface setting; existing rows preserved |
+| `import-cv --file PATH --source-id ID` | Immutable normalized UTF-8/LF snapshot plus SQLite source ID/hash |
+| `import-profile --file PATH` / `profile` | One candidate, exact source quotes/status/conflict keys, preferences and fingerprint |
+| `confirm-profile --fingerprint HASH --confirmation PATH` | Current-profile local review; proof text `CONFIRM PROFILE HASH`; human provenance unauthenticated |
+| `import-jd --file PATH` | Job document and stable-ID dedup in the same workflow.sqlite3; JD text is inert |
+| `assess --job-id ID --matrix PATH` | Complete evidence matrix, constraints, profile/JD fingerprints |
+| `prepare --job-id ID --plan PATH` | Selected confirmed quotes into Markdown, source map/hashes, review_required state |
+| `resume` / `report` / `handoff` | Derived checkpoint/stale flags/manual next steps; no external action |
+
+Profile confirmation is separate from disclosure approval. A changed profile invalidates earlier local approvals; assessments/drafts become stale. Pending/rejected facts cannot support direct matches or enter drafts. Explicit conflict groups with differing non-rejected values block confirmation; unencoded semantic conflicts still require human review. Exact field/value matching validates a structured mapping, not truth or semantic equivalence.
+
+Report writes are restricted to relative reports/ paths with the selected .json/.md suffix. Submitted/user-reported/uncertain jobs cannot receive another draft/handoff without reconciliation. SQLite is canonical; reports/drafts/source maps are derived. Missing/changed sources/JDs/artifacts never silently resume as valid. This boundary is not OS authentication, encryption or a sandbox for arbitrary host tools.
+
+No live browser adapter, PDF/DOCX renderer or complete expiring finite-campaign executor exists in Slice 1. Their gates remain in roadmap.md.
+
+## Legacy package checker
+
+The retained operations below perform local validation/bookkeeping only. They do not implement campaign expiry/limits, attempt recovery, authenticated candidate approval or browser execution.
+
 Use a candidate-approved data directory outside and separate from this Git checkout. `kit.py` resolves paths and rejects the repository, a nested path, an ancestor, or a symlink/junction that resolves there. This reduces accidental publication; it is not an OS sandbox, encryption, access control or protection from malicious local users.
 
 The private directory contains `workflow.sqlite3`, `raw-jd/`, candidate profile/facts/corrections, job packages, artifact versions and approval evidence. One coordinator owns tracker writes. No candidate dataset is shipped. JSON files in templates are fictional starter shapes and remain manual.
@@ -24,7 +51,7 @@ Candidate facts use ID, exact claim, source/locator, evidence status, approval s
 
 Job JSON requires platform, platform_job_id, employer, req_id (empty allowed), title, exact HTTPS URL, city, raw_jd, readable and liveness. Preserve additional metadata such as exact work location, work model, language, deadline, salary bases and application destination in the private job snapshot. Stable platform IDs and nonempty employer requisitions deduplicate; fuzzy matches require review. Raw JD content is written as inert UTF-8, never executed. Unreadable records become unverified.
 
-The SQLite tool currently supports job upsert/liveness, status, package validation and approval/invalidation. Status reports `unrevoked_approval_records`: database records without explicit revocation, which may still be stale because of file changes or a hook marker. It is not a count of valid disclosure approvals; use `check-approval` with the exact current package. Its state vocabulary supports later lifecycle integrations, but there is no generic transition-to-submitted CLI or live submitter. Do not simulate unsupported transitions. If a host adds state writes, require evidence and immutable submitted snapshots before exposing those operations. Core event rows are append-only, with actor and UTC time; display uses Vietnam +07:00.
+The legacy SQLite interface supports job upsert/liveness, status, package validation and approval/invalidation alongside the Slice 1 operations above. Status reports `unrevoked_approval_records`: database records without explicit revocation, which may still be stale because of file changes or a hook marker. It is not a count of valid disclosure approvals; use `check-approval` with the exact current package. Its state vocabulary supports later lifecycle integrations, but there is no generic transition-to-submitted CLI or live submitter. Do not simulate unsupported transitions. If a host adds state writes, require evidence and immutable submitted snapshots before exposing those operations. Core event rows are append-only, with actor and UTC time; display uses Vietnam +07:00.
 
 ## Exact approval bookkeeping
 

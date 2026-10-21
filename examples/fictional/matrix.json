@@ -1,0 +1,4 @@
+{"schema_version":"1.0","rows":[
+  {"requirement_id":"R1","match":"direct","fact_ids":["F1"],"reason":"The exact source quote records SQL project work."},
+  {"requirement_id":"R2","match":"direct","fact_ids":["F2"],"reason":"The source records classroom requirements documentation; retain the classroom qualifier."}
+]}

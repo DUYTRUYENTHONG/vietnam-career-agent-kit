@@ -29,3 +29,7 @@ jobs:
         run: python scripts/check_repository.py
       - name: Capability report
         run: python scripts/kit.py doctor
+      - name: Generated adapter synchronization
+        run: python scripts/generate_adapters.py --check
+      - name: Disposable fictional preparation demo
+        run: python scripts/demo_slice1.py
