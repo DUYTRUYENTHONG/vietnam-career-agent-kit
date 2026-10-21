@@ -1,4 +1,4 @@
-# Vietnam Marketplace — Auto Tailor CV and Apply Job Skill Kit
+# Vietnam Career Agent Kit
 
 An open-source, local-first workflow for finding relevant jobs in Vietnam, tailoring truthful CVs and preparing supervised applications with an AI coding agent.
 
@@ -9,8 +9,8 @@ Clone it, give your agent the master prompt and provide your own approved CV. Th
 Requires Git, Python 3.11+ and your existing agent. Core tools have no third-party Python dependencies and make no network calls.
 
 ```sh
-git clone https://github.com/DUYTRUYENTHONG/vietnam-marketplace-auto-tailor-cv-and-apply-job-skill-kit.git
-cd vietnam-marketplace-auto-tailor-cv-and-apply-job-skill-kit
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+cd vietnam-career-agent-kit
 python scripts/kit.py doctor
 python scripts/kit.py --data-dir ../vietnam-job-search-private init
 python -m unittest discover -s tests -v

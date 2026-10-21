@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Renamed the project to Vietnam Career Agent Kit and updated clone instructions.
+
 ## 0.1.0 — 2026-10-21
 
 ### Added
