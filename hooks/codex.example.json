@@ -1,0 +1,48 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"__PYTHON__\" \"__KIT_ROOT__/hooks/guard.py\" --host codex --data-dir \"__DATA_DIR__\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"__PYTHON__\" \"__KIT_ROOT__/hooks/guard.py\" --host codex --data-dir \"__DATA_DIR__\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"__PYTHON__\" \"__KIT_ROOT__/hooks/guard.py\" --host codex --data-dir \"__DATA_DIR__\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"__PYTHON__\" \"__KIT_ROOT__/hooks/guard.py\" --host codex --data-dir \"__DATA_DIR__\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

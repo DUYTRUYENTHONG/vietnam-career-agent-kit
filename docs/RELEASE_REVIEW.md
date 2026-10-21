@@ -1,0 +1,31 @@
+# Bounded release review
+
+Reviewed 21 October 2026. Scope: public README/entrypoints, master prompt, six shared skills and adapters, optional hooks, local CLI, templates, tests, documentation and CI. Only public-kit source and disposable fictional fixtures were used. No network requests, native host callbacks, live applications or external writes were exercised.
+
+## Historical findings — resolved
+
+1. **P2 — Null recipient identity passes package validation.** At review time, `scripts/kit.py:207` used `str(package["company"])` and `str(package["job_id"])` to check required identity. JSON null becomes the nonempty string `None`, allowing a package without a real company or requisition identity to return `ready: true`. A fictional local reproduction returned `null_identity_ready True`. Require the intended scalar types and nonblank content before issuing a ready result; cover null and inappropriate container values. This affects the advertised local package gate, although the tool itself performs no disclosure.
+
+2. **P2 — Status labels hook-invalidated approvals as active.** At review time, `scripts/kit.py:307`–`scripts/kit.py:310` counted every approval whose database invalidation field was null, without applying the marker check used by `check_approval`. Fictional reproduction after a newer invalidation marker returned `check_approval=False` and `active_approvals=1`. This can mislead resume/status reporting. Either report a clearly named count of unrevoked database records, or account for marker invalidation and clearly distinguish bookkeeping status from current-package approval. Current artifact validity still requires `check-approval` with the exact package.
+
+Both findings were sent to the coordinator for correction. This report records the reviewed behavior, not a claim that later edits still contain it. Release evidence should include focused regression results after the fixes.
+
+## Boundaries assessed
+
+- **Privacy:** No candidate biography or private dataset was found in the reviewed public source. Templates are fictional, stateful CLI paths must resolve separately from the repository, and hooks avoid transcript/credential reads. The bounded source scanner and Git ignore rules reduce mistakes but do not establish complete privacy protection. The documented staged-diff inspection remains necessary.
+- **Approval binding:** Current artifact bytes, destination, recipient identity, answers, consents, policy and extra manifest fields are fingerprinted. Wrong bytes or changed package fields invalidate matching. Confirmation-file provenance cannot authenticate a human; the documentation says so. Actual candidate-profile changes require updating their manifest hash or invalidation evidence; optional hash fields are not independently dereferenced. The kit does not claim an OS/browser sandbox.
+- **Hooks:** Examples are inactive. Recognizable browser/control/transmission names receive a deny; arbitrary shell wrappers and unrecognized tools are outside coverage. Error exit 1 does not guarantee host-level blocking. README and hook documentation explicitly require manual handling when hooks fail or are unsupported, and describe the helper as preparation-only. These are declared limits, not undisclosed universal-enforcement claims.
+- **Host compatibility:** The adapter references resolve to the shared bodies. Codex/Claude native callback execution is expressly untested; Grokbot is only a portable text path. No native-runtime compatibility certification follows from helper unit tests. Official-documentation/source-audit statements were read as repository evidence, not independently revalidated in this offline review.
+- **Workflow roles:** One coordinator owns browser/tracker writes; the reviewer may critique only. External JDs are untrusted input. Skills do not grant tool permissions, fabricate evidence, take assessments, or authorize unrelated messages. Manual final submission is the default; delegated actions still require exact scope and platform/host permission.
+- **Quickstart and CI:** The core commands require only Python 3.11+ and standard-library modules. The Windows Store-alias caveat is accurate: this environment needed an explicit real interpreter. CI defines Linux/Windows and Python 3.11/3.12 checks with read-only repository permission and no application actions. Local test success does not establish a remote CI pass or native hook support.
+- **Lifecycle limits:** SQLite state transitions beyond the supplied operations, immutable submitted snapshots, a browser submitter and document rendering are workflow/integration responsibilities, not implemented runtime guarantees. The data contract and tools documentation disclose these limits sufficiently for this release's supervised-workflow scope.
+
+## Gate disposition
+
+**Both findings are resolved; no open blocker remains from this bounded review.** The reviewer inspected the corrected validation/status code and data-contract wording and ran the full local suite: 16 tests passed. This closes only the two findings above; it does not expand the review scope. Final staged-diff/public-source checks remain the coordinator's release responsibility. This is a review disposition, not publication approval or a guarantee of native/live behavior.
+
+## Closure evidence
+
+- Finding 1: `scripts/kit.py:207` now requires company and job ID to be nonblank strings. `tests/test_kit.py:90` rejects null, empty, whitespace-only, numeric and list values independently for each field. The regression passed.
+- Finding 2: `scripts/kit.py:308` now reports `unrevoked_approval_records`, removing the misleading active-approval label. `docs/DATA_CONTRACT.md:27` explains that these records may be stale and directs callers to exact-package checking. `tests/test_kit.py:148` reproduces hook invalidation with `check_approval=False` while one unrevoked record remains, checks that `active_approvals` is absent, and confirms explicit revocation reduces the count to zero. The regression passed.
+- Verification: `python -m unittest discover -s tests -v` using the environment's actual Python interpreter completed successfully: **16 tests, OK**. No native hooks, network operations or live applications were exercised.
