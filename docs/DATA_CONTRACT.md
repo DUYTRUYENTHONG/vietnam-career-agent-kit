@@ -70,3 +70,16 @@ Run `check-approval --action ...` immediately before any allowed disclosure. Cur
 ## Retention and export
 
 Choose a review interval and deletion policy with the candidate; no automatic deletion or unattended tasks are scheduled. Preserve submitted snapshots as new immutable versions in any future submission integration. Do not redistribute employer text or customer-level data. Screenshot only relevant forms and redact unrelated information. If CSV export is implemented, escape formula-leading cells. Public release checks do not guarantee detection of every secret or personal detail; inspect the staged diff too.
+## Fast tracker projection 1.0
+
+`tracker` returns an ordinary Outcome containing the data described in
+`schemas/tracker.schema.json`. It uses one read transaction, never hashes files,
+and reports `validates_artifacts=false`. Counts distinguish durable attempts,
+host-observed confirmation records and candidate-reported prior applications.
+The generated UTC time is the snapshot time; each job has its last recorded
+update time. This projection cannot authorize continuing a campaign.
+
+`advance-execution` accepts the existing receipt 1.0 and returns the ordinary
+execution outcome with additive `receipt_recorded` and `recorded_request_id`
+fields after acknowledgement. Its successor request still uses protocol 1.0.
+Schema 3 and all older commands remain compatible; no new database migration.

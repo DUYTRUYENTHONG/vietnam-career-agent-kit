@@ -28,6 +28,20 @@ class DocumentTests(unittest.TestCase):
 
     def rendered(self):return self.work.render(1).data
 
+    def test_content_validation_reads_only_the_selected_job(self):
+        fixture=Path(__file__).resolve().parents[1]/'examples/fictional'
+        job=json.loads((fixture/'job.json').read_text(encoding='utf8'))
+        job.update(platform_job_id='fictional-other',req_id='FICT-OTHER',url='https://jobs.example.test/other')
+        other=self.work.import_job(job).data['job']['id']
+        self.work.assess(other,json.loads((fixture/'matrix.json').read_text(encoding='utf8')))
+        draft=self.work.prepare(other,json.loads((fixture/'plan.json').read_text(encoding='utf8'))).data
+        (self.root/draft['files']['cv']['path']).write_bytes(b'Unrelated stale draft')
+        with patch.object(self.work, 'job_document', wraps=self.work.job_document) as reads:
+            self.work.content_model(1)
+        self.assertEqual([1, 1], [call.args[0] for call in reads.call_args_list])
+        self.assertTrue(self.work.job_checkpoint(other)['draft_stale'])
+        self.assertEqual('manual_required',self.work.handoff(1).outcome)
+
     def review(self, result):
         review={'schema_version':'1.0','render_fingerprint':result['fingerprint'],
             'reviewed_pages':[1],'checks':{'content':True,'layout':True,'glyphs':True,'language':True}}

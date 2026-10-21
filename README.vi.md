@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+Tối ưu mới: kiểm tra CV theo từng việc, `advance-execution` ghi nhận kết quả và
+trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng thái nhanh. Bảng chỉ
+phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.
+Xem [kiến trúc và số đo](docs/PERFORMANCE.md); chưa đo tốc độ ứng tuyển thực tế.
+
 Dùng trợ lý AI và CV của riêng bạn để tìm việc tại Việt Nam theo một quy trình có bằng chứng, công cụ tái sử dụng và kiểm soát việc gửi hồ sơ.
 
 [English](README.md) · [Mục tiêu](GOAL.md) · [Kiến trúc](docs/architecture.md) · [Tương thích](docs/compatibility.md) · [Lộ trình](docs/roadmap.md)

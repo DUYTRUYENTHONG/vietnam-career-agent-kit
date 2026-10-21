@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Replace full-workspace scans on selected CV/render/handoff paths with shared targeted draft validation. A 100-draft fictional benchmark reduces JD reads from 101 to 2 per content check.
+- Add `advance-execution` for durable receipt plus one successor (19 → 13 CLI calls per six-phase application), and a read-only `tracker` command with Markdown tables, explicit blockers, next steps and separate confirmation/attempt/prior-report counts.
+- Require tracker output after application passes in shared skills; document architecture decisions, benchmarks and unchanged browser integration limits in docs/PERFORMANCE.md.
+
 - Add host-mediated sequential application execution, exact reviewed bridge/runtime scope, durable unique attempts before submit, finite budgets and read-only confirmation recovery.
 - Add additive schema 3, phase-specific browser receipts, fresh form/consent checks, frozen documents/evidence, execution CLI controls and accurate execution reports.
 - Test deterministic fictional bridge/CLI, concurrency, expiry/revocation, drift, tampering, interrupted submits and a separate Codex loopback browser smoke; real employer integration remains unverified.

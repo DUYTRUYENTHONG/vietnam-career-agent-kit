@@ -53,3 +53,11 @@ Keep local timestamped states: discovered → assessed → draft_ready → revie
 Use one coordinator for browser and tracker writes. On resume, check actual state and artifact hashes. Keep candidate data/screenshots/logs private with configurable retention. Avoid unrelated screenshots and public telemetry. Use fictional local fixtures for tests; no live applications during tests. Never schedule unattended activity.
 
 Finish with actual artifacts, evidence-backed status, missing tools/answers and one concrete next action. If blocked on a fact or approval, complete all independent preparation first. Never claim a hook, plugin, account connection, rendered document or application exists without verification.
+
+After every application pass, return a timestamped Markdown tracker table with
+employer/role, source, status, blocker, next step and update time. Export the full
+private table with tracker; distinguish prior candidate reports, host-observed
+confirmations and uncertain attempts. This fast read model does not validate files
+or live vacancies. Reuse current exact authorization without redundant approval
+questions. Prefer advance-execution for receipt plus successor, and keep the
+fresh check-action and supported-browser observation before each action.

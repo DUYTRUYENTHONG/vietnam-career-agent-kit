@@ -23,7 +23,16 @@ Read resume before continuing. Check current source/profile/JD/artifact fingerpr
 
 ## Outputs
 
-Current JSON or Markdown checkpoint, stale flags, exceptions and truthful application counts.
+Return a timestamped Markdown tracker table after every application pass, including
+when the pass is blocked. Include employer/role, source URL, recorded status,
+blocker, next step and last update. Link the complete private report for longer
+campaigns. Keep host-observed confirmations, candidate-reported prior applications
+and uncertain attempts separate; always distinguish prepared from submitted.
+
+Use `tracker --format md --output reports/tracker.md` for fast catch-up output.
+It is a ledger projection, not a content/approval/liveness check. Use resume and
+the normal action checks before actual work. No visualization file is required
+for a table. Never describe the tracker as a background employer-response monitor.
 
 ## Failure behavior
 

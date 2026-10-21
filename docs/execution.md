@@ -65,6 +65,36 @@ terminal state or any non-ok outcome. `init` adds schema 3 without replacing sch
 1/2 data. Use the same workspace and actor on later commands. Actor IDs prevent
 accidental coordinator mixing; local database access is not an authorization boundary.
 
+## Fewer orchestration round trips
+
+After the first `next-action`, prefer:
+
+```sh
+python scripts/kit.py --data-dir ../career-private advance-execution --run-id RUN_ID --receipt ../career-private/receipt.json
+```
+
+This records the observed receipt and returns the next `data.request` in the same
+CLI response. Do not call next-action again if a request was returned. Continue
+to call check-action immediately before each actual host action. Terminal results
+have no request. `receipt_recorded=true` and `recorded_request_id` identify the
+committed acknowledgement, including when issuing its successor is blocked.
+If the process exits unexpectedly or the response is lost, inspect execution-status
+and reconcile outstanding requests. Never resubmit the same receipt or replay a
+browser mutation. In particular, a returned-but-lost submit request has already
+consumed its attempt and can only advance to read-only verification.
+
+For frequent catch-up output, use:
+
+```sh
+python scripts/kit.py --data-dir ../career-private tracker --format md --output reports/tracker.md
+```
+
+`tracker` projects recorded employer/role/source/status/blocker/next-step/time and
+separates attempts, host-observed confirmations and prior candidate reports. It
+does not read artifact bytes, refresh vacancy liveness or authorize a next action.
+Use resume and normal content/action checks before continuing actual work.
+See [performance evidence](PERFORMANCE.md) and [tracker data schema](../schemas/tracker.schema.json).
+
 ## Browser bridge protocol 1.0
 
 The agent is the bridge. It reads a request, uses its installed browser tools,

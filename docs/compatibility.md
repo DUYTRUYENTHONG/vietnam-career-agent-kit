@@ -2,6 +2,11 @@
 
 Checked 21 October 2026. Labels apply to the named scope, not every product from a provider.
 
+The performance increment adds local selected-job validation, a ledger-only
+tracker and receipt-plus-successor CLI command. Windows fictional measurements
+and real CLI call counts are recorded in [PERFORMANCE.md](PERFORMANCE.md).
+It adds no native browser/provider certification or employer adapter.
+
 | Runtime/interface | Version inventory | OS | Label | Tested and missing |
 |---|---|---|---|---|
 | Generic Python CLI subprocess | Python 3.12.14, SQLite from runtime | Windows | Verified for local operations | Fictional end-to-end CLI, two isolated candidates, import/confirm/assess/draft/report/resume. No native AI/browser functionality implied. |

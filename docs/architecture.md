@@ -34,6 +34,12 @@ These core paths are shared by scripts/kit.py. core/execution.py adds a durable 
 
 ## Boundaries
 
+Selected-job document/handoff checks use a shared targeted checkpoint rather than
+full-workspace resume. Frequent `tracker` output is a separate read-only ledger
+projection with explicit nonvalidation semantics. `advance-execution` combines
+receipt acknowledgement and one successor request without merging their durable
+transactions. See [measured architecture decision](PERFORMANCE.md).
+
 - Core setup/import/assessment/draft/report commands are local. They do not browse, call models, upload or submit.
 - Maintainer instructions are AGENTS.md/CLAUDE.md. Job-seeker workflow is prompts/MASTER_PROMPT.md and canonical skills/policy, activated only by a career request.
 - Source connectors declare operations separately. A registry entry is not an implemented connector or permission. Manual structured JD import is the working first connector.
