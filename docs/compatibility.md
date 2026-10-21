@@ -7,6 +7,25 @@ tracker and receipt-plus-successor CLI command. Windows fictional measurements
 and real CLI call counts are recorded in [PERFORMANCE.md](PERFORMANCE.md).
 It adds no native browser/provider certification or employer adapter.
 
+`route-task` is verified only as deterministic local Python/CLI planning with
+fictional inventories. Host model IDs/efforts are caller-reported; no provider API
+or native per-task override was exercised. The development host offered
+gpt-6-astra and gpt-5.6-sol but not the policy's gpt-5.6-luna or gpt-5.6-terra:
+the installed Company Skill Library router returned blocked for those missing
+routes. No more expensive substitution or current-agent model switch was made.
+Model availability must be supplied again for each host; this inventory is not
+shipped as a candidate default.
+
+Rolling KPI tests use fictional immutable confirmations, explicit UTC boundaries,
+and separate unknown/other-fit counts. New attempts carry frozen fit metadata;
+old records remain readable and unmodified. Neither KPI tests nor mocked
+validation measurements certify 100 live employer confirmations per hour.
+
+This increment passed 103 tests in the full local Windows run, followed by six
+targeted KPI tests after adding real CLI and pre-execution-schema coverage. Public
+source hygiene, whitespace and generated adapter checks passed. CI remains a
+separate published result; no local real LibreOffice conversion is claimed.
+
 | Runtime/interface | Version inventory | OS | Label | Tested and missing |
 |---|---|---|---|---|
 | Generic Python CLI subprocess | Python 3.12.14, SQLite from runtime | Windows | Verified for local operations | Fictional end-to-end CLI, two isolated candidates, import/confirm/assess/draft/report/resume. No native AI/browser functionality implied. |

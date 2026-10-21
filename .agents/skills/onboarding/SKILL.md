@@ -21,6 +21,8 @@ Local Python 3.11+ CLI. Browser/model APIs are optional and not assumed.
 
 Run doctor --runtime HOST. Inspect docs/compatibility.md; initialize with --data-dir PATH init --language en or vi. Reuse existing state. Record only missing preferences and finite campaign scope. Do not import a real CV for a maintainer task.
 
+For model routing, read ../../../docs/MODEL_ROUTING.md and use route-task with actual host model/effort/skill inventory and the existing owner. Use tools directly for deterministic work. Load only the selected skill and compact relevant context; never use a second model to classify tasks. Unavailable routes block until an explicit policy alternative is configured. A plan does not switch the running model or grant browser authority.
+
 ## Outputs
 
 Capability result, selected workspace and compact missing-input list.

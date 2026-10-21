@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add a fictional full-manifest/action benchmark and record a rejected profile-sharing optimization because repeated timing did not show a reliable gain. Retain every entry's validation and add final source/expiry/runtime checks after long passes.
+- Add `throughput --target N --window-minutes M` for a rolling confirmation KPI. Freeze fit classification with new attempts; exclude attempts, prior user reports and historical records without frozen qualifying fit from the target.
+
+- Add deterministic `route-task` plans with explicit host model/effort/skill inventory, configurable role policy, direct tool routes, bounded code escalation and no implicit model fallback. Document compact context and observed-usage reporting; no model SDK or native dispatch is added.
+
 - Document campaign continuity across finite batches: explicit host goals, private checkpoints, confirmed-new counting, duplicate recovery and continued independent work past blocked vacancies. Update discovery/tracking skills and startup guidance without adding a scheduler, changing execution authorization or publishing candidate data.
 
 - Establish a standing skill/feature update workflow, descriptive commit convention and GitHub PR template covering documentation, source evidence, checks and publication status.
