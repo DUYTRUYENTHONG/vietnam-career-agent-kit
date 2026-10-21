@@ -2,7 +2,7 @@
 
 ## Local setup
 
-Clone the repository and use an existing Python 3.11+ interpreter. There is no core package installer or privileged step. The code/dependency lock requires no third-party runtime/test packages. Agent subscriptions/search/browser services are separate and optional; do not add a second model API to run the CLI.
+Clone the repository and use an existing Python 3.11+ interpreter. Core preparation requires no package installer or privileged step and no third-party runtime/test packages. Optional Slice 2 rendering has a separate explicit setup in documents-and-approval.md; no model API is added. Agent subscriptions/search/browser services are separate and optional.
 
 ```sh
 python scripts/kit.py doctor --runtime generic
@@ -44,7 +44,7 @@ Windows local environment: Python 3.12.14; Codex CLI inventory 0.137.0; Claude C
 
 ## Upgrade and uninstall
 
-Commit or back up your own toolkit changes before updating the public checkout. Private directories remain outside it. Review the new changelog and run tests first; do not run reference installers or auto-trust hooks. `init` performs the documented additive schema-1 migration and preserves existing legacy rows. Newer unknown schema versions are blocked. Back up your private directory before upgrading a production workspace; the repository never upgrades or overwrites it on clone/pull.
+Commit or back up your own toolkit changes before updating the public checkout. Private directories remain outside it. Review the new changelog and run tests first; do not run reference installers or auto-trust hooks. `init` performs additive schema-1/2 migrations and preserves existing rows/approvals. Newer unknown schema versions are blocked. Back up your private directory before upgrading a production workspace; the repository never upgrades or overwrites it on clone/pull.
 
 Wrapper generation affects only repository-owned .claude skill pointers and inactive examples. Preview with `python scripts/generate_adapters.py --dry-run`; verify with `--check`. No global settings or active hooks are installed. If you manually enabled examples, remove only those reviewed entries from your project configuration, preserving other settings and a backup. There is no automatically granted hook trust to revoke.
 

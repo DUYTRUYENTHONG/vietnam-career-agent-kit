@@ -6,7 +6,9 @@ Dùng trợ lý AI và CV của riêng bạn để tìm việc tại Việt Nam 
 
 **Đã chạy được:** chẩn đoán → tạo không gian riêng → nhập CV dạng TXT/Markdown UTF-8 và hồ sơ có nguồn → xác nhận hồ sơ → nhập JD có cấu trúc → đối chiếu yêu cầu → tạo bản nháp CV Markdown → theo dõi, xuất báo cáo và tiếp tục phiên sau. Có mười skill dùng chung và ví dụ hư cấu cho hai người khác nhau.
 
-**Chưa có trong Slice 1:** nhập/xuất PDF/DOCX, bộ tìm việc qua mạng, thao tác trình duyệt và gửi hàng loạt có phê duyệt. Skill/hook hoặc tên một nhà cung cấp AI không chứng minh các khả năng này đã hoạt động. Công cụ kiểm tra hash cũ chỉ lưu trạng thái phê duyệt cục bộ.
+**Slice 2 bổ sung:** tạo DOCX từ nội dung có nguồn, chuyển chính DOCX đó sang PDF bằng LibreOffice cục bộ, tạo ảnh từng trang, ghi nhận kiểm tra tài liệu và phê duyệt manifest hữu hạn có thời hạn. Xem [hướng dẫn dựng tài liệu và phê duyệt](docs/documents-and-approval.md). Phê duyệt cục bộ không bật trình duyệt hay gửi hồ sơ.
+
+**Chưa có:** trích xuất CV PDF/DOCX, tìm việc tự động qua mạng, thao tác trình duyệt và gửi hàng loạt có phục hồi lần nộp. Skill/hook, tên nhà cung cấp AI hoặc một bản ghi phê duyệt không chứng minh các khả năng này đã hoạt động.
 
 ## Chạy thử bằng dữ liệu hư cấu
 
@@ -34,6 +36,15 @@ Nhập CV được phép bằng `import-cv`, hồ sơ bằng `import-profile`; k
 Mỗi thư mục chỉ chọn một ứng viên. CV, dữ kiện, mức lương, câu trả lời và SQLite phải ở ngoài Git công khai. Báo cáo/bản nháp là dữ liệu dẫn xuất; SQLite là nguồn trạng thái chính. Lưu cục bộ không có nghĩa là mô hình chạy cục bộ: nội dung bạn cung cấp cho trợ lý đám mây có thể được nhà cung cấp xử lý.
 
 ## Kết quả và giới hạn
+
+Slice 2 cần cài riêng các thư viện Python đã khóa phiên bản/hash, LibreOffice Writer và font DejaVu Sans. Core không tự cài chúng. Trên Windows chưa có LibreOffice, lệnh render trả manual_required. Không gửi CV thật lên CI hoặc dịch vụ chuyển đổi bên ngoài.
+
+```sh
+python -m pip install --require-hashes --only-binary=:all: -r requirements-documents.lock
+python scripts/demo_slice2.py --candidate b --data-dir ../career-doc-demo --soffice /absolute/path/to/soffice
+```
+
+Xem TẤT CẢ ảnh từng trang và nội dung có nguồn trước khi chạy review-documents. Sau đó dùng create-manifest để chọn đúng ứng viên, công ty/vị trí, đích HTTPS, hash CV/câu trả lời, lựa chọn đồng ý, thao tác, hạn UTC và giới hạn hữu hạn. Chỉ approve-manifest sau khi người dùng thực sự xem đúng fingerprint. check-manifest kiểm tra lại dữ liệu, thời hạn và việc thu hồi; execution_enabled luôn là false. Xem [cú pháp và các tệp đầu vào](docs/documents-and-approval.md).
 
 - Lệnh hiện tại chỉ đọc/ghi cục bộ. `handoff` trả về bước bàn giao thủ công, không phải đơn đã gửi.
 - Mỗi kết quả có `schema_version`, `outcome`, `data`, `issues`, `message`. Mã thoát 0 là tác vụ cục bộ thành công; mã 2 yêu cầu xem trạng thái và bổ sung/xử lý thông tin.

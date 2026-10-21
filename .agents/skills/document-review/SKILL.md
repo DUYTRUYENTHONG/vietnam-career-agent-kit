@@ -15,11 +15,11 @@ JD, source-backed profile, draft, source map and actual rendering evidence when 
 
 ## Required capabilities
 
-Separate review pass or bounded independent reviewer; document renderer for any claimed visual format.
+Local render, review-documents and reject-documents commands; optional locked Python packages, trusted LibreOffice Writer and DejaVu Sans fonts. Missing tools return manual_required.
 
 ## Steps
 
-Check every claim against evidence and exact scope. Distinguish prototype/production, evaluation/business impact and overlapping dates. Inspect every rendered page when that format exists; text extraction alone is not visual QA. At most two content revisions unless requested.
+Run render on the current source-bound draft. Check every claim against evidence and exact scope. Distinguish prototype/production, evaluation/business impact and overlapping dates. Inspect content.json and EVERY current page image from the exact DOCX-to-PDF conversion. Record the fingerprint, all ordered page numbers and actual checks with review-documents using a private JSON file. Text extraction alone is not visual QA. Reject a bad set with reject-documents so dependent approval checks fail. See docs/documents-and-approval.md.
 
 ## Outputs
 
@@ -35,4 +35,4 @@ Write review notes only; coordinator owns candidate facts, tracker and browser.
 
 ## Tests and examples
 
-examples/fictional/; tests/test_preparation.py stale-artifact cases; docs/roadmap.md rendering gate.
+examples/fictional/; tests/test_documents.py; tests_optional/test_rendering.py; docs/documents-and-approval.md.

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add optional source-bound DOCX/PDF output with isolated LibreOffice conversion, exact text/font checks, page previews and explicit review/rejection.
+- Add finite, expiring manifest creation/approval/check/revocation binding candidate, job, destination, reviewed CV, answers, consents and operation limits. Browser execution stays disabled.
+- Preserve existing data through additive schema 2; report document/approval status on resume. Block stale bytes, missing answers, superseded scopes and revoked-confirmation replay.
+- Lock the complete optional Python wheel closure; test real fictional English/Vietnamese renders and multi-page layout separately from standard-library state tests.
+
 ### Added
 
 - Portable preparation core over the existing SQLite ledger, versioned schemas and structured CLI outcomes.

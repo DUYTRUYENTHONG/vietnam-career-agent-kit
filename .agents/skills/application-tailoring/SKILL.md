@@ -15,7 +15,7 @@ Current assessment, job ID, explicit language and ordered confirmed fact IDs.
 
 ## Required capabilities
 
-Local prepare command. Slice 1 produces Markdown; DOCX/PDF rendering is a later measured capability.
+Local prepare command for source-bound Markdown, followed by optional render and explicit document review for DOCX/PDF. See docs/documents-and-approval.md for requirements and limits.
 
 ## Steps
 

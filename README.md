@@ -6,7 +6,9 @@ Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job sea
 
 **Working now:** a local preparation CLI: diagnose → private workspace → UTF-8 CV/profile import → exact profile confirmation → structured JD import → evidence matrix → tailored Markdown draft → tracker/report/manual handoff → resume. Ten shared skills and Claude wrappers support the workflow. Fictional examples cover two users, cities, roles and languages.
 
-**Not yet implemented:** PDF/DOCX extraction/rendering, network job connectors, native browser execution and finite approved-batch submission. The legacy package hash checker is local bookkeeping, not a batch executor. Do not infer these capabilities from a skill, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
+**Slice 2 adds:** optional source-bound DOCX → local LibreOffice PDF → page previews, explicit page review, and exact expiring approval manifests. [Rendering and approval setup](docs/documents-and-approval.md) explains dependencies, commands and limits. Manifest validation never enables browser execution.
+
+**Not yet implemented:** PDF/DOCX CV extraction, network job connectors, native browser execution and finite approved-batch submission/attempt recovery. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice
 
@@ -42,6 +44,8 @@ Keep CVs, evidence, salary, answers, trackers and screenshots in the selected di
 | `doctor`, `source-registry` | Read-only capability/registry output; no account connection |
 | `init`, `import-cv`, `import-profile`, `confirm-profile` | Private local evidence/profile state |
 | `import-jd`, `assess`, `prepare` | Private local job/matrix/draft state; no website operation |
+| `render`, `review-documents`, `reject-documents` | Optional local DOCX/PDF/page generation and explicit review; no disclosure |
+| `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite local authorization records, expiry/hash checks; execution_enabled=false |
 | `resume`, `status`, `report`, `handoff` | Local checkpoint or explicit manual handoff |
 | Legacy `check-package`, `record-approval`, `check-approval`, `invalidate` | Content-bound local bookkeeping; no authenticated human identity, expiry-bound batch or browser grant |
 | Fill/upload/submit | No live execution command in this slice; host/site/user permission and future tested execution guards required |
@@ -63,7 +67,7 @@ Structured operations return `schema_version`, `outcome`, `data`, `issues`, `mes
 
 ## Costs, hooks and development
 
-Core dependencies are standard library only, recorded in [dependency-lock.json](dependency-lock.json). Optional document pins are not a complete transitive renderer lock and are not auto-installed. Existing agent subscriptions, model usage, search APIs and future browser/render services may cost separately. There is no compulsory second model API, maintainer cloud service or default telemetry.
+Core dependencies are standard library only, recorded in [dependency-lock.json](dependency-lock.json). [Optional document dependencies](requirements-documents.lock) have a complete Python closure with exact versions/wheel hashes and are not auto-installed. LibreOffice and fonts are separately provisioned, measured external dependencies. Existing agent subscriptions, model usage, search APIs and future browser services may cost separately. There is no compulsory second model API, maintainer cloud service or default telemetry.
 
 Optional [hook examples](docs/HOOKS.md) are inactive. Their conservative helper blocks recognized control names in preparation sessions and marks prior approvals stale after recognized edits; it cannot sandbox arbitrary shell/MCP/host actions. No auto-trust, permission bypass, CAPTCHA, cookie extraction or stealth. Employment, interview, ATS and universal-coverage guarantees are outside the product promise.
 
