@@ -36,4 +36,4 @@ The draft selects/orders confirmed exact quotes; it does not certify semantic tr
 
 Next: define the reviewed document content model, render Unicode DOCX/PDF with a fully locked optional dependency set, inspect every rendered page, and create exact expiring campaign manifests. Keep those checks in the shared core before enabling any browser execution.
 
-GitHub CI runs the fictional suite, source check, wrapper drift check, capability report and disposable demo on Linux/Windows with Python 3.11/3.12. A successful run URL is recorded after publication; configuration alone is not a passing result.
+The [successful GitHub CI run](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/actions/runs/39554806475) tested implementation commit a44beb0f803a1572c1f67d7935982d8913a0cc88 on all four Linux/Windows and Python 3.11/3.12 combinations. Every job passed the 41-test fictional suite, source check, wrapper drift check, capability report and disposable demo. These results certify the local CLI scope only, not native agent/browser integration.
