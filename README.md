@@ -1,97 +1,77 @@
 # Vietnam Career Agent Kit
 
-An open-source, local-first workflow for finding relevant jobs in Vietnam, tailoring truthful CVs and preparing supervised applications with an AI coding agent.
+Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job search with reusable tools and controlled application automation.
 
-Clone it, give your agent the master prompt and provide your own approved CV. The agent can research permitted sources, assess requirements, draft an application package and help with a permitted application flow. The kit does not guarantee employment, ATS acceptance, interview rates or protection from account restrictions. It is not an unattended mass-application bot.
+[Tiếng Việt](README.vi.md) · [Product goal](GOAL.md) · [Architecture](docs/architecture.md) · [Compatibility](docs/compatibility.md) · [Roadmap](docs/roadmap.md)
 
-## Start in five minutes
+**Working now:** a local preparation CLI: diagnose → private workspace → UTF-8 CV/profile import → exact profile confirmation → structured JD import → evidence matrix → tailored Markdown draft → tracker/report/manual handoff → resume. Ten shared skills and Claude wrappers support the workflow. Fictional examples cover two users, cities, roles and languages.
 
-Requires Git, Python 3.11+ and your existing agent. Core tools have no third-party Python dependencies and make no network calls.
+**Not yet implemented:** PDF/DOCX extraction/rendering, network job connectors, native browser execution and finite approved-batch submission. The legacy package hash checker is local bookkeeping, not a batch executor. Do not infer these capabilities from a skill, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
+
+## Try the working slice
+
+Requires Git and a real Python 3.11+ interpreter. No pip install, API key, account login, browser driver or model call is needed for these commands.
 
 ```sh
 git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
-python scripts/kit.py doctor
-python scripts/kit.py --data-dir ../vietnam-job-search-private init
-python -m unittest discover -s tests -v
+python scripts/kit.py doctor --runtime generic
+python scripts/demo_slice1.py --data-dir ../career-demo-private
+python scripts/kit.py --data-dir ../career-demo-private resume
+python scripts/kit.py --data-dir ../career-demo-private report --format md --output reports/checkpoint.md
 ```
 
-On Windows, use your real Python executable or `py -3`; a Store alias may not run Python. Keep the private data directory outside the cloned repository. No installer, browser session, account login, API key or hook is created by cloning.
+Use a new empty demo directory. The demo imports fictional candidate A, records a clearly fictional profile confirmation, produces a source-bound Markdown CV and leaves a `review_required` tracker record. It never connects to `example.test` or submits an application. Use `--candidate b` with another empty directory for the Vietnamese operations example. Omit `--data-dir` for a disposable demonstration that cleans up its own temporary workspace.
 
-Open the checkout in Codex, Claude Code or another capable agent and paste:
+On Windows, `py -3` or an absolute real interpreter path may be needed; the Store alias is not an interpreter. [Measured setup and recovery](docs/setup.md) includes the individual commands and outcomes.
 
-> Read AGENTS.md and prompts/MASTER_PROMPT.md. Run the capability inspection first. My private data directory is ../vietnam-job-search-private. Ask only for missing facts and preferences. Help me discover suitable Vietnam jobs, assess them against my approved CV and prepare the strongest application one job at a time. Use computer control only where the destination permits the exact action. Show the exact package and answers before any disclosure. Begin in preparation-only mode.
+## Use your own agent and CV
 
-Then provide your CV in the agent's authorized context or place it in your private directory. Do not paste candidate information into GitHub issues. The full [master prompt](prompts/MASTER_PROMPT.md) covers intake, discovery, tailoring, review, disclosure and submission.
+Open the clone in your chosen agent and paste:
 
-## What is included
+> This is a job-seeker request. Read prompts/STARTUP.md and docs/job-seeker-policy.md. Diagnose my selected runtime, reuse or initialize one explicitly chosen external private workspace, and ask only for missing candidate facts/preferences. Start in PREPARE. Use only capabilities reported by the installed kit. Do not upload, enter personal data or submit without an exact permitted disclosure scope and my approval.
 
-| Component | Purpose |
+The agent may draft versioned inputs using [schemas/contracts.schema.json](schemas/contracts.schema.json) and examples. Import your authorized text CV with `import-cv`, then a source-backed profile with `import-profile`. That returns `needs_input` until you review and explicitly confirm its fingerprint. Generated prose is not evidence. Pending/rejected facts cannot enter the CV; exact quotes preserve qualifiers. The kit validates linkage and structure, not the truth of a human's claim or every semantic requirement.
+
+Keep CVs, evidence, salary, answers, trackers and screenshots in the selected directory **outside this clone**. One workspace selects one candidate. SQLite is authoritative; Markdown/reports are derived. Local-first means user-controlled storage; content supplied to a cloud agent may be processed remotely by that provider. Never put candidate information in public issues or fixtures.
+
+## Local commands and external disclosure
+
+| Operation | Current behavior |
 |---|---|
-| Six shared skills | Candidate evidence, Vietnam job fit, tailoring/rendering, independent review, supervised browser work and application tracking |
-| Codex and Claude entrypoints | Shared instructions with host-specific discovery adapters; no blanket permission grants |
-| Private SQLite CLI | Local job tracking, package validation, artifact hashes and explicit approval records |
-| Optional hook examples | Session reminders, conservative browser-action blocking, approval invalidation after edits and stop summaries |
-| Fictional fixtures and tests | Exercise gaps, changed files/destinations, policy restrictions and storage behavior without live applications |
-| Document guidance | Editable DOCX and text PDF workflow with render/inspect gates and optional pinned libraries |
-| Source review | Pinned audits of four community references, license notes and intentional adaptations |
+| `doctor`, `source-registry` | Read-only capability/registry output; no account connection |
+| `init`, `import-cv`, `import-profile`, `confirm-profile` | Private local evidence/profile state |
+| `import-jd`, `assess`, `prepare` | Private local job/matrix/draft state; no website operation |
+| `resume`, `status`, `report`, `handoff` | Local checkpoint or explicit manual handoff |
+| Legacy `check-package`, `record-approval`, `check-approval`, `invalidate` | Content-bound local bookkeeping; no authenticated human identity, expiry-bound batch or browser grant |
+| Fill/upload/submit | No live execution command in this slice; host/site/user permission and future tested execution guards required |
 
-## Agent compatibility
+Structured operations return `schema_version`, `outcome`, `data`, `issues`, `message`. Outcomes: `ok`, `blocked`, `needs_input`, `manual_required`, `failed`, `submission_unknown`. Exit 0 means the local operation succeeded; exit 2 means inspect the outcome and next input. A manual handoff is not a submitted application. [Tool/data contract](docs/DATA_CONTRACT.md).
 
-| Host | Entry path | Status |
+## Compatibility and sources
+
+| Interface | Label | Actual scope |
 |---|---|---|
-| Codex | AGENTS.md and `.agents/skills/` | Supported instruction structure; native hook schema must match the installed runtime |
-| Claude Code | CLAUDE.md and `.claude/skills/` adapters | Documented structure; native execution not exercised in this release |
-| Grokbot / other agents | Read AGENTS.md and paste the master prompt | Portable instruction path only; product identity, native skills/hooks and browser APIs unverified |
+| Generic local Python CLI | Verified on recorded test matrix | Deterministic commands/fictional tests; no native agent/browser certification |
+| Codex desktop tool execution; CLI 0.137.0 inventory | Experimental | This development flow executes local tools; native project-skill/hook callbacks not integration-tested |
+| Claude Code 2.1.205 inventory | Instruction-only | Generated shared-skill wrappers; native agent execution/hooks not tested |
+| Grok Bot / unidentified Grok runtime | Unsupported natively | Generic text/manual path only; no invented SDK, hooks or browser support |
 
-The kit uses the agent you already selected. It adds no paid AI API and makes no claim that cloud-model processing stays on your machine. Browser/computer control must be supplied by your host; there is no bundled authenticated browser or generic auto-submit CLI. See [compatibility](docs/compatibility.md) and [tools](docs/TOOLS.md).
+[Compatibility evidence](docs/compatibility.md) lists versions, OS, documentation and limits. Coding CLIs and consumer chat websites differ. Ten wrappers do not create ten installed tools. `python scripts/generate_adapters.py --dry-run` previews repository-owned wrapper changes; `--check` detects drift. No global settings or active hooks are overwritten.
 
-## A normal application cycle
+[connectors/registry.json](connectors/registry.json) declares discover/read/extract/fill/upload/submit/verify separately. Manual structured JD import works. Employer pages, feeds, universities and LinkedIn/Indeed/JobsGO/ITviec/TopCV/VietnamWorks/CareerViet are potential sources, not enabled connectors. Unknown permissions stay manual; snippets are leads, and only executed finite searches count as coverage.
 
-1. Import only authorized CVs/evidence; record exact claims and resolve conflicts.
-2. Confirm role track, seniority, Vietnam locations, work model, salary basis, availability, language, exclusions and prior applications. Ask only for missing fields.
-3. Discover a bounded shortlist using permitted public/employer sources. Verify live JDs, exact locations and recipients; ignore stale search snippets as proof of activity.
-4. Map required/preferred duties to evidence. Recommend strong fit, plausible fit, stretch or blocked-by-explicit-requirement with reasons.
-5. Tailor one package: JD snapshot, evidence matrix, CV, optional cover letter, screening answers, critique, change log and hash manifest.
-6. Review the exact package. Do not fill or upload personal data before specific disclosure approval. Autosaving fields and uploads can transmit before Submit.
-7. Use a supported browser only for permitted actions. Default to manual final submission. Record observed confirmation separately from the candidate's reported submission.
+## Costs, hooks and development
 
-Unknown salary, work authorization, language proficiency or start dates stay unknown. Remote does not establish eligibility to work from Vietnam. Overlapping jobs do not add extra years. Technical model scores are not commercial uplift.
+Core dependencies are standard library only, recorded in [dependency-lock.json](dependency-lock.json). Optional document pins are not a complete transitive renderer lock and are not auto-installed. Existing agent subscriptions, model usage, search APIs and future browser/render services may cost separately. There is no compulsory second model API, maintainer cloud service or default telemetry.
 
-## Platform modes
-
-| Destination | Default |
-|---|---|
-| LinkedIn | Manual handoff; no automated logged-in reading/filling/submission without applicable authorization |
-| Indeed | Manual unless an approved site-provided method permits the exact action |
-| ITviec | Manual until intended assisted actions are clearly permitted |
-| Employer/ATS | Check destination-specific terms and redirects; unknown scope stays manual |
-
-Candidate approval cannot override platform restrictions. Do not bypass CAPTCHA, MFA, rate limits, access controls or browser warnings. Do not copy cookies, attach through arbitrary debug ports or use private APIs from traffic. [Policy register](templates/platform-register.json) starts with manual modes and contains no permanent authorization.
-
-## Private data and approvals
-
-`--data-dir` is required for storage commands and must resolve outside the framework checkout. Use one canonical private ledger. Templates contain fictional data; they are not permission to disclose anything.
-
-An approval record binds company, job, exact destination, answers, consent and current artifact bytes. Changed content makes the approval stale. The record is local bookkeeping, not a cryptographic signature, authenticated user identity or global browser sandbox. Only record it after a real explicit candidate response; never manufacture confirmation text. Native host confirmation rules still apply. See [data contract](docs/DATA_CONTRACT.md).
-
-## Optional hooks
-
-Nothing is enabled by default. Read [hook setup and limits](docs/HOOKS.md), inspect `hooks/guard.py`, run the fictional tests and adapt the inactive examples to the installed host and exact local paths. Review/trust them through that host's supported flow. Never bypass hook trust.
-
-The starter PreToolUse guard conservatively blocks recognizable browser/computer controls and transmission tools because generic clicks cannot establish recipient or effect. It is useful for preparation-only sessions. It does not turn approvals into live automation or catch every shell/MCP/hosted path. Missing, failing or unsupported hooks leave application handling manual.
-
-## Development and release checks
+Optional [hook examples](docs/HOOKS.md) are inactive. Their conservative helper blocks recognized control names in preparation sessions and marks prior approvals stale after recognized edits; it cannot sandbox arbitrary shell/MCP/host actions. No auto-trust, permission bypass, CAPTCHA, cookie extraction or stealth. Employment, interview, ATS and universal-coverage guarantees are outside the product promise.
 
 ```sh
 python -m unittest discover -s tests -v
+python scripts/generate_adapters.py --check
 python scripts/check_repository.py
+python scripts/demo_slice1.py
 ```
 
-CI runs fictional local checks on Linux and Windows. It never searches accounts or submits applications. Keep changes small, add behavioral checks for new gates and run the public-data check before pushing. Never force-add private files. Pin/review updates to reference code or document dependencies rather than running unreviewed installers.
-
-## References and license
-
-Original implementation under the [MIT license](LICENSE). Design references: [job-apply-assistant](https://github.com/saizongmm/job-apply-assistant), [career-ops](https://github.com/career-ops-hq/career-ops), [ai-job-search](https://github.com/MadsLorentzen/ai-job-search) and [claude-resume-kit](https://github.com/ARPeeketi/claude-resume-kit). No reference repository code or candidate biography is bundled. Read the [pinned audit and attribution](docs/REFERENCE_REVIEW.md) before borrowing more.
-
-This release supplies a reusable workflow and local guards. Employment outcomes, platform access, native host integration and live application success must be established in each user's environment.
+Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md) and maintainer AGENTS.md. CI uses fictional data, no paid model calls and no real employer applications. [MIT](LICENSE) covers original code; [third-party notices](THIRD_PARTY_NOTICES.md) and the [pinned reference review](docs/REFERENCE_REVIEW.md) distinguish ideas from copied code. No reference candidate examples, installers or orchestrators are bundled.

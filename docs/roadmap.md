@@ -4,7 +4,7 @@ This records implemented evidence separately from intended product scope. No lat
 
 | Slice | Acceptance gate | State |
 |---|---|---|
-| 1 | Clone/diagnose/private init/CV+profile+JD import/confirmed evidence matrix/Markdown draft/tracker/resume; two-user and failure tests | In progress |
+| 1 | Clone/diagnose/private init/CV+profile+JD import/confirmed evidence matrix/Markdown draft/tracker/resume; two-user and failure tests | Implemented; measured evidence in RELEASE_SLICE1.md |
 | 2 | Accurate DOCX/PDF from approved content; rendered page review; exact expiring manifests | Pending |
 | 3 | Measured Codex/Claude runtime execution, synchronized project setup/dry run/backups/uninstall | Pending; wrappers alone are instruction-only |
 | 4 | One permitted discovery connector plus manual import; permission evidence/rate limits/coverage/dedup tests | Manual import in Slice 1; network connector pending |

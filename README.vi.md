@@ -1,0 +1,54 @@
+# Vietnam Career Agent Kit
+
+Dùng trợ lý AI và CV của riêng bạn để tìm việc tại Việt Nam theo một quy trình có bằng chứng, công cụ tái sử dụng và kiểm soát việc gửi hồ sơ.
+
+[English](README.md) · [Mục tiêu](GOAL.md) · [Kiến trúc](docs/architecture.md) · [Tương thích](docs/compatibility.md) · [Lộ trình](docs/roadmap.md)
+
+**Đã chạy được:** chẩn đoán → tạo không gian riêng → nhập CV dạng TXT/Markdown UTF-8 và hồ sơ có nguồn → xác nhận hồ sơ → nhập JD có cấu trúc → đối chiếu yêu cầu → tạo bản nháp CV Markdown → theo dõi, xuất báo cáo và tiếp tục phiên sau. Có mười skill dùng chung và ví dụ hư cấu cho hai người khác nhau.
+
+**Chưa có trong Slice 1:** nhập/xuất PDF/DOCX, bộ tìm việc qua mạng, thao tác trình duyệt và gửi hàng loạt có phê duyệt. Skill/hook hoặc tên một nhà cung cấp AI không chứng minh các khả năng này đã hoạt động. Công cụ kiểm tra hash cũ chỉ lưu trạng thái phê duyệt cục bộ.
+
+## Chạy thử bằng dữ liệu hư cấu
+
+Cần Git và Python thật phiên bản 3.11 trở lên. Không cần pip install, API key hay gọi mô hình AI.
+
+```sh
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+cd vietnam-career-agent-kit
+python scripts/kit.py doctor --runtime generic
+python scripts/demo_slice1.py --candidate b --data-dir ../career-demo-vi-private
+python scripts/kit.py --data-dir ../career-demo-vi-private resume
+python scripts/kit.py --data-dir ../career-demo-vi-private report --format md --output reports/checkpoint.md
+```
+
+Dùng thư mục mới, rỗng và nằm ngoài repo. Ví dụ B là ứng viên hư cấu tại Đà Nẵng, dùng tiếng Việt; ví dụ A dùng `--candidate a`. Demo chỉ tạo xác nhận cho nhân vật hư cấu, không truy cập nhà tuyển dụng và không gửi hồ sơ. Bỏ `--data-dir` để dùng thư mục tạm được dọn sau khi chạy. Trên Windows có thể cần `py -3` hoặc đường dẫn Python thật; Store alias không đủ.
+
+## Dùng CV của bạn
+
+Dán vào trợ lý có quyền đọc/chạy công cụ cục bộ:
+
+> Đây là yêu cầu tìm việc của người dùng, không phải tác vụ phát triển sản phẩm. Đọc prompts/STARTUP.md và docs/job-seeker-policy.md. Kiểm tra runtime, dùng một thư mục riêng ngoài repo và chỉ hỏi những thông tin còn thiếu. Bắt đầu ở PREPARE, chỉ dùng khả năng đã xác minh. Không nhập dữ liệu cá nhân, tải CV hay gửi đơn khi chưa có đúng phạm vi được phép và phê duyệt cụ thể của tôi.
+
+Nhập CV được phép bằng `import-cv`, hồ sơ bằng `import-profile`; kết quả `needs_input` yêu cầu bạn xem và xác nhận đúng fingerprint. Dữ kiện cần trích dẫn nguồn, vị trí và trạng thái. Nội dung do AI viết và yêu cầu của JD không phải bằng chứng kinh nghiệm. Slice 1 chọn và sắp xếp trích dẫn đã xác nhận, giữ nguyên giới hạn bài tập/nguyên mẫu/đóng góp. Việc kiểm tra cấu trúc không chứng minh mọi phát biểu là đúng.
+
+Mỗi thư mục chỉ chọn một ứng viên. CV, dữ kiện, mức lương, câu trả lời và SQLite phải ở ngoài Git công khai. Báo cáo/bản nháp là dữ liệu dẫn xuất; SQLite là nguồn trạng thái chính. Lưu cục bộ không có nghĩa là mô hình chạy cục bộ: nội dung bạn cung cấp cho trợ lý đám mây có thể được nhà cung cấp xử lý.
+
+## Kết quả và giới hạn
+
+- Lệnh hiện tại chỉ đọc/ghi cục bộ. `handoff` trả về bước bàn giao thủ công, không phải đơn đã gửi.
+- Mỗi kết quả có `schema_version`, `outcome`, `data`, `issues`, `message`. Mã thoát 0 là tác vụ cục bộ thành công; mã 2 yêu cầu xem trạng thái và bổ sung/xử lý thông tin.
+- Không tự điền ngày bắt đầu, quyền làm việc, nhu cầu bảo lãnh, đồng ý chuyển nơi ở hoặc mức lương. Giữ riêng VND/USD, tháng/năm, gross/net và thưởng.
+- Trước khi nhập/upload cần đúng nhà tuyển dụng, vị trí, đích đến, hash tài liệu/câu trả lời, lựa chọn đồng ý, thời hạn và phạm vi. Phê duyệt của bạn không thay thế quy định nền tảng hay quyền công cụ.
+- Bảng nguồn chỉ ghi khả năng từng thao tác; LinkedIn, Indeed, JobsGO, ITviec, TopCV, VietnamWorks và CareerViet chưa có connector hoạt động. Không tuyên bố tìm được mọi việc ở Việt Nam.
+
+[Ma trận tương thích](docs/compatibility.md): CLI Python có kiểm thử; Codex là Experimental; Claude Code là Instruction-only; Grok chưa xác định runtime nên Unsupported ở mức tích hợp native. Có thể dùng hướng dẫn chung nếu trợ lý có khả năng phù hợp, nhưng website chat không tự có quyền chạy công cụ/trình duyệt.
+
+Mã nguồn gốc theo MIT; [dependency-lock.json](dependency-lock.json) ghi core không có thư viện bên thứ ba. Thuê bao AI, API tìm kiếm hoặc hạ tầng tùy chọn có thể tính phí riêng. Không bắt mua thêm API mô hình, không có dịch vụ đám mây bắt buộc và không bật telemetry. Hook mẫu chưa kích hoạt, không tự được tin cậy và không bảo vệ mọi đường thao tác.
+
+```sh
+python -m unittest discover -s tests -v
+python scripts/generate_adapters.py --check
+python scripts/check_repository.py
+```
+
+[Thiết lập/nâng cấp/gỡ bỏ](docs/setup.md) · [Đóng góp](CONTRIBUTING.md) · [Bảo mật](SECURITY.md) · [Lộ trình](docs/roadmap.md) · [Nguồn tham khảo và giấy phép](THIRD_PARTY_NOTICES.md). Tác vụ phát triển chỉ dùng dữ liệu hư cấu, không gửi đơn thử đến doanh nghiệp thật. Sản phẩm không cam kết việc làm, phỏng vấn hay điểm ATS.

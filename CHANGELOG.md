@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Added
+
+- Portable preparation core over the existing SQLite ledger, versioned schemas and structured CLI outcomes.
+- Explicit CV/profile confirmation, source-backed fit validation, quote-preserving Markdown drafts, resume/report and manual handoff.
+- Ten canonical skills, synchronized Claude wrappers with dry-run/check modes, and a per-operation source registry.
+- Two complete fictional user flows, English/Vietnamese guides, dependency lock, maintainer separation and contribution/security notices.
+
 ### Changed
 
 - Renamed the project to Vietnam Career Agent Kit and updated clone instructions.
