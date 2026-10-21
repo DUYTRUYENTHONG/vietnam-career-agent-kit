@@ -1,5 +1,4 @@
-# Optional, manually reviewed document dependencies; core CLI needs none.
-# Tested versions in the source preparation environment, not an auto-installer.
-python-docx==1.2.0
-reportlab==4.4.9
-pypdf==6.10.0
+# Optional, explicit, hash-locked install; core remains standard library only.
+--require-hashes
+--only-binary=:all:
+-r requirements-documents.lock
