@@ -1,0 +1,335 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Host execution protocol 1.0",
+  "description": "Select a named definition. The engine further validates the pending action phase, exact scope, current form, receipts and hashes. A receipt does not authenticate its host.",
+  "schema_version": "1.0",
+  "$defs": {
+    "form_observation": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "consents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "required": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "required"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "upload_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "blockers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "fields",
+        "required_fields",
+        "consents",
+        "upload_extensions",
+        "blockers"
+      ],
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "binding_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "employer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "requisition": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "failed",
+            "unknown",
+            "manual_required"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "form": {
+          "$ref": "#/$defs/form_observation"
+        },
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "boolean"
+            ]
+          }
+        },
+        "consents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "choice": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "document_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "confirmed": {
+          "type": "boolean"
+        },
+        "confirmation_text": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "screenshot": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "binding_id",
+        "url",
+        "employer",
+        "requisition",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "job_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "action": {
+          "enum": [
+            "inspect",
+            "fill",
+            "upload",
+            "review",
+            "submit",
+            "verify"
+          ]
+        },
+        "binding_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "destination": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "employer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "requisition": {
+          "type": "string"
+        },
+        "manifest_fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "bridge_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "deadline_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "boolean"
+            ]
+          }
+        },
+        "consents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "choice": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "choice"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "document": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "additionalProperties": false
+        },
+        "document_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "attempt_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "run_id",
+        "job_id",
+        "action",
+        "binding_id",
+        "destination",
+        "employer",
+        "requisition",
+        "manifest_fingerprint",
+        "bridge_id",
+        "deadline_utc"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

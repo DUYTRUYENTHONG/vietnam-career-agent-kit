@@ -22,7 +22,8 @@ class Documents(Preparation):
             db.execute('CREATE TABLE IF NOT EXISTS document_reviews(render_id TEXT PRIMARY KEY REFERENCES document_sets(id),fingerprint TEXT NOT NULL,payload TEXT NOT NULL,recorded_utc TEXT NOT NULL)')
             db.execute('CREATE TABLE IF NOT EXISTS campaign_manifests(fingerprint TEXT PRIMARY KEY,payload TEXT NOT NULL,created_utc TEXT NOT NULL)')
             db.execute('CREATE TABLE IF NOT EXISTS campaign_approvals(fingerprint TEXT PRIMARY KEY REFERENCES campaign_manifests(fingerprint),approved_utc TEXT NOT NULL,revoked_utc TEXT,reason TEXT)')
-            db.execute('PRAGMA user_version=2')
+            if db.execute('PRAGMA user_version').fetchone()[0]<2:
+                db.execute('PRAGMA user_version=2')
             db.commit()
         return Outcome('ok',{'workspace':str(self.data_dir),'schema':2,'language':self.language()},[])
 
@@ -91,7 +92,8 @@ class Documents(Preparation):
         return Outcome('ok',{**payload,'fingerprint':fingerprint,'reviewed':False,'approved':False},[],
             'Inspect every page image and confirm content, language, glyphs and layout before approval.')
 
-    def current_render(self, render_id):
+    def reviewed_render_snapshot(self, render_id):
+        """Validate immutable bytes/review, including a submitted historical render."""
         with self._db() as db:
             row=db.execute('SELECT * FROM document_sets WHERE id=?',(render_id,)).fetchone()
             review=db.execute('SELECT * FROM document_reviews WHERE render_id=?',(render_id,)).fetchone()
@@ -99,14 +101,18 @@ class Documents(Preparation):
         payload=json.loads(row['payload'])
         if canonical_hash(payload)!=row['fingerprint']:
             raise WorkflowError('blocked','Render snapshot integrity check failed')
-        if canonical_hash(self.content_model(row['job_id']))!=payload['content_hash']:
-            raise WorkflowError('blocked','Rendered content is stale against the current profile, job or draft')
         for file in [*payload['files'].values(),*payload['pages']]:
             path=self.inside(file['path'])
             if not path.is_file() or self.hash_file(path)!=file['sha256']:
                 raise WorkflowError('blocked','Rendered file/page bytes changed or disappeared; render and review again')
         return {**payload,'fingerprint':row['fingerprint'],
             'reviewed':bool(review and review['fingerprint']==row['fingerprint'])}
+
+    def current_render(self, render_id):
+        payload=self.reviewed_render_snapshot(render_id)
+        if canonical_hash(self.content_model(payload['job_id']))!=payload['content_hash']:
+            raise WorkflowError('blocked','Rendered content is stale against the current profile, job or draft')
+        return payload
 
     def private_json(self, path):
         path=Path(path).resolve(strict=True)

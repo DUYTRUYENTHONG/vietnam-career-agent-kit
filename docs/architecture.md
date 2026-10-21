@@ -30,7 +30,7 @@ core/rendering.py is an optional library/subprocess boundary: build DOCX, use a 
 
 Schema 2 adds document_sets, document_reviews, campaign_manifests and campaign_approvals transactionally; it preserves existing canonical data. core/manifests.py validates finite plans, constructs exact review copies and records/checks/revokes expiring approval. It reuses current-render/source validation rather than implementing another evidence model. An explicit intent checks job, destination, operation and document/answer/consent hashes. New overlapping scopes revoke previous relevant approvals. resume reports document/manifest status without treating approval as submission.
 
-These core paths are shared by scripts/kit.py. No native browser or executor exists; execution_enabled is always false. Approval limits/expiry bind prospective scope but cannot constrain arbitrary external host tools. No attempts are recorded or consumed until the later execution slice is implemented and tested.
+These core paths are shared by scripts/kit.py. core/execution.py adds a durable host-mediated executor with additive schema 3. An explicitly reviewed bridge/runtime scope enables requests; preparation-only approvals stay disabled. One active coordinator, one pending action and a unique immutable attempt before submit prevent engine retries. The agent host supplies supported browser actions and observed receipts; the CLI cannot constrain arbitrary external tools. See execution.md for the protocol and trust boundary.
 
 ## Boundaries
 
@@ -38,7 +38,7 @@ These core paths are shared by scripts/kit.py. No native browser or executor exi
 - Maintainer instructions are AGENTS.md/CLAUDE.md. Job-seeker workflow is prompts/MASTER_PROMPT.md and canonical skills/policy, activated only by a career request.
 - Source connectors declare operations separately. A registry entry is not an implemented connector or permission. Manual structured JD import is the working first connector.
 - Runtime wrappers read shared skills and call the same CLI. They grant no permissions and install no active hooks/global settings. Generic CLI execution is distinct from native runtime/browser verification.
-- Existing legacy package approval checking remains available. Slice 2 adds exact finite campaign approval validation; APPROVED_BATCH execution remains unavailable until attempt recording and local portal recovery tests exist.
+- Existing legacy package approval checking remains available. Slice 2 adds exact finite campaign approval validation. The execution engine now supports APPROVED_BATCH with durable attempts and read-only recovery; native employer integrations remain unverified.
 - External computer tools outside this CLI are not sandboxed by core checks. Missing/failed host hooks never grant permission.
 
 ## Verification

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Slice 2 review and manifest plan inputs 1.0",
+  "title": "Document review and campaign plan inputs 1.0 (optional execution scope)",
   "description": "Editor input shapes; shared core additionally checks source/current artifact hashes, complete ordered pages, UTC/freshness/expiry, finite modes/limits, exact hosts and candidate evidence. Select a named definition.",
   "schema_version": "1.0",
   "$defs": {
@@ -254,6 +254,27 @@
           },
           "minItems": 1,
           "maxItems": 100
+        },
+        "execution": {
+          "type": "object",
+          "properties": {
+            "bridge_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "\\S"
+            },
+            "runtime_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 60
+            }
+          },
+          "required": [
+            "bridge_id",
+            "runtime_minutes"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [

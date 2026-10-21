@@ -23,6 +23,7 @@ def diagnose(runtime: str = 'generic') -> Outcome:
         'agent_executable_present':bool(shutil.which({'codex':'codex','claude':'claude'}.get(runtime,'__not_an_agent__'))),
         'skill_discovery':'Shared project skills; native loading must be verified in the named host',
         'hooks_trusted_or_tested':False,'browser_execution':False,'network_execution':False,
+        'execution_engine':{'available':True,'interface':'Host-mediated request/receipt CLI; no browser acquired','standalone_browser_worker':False},
         'model_api_required':False,'document_formats':['UTF-8 TXT CV import','Markdown CV draft'],
         'optional_document_pipeline':{'formats':['DOCX','PDF','PNG previews'],
             'dependency_versions':document_dependencies,'libreoffice_on_path':bool(shutil.which('soffice')),

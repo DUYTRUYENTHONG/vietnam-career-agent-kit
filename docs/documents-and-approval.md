@@ -1,6 +1,6 @@
 # Render documents and approve exact scope
 
-Slice 2 is local preparation and approval bookkeeping. It has no browser, upload, submit or attempt executor. Even an approved APPROVED_BATCH manifest returns execution_enabled=false. Submission limits are validated and bound to approval, not consumed or enforced against external computer tools. Later slices must implement those execution checks before enabling a browser.
+Slice 2 introduced local preparation and approval bookkeeping. Plans without execution scope still return execution_enabled=false. The newer [host-mediated execution engine](execution.md) requires an explicitly reviewed bridge/runtime scope and consumes submission limits through durable attempts. The CLI does not acquire a browser or constrain arbitrary external computer tools.
 
 ## Explicit optional setup
 
@@ -65,7 +65,7 @@ python scripts/kit.py --data-dir ../career-doc-demo revoke-manifest --fingerprin
 python scripts/kit.py --data-dir ../career-doc-demo resume
 ```
 
-check-manifest optionally accepts --intent for an exact private JSON object with schema_version=1.0, job_id, destination, action, document_sha256, answers_sha256 and consents_sha256. Any mismatch blocks. Every check revalidates profile/source/JD/draft/render/page hashes, current review, expiry, policy freshness and revocation. Recreating an unchanged approved scope retains its approval; a revoked/superseded fingerprint cannot replay its old proof and needs a new reviewed manifest/expiry. Local confirmation files cannot authenticate a human or prevent unrelated host tools from bypassing the CLI. An ok outcome means this local check passed; execution_enabled remains false and no application is inferred.
+check-manifest optionally accepts --intent for an exact private JSON object with schema_version=1.0, job_id, destination, action, document_sha256, answers_sha256 and consents_sha256. Any mismatch blocks. Every check revalidates profile/source/JD/draft/render/page hashes, current review, expiry, policy freshness and revocation. Recreating an unchanged approved scope retains its approval; a revoked/superseded fingerprint cannot replay its old proof and needs a new reviewed manifest/expiry. Local confirmation files cannot authenticate a human or prevent unrelated host tools from bypassing the CLI. An ok outcome means this local check passed; execution_enabled is true only for a newly reviewed optional execution scope. No submission is inferred from approval; see [the execution protocol](execution.md).
 
 ## Tests and external components
 

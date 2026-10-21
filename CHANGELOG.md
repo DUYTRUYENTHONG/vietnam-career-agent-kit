@@ -2,8 +2,12 @@
 
 ## Unreleased
 
+- Add host-mediated sequential application execution, exact reviewed bridge/runtime scope, durable unique attempts before submit, finite budgets and read-only confirmation recovery.
+- Add additive schema 3, phase-specific browser receipts, fresh form/consent checks, frozen documents/evidence, execution CLI controls and accurate execution reports.
+- Test deterministic fictional bridge/CLI, concurrency, expiry/revocation, drift, tampering, interrupted submits and a separate Codex loopback browser smoke; real employer integration remains unverified.
+
 - Add optional source-bound DOCX/PDF output with isolated LibreOffice conversion, exact text/font checks, page previews and explicit review/rejection.
-- Add finite, expiring manifest creation/approval/check/revocation binding candidate, job, destination, reviewed CV, answers, consents and operation limits. Browser execution stays disabled.
+- Add finite, expiring manifest creation/approval/check/revocation binding candidate, job, destination, reviewed CV, answers, consents and operation limits. Preparation-only manifests keep execution disabled; explicit new execution scope is separately reviewed.
 - Preserve existing data through additive schema 2; report document/approval status on resume. Block stale bytes, missing answers, superseded scopes and revoked-confirmation replay.
 - Lock the complete optional Python wheel closure; test real fictional English/Vietnamese renders and multi-page layout separately from standard-library state tests.
 

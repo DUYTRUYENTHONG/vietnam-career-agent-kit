@@ -1,4 +1,4 @@
-"""Finite, expiring local approval records. No browser or submit executor."""
+"""Finite, expiring approval records; optional exact host execution scope."""
 from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
@@ -75,10 +75,16 @@ class Campaign(Documents):
             raise WorkflowError('blocked','Requested operations exceed the recorded source permission')
 
     def create_manifest(self,raw):
-        plan=object_fields(raw,{'schema_version','campaign_id','mode','expires_utc','submission_limit','entries'},set(),'campaign plan')
+        plan=object_fields(raw,{'schema_version','campaign_id','mode','expires_utc','submission_limit','entries'},{'execution'},'campaign plan')
         version(plan,'campaign plan');text(plan['campaign_id'],'campaign_id')
         choice(plan['mode'],{'ASSIST','APPROVED_BATCH'},'mode')
         now=now_utc();expiry=timestamp(plan['expires_utc'],'expires_utc')
+        if 'execution' in plan:
+            execution=object_fields(plan['execution'],{'bridge_id','runtime_minutes'},set(),'execution')
+            text(execution['bridge_id'],'execution.bridge_id')
+            if (len(execution['bridge_id'])>128 or type(execution['runtime_minutes']) is not int or
+                    not 1<=execution['runtime_minutes']<=60):
+                raise ContractError('execution: bridge ID <=128 characters and runtime 1..60 minutes required')
         if not now<expiry<=now+timedelta(days=30):
             raise WorkflowError('needs_input','Expiry must be in the future and no more than 30 days away')
         entries=plan['entries'];limit=plan['submission_limit']
@@ -114,7 +120,7 @@ class Campaign(Documents):
                 'document':document,'document_sha256':document['sha256'],
                 'answers_sha256':canonical_hash(entry['answers']),'consents_sha256':canonical_hash(entry['consents'])})
         manifest={**plan,'entries':rows,'candidate_id':profile['profile']['candidate_id'],
-            'profile_fingerprint':profile['fingerprint'],'execution_enabled':False}
+            'profile_fingerprint':profile['fingerprint'],'execution_enabled':'execution' in plan}
         fingerprint=canonical_hash(manifest)
         with self._db() as db:
             db.execute('BEGIN IMMEDIATE')
@@ -136,7 +142,25 @@ class Campaign(Documents):
         with self._db() as db:
             existing=db.execute('SELECT revoked_utc FROM campaign_approvals WHERE fingerprint=?',(fingerprint,)).fetchone()
         return Outcome('ok',{'fingerprint':fingerprint,'manifest':manifest,'file':self.file_record(path),
-            'approved':bool(existing and existing['revoked_utc'] is None),'execution_enabled':False},[])
+            'approved':bool(existing and existing['revoked_utc'] is None),'execution_enabled':manifest['execution_enabled']},[])
+
+    def manifest_render(self, entry, fingerprint):
+        # Only this engine's immutable attempt permits historical validation.
+        with self._db() as db:
+            schema=db.execute('PRAGMA user_version').fetchone()[0]
+            submitted=db.execute('SELECT snapshot_json,snapshot_sha256 FROM execution_attempts WHERE job_id=?',
+                (entry['job_id'],)).fetchone() if schema>=3 else None
+        if submitted:
+            snapshot=json.loads(submitted['snapshot_json'])
+            if canonical_hash(snapshot)!=submitted['snapshot_sha256']:
+                raise WorkflowError('blocked','Attempt snapshot integrity failed')
+            if (snapshot['manifest_fingerprint']==fingerprint and
+                    snapshot['entry']['render_id']==entry['render_id']):
+                _,job_hash=self.job_document(entry['job_id'])
+                if job_hash!=entry['job_fingerprint']:
+                    raise WorkflowError('blocked','Submitted job content changed')
+                return self.reviewed_render_snapshot(entry['render_id'])
+        return self.current_render(entry['render_id'])
 
     def current_manifest(self,fingerprint):
         text(fingerprint,'fingerprint')
@@ -155,7 +179,7 @@ class Campaign(Documents):
         if profile['fingerprint']!=manifest['profile_fingerprint'] or profile['profile']['candidate_id']!=manifest['candidate_id']:
             raise WorkflowError('blocked','Manifest candidate/profile changed')
         for entry in manifest['entries']:
-            rendered=self.current_render(entry['render_id'])
+            rendered=self.manifest_render(entry,fingerprint)
             self.validate_policy(entry,now)
             if not rendered['reviewed'] or rendered['fingerprint']!=entry['render_fingerprint']:
                 raise WorkflowError('blocked','Manifest document review is absent/stale')
@@ -173,7 +197,7 @@ class Campaign(Documents):
             if previous and previous['revoked_utc'] is not None:
                 raise WorkflowError('blocked','Revoked/superseded scope cannot reuse an old confirmation; create and review a new manifest with a fresh expiry')
             db.execute('INSERT OR REPLACE INTO campaign_approvals VALUES(?,?,NULL,NULL)',(fingerprint,utc_now()))
-            self._event(db,'manifest_approved',fingerprint,'local bookkeeping; human provenance not authenticated; execution unavailable')
+            self._event(db,'manifest_approved',fingerprint,'exact scope; human provenance not authenticated')
             db.commit()
         return self.check_manifest(fingerprint)
 
@@ -192,9 +216,9 @@ class Campaign(Documents):
             if (not entry or intent['action'] not in entry['operations'] or
                     any(intent[key]!=entry[key] for key in keys-{'action','schema_version'})):
                 raise WorkflowError('blocked','Intent differs from the approved job, destination, CV, answers, consents or operation')
-        return Outcome('ok',{'fingerprint':fingerprint,'approved':True,'execution_enabled':False,
+        return Outcome('ok',{'fingerprint':fingerprint,'approved':True,'execution_enabled':manifest.get('execution_enabled',False),
             'mode':manifest['mode'],'submission_limit':manifest['submission_limit'],'expires_utc':manifest['expires_utc']},
-            ['Local approval validation only. Browser/attempt execution and submission-limit consumption are not implemented.'])
+            ['Local approval bookkeeping cannot authenticate a human or grant browser/platform permissions.'])
 
     def revoke_manifest(self,fingerprint,reason):
         text(reason,'reason')
@@ -222,8 +246,8 @@ class Campaign(Documents):
         approvals=[]
         for row in manifests:
             try:
-                self.check_manifest(row['fingerprint'])
-                approvals.append({'fingerprint':row['fingerprint'],'approved':True,'execution_enabled':False})
+                checked=self.check_manifest(row['fingerprint'])
+                approvals.append({'fingerprint':row['fingerprint'],'approved':True,'execution_enabled':checked.data['execution_enabled']})
             except (WorkflowError,OSError,ValueError) as error:
                 approvals.append({'fingerprint':row['fingerprint'],'approved':False,'issues':[str(error)]})
         result.data.update({'document_sets':document_status,'manifests':approvals})
