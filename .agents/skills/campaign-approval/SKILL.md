@@ -15,11 +15,11 @@ Candidate, finite jobs/destinations, current artifact/answer hashes, consents/ac
 
 ## Required capabilities
 
-Local legacy check-package is available; full versioned campaign authorization is pending in the roadmap.
+Local create-manifest, approve-manifest, check-manifest and revoke-manifest. Reviewed rendered artifacts are required. Browser and attempt/submission execution are unavailable.
 
 ## Steps
 
-Identify recipient/requisition and every disclosure before typing/upload. Keep PREPARE until a tested manifest path supports requested scope. Local approval records cannot authenticate a human or grant platform permission. New bytes/destination/answers/consents/expiry require renewed approval.
+Identify recipient/requisition and every disclosure. Build a finite plan from actually reviewed files, confirmed ordinary answers, explicit consents, per-host permission evidence, operations, UTC expiry and limits. Create the manifest, show its exact exported scope, then record an actual explicit approval of that fingerprint. Check intent hashes/destination/action before any future disclosure; execution_enabled remains false in this slice. Changed overlapping scopes revoke old approvals. Local records cannot authenticate a human or grant platform permission. See docs/documents-and-approval.md.
 
 ## Outputs
 
@@ -27,12 +27,12 @@ Reviewable exact manifest or explicit needs_input/manual_required; never a manuf
 
 ## Failure behavior
 
-Unknown required fields, changed files, unverified platform scope or missing guard block affected live action. Do not claim legacy approval has campaign expiry/limits.
+Unknown required fields, stale files/review/permission/expiry or wrong destination/hash/action block validation. Unverified/manual platform scope produces manual_required. Legal/sensitive attestations stay with the user. Never claim legacy records have the new manifest guarantees or that validation executes an application.
 
 ## Side-effect limits
 
-Local review/bookkeeping only in Slice 1; no live disclosure or batch execution.
+Local exact review/bookkeeping only; no live disclosure, attempt creation or batch execution.
 
 ## Tests and examples
 
-templates/package.example.json; tests/test_kit.py; docs/roadmap.md.
+tests/test_manifests.py; tests_optional/test_rendering.py; docs/documents-and-approval.md.

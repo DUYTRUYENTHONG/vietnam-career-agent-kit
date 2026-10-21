@@ -1,10 +1,60 @@
 {
-  "schema_version":"1.0",
-  "scope":"Slice 1 local CLI, tests, hook helper and fictional demo",
-  "python":{"requires":">=3.11","tested_locally":"3.12.14","ci_matrix":["3.11","3.12"]},
-  "third_party_runtime_dependencies":[],
-  "third_party_test_dependencies":[],
-  "install_steps":[],
-  "optional_documents":{"file":"requirements-documents.txt","status":"Optional direct pins only, not a transitive rendering lock; rendering is outside Slice 1","auto_install":false},
-  "external_costs":"Existing agent subscriptions, provider usage, search or future browser/rendering services have separate terms and costs. No maintainer cloud or second model API is required."
+  "schema_version": "1.0",
+  "scope": "Local core and optional Slice 2 document profile",
+  "python": {
+    "requires": ">=3.11",
+    "tested_locally": "3.12.14",
+    "ci_matrix": [
+      "3.11",
+      "3.12"
+    ]
+  },
+  "third_party_runtime_dependencies": [],
+  "third_party_test_dependencies": [],
+  "install_steps": [],
+  "optional_documents": {
+    "file": "requirements-documents.lock",
+    "status": "Full Python dependency closure, exact versions and PyPI wheel hashes; no extras/source builds",
+    "auto_install": false,
+    "packages": {
+      "python-docx": {
+        "version": "1.2.0",
+        "source": "https://pypi.org/pypi/python-docx/1.2.0/json",
+        "wheel_hashes": 1,
+        "license": "MIT"
+      },
+      "lxml": {
+        "version": "6.1.1",
+        "source": "https://pypi.org/pypi/lxml/6.1.1/json",
+        "wheel_hashes": 133,
+        "license": "BSD-3-Clause"
+      },
+      "typing_extensions": {
+        "version": "4.16.0",
+        "source": "https://pypi.org/pypi/typing_extensions/4.16.0/json",
+        "wheel_hashes": 1,
+        "license": "PSF-2.0"
+      },
+      "pypdf": {
+        "version": "6.10.0",
+        "source": "https://pypi.org/pypi/pypdf/6.10.0/json",
+        "wheel_hashes": 1,
+        "license": "BSD-3-Clause"
+      },
+      "pypdfium2": {
+        "version": "5.14.0",
+        "source": "https://pypi.org/pypi/pypdfium2/5.14.0/json",
+        "wheel_hashes": 22,
+        "license": "BSD-3-Clause, Apache-2.0, dependency licenses"
+      },
+      "Pillow": {
+        "version": "12.3.0",
+        "source": "https://pypi.org/pypi/Pillow/12.3.0/json",
+        "wheel_hashes": 86,
+        "license": "MIT-CMU"
+      }
+    },
+    "external_renderer": "User-provisioned LibreOffice Writer and DejaVu Sans fonts; OS packages are not locked by the Python lock. Actual versions are recorded per render."
+  },
+  "external_costs": "Agent subscriptions/search/browser services are separate. No extra model API, telemetry or maintainer cloud."
 }

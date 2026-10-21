@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "kind": "fictional visual QA only",
+  "implementation_commit": "8670026a5d75f20e637a0914a09805cda37976db",
+  "ci_run": "https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/actions/runs/39557082895",
+  "reviewer": "maintainer agent; not candidate approval or authenticated human signature",
+  "reviewed_utc": "2026-10-21T06:46:10.099944+00:00",
+  "observations": "All five page images inspected at original resolution after removing the inherited Title border. Vietnamese glyphs, literal metacharacters, margins, wrapping and three-page flow are legible without overlap or clipping.",
+  "artifact_retention_days": 7,
+  "cases": [
+    {
+      "fixture": "candidate-a",
+      "pages": 1,
+      "renderer": {
+        "font": "DejaVu Sans",
+        "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+        "pillow": "12.3.0",
+        "preview_dpi": 144,
+        "pypdf": "6.10.0",
+        "pypdfium2": "5.14.0",
+        "python_docx": "1.2.0"
+      },
+      "files": [
+        {
+          "file": "cv.docx",
+          "sha256": "15412e869f359f2fa8fa91959ee03ce1975f60ba9f0ac8a5bc5adda857ea900e"
+        },
+        {
+          "file": "cv.pdf",
+          "sha256": "b0a9175cb55fc4dc9863a0eb7ec20fbcabaab9a7923b223de647a4765f879735"
+        },
+        {
+          "file": "page-001.png",
+          "sha256": "5346467a5780764ede33a5ce73eb0f301ef967c6045eeac333d17d94935c9fe6",
+          "dimensions": [
+            1191,
+            1684
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "candidate-b",
+      "pages": 1,
+      "renderer": {
+        "font": "DejaVu Sans",
+        "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+        "pillow": "12.3.0",
+        "preview_dpi": 144,
+        "pypdf": "6.10.0",
+        "pypdfium2": "5.14.0",
+        "python_docx": "1.2.0"
+      },
+      "files": [
+        {
+          "file": "cv.docx",
+          "sha256": "c8a17ce0496a35decef7107d9d205413bb5fee7127117a35e7e79d7b3ff76e73"
+        },
+        {
+          "file": "cv.pdf",
+          "sha256": "5ac5739ff3367effe89daa1072cf2d402bdab451a421828265b436775caa85c7"
+        },
+        {
+          "file": "page-001.png",
+          "sha256": "569d4bffa9ab2a0d57975d7c7e77c21708c7a8360356f73a6660152a473a996f",
+          "dimensions": [
+            1191,
+            1684
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "long-vietnamese",
+      "pages": 3,
+      "renderer": {
+        "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+        "python_docx": "1.2.0",
+        "pypdf": "6.10.0",
+        "pypdfium2": "5.14.0",
+        "pillow": "12.3.0",
+        "font": "DejaVu Sans",
+        "preview_dpi": 144
+      },
+      "files": [
+        {
+          "file": "cv.docx",
+          "sha256": "1a1f42efb0e17e07ad7b184f4efb1781bd6a8bf6dd0cc3e54118ab3b92daf3c1"
+        },
+        {
+          "file": "cv.pdf",
+          "sha256": "7f96168eed84b20ed336c9949ab03cbb7b6aa4683b878718c8207cdd2bffc5a8"
+        },
+        {
+          "file": "page-001.png",
+          "sha256": "77e97fb8e7bad9122b37e4c2145eff8c8d9369b2a0152f1ef9946abfbf7b23fd",
+          "dimensions": [
+            1191,
+            1684
+          ]
+        },
+        {
+          "file": "page-002.png",
+          "sha256": "bc7be1137bfb24cc619df8e80cab95cd7029063a1e1c8e35dd9d038c5c06a7b1",
+          "dimensions": [
+            1191,
+            1684
+          ]
+        },
+        {
+          "file": "page-003.png",
+          "sha256": "5c07d3a138ea347c7590c5414071bb1c37a65ed4802724fd5ac14e5a6c8e19a3",
+          "dimensions": [
+            1191,
+            1684
+          ]
+        }
+      ]
+    }
+  ]
+}

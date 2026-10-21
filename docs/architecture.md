@@ -22,7 +22,15 @@ SQLite is authoritative for candidate/profile confirmation, imported source meta
 
 The host reasons and proposes structured profile/JD/matrix/selection files. Deterministic code validates them; it cannot authenticate a human or prove a semantic claim. Slice 1 only renders exact confirmed source quotes into drafts, with internal source mapping kept separate. No freeform agent-written experience bullet is accepted as new evidence. Profile confirmation is local bookkeeping after actual user review, not a signature.
 
-UTF-8 TXT/Markdown CV import is implemented first. PDF/DOCX extraction/rendering is a later explicit capability; absent support returns manual_required. English/Vietnamese summary labels and Markdown headings are selected explicitly. City aliases normalize for comparison while exact wording remains stored. Compensation fields never convert or infer gross/net, period, currency or bonuses.
+UTF-8 TXT/Markdown CV import is implemented. PDF/DOCX input extraction remains pending. Slice 2 adds optional output rendering with absent tools returning manual_required. English/Vietnamese labels and document headings are selected explicitly. City aliases normalize for comparison while exact wording remains stored. Compensation fields never convert or infer gross/net, period, currency or bonuses.
+
+## Slice 2 documents and manifests
+
+core/rendering.py is an optional library/subprocess boundary: build DOCX, use a trusted local LibreOffice executable with an isolated profile to convert that file, compare text/embedded fonts, then rasterize every page under a PDFium lock. core/documents.py binds canonical selected facts, source/draft/profile/JD hashes, files and page hashes into a document set. Reviews accept only an exact fingerprint, all ordered pages and explicit content/layout/glyph/language checks. Rendering and review are distinct operations.
+
+Schema 2 adds document_sets, document_reviews, campaign_manifests and campaign_approvals transactionally; it preserves existing canonical data. core/manifests.py validates finite plans, constructs exact review copies and records/checks/revokes expiring approval. It reuses current-render/source validation rather than implementing another evidence model. An explicit intent checks job, destination, operation and document/answer/consent hashes. New overlapping scopes revoke previous relevant approvals. resume reports document/manifest status without treating approval as submission.
+
+These core paths are shared by scripts/kit.py. No native browser or executor exists; execution_enabled is always false. Approval limits/expiry bind prospective scope but cannot constrain arbitrary external host tools. No attempts are recorded or consumed until the later execution slice is implemented and tested.
 
 ## Boundaries
 
@@ -30,7 +38,7 @@ UTF-8 TXT/Markdown CV import is implemented first. PDF/DOCX extraction/rendering
 - Maintainer instructions are AGENTS.md/CLAUDE.md. Job-seeker workflow is prompts/MASTER_PROMPT.md and canonical skills/policy, activated only by a career request.
 - Source connectors declare operations separately. A registry entry is not an implemented connector or permission. Manual structured JD import is the working first connector.
 - Runtime wrappers read shared skills and call the same CLI. They grant no permissions and install no active hooks/global settings. Generic CLI execution is distinct from native runtime/browser verification.
-- Existing local package approval checking remains available. Full finite campaign authorization and attempt-before-submit execution are later capabilities. APPROVED_BATCH is unavailable until those paths and local portal recovery tests exist.
+- Existing legacy package approval checking remains available. Slice 2 adds exact finite campaign approval validation; APPROVED_BATCH execution remains unavailable until attempt recording and local portal recovery tests exist.
 - External computer tools outside this CLI are not sandboxed by core checks. Missing/failed host hooks never grant permission.
 
 ## Verification

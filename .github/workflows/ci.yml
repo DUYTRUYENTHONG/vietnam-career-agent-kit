@@ -33,3 +33,33 @@ jobs:
         run: python scripts/generate_adapters.py --check
       - name: Disposable fictional preparation demo
         run: python scripts/demo_slice1.py
+  document-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CAREER_KIT_SOFFICE: /usr/bin/soffice
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Provision optional local rendering tools explicitly
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libreoffice-writer fonts-dejavu-core
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-documents.lock
+          soffice --version
+      - name: Real fictional DOCX PDF previews and approval CLI integration
+        env:
+          CAREER_KIT_QA_DIR: ${{ runner.temp }}/career-kit-fictional-qa
+        run: python -m unittest discover -s tests_optional -v
+      - name: Publish fictional page images for maintainer visual review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, reviewed metadata pin
+        with:
+          name: slice2-fictional-visual-qa
+          path: ${{ runner.temp }}/career-kit-fictional-qa
+          if-no-files-found: warn
+          retention-days: 7
