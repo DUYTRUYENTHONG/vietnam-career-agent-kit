@@ -22,3 +22,7 @@ Canonical skills live under .agents/skills. Run `python scripts/generate_adapter
 For dependencies/reference material, record exact versions/commits, license, network/install effects and attribution. Do not execute unreviewed installers. Optional live-provider tests require separate configuration and a stated budget; deterministic CI remains free of model calls and real employers.
 
 PRs should explain the concrete problem/result, contract changes, actual checks and unresolved limits. Inspect the staged diff and run the bounded public-source checker; the checker is not complete secret/privacy detection. Report security issues through SECURITY.md rather than publishing candidate data.
+
+Every skill/feature change follows [the update workflow](docs/change-workflow.md).
+Use the GitHub PR template, update the changelog and relevant usage/evidence files
+in the same change, and use a descriptive `<type>(<scope>): <result>` commit subject.
