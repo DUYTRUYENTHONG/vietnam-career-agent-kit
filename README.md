@@ -44,7 +44,7 @@ Then provide your CV in the agent's authorized context or place it in your priva
 | Claude Code | CLAUDE.md and `.claude/skills/` adapters | Documented structure; native execution not exercised in this release |
 | Grokbot / other agents | Read AGENTS.md and paste the master prompt | Portable instruction path only; product identity, native skills/hooks and browser APIs unverified |
 
-The kit uses the agent you already selected. It adds no paid AI API and makes no claim that cloud-model processing stays on your machine. Browser/computer control must be supplied by your host; there is no bundled authenticated browser or generic auto-submit CLI. See [compatibility](docs/COMPATIBILITY.md) and [tools](docs/TOOLS.md).
+The kit uses the agent you already selected. It adds no paid AI API and makes no claim that cloud-model processing stays on your machine. Browser/computer control must be supplied by your host; there is no bundled authenticated browser or generic auto-submit CLI. See [compatibility](docs/compatibility.md) and [tools](docs/TOOLS.md).
 
 ## A normal application cycle
 
