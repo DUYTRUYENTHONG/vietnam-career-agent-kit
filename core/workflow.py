@@ -359,6 +359,29 @@ class Preparation(Kit):
             db.commit()
         return Outcome('ok',result,[], 'Bản nháp cần được xem xét.' if vi else 'Draft requires review; no application performed.')
 
+    def draft_status(self, draft, profile):
+        """Validate one latest draft using the same rules as a full checkpoint."""
+        payload=json.loads(draft['payload']) if draft else None
+        stale=False
+        if draft:
+            try:
+                _,job_hash=self.job_document(draft['job_id'])
+                stale=(not profile.data.get('confirmed') or draft['profile_fingerprint']!=profile.data.get('fingerprint') or draft['job_fingerprint']!=job_hash)
+                for file in payload['files'].values():
+                    file_path=self.inside(file['path'])
+                    stale=stale or not file_path.is_file() or self.hash_file(file_path)!=file['sha256']
+            except (WorkflowError,OSError):
+                stale=True
+        return payload,stale
+
+    def job_checkpoint(self, job_id):
+        profile=self.inspect_profile()
+        job=self.get_job(job_id)
+        with self._db() as db:
+            draft=db.execute('SELECT * FROM drafts WHERE job_id=? ORDER BY id DESC LIMIT 1',(job_id,)).fetchone()
+        job['draft'],job['draft_stale']=self.draft_status(draft,profile)
+        return job
+
     def resume(self) -> Outcome:
         profile=self.inspect_profile()
         with self._db() as db:
@@ -366,18 +389,7 @@ class Preparation(Kit):
             drafts={row['job_id']:dict(row) for row in db.execute('SELECT * FROM drafts ORDER BY id')}
         for job in jobs:
             draft=drafts.get(job['id'])
-            job['draft']=json.loads(draft['payload']) if draft else None
-            stale=False
-            if draft:
-                try:
-                    _,job_hash=self.job_document(job['id'])
-                    stale=(not profile.data.get('confirmed') or draft['profile_fingerprint']!=profile.data.get('fingerprint') or draft['job_fingerprint']!=job_hash)
-                    for file in job['draft']['files'].values():
-                        file_path=self.inside(file['path'])
-                        stale=stale or not file_path.is_file() or self.hash_file(file_path)!=file['sha256']
-                except (WorkflowError,OSError):
-                    stale=True
-            job['draft_stale']=stale
+            job['draft'],job['draft_stale']=self.draft_status(draft,profile)
         return Outcome('ok' if profile.outcome=='ok' else 'needs_input',
             {'candidate':profile.data.get('profile',{}).get('name'),'profile_confirmed':profile.data.get('confirmed',False),
              'jobs':jobs,'summary':self.status(),'mode':'PREPARE','external_actions':0},profile.issues,
@@ -386,8 +398,7 @@ class Preparation(Kit):
     def handoff(self, job_id: int) -> Outcome:
         if self.get_job(job_id)['state'] in {'confirmed_submitted','user_reported_submitted','submission_uncertain'}:
             raise WorkflowError('blocked','Existing submitted/uncertain application must not receive another application handoff')
-        state=self.resume()
-        row=next((job for job in state.data['jobs'] if job['id']==job_id),None)
+        row=self.job_checkpoint(job_id)
         if row is None or row['draft'] is None:
             raise WorkflowError('needs_input','Prepare a reviewed draft before creating a handoff')
         if row['draft_stale']:

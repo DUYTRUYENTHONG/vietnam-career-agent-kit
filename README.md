@@ -10,6 +10,11 @@ Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job sea
 
 **Execution engine:** an exact approved host-browser loop now supports sequential fill/upload/review/submit/verify, durable attempts, finite budgets and read-only recovery. See [execution setup and protocol](docs/execution.md). The agent supplies supported browser tools; the CLI does not acquire a browser.
 
+**Faster local pipeline:** selected-job validation avoids all-job scans;
+`advance-execution` combines receipt and successor; `tracker` exports a fast
+catch-up table. [Measurements and architecture](docs/PERFORMANCE.md) distinguish
+local gains from unmeasured live-browser time.
+
 **Not yet implemented:** PDF/DOCX CV extraction, network job connectors, standalone unattended browser workers and verified employer-specific adapters. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice
@@ -49,8 +54,9 @@ Keep CVs, evidence, salary, answers, trackers and screenshots in the selected di
 | `render`, `review-documents`, `reject-documents` | Optional local DOCX/PDF/page generation and explicit review; no disclosure |
 | `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite authorization records and expiry/hash checks; execution requires an explicitly reviewed bridge/runtime scope |
 | `resume`, `status`, `report`, `handoff` | Local checkpoint or explicit manual handoff |
+| `tracker` | Fast recorded-status table; does not validate artifacts, approvals or live vacancies |
 | Legacy `check-package`, `record-approval`, `check-approval`, `invalidate` | Content-bound local bookkeeping; no authenticated human identity, expiry-bound batch or browser grant |
-| `start-execution`, `next-action`, `check-action`, `record-action` | Durable sequential engine; designated agent performs each request through supported browser tools |
+| `start-execution`, `next-action`, `check-action`, `record-action`, `advance-execution` | Durable sequential engine; designated agent performs each request through supported browser tools |
 | `execution-status`, `stop-execution`, `recover-execution` | Inspect/stop or reconcile an uncertain attempt read-only; no duplicate submit |
 
 Structured operations return `schema_version`, `outcome`, `data`, `issues`, `message`. Outcomes: `ok`, `blocked`, `needs_input`, `manual_required`, `failed`, `submission_unknown`. Exit 0 means the local operation succeeded; exit 2 means inspect the outcome and next input. A manual handoff is not a submitted application. [Tool/data contract](docs/DATA_CONTRACT.md).

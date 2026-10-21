@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ledger tracker data 1.0 (inside Outcome.data)",
+  "description": "Recorded status only. This data does not validate artifacts, live vacancies or action authorization.",
+  "type": "object",
+  "required": ["schema_version", "generated_utc", "basis", "validates_artifacts", "observed_submissions", "attempts", "user_reported_submissions", "jobs"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "generated_utc": {"type": "string", "format": "date-time"},
+    "basis": {"type": "string"},
+    "validates_artifacts": {"const": false},
+    "observed_submissions": {"type": "integer", "minimum": 0},
+    "attempts": {"type": "integer", "minimum": 0},
+    "user_reported_submissions": {"type": "integer", "minimum": 0},
+    "jobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "employer", "title", "url", "state", "liveness", "updated_utc", "latest_action", "run_state", "blocker", "next_step"],
+        "properties": {
+          "id": {"type": "integer", "minimum": 1},
+          "employer": {"type": "string"},
+          "title": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "state": {"type": "string"},
+          "liveness": {"enum": ["active", "closed", "unverified"]},
+          "updated_utc": {"type": "string", "format": "date-time"},
+          "latest_action": {"type": ["string", "null"]},
+          "run_state": {"type": ["string", "null"]},
+          "blocker": {"type": ["string", "null"]},
+          "next_step": {"type": "string"}
+        }
+      }
+    }
+  }
+}

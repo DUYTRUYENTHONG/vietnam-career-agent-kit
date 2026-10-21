@@ -24,13 +24,13 @@ A supported authorized host browser and the execution CLI. Read ../../../docs/ex
 3. Start one run with start-execution. Request one next-action. Bind inspect to the explicitly authorized tab and exact visible employer/requisition/destination. Map visible labels to approved answer IDs.
 4. Immediately before the requested action call check-action, inspect fresh UI and satisfy any host/tool confirmation. A pending request does not override expiry, revocation, platform rules or host policy. Block challenges, legal agreements, new required fields/consents or redirects before any further mutation.
 5. Perform only the requested action through supported host browser tools. Never use private browser APIs, exported sessions or an alternate tool to avoid a denial. Fill exact values, upload only the frozen approved file and verify visible file selection/byte identity using supported evidence. Re-observe after every action.
-6. Save an observed receipt in the external private workspace and call record-action. Successful inspect/fill/upload/review require a fresh unchanged form observation. Review must match visible answers, consent choices and document hash. See protocol for exact keys. Do not copy expectations into receipts without observing the UI.
+6. Save an observed receipt in the external private workspace and prefer advance-execution to record it and return one successor request. Do not call next-action again when that response already contains a request. record-action plus next-action remains compatible. Successful inspect/fill/upload/review require a fresh unchanged form observation. Review must match visible answers, consent choices and document hash. See protocol for exact keys. Do not copy expectations into receipts without observing the UI.
 7. Repeat sequentially. Only APPROVED_BATCH returns submit, after a durable unique attempt has already been committed. Click once. Acknowledge it, then verify visible employer/requisition/success and retain a private screenshot. An issued click is not confirmation.
 8. Stop on non-ok outcomes. A pending submit resumes as read-only verify; it never returns another submit. A terminal unknown may use recover-execution for reconciliation only. Do not retry that vacancy, continue other entries or infer success. ASSIST ends after review without submitting.
 
 ## Outputs
 
-Permitted observed outcome or accurate manual handoff with documents, missing questions, destination verification and steps.
+Permitted observed outcome or accurate manual handoff with documents, missing questions, destination verification and steps. Finish each pass with the application-tracking skill's timestamped tracker table. Reuse an existing still-current exact approved scope without requesting the same approval again; host confirmations and material scope changes still apply.
 
 ## Failure behavior
 

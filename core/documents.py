@@ -28,9 +28,8 @@ class Documents(Preparation):
         return Outcome('ok',{'workspace':str(self.data_dir),'schema':2,'language':self.language()},[])
 
     def current_draft(self, job_id):
-        state=Preparation.resume(self)
-        row=next((r for r in state.data['jobs'] if r['id']==job_id),None)
-        if not row or not row['draft'] or row['draft_stale']:
+        row=self.job_checkpoint(job_id)
+        if not row['draft'] or row['draft_stale']:
             raise WorkflowError('needs_input','A current source-bound Markdown draft is required; prepare/review current evidence first')
         if row['state'] in TERMINAL or row['liveness']!='active':
             raise WorkflowError('blocked','Closed, submitted or uncertain job cannot receive a new render/approval')

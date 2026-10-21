@@ -305,6 +305,25 @@ class Executor(Campaign):
             self._save(db,run,flow);self._event(db,'read_only_recovery_started',run_id,flow['attempt_id']);db.commit()
         return Outcome('ok',{'run_id':run_id,'state':'active','recovery_only':True},[])
 
+    def advance_execution(self, run_id, receipt):
+        """Commit a receipt, then issue one successor. Never repeat either on error.
+
+        Two transactions intentionally preserve the receipt if the successor is
+        blocked. A lost response is reconciled with execution-status, not replay.
+        """
+        recorded=self.record_action(run_id,receipt)
+        try:
+            result=self.next_action(run_id) if recorded.data['state']=='active' else recorded
+        except WorkflowError as error:
+            return Outcome(error.outcome,{'run_id':run_id,'receipt_recorded':True,
+                'recorded_request_id':receipt['request_id']},[str(error)])
+        result.data.update(receipt_recorded=True,recorded_request_id=receipt['request_id'])
+        return result
+
+    def tracker(self):
+        from .tracking import checkpoint
+        return checkpoint(self)
+
     def stop_execution(self, run_id, reason):
         text(reason,'reason')
         with self._db() as db:

@@ -62,14 +62,17 @@ def parser() -> Parser:
     start.add_argument('--fingerprint',required=True)
     start.add_argument('--bridge-id',required=True)
     start.add_argument('--runtime-minutes',type=int,required=True)
-    for name in ['next-action','execution-status','recover-execution','stop-execution','record-action','check-action']:
+    for name in ['next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action']:
         cmd=commands.add_parser(name)
         cmd.add_argument('--run-id',required=True)
         if name=='stop-execution':cmd.add_argument('--reason',required=True)
-        if name=='record-action':cmd.add_argument('--receipt',type=Path,required=True)
+        if name in {'record-action','advance-execution'}:cmd.add_argument('--receipt',type=Path,required=True)
         if name=='check-action':cmd.add_argument('--request-id',required=True)
     report=commands.add_parser('report');report.add_argument('--format',choices=['json','md'],default='json')
     report.add_argument('--output',help='relative output path inside the private workspace')
+    tracker=commands.add_parser('tracker',help='fast ledger snapshot; does not validate files, approvals or live vacancies')
+    tracker.add_argument('--format',choices=['json','md'],default='json')
+    tracker.add_argument('--output',help='relative reports/ output path in the private workspace')
     add=commands.add_parser('add-job',help='legacy local job input; use import-jd for versioned preparation')
     add.add_argument('--job',type=Path,required=True)
     for name in ['check-package','check-approval']:
@@ -109,7 +112,7 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
-            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','check-action'} and schema<3:
+            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action'} and schema<3:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
     if command=='import-cv':return work.import_cv(args.file,args.source_id)
     if command=='import-profile':return work.import_profile(load_input(args.file))
@@ -132,18 +135,22 @@ def execute(args) -> Outcome:
     if command=='recover-execution':return work.recover_execution(args.run_id)
     if command=='stop-execution':return work.stop_execution(args.run_id,args.reason)
     if command=='record-action':return work.record_action(args.run_id,work.private_json(args.receipt))
+    if command=='advance-execution':return work.advance_execution(args.run_id,work.private_json(args.receipt))
     if command=='resume':return work.resume()
     if command=='handoff':return work.handoff(args.job_id)
-    if command=='report':
+    if command in {'report','tracker'}:
         if args.output:
             target=work.inside(args.output)
             expected_suffix='.'+args.format
             if (Path(args.output).is_absolute() or not target.is_relative_to(work.data_dir/'reports') or
                     target.suffix!=expected_suffix):
                 raise WorkflowError('blocked','Report output must be a relative reports/ path with the selected .json or .md extension; tracker/evidence/drafts are protected')
-        result=work.resume()
+        result=work.tracker() if command=='tracker' else work.resume()
         if not args.output:return result
         if args.format=='json':content=json.dumps(result.json(),ensure_ascii=False,indent=2)
+        elif command=='tracker':
+            from core.tracking import markdown
+            content=markdown(result.data)
         else:
             vi=work.language()=='vi'
             lines=['# '+('Báo cáo tìm việc' if vi else 'Job search checkpoint'),'',
