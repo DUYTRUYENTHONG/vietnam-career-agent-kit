@@ -1,0 +1,22 @@
+{
+  "schema_version":"1.0",
+  "platform":"manual",
+  "platform_job_id":"fictional-analyst-01",
+  "employer":"Example Cooperative",
+  "req_id":"EX-ANALYST-01",
+  "title":"Junior Data Analyst",
+  "url":"https://jobs.example.test/EX-ANALYST-01",
+  "city":"TP. Hồ Chí Minh",
+  "country":"VN",
+  "work_model":"hybrid",
+  "employment_type":"full_time",
+  "document_language":"en",
+  "raw_jd":"FICTIONAL LOCAL DEMONSTRATION ONLY. SQL project experience required; requirements documentation preferred. No real application destination exists.",
+  "liveness":"active",
+  "readable":true,
+  "requirements":[
+    {"id":"R1","text":"SQL project experience","field":"skill","value":"SQL","mandatory":true,"hard":false},
+    {"id":"R2","text":"Requirements documentation preferred","field":"capability","value":"requirements","mandatory":false,"hard":false}
+  ],
+  "salary":{"amount":null,"currency":null,"period":null,"gross_net":null,"bonus":null}
+}

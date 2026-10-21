@@ -1,0 +1,11 @@
+{
+  "schema_version":"1.0",
+  "candidate_id":"fictional-bao-ngoc",
+  "name":"Trần Bảo Ngọc",
+  "language":"vi",
+  "preferences":{"target_roles":["Trợ lý vận hành"],"seniority":"fresher","preferred_cities":["Đà Nẵng"],"relocation":null,"work_models":["onsite"],"employment_types":["internship"],"salary":{"amount":null,"currency":null,"period":null,"gross_net":null,"bonus":null}},
+  "facts":[
+    {"id":"B1","field":"skill","value":"Excel","claim":"Đã dùng Excel để tổng hợp lịch chăm sóc trong bài tập mô phỏng.","source_id":"CV1","quote":"Đã dùng Excel để tổng hợp lịch chăm sóc trong bài tập mô phỏng.","locator":"line 5","status":"confirmed"},
+    {"id":"B2","field":"capability","value":"quy trình","claim":"Đã ghi chép quy trình chăm sóc trong dự án học tập.","source_id":"CV1","quote":"Đã ghi chép quy trình chăm sóc trong dự án học tập.","locator":"line 6","status":"confirmed"}
+  ]
+}
