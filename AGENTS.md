@@ -12,4 +12,6 @@ User workflow is a separate layer: only an explicit job-seeker request activates
 
 Use short codex/ branches, inspect staged files and commit coherent tested increments. Do not touch private workspaces during upgrade/uninstall. Wrapper generation is scripts/generate_adapters.py; --check verifies synchronized project files without changes. Active hooks/global settings are never auto-installed or trusted.
 
+For every new or changed skill/feature, follow docs/change-workflow.md: update the relevant instructions and changelog together, record applicable source/contract/compatibility evidence, run required checks, and publish a focused descriptive commit to GitHub. Report its commit/PR link and actual CI state. Keep this convention across subsequent tasks; do not leave completed authorized changes only in the local checkout.
+
 Compatibility labels are Verified, Experimental, Instruction-only and Unsupported, scoped to the tested interface/version/OS. Local CLI success does not prove native skill discovery, hook blocking or browser automation. Keep runtime and source limitations explicit.
