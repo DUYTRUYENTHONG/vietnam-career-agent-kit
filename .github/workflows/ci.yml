@@ -38,7 +38,6 @@ jobs:
     timeout-minutes: 15
     env:
       CAREER_KIT_SOFFICE: /usr/bin/soffice
-      CAREER_KIT_QA_DIR: ${{ runner.temp }}/career-kit-fictional-qa
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -53,6 +52,8 @@ jobs:
           python -m pip install --require-hashes --only-binary=:all: -r requirements-documents.lock
           soffice --version
       - name: Real fictional DOCX PDF previews and approval CLI integration
+        env:
+          CAREER_KIT_QA_DIR: ${{ runner.temp }}/career-kit-fictional-qa
         run: python -m unittest discover -s tests_optional -v
       - name: Publish fictional page images for maintainer visual review
         if: always()
