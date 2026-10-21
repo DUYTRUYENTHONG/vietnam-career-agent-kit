@@ -1,12 +1,38 @@
 ---
 name: candidate-evidence
-description: Import authorized CVs and work records into a private fact ledger for Vietnam job applications; surface conflicts and candidate corrections. Do not use for public biography generation or unrelated files.
+description: Import authorized CV evidence and validate one candidate profile with source quotes, conflicts and corrections for a private career workflow.
 ---
 
-Read ../../../prompts/MASTER_PROMPT.md and ../../../docs/DATA_CONTRACT.md. Input is the user's approved source list and private data directory, not a home-directory scan.
+Read ../../../docs/job-seeker-policy.md first. Root AGENTS.md governs maintainer work; this skill activates only for an explicit career request.
 
-Extract exact claims with source path/page/line, provenance, approval state, confirmation date and conflict/correction IDs. Preserve titles, dates, education and language status. Separate prototypes, team work, solo work, deployment and measured outcomes. Never add overlapping job durations. A draft is not evidence.
+## Purpose and invocation
 
-Build one canonical profile and role emphasis views. Ask only unresolved facts; never pick the strongest competing metric silently. Record user corrections durably and invalidate affected reviews/approvals. Omit sensitive identifiers and photos unless specifically approved for a relevant request.
+Import authorized CV evidence and validate one candidate profile with source quotes, conflicts and corrections for a private career workflow.
 
-Output private fact ledger, source hashes, conflict log and compact missing-fact intake. No web upload, public push, credential access or unrelated file import is permitted by this skill.
+## Inputs
+
+Explicit CV path, source ID and versioned profile JSON; no home-directory scan.
+
+## Required capabilities
+
+Local CLI; Slice 1 imports UTF-8 TXT/Markdown only.
+
+## Steps
+
+Run import-cv, then import-profile. Map exact claim/quote/source/locator/status and conflict keys. Inspect profile, ask only unresolved facts, then record confirm-profile only after actual review of its exact fingerprint. Never create user confirmation on behalf of a real person.
+
+## Outputs
+
+Immutable normalized UTF-8 evidence, profile fingerprint, conflicts and confirmation state.
+
+## Failure behavior
+
+Unsupported extraction returns manual_required. Missing/changed source, wrong candidate or unresolved conflicts block affected work.
+
+## Side-effect limits
+
+Local evidence/profile writes only; no upload, public biography or disclosure.
+
+## Tests and examples
+
+tests/test_preparation.py; examples/fictional/profile-a.json and profile-b.json.
