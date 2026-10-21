@@ -73,6 +73,26 @@ def verify_pdf(content, path):
     return len(reader.pages)
 
 
+def preview_pdf(path,directory,count):
+    import pypdfium2 as pdfium
+    # PDFium is not thread safe, including across different document objects.
+    with PDFIUM_LOCK:
+        pdf=pdfium.PdfDocument(path)
+        try:
+            if len(pdf)!=count:raise WorkflowError('failed','PDF parsers disagree about the page count')
+            for index in range(count):
+                page=pdf[index]
+                try:
+                    bitmap=page.render(scale=2)
+                    try:
+                        picture=bitmap.to_pil()
+                        try:picture.save(directory/f'page-{index+1:03}.png')
+                        finally:picture.close()
+                    finally:bitmap.close()
+                finally:page.close()
+        finally:pdf.close()
+
+
 def render_files(content, directory: Path, soffice=None):
     try:
         import docx
@@ -100,18 +120,7 @@ def render_files(content, directory: Path, soffice=None):
     if result.returncode!=0 or not (directory/'cv.pdf').is_file():
         raise WorkflowError('failed','LibreOffice did not produce a PDF; inspect local converter installation and font availability')
     count=verify_pdf(content,directory/'cv.pdf')
-    # PDFium is not thread safe, including across different document objects.
-    with PDFIUM_LOCK:
-        with pdfium.PdfDocument(directory/'cv.pdf') as pdf:
-            if len(pdf)!=count:raise WorkflowError('failed','PDF parsers disagree about the page count')
-            for index in range(count):
-                with pdf[index] as page:
-                    bitmap=page.render(scale=2)
-                    try:
-                        picture=bitmap.to_pil()
-                        picture.save(directory/f'page-{index+1:03}.png')
-                        picture.close()
-                    finally:bitmap.close()
+    preview_pdf(directory/'cv.pdf',directory,count)
     # Only this freshly created, private converter profile is removed.
     if profile.exists():shutil.rmtree(profile)
     return {'page_count':count,'renderer':{'libreoffice':inventory.stdout.strip(),
