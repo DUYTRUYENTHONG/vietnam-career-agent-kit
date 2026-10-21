@@ -1,0 +1,22 @@
+{
+  "fictional_template":true,
+  "market":"Vietnam",
+  "display_timezone":"Asia/Ho_Chi_Minh",
+  "professional_name":null,
+  "approved_cv":null,
+  "primary_track":null,
+  "seniority":null,
+  "cities":null,
+  "relocation":null,
+  "work_model":null,
+  "employment_type":null,
+  "notice_period":null,
+  "available_date":null,
+  "work_authorization":null,
+  "salary":{"amount":null,"currency":null,"period":null,"gross_net":null,"commission_bonus":null},
+  "language":null,
+  "exclusions":null,
+  "prior_applications":null,
+  "browser_mode":"preparation_only",
+  "retention":{"review_after_days":90,"automatic_deletion":false}
+}

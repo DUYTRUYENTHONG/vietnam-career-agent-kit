@@ -1,0 +1,27 @@
+# Candidate data never belongs in the public framework.
+.private/
+private/
+data/
+output/
+artifacts/
+applications/
+sources/
+screenshots/
+*.pdf
+*.docx
+*.sqlite*
+*.db
+*.log
+*.env
+.env*
+!.env.example
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+.codex/hooks.json
+.codex/config.toml
+.claude/settings.local.json
+.claude/settings.json
+*.approval.json
+*.confirmation.txt

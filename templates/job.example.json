@@ -1,0 +1,12 @@
+{
+  "platform":"fictional-employer",
+  "platform_job_id":"EXAMPLE-001",
+  "employer":"Fictional Vietnam Company",
+  "req_id":"EXAMPLE-001",
+  "title":"Junior Solutions Consultant",
+  "url":"https://employer.example.invalid/careers/EXAMPLE-001",
+  "city":"Ho Chi Minh City",
+  "raw_jd":"FICTIONAL TEST DATA. Gather customer requirements and build reviewed prototypes. Required tools must be checked against candidate evidence.",
+  "readable":true,
+  "liveness":"unverified"
+}

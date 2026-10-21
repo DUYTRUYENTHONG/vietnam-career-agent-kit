@@ -1,0 +1,13 @@
+{
+  "company":"Fictional Vietnam Company",
+  "job_id":"EXAMPLE-001",
+  "destination":"https://employer.example.invalid/careers/EXAMPLE-001/apply",
+  "artifacts":[{"path":"artifacts/cv.txt","sha256":"REPLACE_WITH_ACTUAL_SHA256_OF_YOUR_REVIEWED_FILE"}],
+  "answers":{"available_date":null,"salary":null,"visa_sponsorship":null},
+  "required_fields":["available_date","salary","visa_sponsorship"],
+  "consents":[],
+  "policy":{"mode":"manual","source":"https://employer.example.invalid/terms","checked_utc":"2026-10-21T00:00:00+00:00","allowed_actions":[]},
+  "candidate_profile_sha256":null,
+  "review_evidence":null,
+  "disclosure_implications":"Fictional template only. No disclosure approval exists."
+}

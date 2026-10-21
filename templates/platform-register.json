@@ -1,0 +1,9 @@
+{
+  "description": "Starter modes only. Recheck current exact action policies before enabling a destination.",
+  "destinations": [
+    {"domain":"linkedin.com","mode":"manual","policy_source":"https://www.linkedin.com/legal/user-agreement","checked_utc":null,"allowed_actions":[],"evidence":"Not checked for this user's intended action."},
+    {"domain":"indeed.com","mode":"manual","policy_source":"https://www.indeed.com/legal","checked_utc":null,"allowed_actions":[],"evidence":"Not checked for this user's intended action."},
+    {"domain":"itviec.com","mode":"manual","policy_source":null,"checked_utc":null,"allowed_actions":[],"evidence":"Exact assisted action permission unverified."},
+    {"domain":"employer.example.invalid","mode":"manual","policy_source":null,"checked_utc":null,"allowed_actions":[],"evidence":"Fictional destination; never disclose candidate data."}
+  ]
+}

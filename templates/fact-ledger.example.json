@@ -1,0 +1,4 @@
+[
+  {"fact_id":"FICTIONAL-001","exact_claim":"Built a classroom FAQ prototype as one member of a three-person course team.","source_path":"candidate-supplied-coursework.txt","locator":"paragraph 2","evidence_status":"candidate_self_report","approval_state":"pending","date_confirmed":null,"conflict":null,"correction":null},
+  {"fact_id":"FICTIONAL-002","exact_claim":"English level has not been confirmed.","source_path":"candidate-intake","locator":"language question","evidence_status":"unknown","approval_state":"pending","date_confirmed":null,"conflict":null,"correction":null}
+]
