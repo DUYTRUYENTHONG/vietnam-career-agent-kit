@@ -83,3 +83,21 @@ update time. This projection cannot authorize continuing a campaign.
 execution outcome with additive `receipt_recorded` and `recorded_request_id`
 fields after acknowledgement. Its successor request still uses protocol 1.0.
 Schema 3 and all older commands remain compatible; no new database migration.
+
+## Routing packet 1.0
+
+`route-task` accepts `schemas/routing.schema.json` and returns a normal Outcome.
+It has no workspace, candidate access or persistence. `execution=tool` needs no
+model. Agent plans select an exact model/effort and one available skill, with
+`dispatch_required=true` only on success. A blocked plan must not dispatch.
+`usage_cost_usd=null` is unknown, never a cost estimate. Explicit policy overrides
+are input, not a change to host settings. See MODEL_ROUTING.md for failure limits.
+
+## Rolling KPI 1.0
+
+`throughput` returns `schemas/throughput.schema.json` inside Outcome.data. New
+attempt/confirmation snapshots have additive `fit_classification` metadata from
+the current source-bound draft. Existing schema 3 databases and old immutable
+snapshots remain unchanged. Missing historical fit is counted separately, never
+retrofitted. Window counts use unique confirmed submission records and frozen
+Strong/Plausible fit only. See THROUGHPUT.md for exact boundaries and limitations.

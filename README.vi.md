@@ -5,6 +5,15 @@ trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng th
 phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.
 Xem [kiến trúc và số đo](docs/PERFORMANCE.md); chưa đo tốc độ ứng tuyển thực tế.
 
+[Định tuyến mô hình](docs/MODEL_ROUTING.md): dùng công cụ trực tiếp cho kiểm thử,
+trạng thái và số đo; `route-task --packet task.json` chọn theo độ khó/rủi ro và
+danh sách mô hình, effort, skill thực tế của host. Lệnh không gọi AI, không tự
+đổi mô hình và không âm thầm thay mô hình bị thiếu bằng lựa chọn đắt hơn.
+
+[Đo KPI theo giờ](docs/THROUGHPUT.md): `throughput --target 100 --window-minutes 60`
+chỉ tính bản ghi nộp đã xác nhận có mức phù hợp được lưu bất biến. Hồ sơ mới chuẩn
+bị, lần thử và đơn đã nộp trước không được tính. Chưa xác minh tốc độ thực tế 100 đơn/giờ.
+
 [Duy trì chiến dịch](docs/campaign-continuity.md): tiếp tục qua nhiều đợt hữu hạn,
 khôi phục từ một tracker riêng và chỉ tính đơn mới đã xác nhận vào mục tiêu.
 Mục tiêu bền vững cần host hỗ trợ; hướng dẫn này không tạo lịch chạy hay worker

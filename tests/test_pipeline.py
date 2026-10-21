@@ -20,6 +20,15 @@ class PipelineTests(unittest.TestCase):
     step = execution_fixtures.ExecutionTests.step
     until_submit = execution_fixtures.ExecutionTests.until_submit
 
+    def test_runtime_expiry_during_validation_blocks_issued_action(self):
+        from datetime import datetime, timedelta, timezone
+        run = self.start()
+        request = self.work.next_action(run).data['request']
+        now = datetime.now(timezone.utc)
+        with patch('core.execution.now_utc', side_effect=[now, now + timedelta(hours=1)]):
+            with self.assertRaises(WorkflowError):
+                self.work.check_action(run, request['request_id'])
+
     def test_advance_commits_receipt_then_returns_one_next_request(self):
         run = self.start()
         request = self.work.next_action(run).data['request']

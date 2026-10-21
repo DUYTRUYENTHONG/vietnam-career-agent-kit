@@ -1,8 +1,10 @@
 """Fast read-only ledger projection; never a content or execution authorization."""
 import json
+from datetime import datetime, timedelta, timezone
 
-from .contracts import Outcome
-from .ledger import utc_now
+from .contracts import ContractError, Outcome
+from .ledger import canonical_hash, utc_now
+from .workflow import WorkflowError
 
 
 def checkpoint(work):
@@ -61,3 +63,52 @@ def markdown(data):
         lines.append('| '+' | '.join(cell(value) for value in [job['id'],job['employer']+' — '+job['title'],
             job['url'],job['state'],job['blocker'],job['next_step'],job['updated_utc']])+' |')
     return '\n'.join(lines)+'\n'
+
+
+def throughput(work, target, window_minutes=60):
+    """Read-only rolling confirmation KPI. Old records without frozen fit stay separate."""
+    if type(target) is not int or not 1<=target<=10_000:
+        raise ContractError('target: choose an integer from 1 to 10000')
+    if type(window_minutes) is not int or not 1<=window_minutes<=1440:
+        raise ContractError('window_minutes: choose an integer from 1 to 1440')
+    end=datetime.fromisoformat(utc_now()).astimezone(timezone.utc)
+    start=end-timedelta(minutes=window_minutes)
+    with work._db() as db:
+        db.execute('BEGIN')
+        if db.execute('PRAGMA user_version').fetchone()[0]<3:
+            raise WorkflowError('needs_input','Execution schema 3 is required for a confirmation KPI; run compatible init first')
+        rows=db.execute('SELECT job_id,recorded_utc,snapshot_json,snapshot_sha256 FROM execution_submissions').fetchall()
+    qualifying=other_fit=unrecorded=0
+    seen=set()
+    for row in rows:
+        if not isinstance(row['recorded_utc'],str):
+            raise WorkflowError('blocked','Invalid confirmation timestamp; reconcile the ledger')
+        try:
+            recorded=datetime.fromisoformat(row['recorded_utc'].replace('Z','+00:00'))
+        except (ValueError,TypeError) as error:
+            raise WorkflowError('blocked','Invalid confirmation timestamp; reconcile the ledger') from error
+        if recorded.tzinfo is None:
+            raise WorkflowError('blocked','Confirmation timestamp lacks a timezone; reconcile the ledger')
+        if not start<recorded<=end:
+            continue
+        if row['job_id'] in seen:
+            raise WorkflowError('blocked','Duplicate confirmation job; reconcile the ledger')
+        seen.add(row['job_id'])
+        snapshot=json.loads(row['snapshot_json'])
+        if not isinstance(snapshot,dict) or canonical_hash(snapshot)!=row['snapshot_sha256']:
+            raise WorkflowError('blocked','Confirmation snapshot integrity failed; KPI cannot be trusted')
+        fit=snapshot.get('fit_classification')
+        if fit in {'Strong fit','Plausible fit'}:
+            qualifying+=1
+        elif fit is None:
+            unrecorded+=1
+        else:
+            other_fit+=1
+    return Outcome('ok',{'schema_version':'1.0','window_start_utc':start.isoformat(),
+        'window_end_utc':end.isoformat(),'window_minutes':window_minutes,'target':target,
+        'qualifying_confirmations':qualifying,'other_fit_confirmations':other_fit,
+        'fit_unrecorded_confirmations':unrecorded,'target_met':qualifying>=target,
+        'remaining':max(0,target-qualifying),'observed_per_hour':round(qualifying*60/window_minutes,3),
+        'validates_artifacts':False,
+        'basis':'Unique host-observed confirmations recorded in (start, end]; frozen fit is Strong fit or Plausible fit. '
+                'Attempts, drafts and prior user reports are excluded. This does not revalidate suitability or files.'},[])

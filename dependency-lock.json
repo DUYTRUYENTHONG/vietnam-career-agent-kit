@@ -11,6 +11,19 @@
   },
   "third_party_runtime_dependencies": [],
   "third_party_test_dependencies": [],
+  "routing_and_metrics": {
+    "implementation": "Original standard-library Python; no model SDK or native host dispatcher",
+    "external_runtime_dependencies": [],
+    "development_reference": {
+      "package": "company-skill-library",
+      "artifact_version": "0.1.0+codex.20260914012433",
+      "files_and_hashes": "docs/REFERENCE_REVIEW.md",
+      "license_in_installed_artifact": null,
+      "source_commit_in_installed_artifact": null,
+      "redistributed": false,
+      "required_to_run_kit": false
+    }
+  },
   "install_steps": [],
   "optional_documents": {
     "file": "requirements-documents.lock",

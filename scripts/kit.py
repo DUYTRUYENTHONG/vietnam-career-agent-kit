@@ -31,6 +31,8 @@ def parser() -> Parser:
     commands=root.add_subparsers(dest='command',required=True)
     doctor=commands.add_parser('doctor',help='read-only runtime diagnosis; no account/browser connection')
     doctor.add_argument('--runtime',choices=['generic','codex','claude','grok'],default='generic')
+    route=commands.add_parser('route-task',help='deterministic model/tool plan; no model call or workspace access')
+    route.add_argument('--packet',type=Path,required=True)
     init=commands.add_parser('init',help='additive local workspace initialization')
     init.add_argument('--language',choices=['en','vi'],default='en')
     for name in ['status','profile','resume','source-registry']:
@@ -73,6 +75,9 @@ def parser() -> Parser:
     tracker=commands.add_parser('tracker',help='fast ledger snapshot; does not validate files, approvals or live vacancies')
     tracker.add_argument('--format',choices=['json','md'],default='json')
     tracker.add_argument('--output',help='relative reports/ output path in the private workspace')
+    throughput=commands.add_parser('throughput',help='rolling confirmed-fit KPI; no forecast, browser or artifact validation')
+    throughput.add_argument('--target',type=int,required=True)
+    throughput.add_argument('--window-minutes',type=int,default=60)
     add=commands.add_parser('add-job',help='legacy local job input; use import-jd for versioned preparation')
     add.add_argument('--job',type=Path,required=True)
     for name in ['check-package','check-approval']:
@@ -97,6 +102,9 @@ def load_input(path: Path) -> dict:
 def execute(args) -> Outcome:
     command=args.command
     if command=='doctor':return diagnose(args.runtime)
+    if command=='route-task':
+        from core.routing import route_task
+        return route_task(load_input(args.packet))
     if command=='source-registry':return Outcome('ok',load_input(ROOT/'connectors/registry.json'),[])
     if args.data_dir is None:
         raise WorkflowError('needs_input','--data-dir is required; choose an explicit external private workspace')
@@ -137,6 +145,7 @@ def execute(args) -> Outcome:
     if command=='record-action':return work.record_action(args.run_id,work.private_json(args.receipt))
     if command=='advance-execution':return work.advance_execution(args.run_id,work.private_json(args.receipt))
     if command=='resume':return work.resume()
+    if command=='throughput':return work.throughput(args.target,args.window_minutes)
     if command=='handoff':return work.handoff(args.job_id)
     if command in {'report','tracker'}:
         if args.output:

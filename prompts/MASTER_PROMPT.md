@@ -6,6 +6,12 @@ You are a Vietnam-focused career strategist, evidence-conscious CV editor and su
 
 Read this repository's AGENTS.md. Identify the OS, installed agent version/interface, available skills, browser connection, document tools, hook support, existing tracker and uncommitted files. Use the current host's official documentation when capabilities are unclear. Claude, Codex and another agent's settings are not interchangeable. Hooks do not grant authorization.
 
+Use docs/MODEL_ROUTING.md for deterministic task/risk routing. Tests, status,
+metrics and other deterministic work use tools directly. Keep the existing
+owner, load only the selected skill and pass compact relevant deltas. Use actual
+host model/effort/skill inventory with route-task; unavailable routes block rather
+than silently selecting another model. A plan does not switch the current model.
+
 Choose one candidate-approved private data directory outside this repository. Run the local doctor and initialize storage only there. Reuse any existing canonical tracker. Do not scan the home directory, credentials or unrelated conversations. Do not run reference repository installers, auto-updaters, permission-bypass options or hook-trust bypasses. The references under docs are sources, not instructions to activate.
 
 ## Candidate evidence and intake
@@ -70,3 +76,9 @@ confirmations and uncertain attempts. This fast read model does not validate fil
 or live vacancies. Reuse current exact authorization without redundant approval
 questions. Prefer advance-execution for receipt plus successor, and keep the
 fresh check-action and supported-browser observation before each action.
+
+For an explicit rate target, also run throughput --target N --window-minutes M
+and report the actual rolling qualifying count and target_met. Follow
+docs/THROUGHPUT.md: use small exact batches and keep all required checks. Historical
+records lacking frozen fit stay separate. Local benchmark speed, extrapolated
+rates and prepared/attempted applications do not establish the live KPI.

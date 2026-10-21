@@ -45,3 +45,23 @@ On 21 October 2026 the pinned files below were retrieved through GitHub's conten
 | claude-resume-kit | resume_builder/templates/resume.cls | 721ed8d5e80fcc54d829eba481b8b37b7d2e18574758828eed8b94551879e69e |
 
 Retained ideas are provenance/deduplication, one private tracker, separate critique and rendering checks. Ranged dependencies, Playwright install lifecycle, browser-attachment refusal, market-specific defaults and class notices support using original bounded modules rather than combining orchestrators. This is not a full-source/transitive security certificate. THIRD_PARTY_NOTICES.md records that no reference code/assets are bundled.
+
+## Company Skill Library routing reference
+
+Used the installed `company-skill-library:company-task-routing` skill, package
+`0.1.0+codex.20260914012433`, on 21 October 2026. Exact package file hashes:
+
+| Package-relative file | SHA-256 |
+|---|---|
+| skills/company-task-routing/SKILL.md | a62b162ac4a911b3c832aaadf35bb4bf625a13a978e141f0a9961782b88dd7b9 |
+| scripts/route.mjs | 76419c99b8022f7fad96f48457f92db882b205a83877afbabf81e1ebd66059ff |
+
+The installed pure router was run with the actual host inventory and existing
+owner: planning/complex/tool routes were ready; unavailable preferred simple and
+routine model IDs blocked. No dispatch or paid model call was performed by it.
+The package declares Node 22+ and no npm dependencies. Its installed artifact
+does not include a root license or Git commit identifier; these remain unknown,
+so no source code, catalog or skill text is redistributed or installed by this
+kit. The portable Python planner is an original implementation of the requested
+deterministic policy, with explicit caller policy/skill candidates instead of
+copying the company capability catalog. It adds no runtime dependency.

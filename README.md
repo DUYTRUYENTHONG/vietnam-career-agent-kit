@@ -15,6 +15,15 @@ Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job sea
 catch-up table. [Measurements and architecture](docs/PERFORMANCE.md) distinguish
 local gains from unmeasured live-browser time.
 
+**Model efficiency:** [deterministic routing](docs/MODEL_ROUTING.md) uses tools for
+tests/status/metrics and an explicit model policy for agent work. `route-task`
+checks host inventory without calling a model or silently changing models.
+
+**Throughput KPI:** [rolling confirmation reporting](docs/THROUGHPUT.md) measures
+an explicit target such as 100 qualifying confirmations in 60 minutes. It counts
+confirmed fit-reviewed records, not prepared files or attempted clicks. No live
+100/hour performance claim has been verified.
+
 **Campaign continuity:** [goals and checkpoints](docs/campaign-continuity.md)
 guide successive finite batches, resume from one private ledger, and count only
 confirmed new submissions toward a user-selected target. Persistent goals require
@@ -60,6 +69,8 @@ Keep CVs, evidence, salary, answers, trackers and screenshots in the selected di
 | `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite authorization records and expiry/hash checks; execution requires an explicitly reviewed bridge/runtime scope |
 | `resume`, `status`, `report`, `handoff` | Local checkpoint or explicit manual handoff |
 | `tracker` | Fast recorded-status table; does not validate artifacts, approvals or live vacancies |
+| `route-task --packet task.json` | Read-only model/tool plan using explicit host capabilities; no workspace or model API required |
+| `throughput --target 100 --window-minutes 60` | Rolling confirmation KPI; old records without frozen fit are separate, never inferred |
 | Legacy `check-package`, `record-approval`, `check-approval`, `invalidate` | Content-bound local bookkeeping; no authenticated human identity, expiry-bound batch or browser grant |
 | `start-execution`, `next-action`, `check-action`, `record-action`, `advance-execution` | Durable sequential engine; designated agent performs each request through supported browser tools |
 | `execution-status`, `stop-execution`, `recover-execution` | Inspect/stop or reconcile an uncertain attempt read-only; no duplicate submit |
