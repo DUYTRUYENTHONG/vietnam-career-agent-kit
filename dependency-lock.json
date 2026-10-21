@@ -1,0 +1,10 @@
+{
+  "schema_version":"1.0",
+  "scope":"Slice 1 local CLI, tests, hook helper and fictional demo",
+  "python":{"requires":">=3.11","tested_locally":"3.12.14","ci_matrix":["3.11","3.12"]},
+  "third_party_runtime_dependencies":[],
+  "third_party_test_dependencies":[],
+  "install_steps":[],
+  "optional_documents":{"file":"requirements-documents.txt","status":"Optional direct pins only, not a transitive rendering lock; rendering is outside Slice 1","auto_install":false},
+  "external_costs":"Existing agent subscriptions, provider usage, search or future browser/rendering services have separate terms and costs. No maintainer cloud or second model API is required."
+}

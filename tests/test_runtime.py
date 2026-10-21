@@ -11,4 +11,3 @@ class RuntimeTests(unittest.TestCase):
         with patch('core.runtime.platform.system', return_value='Windows'), \
                 patch('core.runtime.sys.version_info', (3, 12, 14)):
             self.assertEqual('Verified', diagnose().data['native_compatibility'])
-

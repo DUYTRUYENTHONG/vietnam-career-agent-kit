@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "rows": [
+    {
+      "requirement_id": "R1",
+      "match": "direct",
+      "fact_ids": [
+        "B1"
+      ],
+      "reason": "Nguồn mô tả Excel trong bài tập."
+    },
+    {
+      "requirement_id": "R2",
+      "match": "direct",
+      "fact_ids": [
+        "B2"
+      ],
+      "reason": "Nguồn mô tả ghi chép quy trình học tập."
+    }
+  ]
+}
