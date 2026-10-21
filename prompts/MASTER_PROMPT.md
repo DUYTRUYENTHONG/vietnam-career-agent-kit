@@ -48,6 +48,15 @@ Default to user final submission. If the user explicitly delegates submission an
 
 ## Tracking and completion
 
+Follow docs/campaign-continuity.md for campaign targets spanning multiple batches
+or turns. Reuse the private checkpoint and canonical ledger; do not restart the
+count or repeat completed applications. Continue successive finite batches within
+the permitted scope and pursue independent jobs when one vacancy is blocked.
+Create a host goal only when explicitly requested and supported. A target or goal
+does not authorize disclosures, extend a manifest or provide a background worker.
+Keep personal goals private and mark completion only after the target's qualifying
+confirmed receipts and tracker have been reconciled.
+
 Keep local timestamped states: discovered → assessed → draft_ready → review_required → approved_for_disclosure → form_prepared → awaiting_manual_submission. Distinguish confirmed_submitted, user_reported_submitted, submission_uncertain, closed and withdrawn. Only observed confirmation proves an observed submission. Never infer application success from navigation, upload or file creation. Submitted packages are immutable snapshots; later edits create new versions.
 
 Use one coordinator for browser and tracker writes. On resume, check actual state and artifact hashes. Keep candidate data/screenshots/logs private with configurable retention. Avoid unrelated screenshots and public telemetry. Use fictional local fixtures for tests; no live applications during tests. Never schedule unattended activity.

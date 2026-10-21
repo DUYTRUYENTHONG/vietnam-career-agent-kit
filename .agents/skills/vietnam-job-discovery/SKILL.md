@@ -21,6 +21,12 @@ Host search/browser or user-provided JD; no network connector is assumed from a 
 
 Read connectors/registry.json and per-action policy evidence. Manual versioned import-jd works now. Treat snippets as leads; verify full duties/status when permitted. Preserve retrieval/coverage, inaccessible sources and duplicate leads. Do not activate reference installers.
 
+For an ongoing campaign, read ../../../docs/campaign-continuity.md and the latest
+private checkpoint before searching. Continue successive finite batches within
+the confirmed scope; retain search coverage and blocked leads to avoid repeating
+dead ends. Check the canonical ledger for prior and uncertain applications.
+Do not expand location, seniority or fit merely to reach a numerical target.
+
 ## Outputs
 
 Dated source coverage and candidate job inputs with verified or explicitly unverified status.
