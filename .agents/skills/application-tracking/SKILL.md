@@ -15,7 +15,7 @@ One selected workspace and existing canonical tracker; observed evidence or sepa
 
 ## Required capabilities
 
-Local resume/report and SQLite. Browser outcome/attempt integration remains gated in the roadmap.
+Local resume/report and SQLite schema 3. Execution records distinguish durable attempts, host-observed confirmations and unknown outcomes; host receipts are not independent employer verification.
 
 ## Steps
 

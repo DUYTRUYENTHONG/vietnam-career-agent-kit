@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Fictional application portal</title>
+<style>body{font:17px system-ui;background:#eef3f8;color:#172b45;margin:0}main{max-width:680px;margin:50px auto;padding:36px;background:white;border-radius:14px}label{display:block;margin:24px 0 8px}input:not([type=checkbox]){display:block;padding:10px;max-width:95%}button{margin-top:28px;padding:12px 20px;background:#176344;color:white;border:0;border-radius:6px;font:inherit}.notice{background:#fff1cc;padding:14px}small{color:#4c6076}#result{border-top:1px solid #ccd7e3;margin-top:24px;padding-top:12px}</style>
+<main><p class="notice">LOCAL TEST ONLY — fictional candidate and employer. No employer application is sent.</p>
+<h1>Fictional Example Co</h1><h2>Automation Specialist · FICT-1</h2><small>This fixture has no external resources, cookies or telemetry.</small>
+<form id="application">
+<label for="salary">Salary expectation (required)</label><input id="salary" name="salary" required>
+<label for="resume">Fictional CV (.pdf required)</label><input id="resume" type="file" accept=".pdf" required>
+<label><input id="privacy" type="checkbox" required> Fictional retention policy</label>
+<button type="submit">Submit fictional application</button></form>
+<section id="result" aria-live="polite"></section></main>
+<script>
+const form=document.getElementById('application');
+form.addEventListener('submit',async event=>{
+ event.preventDefault();const file=document.getElementById('resume').files[0];
+ const bytes=await file.arrayBuffer();
+ const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+ const payload={salary:document.getElementById('salary').value,privacy:document.getElementById('privacy').checked,document_sha256:digest};
+ const response=await fetch('/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+ if(!response.ok)throw new Error('Local fixture submission failed');
+ form.hidden=true;const result=document.getElementById('result');
+ const heading=document.createElement('h2');heading.textContent='Fictional application submitted';result.append(heading);
+ const details=document.createElement('p');details.textContent='FICT-1 · Salary: '+payload.salary+' · File: '+file.name;result.append(details);
+ const hash=document.createElement('p');hash.textContent='SHA-256: '+digest;result.append(hash);
+});
+</script></html>

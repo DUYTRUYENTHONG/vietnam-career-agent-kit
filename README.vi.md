@@ -6,9 +6,11 @@ Dùng trợ lý AI và CV của riêng bạn để tìm việc tại Việt Nam 
 
 **Đã chạy được:** chẩn đoán → tạo không gian riêng → nhập CV dạng TXT/Markdown UTF-8 và hồ sơ có nguồn → xác nhận hồ sơ → nhập JD có cấu trúc → đối chiếu yêu cầu → tạo bản nháp CV Markdown → theo dõi, xuất báo cáo và tiếp tục phiên sau. Có mười skill dùng chung và ví dụ hư cấu cho hai người khác nhau.
 
-**Slice 2 bổ sung:** tạo DOCX từ nội dung có nguồn, chuyển chính DOCX đó sang PDF bằng LibreOffice cục bộ, tạo ảnh từng trang, ghi nhận kiểm tra tài liệu và phê duyệt manifest hữu hạn có thời hạn. Xem [hướng dẫn dựng tài liệu và phê duyệt](docs/documents-and-approval.md). Phê duyệt cục bộ không bật trình duyệt hay gửi hồ sơ.
+**Slice 2 bổ sung:** tạo DOCX từ nội dung có nguồn, chuyển chính DOCX đó sang PDF bằng LibreOffice cục bộ, tạo ảnh từng trang, ghi nhận kiểm tra tài liệu và phê duyệt manifest hữu hạn có thời hạn. Xem [hướng dẫn dựng tài liệu và phê duyệt](docs/documents-and-approval.md). Manifest cũ không có phạm vi execution vẫn chỉ dùng để chuẩn bị.
 
-**Chưa có:** trích xuất CV PDF/DOCX, tìm việc tự động qua mạng, thao tác trình duyệt và gửi hàng loạt có phục hồi lần nộp. Skill/hook, tên nhà cung cấp AI hoặc một bản ghi phê duyệt không chứng minh các khả năng này đã hoạt động.
+**Engine mới:** điều phối tuần tự inspect/fill/upload/review/submit/verify qua công cụ trình duyệt được host hỗ trợ; ghi lần thử trước khi nộp, giới hạn hữu hạn và chỉ đọc để xác minh lần nộp chưa rõ kết quả. Xem [hướng dẫn execution](docs/execution.md). Agent cung cấp kết nối trình duyệt; CLI không tự đăng nhập hay tạo trình duyệt.
+
+**Chưa có:** trích xuất CV PDF/DOCX, tìm việc tự động qua mạng, worker trình duyệt chạy độc lập và adapter nhà tuyển dụng đã được xác minh. Skill/hook, tên nhà cung cấp AI hoặc một bản ghi phê duyệt không chứng minh các khả năng này đã hoạt động.
 
 ## Chạy thử bằng dữ liệu hư cấu
 
@@ -44,9 +46,9 @@ python -m pip install --require-hashes --only-binary=:all: -r requirements-docum
 python scripts/demo_slice2.py --candidate b --data-dir ../career-doc-demo --soffice /absolute/path/to/soffice
 ```
 
-Xem TẤT CẢ ảnh từng trang và nội dung có nguồn trước khi chạy review-documents. Sau đó dùng create-manifest để chọn đúng ứng viên, công ty/vị trí, đích HTTPS, hash CV/câu trả lời, lựa chọn đồng ý, thao tác, hạn UTC và giới hạn hữu hạn. Chỉ approve-manifest sau khi người dùng thực sự xem đúng fingerprint. check-manifest kiểm tra lại dữ liệu, thời hạn và việc thu hồi; execution_enabled luôn là false. Xem [cú pháp và các tệp đầu vào](docs/documents-and-approval.md).
+Xem TẤT CẢ ảnh từng trang và nội dung có nguồn trước khi chạy review-documents. Sau đó dùng create-manifest để chọn đúng ứng viên, công ty/vị trí, đích HTTPS, hash CV/câu trả lời, lựa chọn đồng ý, thao tác, hạn UTC và giới hạn hữu hạn. Chỉ approve-manifest sau khi người dùng thực sự xem đúng fingerprint. check-manifest kiểm tra lại dữ liệu, thời hạn và việc thu hồi; execution_enabled chỉ là true khi kế hoạch có phạm vi execution rõ ràng gồm bridge_id và runtime_minutes, được xem và phê duyệt lại. Xem [cú pháp và các tệp đầu vào](docs/documents-and-approval.md).
 
-- Lệnh hiện tại chỉ đọc/ghi cục bộ. `handoff` trả về bước bàn giao thủ công, không phải đơn đã gửi.
+- CLI đọc/ghi trạng thái cục bộ và phát yêu cầu cho agent; agent mới thực hiện thao tác qua công cụ trình duyệt được phép. `handoff` trả về bước bàn giao thủ công, không phải đơn đã gửi.
 - Mỗi kết quả có `schema_version`, `outcome`, `data`, `issues`, `message`. Mã thoát 0 là tác vụ cục bộ thành công; mã 2 yêu cầu xem trạng thái và bổ sung/xử lý thông tin.
 - Không tự điền ngày bắt đầu, quyền làm việc, nhu cầu bảo lãnh, đồng ý chuyển nơi ở hoặc mức lương. Giữ riêng VND/USD, tháng/năm, gross/net và thưởng.
 - Trước khi nhập/upload cần đúng nhà tuyển dụng, vị trí, đích đến, hash tài liệu/câu trả lời, lựa chọn đồng ý, thời hạn và phạm vi. Phê duyệt của bạn không thay thế quy định nền tảng hay quyền công cụ.

@@ -16,6 +16,7 @@ from core.ledger import ACTIONS, ConcurrentWrite, Kit, PackageError
 from core.runtime import diagnose
 from core.workflow import Preparation, WorkflowError
 from core.manifests import Campaign
+from core.execution import Executor
 
 
 class Parser(argparse.ArgumentParser):
@@ -57,6 +58,16 @@ def parser() -> Parser:
     check.add_argument('--intent',type=Path)
     revoke_manifest=commands.add_parser('revoke-manifest');revoke_manifest.add_argument('--fingerprint',required=True)
     revoke_manifest.add_argument('--reason',required=True)
+    start=commands.add_parser('start-execution',help='opt in to an exact approved host-browser scope; does not acquire a browser')
+    start.add_argument('--fingerprint',required=True)
+    start.add_argument('--bridge-id',required=True)
+    start.add_argument('--runtime-minutes',type=int,required=True)
+    for name in ['next-action','execution-status','recover-execution','stop-execution','record-action','check-action']:
+        cmd=commands.add_parser(name)
+        cmd.add_argument('--run-id',required=True)
+        if name=='stop-execution':cmd.add_argument('--reason',required=True)
+        if name=='record-action':cmd.add_argument('--receipt',type=Path,required=True)
+        if name=='check-action':cmd.add_argument('--request-id',required=True)
     report=commands.add_parser('report');report.add_argument('--format',choices=['json','md'],default='json')
     report.add_argument('--output',help='relative output path inside the private workspace')
     add=commands.add_parser('add-job',help='legacy local job input; use import-jd for versioned preparation')
@@ -86,7 +97,7 @@ def execute(args) -> Outcome:
     if command=='source-registry':return Outcome('ok',load_input(ROOT/'connectors/registry.json'),[])
     if args.data_dir is None:
         raise WorkflowError('needs_input','--data-dir is required; choose an explicit external private workspace')
-    work=Campaign(args.data_dir,actor=args.actor)
+    work=Executor(args.data_dir,actor=args.actor)
     if command=='init':return work.init(args.language)
     if not work.db_path.is_file():
         raise WorkflowError('needs_input','Workspace not initialized; run init first with this --data-dir')
@@ -94,10 +105,12 @@ def execute(args) -> Outcome:
     if command not in legacy:
         with work._db() as db:
             schema=db.execute('PRAGMA user_version').fetchone()[0]
-            if schema not in {1,2}:
+            if schema not in {1,2,3}:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
+            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','check-action'} and schema<3:
+                raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
     if command=='import-cv':return work.import_cv(args.file,args.source_id)
     if command=='import-profile':return work.import_profile(load_input(args.file))
     if command=='profile':return work.inspect_profile()
@@ -112,6 +125,13 @@ def execute(args) -> Outcome:
     if command=='approve-manifest':return work.approve_manifest(args.fingerprint,args.confirmation)
     if command=='check-manifest':return work.check_manifest(args.fingerprint,work.private_json(args.intent) if args.intent else None)
     if command=='revoke-manifest':return work.revoke_manifest(args.fingerprint,args.reason)
+    if command=='start-execution':return work.start_execution(args.fingerprint,args.bridge_id,args.runtime_minutes)
+    if command=='next-action':return work.next_action(args.run_id)
+    if command=='execution-status':return work.execution_status(args.run_id)
+    if command=='check-action':return work.check_action(args.run_id,args.request_id)
+    if command=='recover-execution':return work.recover_execution(args.run_id)
+    if command=='stop-execution':return work.stop_execution(args.run_id,args.reason)
+    if command=='record-action':return work.record_action(args.run_id,work.private_json(args.receipt))
     if command=='resume':return work.resume()
     if command=='handoff':return work.handoff(args.job_id)
     if command=='report':
@@ -127,7 +147,7 @@ def execute(args) -> Outcome:
         else:
             vi=work.language()=='vi'
             lines=['# '+('Báo cáo tìm việc' if vi else 'Job search checkpoint'),'',
-                'PREPARE — '+('chưa gửi hồ sơ' if vi else 'no application performed'),'',
+                result.data['mode']+' — '+('Số hồ sơ có xác nhận từ trình duyệt: ' if vi else 'Host-observed confirmed applications: ')+str(result.data.get('observed_submissions',0)),'',
                 '| Job | State | Draft stale |','|---|---|---|']
             for job in result.data['jobs']:
                 lines.append(f"| {work.literal(job['employer']+' — '+job['title'])} | {job['state']} | {job['draft_stale']} |")
@@ -140,7 +160,7 @@ def execute(args) -> Outcome:
                 lines += ['','## '+('Phê duyệt cục bộ' if vi else 'Local approvals'),'',
                     '| Manifest | Approved | Execution enabled |','|---|---|---|']
                 for item in result.data['manifests']:
-                    lines.append(f"| {item['fingerprint']} | {item['approved']} | False |")
+                    lines.append(f"| {item['fingerprint']} | {item['approved']} | {item.get('execution_enabled',False)} |")
             content='\n'.join(lines)+'\n'
         target=work.atomic_text(args.output,content)
         return Outcome(result.outcome,{'path':str(target.relative_to(work.data_dir)),

@@ -6,9 +6,11 @@ Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job sea
 
 **Working now:** a local preparation CLI: diagnose → private workspace → UTF-8 CV/profile import → exact profile confirmation → structured JD import → evidence matrix → tailored Markdown draft → tracker/report/manual handoff → resume. Ten shared skills and Claude wrappers support the workflow. Fictional examples cover two users, cities, roles and languages.
 
-**Slice 2 adds:** optional source-bound DOCX → local LibreOffice PDF → page previews, explicit page review, and exact expiring approval manifests. [Rendering and approval setup](docs/documents-and-approval.md) explains dependencies, commands and limits. Manifest validation never enables browser execution.
+**Slice 2 adds:** optional source-bound DOCX → local LibreOffice PDF → page previews, explicit page review, and exact expiring approval manifests. [Rendering and approval setup](docs/documents-and-approval.md) explains dependencies, commands and limits. Plans without explicit execution scope remain preparation only.
 
-**Not yet implemented:** PDF/DOCX CV extraction, network job connectors, native browser execution and finite approved-batch submission/attempt recovery. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
+**Execution engine:** an exact approved host-browser loop now supports sequential fill/upload/review/submit/verify, durable attempts, finite budgets and read-only recovery. See [execution setup and protocol](docs/execution.md). The agent supplies supported browser tools; the CLI does not acquire a browser.
+
+**Not yet implemented:** PDF/DOCX CV extraction, network job connectors, standalone unattended browser workers and verified employer-specific adapters. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice
 
@@ -45,10 +47,11 @@ Keep CVs, evidence, salary, answers, trackers and screenshots in the selected di
 | `init`, `import-cv`, `import-profile`, `confirm-profile` | Private local evidence/profile state |
 | `import-jd`, `assess`, `prepare` | Private local job/matrix/draft state; no website operation |
 | `render`, `review-documents`, `reject-documents` | Optional local DOCX/PDF/page generation and explicit review; no disclosure |
-| `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite local authorization records, expiry/hash checks; execution_enabled=false |
+| `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite authorization records and expiry/hash checks; execution requires an explicitly reviewed bridge/runtime scope |
 | `resume`, `status`, `report`, `handoff` | Local checkpoint or explicit manual handoff |
 | Legacy `check-package`, `record-approval`, `check-approval`, `invalidate` | Content-bound local bookkeeping; no authenticated human identity, expiry-bound batch or browser grant |
-| Fill/upload/submit | No live execution command in this slice; host/site/user permission and future tested execution guards required |
+| `start-execution`, `next-action`, `check-action`, `record-action` | Durable sequential engine; designated agent performs each request through supported browser tools |
+| `execution-status`, `stop-execution`, `recover-execution` | Inspect/stop or reconcile an uncertain attempt read-only; no duplicate submit |
 
 Structured operations return `schema_version`, `outcome`, `data`, `issues`, `message`. Outcomes: `ok`, `blocked`, `needs_input`, `manual_required`, `failed`, `submission_unknown`. Exit 0 means the local operation succeeded; exit 2 means inspect the outcome and next input. A manual handoff is not a submitted application. [Tool/data contract](docs/DATA_CONTRACT.md).
 
@@ -57,7 +60,7 @@ Structured operations return `schema_version`, `outcome`, `data`, `issues`, `mes
 | Interface | Label | Actual scope |
 |---|---|---|
 | Generic local Python CLI | Verified on recorded test matrix | Deterministic commands/fictional tests; no native agent/browser certification |
-| Codex desktop tool execution; CLI 0.137.0 inventory | Experimental | This development flow executes local tools; native project-skill/hook callbacks not integration-tested |
+| Codex desktop tool execution; CLI 0.137.0 inventory | Experimental | This development flow executes local tools; separate fictional browser fill/upload/submit smoke passed; engine bridge tested deterministically; native skill/hooks and real employer integration unverified |
 | Claude Code 2.1.205 inventory | Instruction-only | Generated shared-skill wrappers; native agent execution/hooks not tested |
 | Grok Bot / unidentified Grok runtime | Unsupported natively | Generic text/manual path only; no invented SDK, hooks or browser support |
 

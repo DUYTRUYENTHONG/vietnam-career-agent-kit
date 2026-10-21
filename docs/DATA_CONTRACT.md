@@ -8,7 +8,7 @@ Input shapes live in schemas/contracts.schema.json ($defs profile/job/matrix/pla
 
 | Operation | Persisted authority |
 |---|---|
-| `init --language en/vi` | Additive SQLite schema 1/2 and interface setting; existing rows preserved |
+| `init --language en/vi` | Additive SQLite schema 1/2/3 and interface setting; existing rows preserved |
 | `import-cv --file PATH --source-id ID` | Immutable normalized UTF-8/LF snapshot plus SQLite source ID/hash |
 | `import-profile --file PATH` / `profile` | One candidate, exact source quotes/status/conflict keys, preferences and fingerprint |
 | `confirm-profile --fingerprint HASH --confirmation PATH` | Current-profile local review; proof text `CONFIRM PROFILE HASH`; human provenance unauthenticated |
@@ -21,7 +21,7 @@ Profile confirmation is separate from disclosure approval. A changed profile inv
 
 Report writes are restricted to relative reports/ paths with the selected .json/.md suffix. Submitted/user-reported/uncertain jobs cannot receive another draft/handoff without reconciliation. SQLite is canonical; reports/drafts/source maps are derived. Missing/changed sources/JDs/artifacts never silently resume as valid. This boundary is not OS authentication, encryption or a sandbox for arbitrary host tools.
 
-Slice 2 adds optional render/review and expiring manifest bookkeeping in the same database. See documents-and-approval.md and schemas/documents-approval.schema.json for exact commands, strict input contracts and review/approval boundaries. There is no live browser or finite-campaign executor; execution_enabled remains false. Their gates remain in roadmap.md.
+Slice 2 adds optional render/review and expiring manifest bookkeeping in the same database. See documents-and-approval.md and schemas/documents-approval.schema.json. Schema 3 adds a host-mediated sequential execution engine, optional exact bridge/runtime scope, one pending request, durable attempts before submit and read-only reconciliation. See execution.md and schemas/execution.schema.json. Old preparation-only approvals stay disabled. Native browser access and platform permission are supplied separately by the host.
 
 ## Legacy package checker
 
