@@ -28,6 +28,15 @@ A supported authorized host browser and the execution CLI. Read ../../../docs/ex
 7. Repeat sequentially. Only APPROVED_BATCH returns submit, after a durable unique attempt has already been committed. Click once. Acknowledge it, then verify visible employer/requisition/success and retain a private screenshot. An issued click is not confirmation.
 8. Stop on non-ok outcomes. A pending submit resumes as read-only verify; it never returns another submit. A terminal unknown may use recover-execution for reconciliation only. Do not retry that vacancy, continue other entries or infer success. ASSIST ends after review without submitting.
 
+## Standing authorization
+
+An exact manifest may derive from approved standing campaign authority. Reuse
+matching authority without repeat local approval prompts; check-action still
+rechecks the parent. Never treat standing consent as a host action-time decision.
+Report unresolved host confirmations as blockers. After parent revocation or
+expiry, issued submits permit read-only recovery only. See
+../../../docs/STANDING_AUTHORIZATION.md.
+
 ## Outputs
 
 For rate targets, use small exact finite batches and record actual confirmation

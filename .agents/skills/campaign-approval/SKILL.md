@@ -21,6 +21,18 @@ Local create-manifest, approve-manifest, check-manifest and revoke-manifest. Rev
 
 Identify recipient/requisition and every disclosure. Build a finite plan from actually reviewed files, confirmed ordinary answers, explicit consents, per-host permission evidence, operations, UTC expiry and limits. For execution, bind the exact available bridge_id and runtime_minutes (1..60) before creating the manifest. Show its exact exported scope, then record actual explicit approval of that fingerprint. Plans without execution scope remain disabled. Never manufacture a proof file in place of the user's approval. Check intent hashes/destination/action before disclosure; the execution loop also uses check-action immediately before each browser action. Changed overlapping scopes revoke old approvals. Local records cannot authenticate a human or grant platform permission. See docs/documents-and-approval.md and docs/execution.md.
 
+## Standing authorization
+
+When the user requests automatic routine approvals, configure an opt-in standing
+scope using docs/STANDING_AUTHORIZATION.md. Name recipients/HTTPS prefixes,
+ordinary answer bank, exact consents, confirmed profile, bridge, shared cap and
+expiry. Obtain actual approval once; never infer a proof from the phrase alone.
+For later reviewed Strong/Plausible applications within that scope, use
+authorize-manifest instead of requesting a second local batch proof. Exact
+manifest hashes and reviews remain mandatory. check-authorization reports quota
+allocations, not submitted jobs. Host-required specific disclosure/action-time
+confirmations remain separate. New recipients/answers/consents stay exceptions.
+
 ## Outputs
 
 Reviewable exact manifest or explicit needs_input/manual_required; never a manufactured approval.

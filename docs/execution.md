@@ -33,6 +33,12 @@ distinguish deterministic engine tests from a measured native browser run.
 
 ## Enable an exact execution scope
 
+An exact manifest can receive authority from an actually approved
+[standing campaign scope](STANDING_AUTHORIZATION.md). Use `authorize-manifest`
+instead of another local approval proof only when all parent constraints match.
+Current documents, fit, source permissions and host confirmations still apply.
+`init` now adds schema 4 while preserving existing schema 1/2/3 records.
+
 Start with reviewed documents and the campaign plan in [documents-and-approval.md](documents-and-approval.md).
 Before creating the manifest, add this optional field to that plan:
 
@@ -61,8 +67,8 @@ python scripts/kit.py --data-dir ../career-private record-action --run-id RUN_ID
 ```
 
 Repeat from `next-action` while the outcome contains `data.request`. Stop at a
-terminal state or any non-ok outcome. `init` adds schema 3 without replacing schema
-1/2 data. Use the same workspace and actor on later commands. Actor IDs prevent
+terminal state or any non-ok outcome. `init` adds schema 4 without replacing schema
+1/2/3 data. Use the same workspace and actor on later commands. Actor IDs prevent
 accidental coordinator mixing; local database access is not an authorization boundary.
 
 ## Fewer orchestration round trips

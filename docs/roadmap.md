@@ -15,6 +15,11 @@ This records implemented evidence separately from intended product scope. No lat
 
 ## Current implementation sequence
 
+Standing campaign authorization is an opt-in extension of Slice 6: one approved
+recipient/profile/answer/consent scope can derive later exact reviewed batches
+with a shared cap, expiry and revocation. Local deterministic tests do not close
+the native host or real-employer gates. See STANDING_AUTHORIZATION.md.
+
 1. Specify the portable product and preserve the existing legacy checks.
 2. Move the existing core without behavior changes; retain its compatibility entrypoint.
 3. Add versioned preparation contracts, immutable source import and one-candidate workspace state.
