@@ -10,6 +10,15 @@ người dùng chủ động ủy quyền phạm vi cụ thể.
 tiên trong một lệnh. Không hỏi lại phê duyệt nội bộ khi phạm vi khớp. Nếu lần chạy
 đã tồn tại, lệnh trả trạng thái để đối chiếu; không lặp lại thao tác gửi.
 
+Khi người dùng yêu cầu dọn tab, agent chỉ đóng tab ứng tuyển do mình tạo sau khi
+đã lưu xác nhận và ảnh chứng minh. `cleanup-execution` trả đúng tab cần xử lý;
+`record-cleanup` ghi kết quả do host quan sát. Giữ nguyên tab của người dùng và
+các hồ sơ chưa rõ kết quả. CLI không tự điều khiển hoặc đóng toàn bộ trình duyệt.
+
+[Hướng dẫn tìm việc nhanh hơn](docs/DISCOVERY_ACCELERATION.md) mô tả cách dùng
+danh sách ATS công khai khi được phép, tránh tìm trùng và mở rộng nhóm vai trò
+khi người dùng đồng ý. Đây là hướng dẫn, chưa phải connector mạng đã triển khai.
+
 Tối ưu mới: kiểm tra CV theo từng việc, `advance-execution` ghi nhận kết quả và
 trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng thái nhanh. Bảng chỉ
 phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.

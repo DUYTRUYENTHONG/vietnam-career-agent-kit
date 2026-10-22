@@ -41,6 +41,9 @@ when the pass is blocked. Include employer/role, source URL, recorded status,
 blocker, next step and last update. Link the complete private report for longer
 campaigns. Keep host-observed confirmations, candidate-reported prior applications
 and uncertain attempts separate; always distinguish prepared from submitted.
+Report tab cleanup separately using cleanup_status/cleanup_blocker. A failed
+close does not change the confirmed application, and successful closure is not
+an application blocker. Only the browser-application workflow handles closure.
 
 Use `tracker --format md --output reports/tracker.md` for fast catch-up output.
 It is a ledger projection, not a content/approval/liveness check. Use resume and

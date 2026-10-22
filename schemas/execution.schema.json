@@ -330,6 +330,162 @@
         "deadline_utc"
       ],
       "additionalProperties": false
+    },
+    "cleanup_request": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "action": {
+          "const": "close_application_tab"
+        },
+        "job_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "binding_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "employer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "requisition": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "screenshot": {
+          "$ref": "#/$defs/request/properties/document"
+        },
+        "requires_agent_owned": {
+          "const": true
+        },
+        "requires_cleanup_request": {
+          "const": true
+        },
+        "bridge_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "action",
+        "job_id",
+        "bridge_id",
+        "binding_id",
+        "employer",
+        "requisition",
+        "destination",
+        "screenshot",
+        "requires_agent_owned",
+        "requires_cleanup_request"
+      ],
+      "additionalProperties": false
+    },
+    "cleanup_receipt": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "binding_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "status": {
+          "enum": [
+            "closed",
+            "already_absent",
+            "failed"
+          ]
+        },
+        "agent_owned": {
+          "type": "boolean"
+        },
+        "cleanup_requested": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "bridge_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "bridge_id",
+        "binding_id",
+        "status",
+        "agent_owned",
+        "cleanup_requested"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "closed",
+                  "already_absent"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "agent_owned": {
+                "const": true
+              },
+              "cleanup_requested": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "failed"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      ]
     }
   }
 }

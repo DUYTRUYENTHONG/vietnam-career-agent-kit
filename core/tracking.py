@@ -17,11 +17,17 @@ def checkpoint(work):
             'FROM execution_actions a JOIN execution_runs r ON r.id=a.run_id ORDER BY a.rowid')) if schema>=3 else []
         attempts=db.execute('SELECT count(*) FROM execution_attempts').fetchone()[0] if schema>=3 else 0
         submitted=db.execute('SELECT count(*) FROM execution_submissions').fetchone()[0] if schema>=3 else 0
-    latest={row['job_id']:row for row in actions}
+    latest={row['job_id']:row for row in actions if row['action']!='cleanup'}
+    cleanup={row['job_id']:row for row in actions if row['action']=='cleanup'}
     for job in jobs:
         action=latest.get(job['id'])
-        job.update(latest_action=None,run_state=None,blocker=None,
+        job.update(latest_action=None,run_state=None,blocker=None,cleanup_status=None,cleanup_blocker=None,
                    next_step='Resume and validate current evidence before continuing')
+        if job['id'] in cleanup:
+            closed=cleanup[job['id']];receipt=json.loads(closed['receipt'])
+            job['cleanup_status']=receipt['status']
+            if receipt['status']=='failed':job['cleanup_blocker']=receipt['reason']
+            job['updated_utc']=max(job['updated_utc'],closed['completed_utc'] or closed['created_utc'])
         if action:
             receipt=json.loads(action['receipt']) if action['receipt'] else None
             job.update(latest_action=action['action'],run_state=action['run_state'])
@@ -57,11 +63,11 @@ def markdown(data):
     lines=['# Application tracker','',data['basis']+'.','',
         f"Updated (UTC): {data['generated_utc']}",
         f"Host-observed confirmations: {data['observed_submissions']}; durable attempts: {data['attempts']}; candidate-reported prior submissions: {data['user_reported_submissions']}",'',
-        '| ID | Employer / role | Source | Status | Blocker | Next step | Updated (UTC) |',
-        '|---|---|---|---|---|---|---|']
+        '| ID | Employer / role | Source | Status | Blocker | Tab cleanup | Next step | Updated (UTC) |',
+        '|---|---|---|---|---|---|---|---|']
     for job in data['jobs']:
         lines.append('| '+' | '.join(cell(value) for value in [job['id'],job['employer']+' — '+job['title'],
-            job['url'],job['state'],job['blocker'],job['next_step'],job['updated_utc']])+' |')
+            job['url'],job['state'],job['blocker'],job.get('cleanup_blocker') or job.get('cleanup_status'),job['next_step'],job['updated_utc']])+' |')
     return '\n'.join(lines)+'\n'
 
 

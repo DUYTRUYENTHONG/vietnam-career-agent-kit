@@ -180,8 +180,9 @@ class Executor(Campaign):
 
     def _status(self, run, flow):
         state=run['state']
+        cleanup=self.cleanup_execution(run['id'])
         return Outcome('submission_unknown' if state=='submission_unknown' else 'ok',
-                       {'run_id':run['id'],'state':state,'entry_index':flow['entry_index']},[])
+                       {'run_id':run['id'],'state':state,'entry_index':flow['entry_index'],'cleanup':cleanup.data},cleanup.issues)
 
     def _validate_identity(self, receipt, request):
         for key in ['binding_id','url','employer','requisition']:text(receipt[key],key,empty=key=='requisition')
@@ -329,9 +330,18 @@ class Executor(Campaign):
             result=self.next_action(run_id) if recorded.data['state']=='active' else recorded
         except WorkflowError as error:
             return Outcome(error.outcome,{'run_id':run_id,'receipt_recorded':True,
-                'recorded_request_id':receipt['request_id']},[str(error)])
+                'recorded_request_id':receipt['request_id'],'cleanup':recorded.data['cleanup']},[str(error)])
+        result.data['cleanup']=recorded.data['cleanup']
         result.data.update(receipt_recorded=True,recorded_request_id=receipt['request_id'])
         return result
+
+    def cleanup_execution(self,run_id):
+        from .cleanup import pending
+        return pending(self,run_id)
+
+    def record_cleanup(self,run_id,receipt):
+        from .cleanup import record
+        return record(self,run_id,receipt)
 
     def tracker(self):
         from .tracking import checkpoint
@@ -399,11 +409,20 @@ def run_with_bridge(work, run_id, bridge):
     Exceptions stop mutations. A possibly issued submit remains durable and may
     only resume as verification. No automatic exception retry is performed.
     """
+    from .cleanup import through_bridge
+    cleanup_issues=[];attempted_cleanup=set()
     while True:
         outcome=work.next_action(run_id)
         request=outcome.data.get('request')
-        if request is None:return outcome
+        if request is None:
+            cleanup_issues.extend(through_bridge(work,run_id,bridge,outcome.data['cleanup']['requests'],attempted_cleanup))
+            outcome.data['cleanup']=work.cleanup_execution(run_id).data
+            outcome.issues.extend(cleanup_issues);return outcome
         work.check_action(run_id,request['request_id'])
         receipt=bridge.perform(request)
         result=work.record_action(run_id,receipt)
-        if result.data['state']!='active':return result
+        if request['action']=='verify' and receipt.get('confirmed'):
+            cleanup_issues.extend(through_bridge(work,run_id,bridge,result.data['cleanup']['requests'],attempted_cleanup))
+            result.data['cleanup']=work.cleanup_execution(run_id).data
+        if result.data['state']!='active':
+            result.issues.extend(cleanup_issues);return result

@@ -1,5 +1,19 @@
 # Runtime compatibility evidence
 
+Launch and completed-tab cleanup (22 October 2026): the final Windows suite
+passed all 140 tests in 280.839 seconds, including five launch tests and thirteen
+cleanup tests. Three review regressions first reproduced reused-binding closure
+and tracker misclassification; they passed after fixes, and the focused review
+found no remaining material issues. Generic CLI and fictional bridge coverage
+include terminal cleanup resume, recovery exceptions, exact bridge binding,
+changed screenshots, ownership/intent flags, immutable/idempotent receipts and
+separate tracker status. No new browser driver, native runtime certification or
+real-employer integration is claimed. Discovery acceleration is instruction-only;
+the network connector gate remains pending. Published CI is a separate result.
+The disposable demo, source hygiene, generated adapter and whitespace checks
+passed. A separate seven-sample fictional launch benchmark is recorded in
+PERFORMANCE.md; it does not certify native browser or live-employer throughput.
+
 Launch composition (22 October 2026): five fictional Windows/real-CLI tests passed
 for delegated first requests, invalid scope, interrupted first-request delivery,
 existing-run nonreplay and host-confirmation blockers. Native browser execution

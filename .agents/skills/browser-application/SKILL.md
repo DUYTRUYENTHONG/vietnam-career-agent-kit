@@ -41,6 +41,21 @@ Use launch-execution for a new standing-authorized run to receive its initial
 request without separate authorize/start/next calls. Repeated launch returns
 existing-run reconciliation metadata, not a duplicate action. See execution.md.
 
+## Completed-tab cleanup
+
+When the candidate requested cleanup, handle cleanup.requests returned after a
+confirmed receipt is committed. Verify the saved screenshot and the exact
+bridge/binding in the host's agent-created tab registry and refresh the visible
+employer/requisition immediately before closing that tab through
+supported tools. Preserve unrelated/user-owned tabs, explicit deliverables and
+all uncertain/manual handoffs. Record the observed closed/already_absent result
+with record-cleanup; never manufacture it. A failed close leaves the application
+confirmed and cleanup pending. Do not resubmit. cleanup-execution resumes this
+work separately without renewing disclosure authority. See execution.md.
+Bindings reused for later applications are ineligible. Recheck cleanup-execution
+before acting on earlier output. Track cleanup status separately from application
+blockers; a failed close never cancels the saved submission.
+
 ## Outputs
 
 For rate targets, use small exact finite batches and record actual confirmation

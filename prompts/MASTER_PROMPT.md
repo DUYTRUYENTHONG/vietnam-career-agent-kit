@@ -88,6 +88,13 @@ or live vacancies. Reuse current exact authorization without redundant approval
 questions. Prefer advance-execution for receipt plus successor, and keep the
 fresh check-action and supported-browser observation before each action.
 
+If the candidate requested closing completed application tabs, first save the
+observed confirmation, screenshot and immutable receipt. Use cleanup.requests
+from the engine to match the original agent-owned tab, close it through supported
+host tools, verify absence and record-cleanup. Preserve user-owned/unrelated tabs,
+explicit deliverables and uncertain/manual handoffs. A cleanup failure leaves the
+application confirmed and cleanup pending; never submit again to fix closure.
+
 For an explicit rate target, also run throughput --target N --window-minutes M
 and report the actual rolling qualifying count and target_met. Follow
 docs/THROUGHPUT.md: use small exact batches and keep all required checks. Historical

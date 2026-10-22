@@ -75,11 +75,11 @@ def parser() -> Parser:
     launch=commands.add_parser('launch-execution',help='reuse standing authority, start and return the first guarded request')
     launch.add_argument('--fingerprint',required=True);launch.add_argument('--authorization',required=True)
     launch.add_argument('--bridge-id',required=True);launch.add_argument('--runtime-minutes',type=int,required=True)
-    for name in ['next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action']:
+    for name in ['next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action','cleanup-execution','record-cleanup']:
         cmd=commands.add_parser(name)
         cmd.add_argument('--run-id',required=True)
         if name=='stop-execution':cmd.add_argument('--reason',required=True)
-        if name in {'record-action','advance-execution'}:cmd.add_argument('--receipt',type=Path,required=True)
+        if name in {'record-action','advance-execution','record-cleanup'}:cmd.add_argument('--receipt',type=Path,required=True)
         if name=='check-action':cmd.add_argument('--request-id',required=True)
     report=commands.add_parser('report');report.add_argument('--format',choices=['json','md'],default='json')
     report.add_argument('--output',help='relative output path inside the private workspace')
@@ -131,7 +131,7 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
-            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action'} and schema<3:
+            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action','cleanup-execution','record-cleanup'} and schema<3:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
             if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest','launch-execution'} and schema<4:
                 raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
@@ -163,6 +163,8 @@ def execute(args) -> Outcome:
     if command=='stop-execution':return work.stop_execution(args.run_id,args.reason)
     if command=='record-action':return work.record_action(args.run_id,work.private_json(args.receipt))
     if command=='advance-execution':return work.advance_execution(args.run_id,work.private_json(args.receipt))
+    if command=='cleanup-execution':return work.cleanup_execution(args.run_id)
+    if command=='record-cleanup':return work.record_cleanup(args.run_id,work.private_json(args.receipt))
     if command=='resume':return work.resume()
     if command=='throughput':return work.throughput(args.target,args.window_minutes)
     if command=='handoff':return work.handoff(args.job_id)

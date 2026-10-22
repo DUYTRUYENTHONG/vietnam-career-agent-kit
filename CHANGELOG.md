@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Benchmark combined launch with seven alternating fresh fictional samples: three CLI calls become one; local Windows median 1017.035 → 537.829 ms. No model, browser or live throughput claim.
+
+- Document primary public ATS discovery options, reuse of dated source coverage and candidate-authorized adjacent role families. Guidance only; no new connector or submission permission.
+
+- Return exact post-confirmation tab cleanup requests and record host closure receipts without changing application counts. Require saved screenshot integrity, matching bridge/binding, cleanup intent and agent ownership; preserve reused/unknown/manual tabs. Add optional bridge cleanup, fresh eligibility checks and separate tracker/recovery status, with no schema migration or browser driver.
+
 - Add `launch-execution` to reuse standing authority, start and issue the first guarded request in one command. Existing runs reconcile without replay; partial failures preserve authority/run identifiers and host blockers remain effective.
 
 - Add opt-in standing campaign authorization across later reviewed CVs and exact batches, with named recipient prefixes, confirmed profile/owner, answer/consent bank, shared immutable quota reservations, expiry and revocation. Add schema 4, five CLI controls and fictional end-to-end/race/revocation tests; host confirmations and source permissions remain separate.
