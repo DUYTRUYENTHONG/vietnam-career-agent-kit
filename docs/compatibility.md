@@ -1,5 +1,18 @@
 # Runtime compatibility evidence
 
+Fast Web research (22 October 2026): **Experimental**, original Python stdlib
+Firecrawl v2 HTTP adapter, deterministic fake transports and local CLI only.
+Schema 5 is additive; existing execution/authorization/cleanup tests still apply.
+No configured API key, live provider/account test, native hook validation, cloud
+browser or employer submission test. TinyFish public research/direct sessions
+remain **Unsupported**. No new Codex/Claude/Grok native compatibility claim.
+See [scope and reproducible checks](FAST_WEB.md).
+
+Local release gate: Python 3.12.14 on Windows passed 184 standard tests in
+260.837 seconds, including the existing sequential execution/approval/recovery
+checks. Hygiene, wrapper consistency and CLI dry-run passed. Optional real
+LibreOffice conversion is not claimed locally; it remains a separate CI job.
+
 Duplicate-candidate preflight (22 October 2026): additive deterministic CLI on
 existing schemas 1–4, covered by five fictional behavioral/CLI regressions in
 `tests/test_duplicates.py`. It reads the selected ledger only, does not merge or
@@ -100,3 +113,7 @@ Without browsing, use manual structured JD import. Without computer use, produce
 The stdlib CLI adds independent public discovery without a workspace schema change. Fictional mocked-transport, bounds, deduplication, concurrency and CLI tests are in `tests/test_discovery.py`. No native runtime, live employer or submission performance certification is added. See [scope and contract](BULK_DISCOVERY.md).
 
 Local validation: the full Windows regression run passed 146 tests in 226.251 seconds. After final compact-output and error-path refinements, all eight discovery tests passed separately. The disposable fictional demo, repository hygiene, generated adapter check and whitespace check passed. No real candidate files or employer accounts were used. CI is reported separately in the pull request.
+
+Post-measurement HTTP failure-classification hardening passed six focused
+provider tests. The complete current suite has 185 cases; its CI state is reported
+separately in the PR, without relabelling the earlier 184-test local run.

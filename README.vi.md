@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+[Fast Web Pipeline tùy chọn](docs/FAST_WEB.md): tìm kiếm và đọc trang công khai
+bằng Firecrawl v2, lưu tác vụ/bằng chứng riêng tư và nhập JD có dẫn chứng vào
+SQLite hiện có. Mặc định không gọi mạng; không thêm thư viện Python. TinyFish và
+nộp hồ sơ qua trình duyệt cloud chưa được hỗ trợ trong đợt này.
+
 [Prompt tiếp tục chiến dịch và đóng tab đã hoàn tất](prompts/AUTO_PROCEED.md):
 tái sử dụng câu trả lời đã xác nhận và phạm vi ủy quyền còn hiệu lực; lưu bằng
 chứng nhận hồ sơ, đóng đúng tab do agent tạo, kiểm tra tab đã đóng và cập nhật bảng

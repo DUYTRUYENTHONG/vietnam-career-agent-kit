@@ -163,3 +163,63 @@ as applications.
 ## Bulk discovery scheduling, 22 October 2026
 
 See [the architecture review and benchmark](BULK_DISCOVERY.md). Seven alternating fictional 12-board runs with 50 ms simulated read latency reduced median serial 631.272 ms to 215.581 ms with three workers. This measures scheduling only, not live Internet or application throughput. No freshness checks were removed.
+
+## Optional Firecrawl research slice, 22 October 2026
+
+Current-run evidence: [raw fictional measurements](benchmarks/fast-web-20261022.json).
+Python 3.12.14 on Windows, code `06b778b`. No provider key was configured.
+Both required commands were run after the 184-test release suite completed:
+
+```sh
+python scripts/benchmark_pipeline.py --jobs 100 --samples 7
+python scripts/benchmark_web.py --samples 7
+```
+
+The original pipeline benchmark remains separate: current medians are content
+model 50.576 ms, full resume 1147.595 ms and tracker 4.756 ms. Corresponding JD
+reads remain 2/100/0. These are current operating points, not a claimed core
+speedup. The initial pre-change run also passed 153 tests in 273.131 seconds;
+its benchmark overlapped tests and is excluded from timing comparisons.
+
+The web experiment alternates individual/batch ordering across seven samples,
+12 identical EN/VI fixture pages, two duplicate inputs, three closed and three
+unverified records. Both paths capture exact content digests and import identical
+source-referenced normalized JDs. Six records are active by fixture truth.
+Transport overhead is a fixed simulated 30 ms per call plus identical 1 ms/page
+work. Local SQLite/evidence/import work is real. No HTTP server, browser, AI
+parser, converter, human waiting or live cloud queue is measured.
+
+| Metric | Individual median (range), ms | Batch median (range), ms |
+|---|---|---|
+| Capture all evidence | 2425.539 (1565.090–3340.350) | 1500.475 (1319.079–1714.335) |
+| First imported JD | 2501.118 (1619.882–3419.979) | 1603.217 (1387.707–1809.828) |
+| Complete capture + normalization/import | 4099.489 (2482.804–4577.566) | 2777.068 (2179.023–3646.992) |
+| Warm evidence lookup, separate scope | 264.480 (111.849–513.810) | 229.643 (202.855–312.578) |
+
+Every sample has 12 unique captures and normalized records, no duplicate fetch,
+12 cache hits on the warm pass, zero warm provider calls and zero browser starts.
+Cold individual calls: 12; batch: 3 (start, status, errors). Fixtures retain all
+content and supplied normalization exactly; this is not an autonomous semantic
+extraction accuracy result. The warm pass checks/reuses evidence, rather than
+repeating cold normalization/import, so it is not an equivalent full-run speedup.
+
+The measured median full fixture run is lower with batches, with overlapping
+ranges and seven samples. No p95, fixed live speedup, token saving, billing saving
+or 100-applications/hour inference is made. Provider internal queueing, actual
+cost/credits/tokens, live host comparison and new/established browser sessions
+remain unknown. TinyFish interactive/hybrid paths are unsupported and the small
+interactive fixture explicitly records that status. Deterministic CI asserts
+equal outputs and 12/3/0 request budgets; it has no wall-clock performance gate.
+
+Local release checks: all 184 standard tests passed in 260.837 seconds, including
+31 new provider/research regressions and existing execution/document/approval
+invariants. Public hygiene, generated wrappers, CLI dry-run, provider diagnosis
+and whitespace checks passed. Optional real conversion is a separate CI job;
+no local LibreOffice or live provider test is claimed. See FAST_WEB_REVIEW.md
+for the bounded self-review and remaining limits.
+
+After the measured code revision, transport hardening conservatively retains paid
+intent on unexpected HTTP redirects, timeouts and conflicts. All six focused
+provider boundary tests passed after that change; the 184-test full run above
+precedes it. CI runs the complete current 185-test suite separately. No timing
+change is inferred from this failure-classification fix.

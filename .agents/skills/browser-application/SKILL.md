@@ -19,6 +19,12 @@ A supported authorized host browser and the execution CLI. Read ../../../docs/ex
 
 ## Steps
 
+Firecrawl research is not this browser bridge. TinyFish direct sessions are
+unsupported in the current increment. Never convert a host-bound manifest into
+cloud disclosure, send private files to a research provider, or fabricate staged
+receipts after an autonomous remote-agent application. The six-stage host loop
+and fresh action checks below remain required. See ../../../docs/FAST_WEB.md.
+
 1. Inspect resume and existing applications. Verify the actual destination/account and current permission for each operation. Unknown permission stays manual. Do not activate this workflow for maintainer tasks.
 2. Obtain an exact reviewed manifest binding the bridge ID, runtime, candidate, jobs, answers, consents, documents, expiry and submission limit. Preparation-only approvals cannot execute. Do not fabricate candidate approval proof.
 3. Start one run with start-execution. Request one next-action. Bind inspect to the explicitly authorized tab and exact visible employer/requisition/destination. Map visible labels to approved answer IDs.

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "notice": "Fictional public provider corpus. No real employer or application destination.",
+  "records": [
+    {"id": "en", "title": "Analyst", "city": "Example City", "language": "en", "requirement": "SQL project experience", "status": "active"},
+    {"id": "vi", "title": "Tư vấn giải pháp", "city": "Thành phố Ví Dụ", "language": "vi", "requirement": "Tư duy phân tích", "status": "active"},
+    {"id": "closed", "title": "Closed Analyst", "city": "Example City", "language": "en", "requirement": "SQL project experience", "status": "closed"},
+    {"id": "missing", "title": "Junior Analyst", "city": "Example City", "language": "en", "requirement": "Communication", "status": "unverified"}
+  ],
+  "interactive_fixture": {"status": "unsupported_in_increment_1_2", "expected": "manual_required; do not substitute a remote agent"}
+}

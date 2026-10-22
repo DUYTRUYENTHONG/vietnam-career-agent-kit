@@ -1,0 +1,428 @@
+{
+  "measured_date": "2026-10-22",
+  "code_revision": "06b778b",
+  "standard_tests": {
+    "count": 184,
+    "seconds": 260.837,
+    "outcome": "passed"
+  },
+  "pipeline": {
+    "fictional_only": true,
+    "jobs": 100,
+    "samples": 7,
+    "python": "3.12.14",
+    "content_model": {
+      "milliseconds": [
+        50.585,
+        47.247,
+        49.23,
+        50.576,
+        122.598,
+        228.785,
+        49.809
+      ],
+      "median_ms": 50.576,
+      "job_document_reads": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "resume": {
+      "milliseconds": [
+        1147.595,
+        1041.473,
+        1100.591,
+        1110.745,
+        1515.296,
+        1261.316,
+        1199.605
+      ],
+      "median_ms": 1147.595,
+      "job_document_reads": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "tracker": {
+      "milliseconds": [
+        7.48,
+        4.631,
+        4.886,
+        4.394,
+        4.716,
+        4.757,
+        4.756
+      ],
+      "median_ms": 4.756,
+      "job_document_reads": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "web": {
+    "fictional_only": true,
+    "python": "3.12.14",
+    "sample_count": 7,
+    "fixed_transport_overhead_ms": 30,
+    "unique_pages": 12,
+    "duplicate_inputs": 2,
+    "comparison": {
+      "individual": {
+        "samples": [
+          {
+            "capture_ms": 1565.09,
+            "complete_ms": 2482.804,
+            "first_imported_jd_ms": 1619.882,
+            "warm_ms": 111.849,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 144.997
+          },
+          {
+            "capture_ms": 1996.482,
+            "complete_ms": 2890.01,
+            "first_imported_jd_ms": 2077.069,
+            "warm_ms": 292.819,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 124.567
+          },
+          {
+            "capture_ms": 2425.539,
+            "complete_ms": 3305.022,
+            "first_imported_jd_ms": 2501.118,
+            "warm_ms": 257.821,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 108.925
+          },
+          {
+            "capture_ms": 3340.35,
+            "complete_ms": 4468.821,
+            "first_imported_jd_ms": 3419.979,
+            "warm_ms": 264.48,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 80.558
+          },
+          {
+            "capture_ms": 3050.041,
+            "complete_ms": 4577.566,
+            "first_imported_jd_ms": 3394.036,
+            "warm_ms": 382.929,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 78.644
+          },
+          {
+            "capture_ms": 3072.7,
+            "complete_ms": 4099.489,
+            "first_imported_jd_ms": 3170.066,
+            "warm_ms": 236.821,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 87.816
+          },
+          {
+            "capture_ms": 2417.039,
+            "complete_ms": 4292.498,
+            "first_imported_jd_ms": 2496.488,
+            "warm_ms": 513.81,
+            "provider_calls": 12,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 83.867
+          }
+        ],
+        "capture_ms": {
+          "median": 2425.539,
+          "range": [
+            1565.09,
+            3340.35
+          ]
+        },
+        "complete_ms": {
+          "median": 4099.489,
+          "range": [
+            2482.804,
+            4577.566
+          ]
+        },
+        "first_imported_jd_ms": {
+          "median": 2501.118,
+          "range": [
+            1619.882,
+            3419.979
+          ]
+        },
+        "warm_ms": {
+          "median": 264.48,
+          "range": [
+            111.849,
+            513.81
+          ]
+        }
+      },
+      "batch": {
+        "samples": [
+          {
+            "capture_ms": 1355.715,
+            "complete_ms": 2179.023,
+            "first_imported_jd_ms": 1437.46,
+            "warm_ms": 272.566,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 165.212
+          },
+          {
+            "capture_ms": 1319.079,
+            "complete_ms": 3098.462,
+            "first_imported_jd_ms": 1387.707,
+            "warm_ms": 229.643,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 116.187
+          },
+          {
+            "capture_ms": 1574.253,
+            "complete_ms": 3646.992,
+            "first_imported_jd_ms": 1770.93,
+            "warm_ms": 312.578,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 98.711
+          },
+          {
+            "capture_ms": 1365.356,
+            "complete_ms": 2312.892,
+            "first_imported_jd_ms": 1468.536,
+            "warm_ms": 225.391,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 155.649
+          },
+          {
+            "capture_ms": 1500.475,
+            "complete_ms": 2749.301,
+            "first_imported_jd_ms": 1607.132,
+            "warm_ms": 218.578,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 130.942
+          },
+          {
+            "capture_ms": 1501.877,
+            "complete_ms": 2794.442,
+            "first_imported_jd_ms": 1603.217,
+            "warm_ms": 202.855,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 128.827
+          },
+          {
+            "capture_ms": 1714.335,
+            "complete_ms": 2777.068,
+            "first_imported_jd_ms": 1809.828,
+            "warm_ms": 248.108,
+            "provider_calls": 3,
+            "warm_provider_calls": 0,
+            "cache_hits": 12,
+            "unique_evidence": 12,
+            "normalized_records": 12,
+            "active_jobs": 6,
+            "closed_jobs": 3,
+            "unverified_jobs": 3,
+            "content_digest_accuracy": 1.0,
+            "fixture_normalization_accuracy": 1.0,
+            "duplicate_fetches": 0,
+            "browser_starts": 0,
+            "active_jobs_per_minute": 129.633
+          }
+        ],
+        "capture_ms": {
+          "median": 1500.475,
+          "range": [
+            1319.079,
+            1714.335
+          ]
+        },
+        "complete_ms": {
+          "median": 2777.068,
+          "range": [
+            2179.023,
+            3646.992
+          ]
+        },
+        "first_imported_jd_ms": {
+          "median": 1603.217,
+          "range": [
+            1387.707,
+            1809.828
+          ]
+        },
+        "warm_ms": {
+          "median": 229.643,
+          "range": [
+            202.855,
+            312.578
+          ]
+        }
+      }
+    },
+    "live_host_workflow": "not measured",
+    "tinyfish_hybrid": "unsupported in this increment",
+    "internal_provider_queueing": null,
+    "observed_cost": null,
+    "tokens": null,
+    "browser_sessions": "not measured",
+    "human_wait": "not measured",
+    "limits": "Simulated transport overhead and local SQLite only. No live provider, browser, paid cost or application-throughput inference. Accuracy uses supplied fixture normalization, not an autonomous parser."
+  },
+  "live_provider": "not_run_missing_credentials",
+  "optional_local_rendering": "not_run; separate CI gate"
+}

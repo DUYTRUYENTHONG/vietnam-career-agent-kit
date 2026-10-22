@@ -69,5 +69,15 @@
     },
     "external_renderer": "User-provisioned LibreOffice Writer and DejaVu Sans fonts; OS packages are not locked by the Python lock. Actual versions are recorded per render."
   },
-  "external_costs": "Agent subscriptions/search/browser services are separate. No extra model API, telemetry or maintainer cloud."
+  "external_costs": "Agent subscriptions are separate. Optional explicitly configured Firecrawl research may incur provider charges; no auto top-ups, second model API, telemetry or maintainer control plane. Local default commands remain offline.",
+  "optional_public_research": {
+    "implementation": "Original audited stdlib HTTP adapter; no SDK or new package dependency",
+    "api_version": "Firecrawl v2",
+    "auto_install": false,
+    "default_network": false,
+    "credentials": "Private environment only",
+    "provider_record": "connectors/providers.json",
+    "source_review": "docs/REFERENCE_REVIEW.md",
+    "tinyfish": "Unsupported in this increment"
+  }
 }

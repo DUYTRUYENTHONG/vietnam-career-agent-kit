@@ -19,6 +19,11 @@ Local assess command; nuanced semantic mapping still needs candidate/reviewer ju
 
 ## Steps
 
+Assess only normalized complete JDs, not search hits or provider success flags.
+Use captured source references, keep all mandatory gaps visible, and filter
+clearly ineligible leads before document work. Public research cache does not
+establish current vacancy status or Vietnam remote eligibility. See ../../../docs/FAST_WEB.md.
+
 Use direct/partial/missing/unknown evidence treatment. Direct field/value links require exact reviewed equality; partial needs a limitation. Apply explicit exclusions/conditions first. Keep missing mandatory, unknown eligibility and unsupported facts visible. Store current profile/JD fingerprints.
 
 ## Outputs
