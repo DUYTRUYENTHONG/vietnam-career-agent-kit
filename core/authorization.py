@@ -17,7 +17,7 @@ from .workflow import WorkflowError
 def require_schema(work):
     with work._db() as db:
         schema=db.execute('PRAGMA user_version').fetchone()[0]
-        if schema>4:
+        if schema>5:
             raise WorkflowError('blocked','Standing workspace schema is newer than this toolkit')
         if schema<4:
             raise WorkflowError('needs_input','Run compatible init for standing authorization schema 4')

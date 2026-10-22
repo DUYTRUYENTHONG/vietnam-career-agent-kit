@@ -8,7 +8,7 @@ import subprocess
 ROOT=Path(__file__).resolve().parents[1]
 FORBIDDEN_SUFFIXES={'.pdf','.docx','.sqlite','.sqlite3','.db','.png','.jpg','.zip','.pem','.key'}
 FORBIDDEN_DIRS={'private','.private','data','sources','applications','screenshots','output','artifacts'}
-SECRET=re.compile(r'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,}|sk-[A-Za-z0-9_-]{24,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)')
+SECRET=re.compile(r'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,}|sk-[A-Za-z0-9_-]{24,}|fc-[A-Za-z0-9_-]{24,}|(?:FIRECRAWL|TINYFISH)_API_KEY\s*[:=]\s*[\x22\x27]?[A-Za-z0-9_-]{24,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)')
 EMAIL=re.compile(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
 
 def issues_for(path,content):

@@ -6,6 +6,15 @@
   HTTP boundary with fixed-origin pagination, explicit capabilities and no SDK.
   Source permission remains separate from provider access.
 
+- Add opt-in Firecrawl v2 public research: offline provider diagnosis and plan
+  preview, bounded search/selected scrape, durable batch start/status/pagination/
+  errors/cancellation, private evidence/cache, and source-referenced normal JD
+  import. Schema 5 is additive and preserves execution/authorization/cleanup
+  guards. No SDK, candidate cloud upload, new browser backend or automatic paid
+  retry. Add fictional failure-path tests and an equivalent web benchmark.
+  TinyFish research/direct Browser integration remains unsupported, separately
+  gated work. See docs/FAST_WEB.md for configuration, measurements and limits.
+
 - Add `duplicate-candidates --job-id ID`, a read-only same-employer identity
   preflight showing matching URLs or normalized title/city and prior recorded
   submission states. Alternate IDs remain separate; hints never auto-merge,

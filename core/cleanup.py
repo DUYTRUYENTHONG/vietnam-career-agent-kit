@@ -9,8 +9,8 @@ from .workflow import WorkflowError
 
 def _schema(db):
     schema=db.execute('PRAGMA user_version').fetchone()[0]
-    if schema not in {3,4}:
-        raise WorkflowError('blocked' if schema>4 else 'needs_input','Use compatible execution schema 3/4 for tab cleanup')
+    if schema not in {3,4,5}:
+        raise WorkflowError('blocked' if schema>5 else 'needs_input','Use compatible execution schema 3/4/5 for tab cleanup')
 
 
 def _closed(db,run_id):

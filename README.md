@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+[Optional Fast Web Pipeline](docs/FAST_WEB.md): explicit Firecrawl v2 public
+search, selected scrape/batch retrieval, durable task recovery and private
+evidence import. Offline by default; no new Python dependency. TinyFish and cloud
+application execution remain unsupported in this increment.
+
 [Auto-decide campaign prompt](prompts/AUTO_DECIDE.md): let the agent rank jobs,
 tailor supported evidence and reuse known answers without routine questions.
 Blocked vacancies move aside while independent work continues. Instruction-only;
