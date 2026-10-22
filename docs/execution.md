@@ -197,6 +197,10 @@ the core enforces phase-specific and cross-record constraints.
 This is host guidance, not a new browser adapter or permission. Use only the
 current host's documented APIs and fresh visible page evidence. Native behavior
 must still be verified for the selected host, site and operating system.
+See [preliminary screens and late consent](PRE_SUBMISSION_GATES.md) for the
+decision table, redacted field readback and bounded receipt waits. Distinguish a
+clearly preliminary transition from an already issued submit request; the latter
+always preserves its durable attempt and permits only read-only recovery.
 
 ### Preserve the reviewed message
 
@@ -227,7 +231,7 @@ file hash alone does not prove that the browser attached that file.
 Continue only under the existing approved action scope and outstanding engine
 request. Reconcile or stop a failed issued upload request rather than replaying
 it through `next-action`. A picker failure before any final action is distinct
-from an uncertain final submission; after a submit/send click, recovery is
+from an uncertain final submission; after a final submit/send click, recovery is
 read-only and the final action must never be repeated to obtain a better receipt.
 
 ### Verify email sending before cleanup

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Document late consent and preliminary application screens with explicit
+  engine-state/counting rules, private handoff evidence, redacted contact
+  verification, minimized compose controls and bounded semantic receipt waits.
+  Preserve issued submit attempts and read-only recovery. Instruction-only;
+  no schema, approval, adapter or measured throughput change.
+
 - Document a host interaction runbook for preserving reviewed email paragraphs,
   refreshing replaced compose controls, resolving observed native file-picker
   failures and verifying Sent recipients/attachments before tab cleanup.
