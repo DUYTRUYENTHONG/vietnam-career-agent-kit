@@ -54,6 +54,15 @@ Default to user final submission. If the user explicitly delegates submission an
 
 ## Tracking and completion
 
+If the user asks to always approve routine applications, configure a bounded
+standing authorization using docs/STANDING_AUTHORIZATION.md and actually review
+its recipient/answer/consent/profile/action/cap/expiry scope once. Reuse it via
+authorize-manifest for later reviewed Strong/Plausible batches; do not ask for
+another local proof when its constraints match. Exact manifests still pin each
+new CV. New recipients or material answers/consents need a scoped decision.
+Host-required specific disclosure/action-time confirmations remain separate and
+must be reported as blockers, never assumed accepted by standing authority.
+
 Follow docs/campaign-continuity.md for campaign targets spanning multiple batches
 or turns. Reuse the private checkpoint and canonical ledger; do not restart the
 count or repeat completed applications. Continue successive finite batches within

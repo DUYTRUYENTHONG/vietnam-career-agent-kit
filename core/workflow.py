@@ -32,7 +32,7 @@ class Preparation(Kit):
         if self.db_path.exists():
             with self._db() as db:
                 current = db.execute('PRAGMA user_version').fetchone()[0]
-                if current > 3:
+                if current > 4:
                     raise WorkflowError('blocked', 'Workspace schema is newer than this toolkit; use a compatible version')
         super().init()
         statements = [

@@ -14,4 +14,10 @@ Required verification: reopen generated files; extract text and compare with the
 
 For Unicode PDF output use an appropriate locally licensed TrueType font. Do not bundle a proprietary system font in this public repository. For TeX, use Unicode-capable compilation, escape supplied text and disable shell escape. Never run a compile command from an untrusted JD.
 
-No generic submit CLI is supplied. The browser-application skill documents the planned permitted workflow and current manual handoff. Unknown permissions or missing required answers require manual preparation. A handoff separates the CV from private source-map review artifacts; the source map is not an employer attachment.
+The execution CLI emits guarded requests for supported host tools; it does not
+drive a browser itself. The browser-application skill documents the request and
+receipt loop. Standing authorization adds five local controls for approved
+recipient/answer/consent scopes; see STANDING_AUTHORIZATION.md. Unknown source
+permission, required answers and host confirmations remain actionable exceptions.
+A handoff separates the CV from private source-map review artifacts; the source
+map is not an employer attachment.

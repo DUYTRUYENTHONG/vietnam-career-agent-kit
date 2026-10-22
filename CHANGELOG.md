@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add opt-in standing campaign authorization across later reviewed CVs and exact batches, with named recipient prefixes, confirmed profile/owner, answer/consent bank, shared immutable quota reservations, expiry and revocation. Add schema 4, five CLI controls and fictional end-to-end/race/revocation tests; host confirmations and source permissions remain separate.
+
 - Add a fictional full-manifest/action benchmark and record a rejected profile-sharing optimization because repeated timing did not show a reliable gain. Retain every entry's validation and add final source/expiry/runtime checks after long passes.
 - Add `throughput --target N --window-minutes M` for a rolling confirmation KPI. Freeze fit classification with new attempts; exclude attempts, prior user reports and historical records without frozen qualifying fit from the target.
 
