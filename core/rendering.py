@@ -7,15 +7,33 @@ import threading
 import unicodedata
 
 from .workflow import WorkflowError
+from .metrics import Trace
 
 PDFIUM_LOCK=threading.Lock()
 FONT='DejaVu Sans'
 MAX_PAGES=10
 
 
+def content_lines(content, markdown=False):
+    lines=[(content['name'],'title'),(content['headline'],'headline')]
+    lines.extend((value,'contact') for value in content['contacts'])
+    if content.get('schema_version')=='2.0':
+        for section in content['sections']:
+            lines.append((section['heading'],'heading'))
+            for group in section['groups']:
+                if group['context']:lines.append((group['context'],'context'))
+                lines.extend((s['text'],'bullet') for s in group['statements'])
+    else:
+        lines.append((content['section'],'heading'))
+        lines.extend((claim,'bullet') for claim in content['claims'])
+    if markdown:
+        prefixes={'title':'# ','heading':'## ','context':'### ','bullet':'- '}
+        return [(value,prefixes.get(kind,'')) for value,kind in lines]
+    return lines
+
+
 def paragraphs(content):
-    return [content['name'],content['headline'],*content['contacts'],content['section'],
-            *['- '+claim for claim in content['claims']]]
+    return [('- ' if kind=='bullet' else '')+value for value,kind in content_lines(content)]
 
 
 def build_docx(content, path):
@@ -25,7 +43,7 @@ def build_docx(content, path):
     section=document.sections[0]
     section.page_width=Mm(210);section.page_height=Mm(297)
     section.top_margin=section.bottom_margin=section.left_margin=section.right_margin=Mm(20)
-    for style_name,size in [('Normal',11),('Title',21),('Heading 1',13)]:
+    for style_name,size in [('Normal',11),('Title',21),('Heading 1',13),('Heading 2',11)]:
         style=document.styles[style_name]
         style.font.name=FONT;style.font.size=Pt(size);style.font.color.rgb=RGBColor(0,0,0)
         style.paragraph_format.space_after=Pt(7)
@@ -35,12 +53,9 @@ def build_docx(content, path):
     document.core_properties.title=content['name']
     document.core_properties.subject=''
     document.core_properties.comments=''
-    document.add_paragraph(content['name'],'Title')
-    document.add_paragraph(content['headline'])
-    for contact in content['contacts']:document.add_paragraph(contact)
-    document.add_paragraph(content['section'],'Heading 1')
-    for claim in content['claims']:
-        document.add_paragraph('- '+claim)
+    for value,kind in content_lines(content):
+        style={'title':'Title','heading':'Heading 1','context':'Heading 2'}.get(kind,'Normal')
+        document.add_paragraph(('- ' if kind=='bullet' else '')+value,style)
     # The library template may carry inherited blue Title rules. Whitespace,
     # rather than theme-dependent borders, separates this simple CV layout.
     for element in [document.styles.element,document.element]:
@@ -99,6 +114,7 @@ def preview_pdf(path,directory,count):
 
 
 def render_files(content, directory: Path, soffice=None):
+    trace=Trace()
     try:
         import docx
         import pypdf
@@ -112,22 +128,25 @@ def render_files(content, directory: Path, soffice=None):
     if not executable.is_file():
         raise WorkflowError('manual_required','LibreOffice is unavailable; supply a reviewed local --soffice path. No render or approval was recorded')
     docx_path=directory/'cv.docx'
-    build_docx(content,docx_path)
+    with trace.stage('docx_generation_and_reopen'):build_docx(content,docx_path)
     profile=directory/'lo-profile'
     try:
-        inventory=subprocess.run([str(executable),'--version'],capture_output=True,text=True,timeout=10,check=True)
-        result=subprocess.run([str(executable),'-env:UserInstallation='+profile.resolve().as_uri(),
-            '--headless','--norestore','--nodefault','--nofirststartwizard',
-            '--convert-to','pdf:writer_pdf_Export','--outdir',str(directory),str(docx_path)],
-            cwd=directory,capture_output=True,text=True,timeout=90,check=False)
+        with trace.stage('converter_inventory_startup'):
+            inventory=subprocess.run([str(executable),'--version'],capture_output=True,text=True,timeout=10,check=True)
+        with trace.stage('converter_startup_and_conversion'):
+            result=subprocess.run([str(executable),'-env:UserInstallation='+profile.resolve().as_uri(),
+                '--headless','--norestore','--nodefault','--nofirststartwizard',
+                '--convert-to','pdf:writer_pdf_Export','--outdir',str(directory),str(docx_path)],
+                cwd=directory,capture_output=True,text=True,timeout=90,check=False)
     except (OSError,subprocess.SubprocessError) as error:
         raise WorkflowError('failed','Local document conversion failed or timed out; no automatic retry or approval') from error
     if result.returncode!=0 or not (directory/'cv.pdf').is_file():
         raise WorkflowError('failed','LibreOffice did not produce a PDF; inspect local converter installation and font availability')
-    count=verify_pdf(content,directory/'cv.pdf')
-    preview_pdf(directory/'cv.pdf',directory,count)
+    with trace.stage('pdf_text_and_embedded_font_checks'):count=verify_pdf(content,directory/'cv.pdf')
+    with trace.stage('page_images'):preview_pdf(directory/'cv.pdf',directory,count)
     # Only this freshly created, private converter profile is removed.
     if profile.exists():shutil.rmtree(profile)
-    return {'page_count':count,'renderer':{'libreoffice':inventory.stdout.strip(),
+    return {'page_count':count,'metrics':trace.report(render_count=1,converter_processes=2,page_images=count),
+            'renderer':{'libreoffice':inventory.stdout.strip(),
             'python_docx':version('python-docx'),'pypdf':version('pypdf'),
             'pypdfium2':version('pypdfium2'),'pillow':version('Pillow'),'font':FONT,'preview_dpi':144}}

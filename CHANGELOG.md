@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Add opt-in evidence-bound CV wording v2: structured sections, single-fact
+  paraphrases/translations, exact scope/requirement links, conservative factual
+  alarms and independently recorded statement review. Markdown/DOCX/PDF now
+  consume the same actual approved wording. Preserve legacy exact claims,
+  rendered-page review and all disclosure boundaries. No database migration.
+  Add reject-wording, monotonic render/wording traces, combined import/review
+  packet, three fictional candidate families, a versioned twelve-JD cohort and
+  adversarial tests. See docs/QUALITY_FAST_PLAN.md for the completed slice and
+  explicitly pending caching, queues, form plans and full quality comparisons.
+
 - Introduce versioned public-research contracts and an original Firecrawl v2
   HTTP boundary with fixed-origin pagination, explicit capabilities and no SDK.
   Source permission remains separate from provider access.

@@ -1,5 +1,15 @@
 # Private data contract
 
+## Opt-in wording 2.0
+
+`import-wording`, `wording-packet`, `review-wording` and `reject-wording` extend
+the existing drafts payload without a database migration. V1 profiles/JDs and
+legacy drafts/reviews remain unchanged; historical approvals never approve new
+v2 wording. See [input schema and bindings](CV_CONTENT_V2.md) and
+[editor contract](../schemas/cv-content-v2.schema.json). Import/review inputs must
+reside within the selected private workspace. Combined packet output may fail
+after draft commit; reconcile current state rather than assuming rollback.
+
 ## Preparation contract 1.0
 
 The current CLI returns `schema_version`, `outcome`, `data`, `issues`, `message`. Legacy payloads now live under `data`; callers must inspect the outcome. Exit 0 is `ok`; other structured outcomes exit 2. Existing Python `Kit` imports remain compatible through scripts/kit.py and core/ledger.py.

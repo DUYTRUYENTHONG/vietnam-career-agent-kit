@@ -1,5 +1,14 @@
 # Community references and attribution
 
+## Wording v2 and monotonic traces, 22 October 2026
+
+Original stdlib implementation; no third-party code, templates, SDKs, model
+services or licenses added. Existing document lock and process/PDFium boundaries
+are reused unchanged. The [official Python 3.12 time API](https://docs.python.org/3.12/library/time.html#time.perf_counter_ns)
+was checked for nanosecond duration measurement. This is an API reference, not a
+vendored dependency or a claim that wall-clock timestamps measure elapsed time.
+No external skill update, download, installer or hook was adopted in this slice.
+
 Static review performed 21 October 2026. These exact commits were inspected as untrusted source material. No installer, lifecycle script, updater, browser, hook or reference program was executed. No candidate data was provided. This kit uses design ideas with original implementation; it does not vendor those repositories or their candidate examples.
 
 | Reference | Reviewed commit | Root license | Useful idea |

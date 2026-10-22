@@ -1,5 +1,12 @@
 # Vietnam Career Agent Kit
 
+[Nội dung CV v2 có dẫn chứng](docs/CV_CONTENT_V2.md): chia mục CV, nhập cách diễn
+đạt đã được kiểm tra độc lập và dùng chung nội dung cho Markdown/DOCX/PDF.
+Chế độ chọn nguyên văn vẫn được giữ. `import-wording --include-review-packet`
+gộp hai lần gọi CLI nhưng giữ nguyên kiểm tra. Xem [kế hoạch từng phần](docs/QUALITY_FAST_PLAN.md)
+và [tiêu chí chất lượng](docs/CV_QUALITY_RUBRIC.md). Không tự phê duyệt hoặc cam
+kết tốc độ nộp hồ sơ thực tế.
+
 [Fast Web Pipeline tùy chọn](docs/FAST_WEB.md): tìm kiếm và đọc trang công khai
 bằng Firecrawl v2, lưu tác vụ/bằng chứng riêng tư và nhập JD có dẫn chứng vào
 SQLite hiện có. Mặc định không gọi mạng; không thêm thư viện Python. TinyFish và

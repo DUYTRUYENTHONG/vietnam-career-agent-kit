@@ -21,6 +21,17 @@ Local render, review-documents and reject-documents commands; optional locked Py
 
 Run render on the current source-bound draft. Check every claim against evidence and exact scope. Distinguish prototype/production, evaluation/business impact and overlapping dates. Inspect content.json and EVERY current page image from the exact DOCX-to-PDF conversion. Record the fingerprint, all ordered page numbers and actual checks with review-documents using a private JSON file. Text extraction alone is not visual QA. Reject a bad set with reject-documents so dependent approval checks fail. See docs/documents-and-approval.md.
 
+V2 wording requires a separately prompted review before rendering. Read the
+original selected quotes/locators, JD/matrix and proposed statements from
+wording-packet; provenance links and deterministic alarms do not prove meaning.
+Use the independent review prompt in docs/CV_CONTENT_V2.md and the evidence-based
+0–3 dimensions in docs/CV_QUALITY_RUBRIC.md. Inspect historical context, chronology,
+contribution scope, qualifications and language equivalence. Record actual
+findings, not confidence or an ATS score. A different reviewer label is not
+authentication. Failed findings remain blocked after one repair; reject-wording
+invalidates factual review and dependent current renders. Rendered page review
+and candidate disclosure approval remain separate gates.
+
 ## Outputs
 
 Precise blockers/improvements and factual/layout disposition with evidence locators.

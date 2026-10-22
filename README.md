@@ -1,5 +1,12 @@
 # Vietnam Career Agent Kit
 
+[Source-bound CV wording v2](docs/CV_CONTENT_V2.md) adds structured sections,
+reviewed paraphrasing and a shared Markdown/DOCX/PDF content model. Exact-quote
+mode remains available. `import-wording --include-review-packet` combines two
+local handoff calls without skipping checks. See the [slice plan](docs/QUALITY_FAST_PLAN.md)
+and [quality rubric](docs/CV_QUALITY_RUBRIC.md); this is not unattended approval
+or a measured live application-rate guarantee.
+
 [Optional Fast Web Pipeline](docs/FAST_WEB.md): explicit Firecrawl v2 public
 search, selected scrape/batch retrieval, durable task recovery and private
 evidence import. Offline by default; no new Python dependency. TinyFish and cloud
