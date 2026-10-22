@@ -31,6 +31,12 @@ revocation/expiry/profile drift blocks their derived authority, including pendin
 action preflight. Existing exact approvals and immutable receipts are preserved.
 See [the input and operation contract](STANDING_AUTHORIZATION.md).
 
+`launch-execution` composes authorization, start and first-request operations on
+schema 4 without another migration. Its result reports `authority_recorded` and
+`run_started`; failures after a commit retain the run ID when available. Existing
+runs return `existing_run`, `pending_action` and a reconciliation step, with no
+new request or renewed authority (`authority_revalidated: false`).
+
 ## Legacy package checker
 
 The retained operations below perform local validation/bookkeeping only. They do not implement campaign expiry/limits, attempt recovery, authenticated candidate approval or browser execution.

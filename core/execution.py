@@ -95,6 +95,10 @@ class Executor(Campaign):
                              'bridge_id':bridge_id,'browser_connected':False},
                        ['Host must bind its explicitly authorized browser session; no browser is acquired by this command.'])
 
+    def launch_execution(self,fingerprint,authorization,bridge_id,runtime_minutes):
+        from .dispatch import launch
+        return launch(self,fingerprint,authorization,bridge_id,runtime_minutes)
+
     def _frozen_document(self, entry):
         source=self.inside(entry['document']['path'])
         data=source.read_bytes()

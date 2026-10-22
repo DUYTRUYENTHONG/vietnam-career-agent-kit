@@ -73,6 +73,25 @@ accidental coordinator mixing; local database access is not an authorization bou
 
 ## Fewer orchestration round trips
 
+For a new reviewed manifest under standing authority, combine authorize/start/next:
+
+```sh
+python scripts/kit.py --data-dir ../career-private launch-execution --fingerprint MANIFEST --authorization AUTHORIZATION --bridge-id selected-supported-host-session --runtime-minutes 30
+```
+
+The three existing operations become one CLI call; no live speed estimate is
+implied. Invalid bridge/runtime is rejected before quota allocation. Missing,
+expired or revoked standing authority still blocks a new launch. Host challenges,
+specific disclosure confirmations and legal agreements remain separate blockers.
+
+A repeated launch returns the existing run ID and pending-action metadata without
+reissuing a request, renewing authority or reserving quota again. `needs_input`
+here means the operator must reconcile its host observation and saved receipt;
+it is not a new approval prompt. Pending submits recover through next-action as
+read-only verification. Terminal manifests never restart. If authorization or a
+run committed before a later step failed, the result preserves that state and its
+identifiers. Inspect it before continuing; do not create a replacement run.
+
 After the first `next-action`, prefer:
 
 ```sh

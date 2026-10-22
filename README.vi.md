@@ -6,6 +6,10 @@ CV đã kiểm tra và các đợt hữu hạn tiếp theo. Dùng chung hạn m�
 thu hồi. Xác nhận bắt buộc của host vẫn áp dụng. CLI mới dùng schema 4, chỉ bật khi
 người dùng chủ động ủy quyền phạm vi cụ thể.
 
+`launch-execution` gộp việc áp dụng ủy quyền còn hiệu lực, bắt đầu và trả bước đầu
+tiên trong một lệnh. Không hỏi lại phê duyệt nội bộ khi phạm vi khớp. Nếu lần chạy
+đã tồn tại, lệnh trả trạng thái để đối chiếu; không lặp lại thao tác gửi.
+
 Tối ưu mới: kiểm tra CV theo từng việc, `advance-execution` ghi nhận kết quả và
 trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng thái nhanh. Bảng chỉ
 phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.

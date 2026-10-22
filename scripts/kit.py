@@ -72,6 +72,9 @@ def parser() -> Parser:
     start.add_argument('--fingerprint',required=True)
     start.add_argument('--bridge-id',required=True)
     start.add_argument('--runtime-minutes',type=int,required=True)
+    launch=commands.add_parser('launch-execution',help='reuse standing authority, start and return the first guarded request')
+    launch.add_argument('--fingerprint',required=True);launch.add_argument('--authorization',required=True)
+    launch.add_argument('--bridge-id',required=True);launch.add_argument('--runtime-minutes',type=int,required=True)
     for name in ['next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action']:
         cmd=commands.add_parser(name)
         cmd.add_argument('--run-id',required=True)
@@ -130,7 +133,7 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
             if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action'} and schema<3:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
-            if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest'} and schema<4:
+            if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest','launch-execution'} and schema<4:
                 raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
     if command=='import-cv':return work.import_cv(args.file,args.source_id)
     if command=='import-profile':return work.import_profile(load_input(args.file))
@@ -152,6 +155,7 @@ def execute(args) -> Outcome:
     if command=='revoke-authorization':return work.revoke_authorization(args.fingerprint,args.reason)
     if command=='authorize-manifest':return work.authorize_manifest(args.fingerprint,args.authorization)
     if command=='start-execution':return work.start_execution(args.fingerprint,args.bridge_id,args.runtime_minutes)
+    if command=='launch-execution':return work.launch_execution(args.fingerprint,args.authorization,args.bridge_id,args.runtime_minutes)
     if command=='next-action':return work.next_action(args.run_id)
     if command=='execution-status':return work.execution_status(args.run_id)
     if command=='check-action':return work.check_action(args.run_id,args.request_id)

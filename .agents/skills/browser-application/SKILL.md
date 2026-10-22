@@ -37,6 +37,10 @@ Report unresolved host confirmations as blockers. After parent revocation or
 expiry, issued submits permit read-only recovery only. See
 ../../../docs/STANDING_AUTHORIZATION.md.
 
+Use launch-execution for a new standing-authorized run to receive its initial
+request without separate authorize/start/next calls. Repeated launch returns
+existing-run reconciliation metadata, not a duplicate action. See execution.md.
+
 ## Outputs
 
 For rate targets, use small exact finite batches and record actual confirmation

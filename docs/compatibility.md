@@ -1,5 +1,10 @@
 # Runtime compatibility evidence
 
+Launch composition (22 October 2026): five fictional Windows/real-CLI tests passed
+for delegated first requests, invalid scope, interrupted first-request delivery,
+existing-run nonreplay and host-confirmation blockers. Native browser execution
+is not added by this command. Full-suite/CI results are recorded separately.
+
 Standing authorization (22 October 2026) adds deterministic schema-4/CLI delegation tests with
 fictional reviewed documents, quota races, revoked issued actions, URL scope,
 profile drift, latest-assessment downgrades and host-confirmation blockers. The

@@ -60,6 +60,8 @@ its recipient/answer/consent/profile/action/cap/expiry scope once. Reuse it via
 authorize-manifest for later reviewed Strong/Plausible batches; do not ask for
 another local proof when its constraints match. Exact manifests still pin each
 new CV. New recipients or material answers/consents need a scoped decision.
+For a new run, prefer launch-execution to combine derivation, start and the first
+request. Reconcile existing runs and committed partial results without replay.
 Host-required specific disclosure/action-time confirmations remain separate and
 must be reported as blockers, never assumed accepted by standing authority.
 
