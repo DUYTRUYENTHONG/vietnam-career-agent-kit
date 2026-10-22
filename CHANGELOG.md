@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Introduce versioned public-research contracts and an original Firecrawl v2
+  HTTP boundary with fixed-origin pagination, explicit capabilities and no SDK.
+  Source permission remains separate from provider access.
+
 - Add `duplicate-candidates --job-id ID`, a read-only same-employer identity
   preflight showing matching URLs or normalized title/city and prior recorded
   submission states. Alternate IDs remain separate; hints never auto-merge,

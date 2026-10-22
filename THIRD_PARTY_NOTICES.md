@@ -16,3 +16,12 @@ Slice 2 optional package metadata reviewed on PyPI: python-docx 1.2.0 (MIT), lxm
 LibreOffice (MPL-2.0 and component licenses) and DejaVu fonts (Bitstream Vera/public-domain additions and font-specific notices) are externally provisioned. No renderer executable or font is copied into this repository. Consult the distribution's installed notices before redistributing a runtime. The pinned GitHub upload-artifact action is referenced for fictional CI evidence only; its code is not vendored. Metadata was read at ea165f8d65b6e75b540449e92b4886f43607fa02.
 
 See docs/REFERENCE_REVIEW.md for exact inspected files, evidence hashes, useful ideas and limitations. Source audits are static review, not execution permission, full transitive security analysis or verification of every upstream claim.
+
+## Optional public research adapters
+
+The Firecrawl v2 adapter is original standard-library HTTP code. No Firecrawl
+server, SDK, docs text or upstream example code is vendored. Official protocol
+references and exact documentation hashes are recorded in docs/REFERENCE_REVIEW.md.
+Hosted API access and billing are governed separately by the provider account;
+MIT licensing of this kit does not grant source access or provider permission.
+No TinyFish runtime or code has been adopted in this increment.

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "notice": "Retrieval providers are separate from job-source permissions. No candidate disclosure or application backend.",
+  "providers": [
+    {
+      "id": "firecrawl-v2",
+      "status": "Experimental",
+      "api_version": "v2",
+      "base_url": "https://api.firecrawl.dev/v2",
+      "operations": [
+        "search",
+        "scrape",
+        "batch_start",
+        "batch_status",
+        "batch_errors",
+        "batch_cancel"
+      ],
+      "sdk": null,
+      "dependencies": [],
+      "credentials": "FIRECRAWL_API_KEY environment only",
+      "account_concurrency_default": 1,
+      "live_account_verified": false,
+      "tests": [
+        "tests/test_provider_contracts.py",
+        "tests/test_research.py"
+      ],
+      "scope": "Public unauthenticated research only; explicit reviewed plan and source permissions required"
+    },
+    {
+      "id": "tinyfish",
+      "status": "Unsupported",
+      "operations": [],
+      "reason": "Interactive public research and direct Browser execution require separately tested increments and disclosure contracts"
+    }
+  ]
+}
