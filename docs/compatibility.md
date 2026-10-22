@@ -31,6 +31,12 @@ was migrated or used as a product fixture.
 
 Checked 21 October 2026. Labels apply to the named scope, not every product from a provider.
 
+The 22 October `prompts/AUTO_PROCEED.md` continuation prompt is Instruction-only.
+It describes the existing standing-authority and tab-cleanup interfaces without
+changing schemas, host permissions or browser capabilities. Fictional cleanup
+tests verify the local engine contract; they do not certify native execution of
+this prose prompt or whole-browser closure.
+
 The performance increment adds local selected-job validation, a ledger-only
 tracker and receipt-plus-successor CLI command. Windows fictional measurements
 and real CLI call counts are recorded in [PERFORMANCE.md](PERFORMANCE.md).

@@ -7,6 +7,10 @@ remain separate. Opt-in CLI support uses additive schema 4.
 
 Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job search with reusable tools and controlled application automation.
 
+[Continue and close completed application tabs](prompts/AUTO_PROCEED.md) provides
+a reusable campaign prompt: reuse confirmed answers and valid authority, save the
+receipt, close the exact agent-created tab, verify absence and update the tracker.
+
 [Tiếng Việt](README.vi.md) · [Product goal](GOAL.md) · [Architecture](docs/architecture.md) · [Compatibility](docs/compatibility.md) · [Roadmap](docs/roadmap.md)
 
 **Working now:** a local preparation CLI: diagnose → private workspace → UTF-8 CV/profile import → exact profile confirmation → structured JD import → evidence matrix → tailored Markdown draft → tracker/report/manual handoff → resume. Ten shared skills and Claude wrappers support the workflow. Fictional examples cover two users, cities, roles and languages.

@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+[Prompt tiếp tục chiến dịch và đóng tab đã hoàn tất](prompts/AUTO_PROCEED.md):
+tái sử dụng câu trả lời đã xác nhận và phạm vi ủy quyền còn hiệu lực; lưu bằng
+chứng nhận hồ sơ, đóng đúng tab do agent tạo, kiểm tra tab đã đóng và cập nhật bảng
+theo dõi. Không tự trả lời “có” cho yêu cầu chưa có bằng chứng.
+
 [Ủy quyền theo chiến dịch](docs/STANDING_AUTHORIZATION.md): phê duyệt một lần phạm
 vi nhà tuyển dụng, nơi nhận, câu trả lời và lựa chọn đồng ý; agent tái sử dụng cho
 CV đã kiểm tra và các đợt hữu hạn tiếp theo. Dùng chung hạn mức, thời hạn và quyền

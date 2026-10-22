@@ -218,6 +218,9 @@ database migration. See [rolling KPI semantics](THROUGHPUT.md).
 
 ## Close completed application tabs
 
+Use [the reusable continuation prompt](../prompts/AUTO_PROCEED.md) to request
+this harness alongside source-backed answers and bounded campaign execution.
+
 When the candidate requests this cleanup, successful verification returns
 `data.cleanup.requests` after the immutable confirmation and screenshot have
 been saved. `advance-execution` retains these instructions alongside a successor

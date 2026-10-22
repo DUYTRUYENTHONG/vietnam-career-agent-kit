@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add a reusable auto-proceed prompt with source-backed screening answers and
+  the existing receipt-before-tab-close harness. Document ownership checks,
+  absence verification, pending cleanup and uncertain-attempt preservation.
+- Link the prompt from both READMEs and the master prompt. Instruction-only;
+  no execution schema, global approval setting or browser integration changes.
+
 - Benchmark combined launch with seven alternating fresh fictional samples: three CLI calls become one; local Windows median 1017.035 → 537.829 ms. No model, browser or live throughput claim.
 
 - Document primary public ATS discovery options, reuse of dated source coverage and candidate-authorized adjacent role families. Guidance only; no new connector or submission permission.
