@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add an agent-owned routine-decision prompt with queue priority, duplicate
+  suppression, evidence-based answers and one deduplicated missing-facts list.
+  Include ten fictional review scenarios. Instruction-only; no execution or
+  authorization contract changes and no measured live speed claim.
+
 - Prioritize campaign receipts and executable reviewed packages before new
   discovery; reuse dated exclusions and keep unanswered questions pending.
   Document publication aliases, detailed-JD precedence and honest stalled-work

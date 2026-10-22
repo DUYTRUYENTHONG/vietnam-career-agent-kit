@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+[Auto-decide campaign prompt](prompts/AUTO_DECIDE.md): let the agent rank jobs,
+tailor supported evidence and reuse known answers without routine questions.
+Blocked vacancies move aside while independent work continues. Instruction-only;
+existing engine scope and host confirmations remain effective.
+
 Bulk public Greenhouse discovery is available through `discover-greenhouse`.
 See [the bounded reader, benchmark and performance limits](docs/BULK_DISCOVERY.md).
 

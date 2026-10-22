@@ -1,5 +1,12 @@
 # Runtime compatibility evidence
 
+Auto-decision prompt (22 October 2026): `prompts/AUTO_DECIDE.md` is
+Instruction-only for every host. Manual review of its ten fictional scenarios
+checked routine autonomy, duplicate/uncertain handling, missing facts, unchanged
+authority, changed agreements, untrusted content and cleanup failure against the
+existing contracts. No schema, executable policy or native integration changed.
+This review does not measure model compliance or live application throughput.
+
 Launch and completed-tab cleanup (22 October 2026): the final Windows suite
 passed all 140 tests in 280.839 seconds, including five launch tests and thirteen
 cleanup tests. Three review regressions first reproduced reused-binding closure

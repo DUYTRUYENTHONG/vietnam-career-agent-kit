@@ -1,5 +1,9 @@
 # Vietnam career agent master prompt
 
+For agent-owned routine choices, use [AUTO_DECIDE.md](AUTO_DECIDE.md). It defines
+queue priority, evidence-based decisions and deduplicated missing-fact handling
+while retaining the existing execution and host authorization checks.
+
 For a reusable continuation instruction that includes post-receipt tab cleanup,
 use [AUTO_PROCEED.md](AUTO_PROCEED.md). It reuses valid scoped authority and
 confirmed answers; it does not replace host confirmations or create authority.
