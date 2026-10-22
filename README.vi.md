@@ -1,10 +1,28 @@
 # Vietnam Career Agent Kit
 
+[Prompt tiếp tục chiến dịch và đóng tab đã hoàn tất](prompts/AUTO_PROCEED.md):
+tái sử dụng câu trả lời đã xác nhận và phạm vi ủy quyền còn hiệu lực; lưu bằng
+chứng nhận hồ sơ, đóng đúng tab do agent tạo, kiểm tra tab đã đóng và cập nhật bảng
+theo dõi. Không tự trả lời “có” cho yêu cầu chưa có bằng chứng.
+
 [Ủy quyền theo chiến dịch](docs/STANDING_AUTHORIZATION.md): phê duyệt một lần phạm
 vi nhà tuyển dụng, nơi nhận, câu trả lời và lựa chọn đồng ý; agent tái sử dụng cho
 CV đã kiểm tra và các đợt hữu hạn tiếp theo. Dùng chung hạn mức, thời hạn và quyền
 thu hồi. Xác nhận bắt buộc của host vẫn áp dụng. CLI mới dùng schema 4, chỉ bật khi
 người dùng chủ động ủy quyền phạm vi cụ thể.
+
+`launch-execution` gộp việc áp dụng ủy quyền còn hiệu lực, bắt đầu và trả bước đầu
+tiên trong một lệnh. Không hỏi lại phê duyệt nội bộ khi phạm vi khớp. Nếu lần chạy
+đã tồn tại, lệnh trả trạng thái để đối chiếu; không lặp lại thao tác gửi.
+
+Khi người dùng yêu cầu dọn tab, agent chỉ đóng tab ứng tuyển do mình tạo sau khi
+đã lưu xác nhận và ảnh chứng minh. `cleanup-execution` trả đúng tab cần xử lý;
+`record-cleanup` ghi kết quả do host quan sát. Giữ nguyên tab của người dùng và
+các hồ sơ chưa rõ kết quả. CLI không tự điều khiển hoặc đóng toàn bộ trình duyệt.
+
+[Hướng dẫn tìm việc nhanh hơn](docs/DISCOVERY_ACCELERATION.md) mô tả cách dùng
+danh sách ATS công khai khi được phép, tránh tìm trùng và mở rộng nhóm vai trò
+khi người dùng đồng ý. Đây là hướng dẫn, chưa phải connector mạng đã triển khai.
 
 Tối ưu mới: kiểm tra CV theo từng việc, `advance-execution` ghi nhận kết quả và
 trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng thái nhanh. Bảng chỉ

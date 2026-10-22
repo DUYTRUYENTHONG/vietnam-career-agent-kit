@@ -26,6 +26,11 @@ private checkpoint before searching. Continue successive finite batches within
 the confirmed scope; retain search coverage and blocked leads to avoid repeating
 dead ends. Check the canonical ledger for prior and uncertain applications.
 Do not expand location, seniority or fit merely to reach a numerical target.
+When the candidate authorizes adjacent role families, use
+../../../docs/DISCOVERY_ACCELERATION.md to broaden discovery while preserving
+evidence-based assessment. Prefer permitted documented board lists, deduplicate
+before full-JD reasoning and retain dated coverage. This guide adds no connector
+or source permission; unsupported reads stay manual.
 
 ## Outputs
 

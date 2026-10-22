@@ -31,6 +31,27 @@ revocation/expiry/profile drift blocks their derived authority, including pendin
 action preflight. Existing exact approvals and immutable receipts are preserved.
 See [the input and operation contract](STANDING_AUTHORIZATION.md).
 
+`launch-execution` composes authorization, start and first-request operations on
+schema 4 without another migration. Its result reports `authority_recorded` and
+`run_started`; failures after a commit retain the run ID when available. Existing
+runs return `existing_run`, `pending_action` and a reconciliation step, with no
+new request or renewed authority (`authority_revalidated: false`).
+
+## Post-confirmation cleanup 1.0
+
+cleanup-execution emits only unacknowledged confirmed bindings whose immutable
+receipt and saved screenshot still match. record-cleanup accepts strict
+source-bound host assertions of closed/already_absent/failed with exact bridge_id
+and binding_id. Later activity reusing that bridge/binding blocks old cleanup,
+including a pre-callback recheck. The host must also refresh visible identity.
+Successful records
+require agent-owned and requested-cleanup flags; failed records require a reason.
+Exact success replay is idempotent. Existing execution_actions store immutable
+completed cleanup receipts; there is no schema migration or application-count
+change. See execution.schema.json and execution.md for host trust limits.
+Tracker JSON adds cleanup_status and cleanup_blocker; Markdown has a separate
+Tab cleanup column. Application latest_action/blocker exclude cleanup records.
+
 ## Legacy package checker
 
 The retained operations below perform local validation/bookkeeping only. They do not implement campaign expiry/limits, attempt recovery, authenticated candidate approval or browser execution.

@@ -1,5 +1,24 @@
 # Runtime compatibility evidence
 
+Launch and completed-tab cleanup (22 October 2026): the final Windows suite
+passed all 140 tests in 280.839 seconds, including five launch tests and thirteen
+cleanup tests. Three review regressions first reproduced reused-binding closure
+and tracker misclassification; they passed after fixes, and the focused review
+found no remaining material issues. Generic CLI and fictional bridge coverage
+include terminal cleanup resume, recovery exceptions, exact bridge binding,
+changed screenshots, ownership/intent flags, immutable/idempotent receipts and
+separate tracker status. No new browser driver, native runtime certification or
+real-employer integration is claimed. Discovery acceleration is instruction-only;
+the network connector gate remains pending. Published CI is a separate result.
+The disposable demo, source hygiene, generated adapter and whitespace checks
+passed. A separate seven-sample fictional launch benchmark is recorded in
+PERFORMANCE.md; it does not certify native browser or live-employer throughput.
+
+Launch composition (22 October 2026): five fictional Windows/real-CLI tests passed
+for delegated first requests, invalid scope, interrupted first-request delivery,
+existing-run nonreplay and host-confirmation blockers. Native browser execution
+is not added by this command. Full-suite/CI results are recorded separately.
+
 Standing authorization (22 October 2026) adds deterministic schema-4/CLI delegation tests with
 fictional reviewed documents, quota races, revoked issued actions, URL scope,
 profile drift, latest-assessment downgrades and host-confirmation blockers. The
@@ -11,6 +30,12 @@ result. No native host/employer verification is added, and no private campaign
 was migrated or used as a product fixture.
 
 Checked 21 October 2026. Labels apply to the named scope, not every product from a provider.
+
+The 22 October `prompts/AUTO_PROCEED.md` continuation prompt is Instruction-only.
+It describes the existing standing-authority and tab-cleanup interfaces without
+changing schemas, host permissions or browser capabilities. Fictional cleanup
+tests verify the local engine contract; they do not certify native execution of
+this prose prompt or whole-browser closure.
 
 The performance increment adds local selected-job validation, a ledger-only
 tracker and receipt-plus-successor CLI command. Windows fictional measurements

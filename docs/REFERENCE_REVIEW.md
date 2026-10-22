@@ -65,3 +65,17 @@ so no source code, catalog or skill text is redistributed or installed by this
 kit. The portable Python planner is an original implementation of the requested
 deterministic policy, with explicit caller policy/skill candidates instead of
 copying the company capability catalog. It adds no runtime dependency.
+
+On 22 October the installed router was run again with the existing owner and
+actual inventory: tests routed directly to tools, architecture planning selected
+gpt-6-astra/high, and simple coding blocked on unavailable gpt-5.6-luna/low. These
+are routing plans only; no model dispatch, paid model call or estimated saving.
+
+## Public ATS discovery documentation, 22 October 2026
+
+Reviewed the official Greenhouse Job Board API, Lever Postings API and
+SmartRecruiters public Posting API documentation for bounded read-side discovery.
+Exact links and limitations are in DISCOVERY_ACCELERATION.md. This is a dated
+documentation review, not a pinned dependency adoption, connector implementation,
+employer test or permission certificate. No source code/examples were copied,
+installed or executed, so no new third-party runtime/license dependency is added.

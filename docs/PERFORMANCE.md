@@ -1,5 +1,35 @@
 # Faster preparation and execution
 
+## Combined launch measurement, 22 October 2026
+
+`python scripts/benchmark_launch.py --samples 7` compares the existing
+authorize-manifest/start-execution/next-action CLI sequence with launch-execution.
+Each sample uses a fresh equivalent single-job fictional workspace, approved
+standing scope and mock renderer; setup is outside timing. Order alternates.
+The full unit suite finished before this benchmark. Windows, Python 3.12.14;
+elapsed milliseconds include subprocess startup and the same authorization,
+start and initial-inspection checks, with no model/network/browser measurement.
+
+| Path | CLI calls | Median ms | Range ms |
+|---|---|---|---|
+| Separate commands | 3 | 1017.035 | 850.130–1835.182 |
+| Combined launch | 1 | 537.829 | 514.023–657.884 |
+
+The measured median fell 47.1%, with nonoverlapping sample ranges. Keep the
+composition: it removes transport overhead while preserving durable allocation,
+run creation, fresh checks and interruption reconciliation. Machine load varies;
+this is local launch latency, not application completion speed. The benchmark
+asserts first-action inspection and zero submission attempts. Five behavioral
+launch tests additionally cover partial failures, nonreplay and host blockers.
+This establishes no token/cost saving or 100/hour employer throughput result.
+
+For discovery bottlenecks, see [the primary-source workflow review](DISCOVERY_ACCELERATION.md).
+Public bulk-list guidance remains instruction-only and has no measured speedup
+or implemented network connector. Post-confirmation cleanup reduces open tabs,
+but its browser latency has not been benchmarked.
+
+## Earlier preparation measurements
+
 Measured 21 October 2026 on Windows, Python 3.12.14. Standard-library core only;
 no models, browser, employer service or real converter was timed.
 
