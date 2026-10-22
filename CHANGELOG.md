@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Prioritize campaign receipts and executable reviewed packages before new
+  discovery; reuse dated exclusions and keep unanswered questions pending.
+  Document publication aliases, detailed-JD precedence and honest stalled-work
+  checkpoints. Instruction-only; no approval, execution or schema change.
+
 - Add experimental bounded public Greenhouse board discovery with three concurrent reads, stable lead fingerprints, duplicate suppression and explicit partial failures. Add fictional transport/CLI tests and a reproducible scheduling benchmark; no submission API, ledger migration or live 100/hour claim.
 
 - Add a reusable auto-proceed prompt with source-backed screening answers and
