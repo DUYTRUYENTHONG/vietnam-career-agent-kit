@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+Duplicate-candidate preflight (22 October 2026): additive deterministic CLI on
+existing schemas 1–4, covered by five fictional behavioral/CLI regressions in
+`tests/test_duplicates.py`. It reads the selected ledger only, does not merge or
+validate receipts, and adds no native browser, connector or model capability.
+See [contract and limits](DUPLICATE_CANDIDATES.md).
+
 Auto-decision prompt (22 October 2026): `prompts/AUTO_DECIDE.md` is
 Instruction-only for every host. Manual review of its ten fictional scenarios
 checked routine autonomy, duplicate/uncertain handling, missing facts, unchanged

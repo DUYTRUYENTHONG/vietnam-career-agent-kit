@@ -20,6 +20,11 @@ Build order follows the vertical slices in roadmap.md. This is one system, not a
 
 SQLite is authoritative for candidate/profile confirmation, imported source metadata, job documents, assessments and drafts. Imported CV bytes live in content-addressed private evidence files; Markdown and reports are derived artifacts, not competing editable trackers. Every assessment/draft binds current profile, source and JD fingerprints. Resume reports staleness explicitly. Each workspace selects one candidate. No global candidate configuration exists.
 
+`duplicate-candidates` is a read-only, same-employer ledger preflight before
+tailoring. It exposes alternate-ID URL/title/city hints and recorded prior
+attempt states without reading artifacts, merging records or granting clearance.
+It uses existing schema 1–4 tables. See [contract and limits](DUPLICATE_CANDIDATES.md).
+
 The host reasons and proposes structured profile/JD/matrix/selection files. Deterministic code validates them; it cannot authenticate a human or prove a semantic claim. Slice 1 only renders exact confirmed source quotes into drafts, with internal source mapping kept separate. No freeform agent-written experience bullet is accepted as new evidence. Profile confirmation is local bookkeeping after actual user review, not a signature.
 
 UTF-8 TXT/Markdown CV import is implemented. PDF/DOCX input extraction remains pending. Slice 2 adds optional output rendering with absent tools returning manual_required. English/Vietnamese labels and document headings are selected explicitly. City aliases normalize for comparison while exact wording remains stored. Compensation fields never convert or infer gross/net, period, currency or bonuses.

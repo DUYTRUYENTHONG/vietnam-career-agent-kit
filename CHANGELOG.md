@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add `duplicate-candidates --job-id ID`, a read-only same-employer identity
+  preflight showing matching URLs or normalized title/city and prior recorded
+  submission states. Alternate IDs remain separate; hints never auto-merge,
+  authorize or clear external history. Five fictional behavioral/CLI regressions;
+  no schema migration, browser integration or live throughput claim.
+
 - Add an agent-owned routine-decision prompt with queue priority, duplicate
   suppression, evidence-based answers and one deduplicated missing-facts list.
   Include ten fictional review scenarios. Instruction-only; no execution or

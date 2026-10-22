@@ -29,6 +29,10 @@ trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng th
 phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.
 Xem [kiến trúc và số đo](docs/PERFORMANCE.md); chưa đo tốc độ ứng tuyển thực tế.
 
+Trước khi chỉnh CV, chạy `duplicate-candidates --job-id ID` để xem việc cùng nhà
+tuyển dụng có URL hoặc tên/địa điểm trùng và trạng thái nộp đã ghi. Lệnh chỉ đọc,
+không tự gộp hay xác nhận chưa từng ứng tuyển. [Giới hạn](docs/DUPLICATE_CANDIDATES.md).
+
 [Định tuyến mô hình](docs/MODEL_ROUTING.md): dùng công cụ trực tiếp cho kiểm thử,
 trạng thái và số đo; `route-task --packet task.json` chọn theo độ khó/rủi ro và
 danh sách mô hình, effort, skill thực tế của host. Lệnh không gọi AI, không tự
