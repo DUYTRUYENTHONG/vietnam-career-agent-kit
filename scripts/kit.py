@@ -29,6 +29,10 @@ def parser() -> Parser:
     root.add_argument('--data-dir',type=Path,help='explicit private directory outside the public clone')
     root.add_argument('--actor',default='local-user')
     commands=root.add_subparsers(dest='command',required=True)
+    discover=commands.add_parser('discover-greenhouse',help='bounded public board GETs; leads only, no candidate data or submission')
+    discover.add_argument('--board',action='append',required=True)
+    discover.add_argument('--workers',type=int,default=3)
+    discover.add_argument('--include-content',action='store_true',help='include full untrusted descriptions; default returns compact leads')
     doctor=commands.add_parser('doctor',help='read-only runtime diagnosis; no account/browser connection')
     doctor.add_argument('--runtime',choices=['generic','codex','claude','grok'],default='generic')
     route=commands.add_parser('route-task',help='deterministic model/tool plan; no model call or workspace access')
@@ -47,6 +51,8 @@ def parser() -> Parser:
         cmd=commands.add_parser(name);cmd.add_argument('--job-id',type=int,required=True)
         cmd.add_argument('--'+flag,type=Path,required=True)
     handoff=commands.add_parser('handoff');handoff.add_argument('--job-id',type=int,required=True)
+    duplicates=commands.add_parser('duplicate-candidates',help='read-only same-employer identity hints; never merges or clears a job')
+    duplicates.add_argument('--job-id',type=int,required=True)
     render=commands.add_parser('render',help='local DOCX/PDF conversion and page previews; no external disclosure')
     render.add_argument('--job-id',type=int,required=True);render.add_argument('--soffice',type=Path)
     review=commands.add_parser('review-documents');review.add_argument('--render-id',required=True)
@@ -112,6 +118,10 @@ def load_input(path: Path) -> dict:
 
 def execute(args) -> Outcome:
     command=args.command
+    if command=='discover-greenhouse':
+        from core.discovery import discover
+        data=discover(args.board,workers=args.workers,include_content=args.include_content)
+        return Outcome('ok' if not data['failed_boards'] else 'manual_required',data,[])
     if command=='doctor':return diagnose(args.runtime)
     if command=='route-task':
         from core.routing import route_task
@@ -140,6 +150,7 @@ def execute(args) -> Outcome:
     if command=='profile':return work.inspect_profile()
     if command=='confirm-profile':return work.confirm_profile(args.fingerprint,args.confirmation)
     if command=='import-jd':return work.import_job(load_input(args.file))
+    if command=='duplicate-candidates':return work.duplicate_candidates(args.job_id)
     if command=='assess':return work.assess(args.job_id,load_input(args.matrix))
     if command=='prepare':return work.prepare(args.job_id,load_input(args.plan))
     if command=='render':return work.render(args.job_id,args.soffice)

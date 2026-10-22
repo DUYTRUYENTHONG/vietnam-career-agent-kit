@@ -12,7 +12,7 @@ from typing import Any
 
 from .contracts import (ContractError, Outcome, choice, normalize_city, object_fields,
                         strings, text, validate_job, validate_profile, version)
-from .ledger import Kit, canonical_hash, utc_now
+from .ledger import Kit, _key, canonical_hash, utc_now
 
 
 class WorkflowError(ValueError):
@@ -23,6 +23,39 @@ class WorkflowError(ValueError):
 
 class Preparation(Kit):
     """Local-only, one-candidate preparation. Does not operate a browser."""
+
+    def duplicate_candidates(self, job_id: int) -> Outcome:
+        """Read same-employer identity hints without merging or validating artifacts."""
+        if type(job_id) is not int or job_id <= 0:
+            raise WorkflowError('needs_input', 'Use a positive local job ID')
+        with self._db() as db:
+            db.execute('BEGIN')
+            job = db.execute('SELECT * FROM jobs WHERE id=?', (job_id,)).fetchone()
+            if job is None:
+                raise WorkflowError('needs_input', 'Unknown local job ID')
+            rows = db.execute('SELECT * FROM jobs WHERE employer_key=? AND id<>? ORDER BY id',
+                              (job['employer_key'], job_id)).fetchall()
+        candidates = []
+        city, title = normalize_city(job['city']), _key(job['title'])
+        for row in rows:
+            signals = []
+            if row['url'] == job['url']:
+                signals.append('same_url')
+            if city and city == normalize_city(row['city']) and title == _key(row['title']):
+                signals.append('same_employer_title_city')
+            if signals:
+                candidate = {key: row[key] for key in ('id', 'platform', 'platform_job_id',
+                             'req_id', 'title', 'city', 'url', 'state', 'liveness')}
+                candidate['signals'] = signals
+                candidate['prior_attempt_needs_reconciliation'] = row['state'] in {
+                    'confirmed_submitted', 'user_reported_submitted', 'submission_uncertain'}
+                candidates.append(candidate)
+        return Outcome('ok', {'job_id': job_id, 'candidates': candidates,
+            'requires_identity_review': bool(candidates), 'deduplication_complete': False,
+            'external_history_checked': False, 'external_actions': 0,
+            'scope': 'Recorded same-employer hints only; no identity proof, live checks or artifact validation.'},
+            ['Verify requisitions and prior receipts before another application; distinct jobs can share a title or URL.']
+            if candidates else [])
 
     def init(self, language: str = 'en') -> Outcome:
         choice(language, {'en', 'vi'}, 'language')

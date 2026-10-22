@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- Add `duplicate-candidates --job-id ID`, a read-only same-employer identity
+  preflight showing matching URLs or normalized title/city and prior recorded
+  submission states. Alternate IDs remain separate; hints never auto-merge,
+  authorize or clear external history. Five fictional behavioral/CLI regressions;
+  no schema migration, browser integration or live throughput claim.
+
+- Add an agent-owned routine-decision prompt with queue priority, duplicate
+  suppression, evidence-based answers and one deduplicated missing-facts list.
+  Include ten fictional review scenarios. Instruction-only; no execution or
+  authorization contract changes and no measured live speed claim.
+
+- Prioritize campaign receipts and executable reviewed packages before new
+  discovery; reuse dated exclusions and keep unanswered questions pending.
+  Document publication aliases, detailed-JD precedence and honest stalled-work
+  checkpoints. Instruction-only; no approval, execution or schema change.
+
+- Add experimental bounded public Greenhouse board discovery with three concurrent reads, stable lead fingerprints, duplicate suppression and explicit partial failures. Add fictional transport/CLI tests and a reproducible scheduling benchmark; no submission API, ledger migration or live 100/hour claim.
+
 - Add a reusable auto-proceed prompt with source-backed screening answers and
   the existing receipt-before-tab-close harness. Document ownership checks,
   absence verification, pending cleanup and uncertain-attempt preservation.

@@ -1,8 +1,9 @@
 # Faster discovery with supported host tools
 
-This is instruction-only guidance reviewed 22 October 2026, not an installed
-connector, permission grant or measured live throughput improvement. The local
-core still imports structured JDs. No new network client or dependency is added.
+This is host guidance reviewed 22 October 2026, not a permission grant or measured
+live throughput improvement. The separate [experimental Greenhouse reader](BULK_DISCOVERY.md)
+now supports bounded public discovery. Other providers below remain research
+references; local preparation still requires reviewed structured JD imports.
 
 ## Reduce work before browser forms
 
@@ -47,3 +48,7 @@ connector needs bounded bytes/pages/time, redirect and URL validation, error/rat
 handling, source evidence, isolated fictional tests and explicit compatibility
 results before the registry may call it implemented. A bulk list can reduce
 discovery reads; it cannot establish a 100/hour confirmed-application rate.
+
+## Implemented experimental increment
+
+The Greenhouse public-board reader is now experimental: [contract and performance evidence](BULK_DISCOVERY.md). Earlier future-network gates remain applicable to other providers. The reader does not perform application writes or establish employer-specific browser permission.

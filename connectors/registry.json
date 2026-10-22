@@ -297,6 +297,45 @@
       "default_write_mode": "manual",
       "policy_source": null,
       "limitation": "No connector, permission or native auto-apply is established by this registry entry"
+    },
+    {
+      "id": "greenhouse-public-board",
+      "name": "Greenhouse public board discovery",
+      "implementation_status": "Experimental",
+      "operations": {
+        "discover": "implemented_public_get",
+        "read": "implemented_public_get",
+        "extract": "implemented_normalized_leads",
+        "fill": "manual_or_unimplemented",
+        "upload": "manual_or_unimplemented",
+        "submit": "manual_or_unimplemented",
+        "verify": "manual_or_unimplemented"
+      },
+      "permission_evidence": "Official Job Board API documents public unauthenticated GET; employer-specific permission still reviewed separately",
+      "checked_utc": "2026-10-22",
+      "authentication": "none; no cookies or credentials",
+      "rate_limits": {
+        "max_boards": 12,
+        "max_workers": 3,
+        "max_bytes_per_board": 4000000,
+        "max_jobs_per_board": 5000,
+        "socket_timeout_seconds": 10,
+        "automatic_retries": 0
+      },
+      "supported_fields": [
+        "platform_job_id",
+        "title",
+        "location",
+        "url",
+        "content",
+        "fingerprint"
+      ],
+      "tests": [
+        "tests/test_discovery.py"
+      ],
+      "default_write_mode": "manual",
+      "policy_source": "https://docs.greenhouse.io/job-board",
+      "limitation": "Untrusted discovery leads only, not fit/liveness/remote-eligibility verification. No application POST or native employer integration."
     }
   ],
   "coverage_claim": "Only declared executed searches count; this registry does not represent all Vietnam jobs."

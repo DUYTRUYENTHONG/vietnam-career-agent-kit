@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Experimental public board discovery 1.0 (inside Outcome.data)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "observed_utc", "source", "boards", "leads_count", "failed_boards", "notice"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "observed_utc": {"type": "string", "format": "date-time"},
+    "source": {"const": "greenhouse-public-board"},
+    "leads_count": {"type": "integer", "minimum": 0, "maximum": 60000},
+    "failed_boards": {"type": "integer", "minimum": 0, "maximum": 12},
+    "notice": {"type": "string"},
+    "boards": {
+      "type": "array", "minItems": 1, "maxItems": 12,
+      "items": {"oneOf": [{"$ref": "#/$defs/success"}, {"$ref": "#/$defs/failure"}]}
+    }
+  },
+  "$defs": {
+    "token": {"type": "string", "pattern": "^[a-zA-Z0-9_-]{1,80}$"},
+    "hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "failure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["board", "error", "http_status"],
+      "properties": {
+        "board": {"$ref": "#/$defs/token"}, "error": {"type": "string"},
+        "http_status": {"type": ["integer", "null"]}
+      }
+    },
+    "success": {
+      "type": "object", "additionalProperties": false,
+      "required": ["board", "source_sha256", "records_received", "leads"],
+      "properties": {
+        "board": {"$ref": "#/$defs/token"}, "source_sha256": {"$ref": "#/$defs/hash"},
+        "records_received": {"type": "integer", "minimum": 0, "maximum": 5000},
+        "leads": {"type": "array", "maxItems": 5000, "items": {"$ref": "#/$defs/lead"}}
+      }
+    },
+    "lead": {
+      "type": "object", "additionalProperties": false,
+      "required": ["key", "platform_job_id", "title", "location", "url", "fingerprint"],
+      "properties": {
+        "key": {"type": "string"}, "platform_job_id": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+        "title": {"type": "string", "minLength": 1}, "location": {"type": "string"},
+        "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+        "content": {"type": "string"}, "fingerprint": {"$ref": "#/$defs/hash"}
+      }
+    }
+  }
+}
