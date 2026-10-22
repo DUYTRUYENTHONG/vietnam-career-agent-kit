@@ -15,6 +15,12 @@ This records implemented evidence separately from intended product scope. No lat
 
 ## Current implementation sequence
 
+Optional Fast Web increments 1–2 add contracts, the opt-in boundary and a complete
+Firecrawl public research/evidence-import slice. Live verification remains
+pending. Increment 3 (TinyFish interactive public research) and increment 4
+(direct Browser plus cloud disclosure) are unimplemented and must preserve the
+host executor. See FAST_WEB.md; they do not block delivery of public retrieval.
+
 Standing campaign authorization is an opt-in extension of Slice 6: one approved
 recipient/profile/answer/consent scope can derive later exact reviewed batches
 with a shared cap, expiry and revocation. Local deterministic tests do not close

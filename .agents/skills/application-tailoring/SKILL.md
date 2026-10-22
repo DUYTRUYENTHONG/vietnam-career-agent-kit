@@ -19,6 +19,11 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+Prepare/render only selected assessed jobs after source and duplicate checks.
+Reuse unchanged current evidence/documents only under existing fingerprints and
+byte checks. Public extraction is not a reason to send CVs to a cloud parser or
+to relax source-bound claims, PDFium locking or converter isolation.
+
 Use prepare with the versioned plan. Keep target headline distinct from historical titles. Select/reorder confirmed quotes; retain classroom/prototype/team/metric qualifiers. Keep source map out of the CV. Follow employer document language, with separate versions.
 
 ## Outputs
