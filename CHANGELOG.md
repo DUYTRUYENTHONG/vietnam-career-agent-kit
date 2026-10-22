@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Document a host interaction runbook for preserving reviewed email paragraphs,
+  refreshing replaced compose controls, resolving observed native file-picker
+  failures and verifying Sent recipients/attachments before tab cleanup.
+  Instruction-only; no adapter, schema, authorization or throughput change.
+
 - Add opt-in evidence-bound CV wording v2: structured sections, single-fact
   paraphrases/translations, exact scope/requirement links, conservative factual
   alarms and independently recorded statement review. Markdown/DOCX/PDF now

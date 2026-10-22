@@ -192,6 +192,52 @@ another origin requires a manual handoff; do not falsify its URL to pass the che
 See [execution.schema.json](../schemas/execution.schema.json) for editor shapes;
 the core enforces phase-specific and cross-record constraints.
 
+## Form and email interaction runbook
+
+This is host guidance, not a new browser adapter or permission. Use only the
+current host's documented APIs and fresh visible page evidence. Native behavior
+must still be verified for the selected host, site and operating system.
+
+### Preserve the reviewed message
+
+Some accessibility value setters flatten line breaks in rich-text email editors.
+For a multiline approved message, prefer the host's supported semantic text
+`fill` or text-paste operation when available. Verify the rendered editor text
+against the approved source before sending, including paragraph breaks. Do not
+collapse all whitespace during that comparison: it can hide this defect.
+Repair formatting from the same approved source; never improvise new wording.
+
+Email compose controls may be replaced after opening or after a recipient is
+committed. Refresh the page observation before using numeric element indexes.
+For stable labelled controls, prefer grounded semantic locators when the host
+supports them. Expand the recipient area to verify To and CC separately; a
+collapsed summary listing both addresses does not establish which is which.
+Leave BCC absent unless it is explicitly in the approved package.
+
+### Distinguish a picker failure from a submission attempt
+
+Register the supported file-chooser listener before clicking the observed file
+input, then select only the approved absolute path. If a chooser wait times out,
+inspect the current page before deciding what happened. A fresh visible native
+file-input locator may resolve an accessibility-click failure; do not blindly
+repeat clicks, inject file paths into the DOM or switch browser backends.
+Verify the selected filename and completed upload using the actual UI. A local
+file hash alone does not prove that the browser attached that file.
+
+Continue only under the existing approved action scope and outstanding engine
+request. Reconcile or stop a failed issued upload request rather than replaying
+it through `next-action`. A picker failure before any final action is distinct
+from an uncertain final submission; after a submit/send click, recovery is
+read-only and the final action must never be repeated to obtain a better receipt.
+
+### Verify email sending before cleanup
+
+An intermediate "sending" indicator is not confirmation. Observe the completed
+send, then inspect the matching Sent message and verify sender, To, CC, subject,
+message and attachment. Save the private evidence before closing the owned tab.
+A Sent receipt establishes sending, not independent delivery to the employer.
+This runbook changes no schema, approval requirement or measured throughput.
+
 ## Interruptions and limits
 
 ```sh
