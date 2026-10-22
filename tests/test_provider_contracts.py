@@ -1,9 +1,12 @@
 """Fictional provider boundary tests; no external request or credentials."""
 from datetime import datetime, timedelta, timezone
+from email.message import Message
 import unittest
+from unittest.mock import patch
+from urllib.error import HTTPError
 
 from adapters.providers.contracts import ContractError, ResearchPlan, canonical_url, public_host, ProviderError
-from adapters.providers.firecrawl import Firecrawl, BASE
+from adapters.providers.firecrawl import Firecrawl, HTTPTransport, BASE
 
 
 def plan():
@@ -69,6 +72,17 @@ class ProviderContractsTests(unittest.TestCase):
         with self.assertRaises(ProviderError) as caught: api.start_batch([], 1, 0)
         self.assertNotIn('private', str(caught.exception))
         self.assertTrue(caught.exception.possibly_accepted)
+
+    def test_unexpected_redirect_timeout_or_conflict_does_not_clear_paid_intent(self):
+        for status in (302, 408, 409, 500, 429):
+            error = HTTPError(BASE+'/batch/scrape', status, 'untrusted message', Message(), None)
+            with patch('adapters.providers.firecrawl.build_opener') as opener:
+                opener.return_value.open.side_effect = error
+                with self.assertRaises(ProviderError) as caught:
+                    HTTPTransport('fictional-key')('POST', BASE+'/batch/scrape', {})
+                self.assertEqual(caught.exception.possibly_accepted, status != 429)
+                self.assertEqual(opener.return_value.open.call_count, 1)
+                self.assertNotIn('untrusted', str(caught.exception))
 
 
 if __name__ == '__main__': unittest.main()

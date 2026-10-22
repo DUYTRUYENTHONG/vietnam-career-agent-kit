@@ -72,7 +72,8 @@ class HTTPTransport:
         except HTTPError as error:
             code, delay = error.code, retry_delay(error.headers.get('Retry-After'))
             error.close()
-            raise ProviderError('http_'+str(code), possibly_accepted=method != 'GET' and code >= 500,
+            known_rejection = code in {400, 401, 402, 403, 404, 422, 429}
+            raise ProviderError('http_'+str(code), possibly_accepted=method != 'GET' and not known_rejection,
                                 retry_after=delay) from None
         except (OSError, URLError, ValueError, UnicodeError):
             raise ProviderError('transport_uncertain', possibly_accepted=method != 'GET') from None
