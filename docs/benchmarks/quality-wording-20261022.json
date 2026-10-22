@@ -1,0 +1,769 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-22",
+  "baseline_commit": "5d5e4f33ad1c49b1865e0506e39212ad926021b3",
+  "implementation_commit": "a8220e04abba636c9aae3d705c7fc9f995e2327b",
+  "fingerprint": {
+    "baseline_commit": "5d5e4f33ad1c49b1865e0506e39212ad926021b3",
+    "code_and_fixture_fingerprint": "d913c4b864007c1aaa5cfa0212dbbd3d04e6338421a5e1364508fb48f6059c58",
+    "files": {
+      "core/__init__.py": "30d9545ee908b905678a52d91cbdab10f8aeb712b071a48fee4cfbdfe96716dd",
+      "core/authorization.py": "e0197849b23f05a5502a59d91a79a73dcc8eb53952acdb1d6e381b6c4ea841d9",
+      "core/cleanup.py": "aaa4f448bb58a224870b3397b51dc2064df702db355456f550d0707441136fb9",
+      "core/contracts.py": "a6d67df25707a2e6295d0d3cf2c68f1a5b1dd93ca6ffa9e4ee3f896878fd19ef",
+      "core/discovery.py": "f33c263de2ce44afde7f37cfeb36866ba423f127db21d144fc1c04454626a750",
+      "core/dispatch.py": "dab08b2740048f35c0d68db74bc6a73a74159c46729fdca280b8a0c86fa4b29a",
+      "core/documents.py": "ad3f5a9501b5d4565268c2e15ceadf996c83768d0fc9d18e8a8c5b8cbead1453",
+      "core/execution.py": "35067fdb3c6109bf50ca843a786de7fdf4e24eda3ee401b2660bb45c9877fb31",
+      "core/ledger.py": "7fe0e6af48d62d78343e991995bcf6cb6a5adb541d81efa78f280e775f900eb9",
+      "core/manifests.py": "7b6aba9750fda43348274bd568bf59d2cfe93b58bdd37c67b4bcbc4497c23d19",
+      "core/metrics.py": "204aa514828f9dad00c72be645d065bea4def2fb61f87cff76335d43d9164a22",
+      "core/rendering.py": "bbc01e31b0bd4fa8ee5deff36c1a98aff3bfe8f7e217b4ad97127d15828c1edf",
+      "core/research_store.py": "75d5646c278a46e55141c399bb0a1eeb12f6e31cfd3e3b85566c78b5f2285d98",
+      "core/routing.py": "9c089a173e4abf4eebebf5fe1e640057e3a47f35ee29e4d721d346f6140cbd9d",
+      "core/runtime.py": "5f9cdf5d3b88390b4192d09409e1696eaa596d6ceaa1cccf070657588a98d56f",
+      "core/tailoring.py": "43415e99d155ceec4050f1e0a33b4c5578ab0bb6aa1b53bb4145f40b1b7d67aa",
+      "core/tracking.py": "6999e2cbebfcb05c4dfdd60c24c614f51ff0f3c61f63bd768f7833064b5b0352",
+      "core/workflow.py": "b34f92aeee6c9ffce1bbdb1173be48d1d676b1c9d490b431139aa97b0b07f650",
+      "examples/fictional/cv-a.md": "7861b16292ce49d4f1955f1c9b99b0f2148635bbcb6efadf7d0f5d3f6c0df09a",
+      "examples/fictional/cv-b.md": "909df03dced59d834f2af2a0f64b152073f175276595ad3e546f060660376a14",
+      "examples/fictional/job-b.json": "09254fb13f79b6328fc5ae5b3bc5cd2775be18fa9c1c647976574e1fef92e2cd",
+      "examples/fictional/job.json": "56b555642cb7ec76f29c350b745097cd1feadd4d4c45fa7f00a4f016991ea980",
+      "examples/fictional/matrix-b.json": "bf6e02a5df62433bc8952657b0050d28e8c135006c75649641eedaf8baf01b16",
+      "examples/fictional/matrix.json": "6a8a630c8ce47e886fd563ab6017a249e685eb289b2c3d6a046b0b85c7097176",
+      "examples/fictional/plan-b.json": "486cfd7e3aa526c82d1f87f1906da6d0261902510b83610cdc692008beb6f0b7",
+      "examples/fictional/plan.json": "27ad0693c08d9e7360b8d1d982c387dcc41cf009891fca1f58110c4c826716b5",
+      "examples/fictional/profile-a.json": "c491c620ee4b9445693668778dd7d534007852bf5606eb3d441603045bc7985a",
+      "examples/fictional/profile-b.json": "7aef6fc33ba42abaeabad445b19a2b07cc427cca39fcb58e1ad4b68a9a6f38f2",
+      "examples/fictional/quality-corpus.json": "4ddc75d177451e03676ed98a282be3dbc60bf96f8d2cf669c5bd54d54a971da1",
+      "examples/fictional/research-plan.json": "8437a861448638422ddb3ee7a64577ff841e62ba244615b8c655aa957740bb13",
+      "examples/fictional/web-corpus.json": "d050492f45a97e395a32e56c4c781d5ac299680ee160be865b63064fbbabcc3d",
+      "schemas/authorization.schema.json": "0911e9f9c62f642fc7b31381490c23ba46073a1e1f91fcb09e384ec75e8bc482",
+      "schemas/contracts.schema.json": "96923696b1f814dceb5829e3c1e4591e6ca962d9e3e72c9aab049803c98610a9",
+      "schemas/cv-content-v2.schema.json": "7d7fb87332e0f9457a0c40af348797817a404b77934b4cc4a9084101a4479501",
+      "schemas/discovery.schema.json": "ea910b097fbe864542a13beeee18dabbb0914cf9a9257c2f33b18181b49779d1",
+      "schemas/documents-approval.schema.json": "5f6de8e059d0a96c745d76fc52f05baa90a4f7fda3bf8ba72a5559c8bf34578e",
+      "schemas/execution.schema.json": "c4cdadfb15c6c1d141192dfbc6d23e547b05b65dc5d982a247df06c47f90f27a",
+      "schemas/research.schema.json": "a7a8180f410469e0bbf8130aac72fe7715a6e649fe37c21ed785dd890ff4349b",
+      "schemas/routing.schema.json": "b1b2d6388e61ecd6aae665ca55f9ff6dde412a59231f2b546f1f02a5b7fd9005",
+      "schemas/throughput.schema.json": "0fd8b180c6362f86d94e3160e6629981ad434c68796a28fd34d2f05a1c40433c",
+      "schemas/tracker.schema.json": "3ced49449ba04d250972992f4f05509b07c4eae0859e0513663876b78806e5f7",
+      "scripts/benchmark_discovery.py": "3167eb877b677ab7caeaac9596746db443a64465790958b15490e0f4fd1956df",
+      "scripts/benchmark_execution.py": "7091fb4a343d44f78c3a9afde8e1b4ccc997339c85784349672219056aa27ed5",
+      "scripts/benchmark_launch.py": "d4d448813ec4152deede6a24d74bf3af9430cf850fdcd7807b640244d1803a60",
+      "scripts/benchmark_pipeline.py": "1e5bcc894573a110b3b4f459affe3339567842778c83a8dd95b6d5c22ae81904",
+      "scripts/benchmark_web.py": "968a7bacdc0563c94e8bd73737125185f40564a56fe41c7c519e51b64ad207cb",
+      "scripts/benchmark_wording.py": "468999c815e616e2030cde301834af7974031783232df821d01fcb22f6754168",
+      "scripts/check_repository.py": "dfe1e020ec40fca4d1985b2b76297828df1c4c69c9d56d0249e4b06000a5a591",
+      "scripts/demo_slice1.py": "5966d7a3ff6eb2eb412010bb56a8c7d469662f8064c4de6d1f69158af7116d61",
+      "scripts/demo_slice2.py": "0416ed5bc6cfb0519c968eb1c32236f9964160574974c17baf72ba9bbe8e3f33",
+      "scripts/demo_wording.py": "db3c3f05906f9ea3ff21bb854f77e01d4a33c81e324d078f929ae0bb81c87b17",
+      "scripts/generate_adapters.py": "f77a3de1fecae842e819157e8ffd09997315453f772e1e87c643aa36fb6d0312",
+      "scripts/kit.py": "2b4359e63a407b553e994b353c99f36f1254c3be29920995151f902cc97a5ef2",
+      "scripts/serve_fixture.py": "b448642af5c6cabf762fc993e41adf6b1bce1aadc1bd40b06dc5fcf7d035dc5e",
+      "tests/test_authorization.py": "68ac842ba570df05de41d100f5e98d5ceac7bb504fdae80bea5b226b6a47ddcd",
+      "tests/test_cleanup.py": "83b9a27e5e09bd2345369739150a5f9fcc8e979f8e208063fc0a5afbad7f2d39",
+      "tests/test_cli.py": "bafe781a5b6173750af27e1021dd6a705ac922a6e242bcc0735d028e9a97a3bd",
+      "tests/test_contracts.py": "556d449a5dd8d93880018d89449972bf5c21623ac4eb410ab94592ead2c077ec",
+      "tests/test_demo.py": "e6891b17261cd7adef716d97bf483dd3aea20bfb4a0e470a1fd2b8b639ab0a3d",
+      "tests/test_discovery.py": "b99fa0d26b7d230cdd908490b1ba4845a862a8937dca5fc59e195a3a1f690b8e",
+      "tests/test_documents.py": "3f094de2f032f0d57218fa53bf43cbafd8d2d6bd051e52d4fe19f51740ea6b73",
+      "tests/test_duplicates.py": "54cf805e8675a65fba988caa2decab528ac9806e1e208bc3581a13b3312f9c75",
+      "tests/test_execution.py": "c93f17f907bd124dd9180ce8eb9425eb4eeb2a1e33063eec96941e869cfce4a4",
+      "tests/test_fixture_portal.py": "c4acca940bf6f8d8a5b96125893d748369dab98907c322e65721370c0b4c02d5",
+      "tests/test_hooks.py": "0cd3ce3957b1a1c993df0d20aa5b165b82b5f2e48e8d5ebb0dbc0fe57b524996",
+      "tests/test_kit.py": "cc1f7bec51aea404800c1be073a227d7d8c2e2c350a90d10b969df7cc197b082",
+      "tests/test_launch.py": "40f701e8df5b148a31aaf79369d2223f4dd79a560b47843066e3aeac8426b2a1",
+      "tests/test_manifest_validation.py": "ab5c2ab4b20d82ce928ce0b264b964d2ffad2e6bfe24ff1f85ae5b2eccb1ccd9",
+      "tests/test_manifests.py": "eb8fd613885d278d7723b75c6ba6d968a58d3e254dbce40938fda0b8221ad64d",
+      "tests/test_metrics.py": "b0db710e54c1926ffa1f3ea9a701cc917bedbc02cd4cb868bfcb6ca7ab9fb51e",
+      "tests/test_pipeline.py": "56ffc7dcc84bd004304a1bcc321f4a9dba7799eb75183180f054e164233c70c8",
+      "tests/test_preparation.py": "887614e1f7cf13913d6e7b47ca6d63edbdee3e095842ea72391fa04b183ae5a0",
+      "tests/test_provider_contracts.py": "3f0074ff45e93112a1ff5cfe158357385529fd84cae3f4f16c3a399a0d0a2209",
+      "tests/test_quality_corpus.py": "1d91c9a8c51ac82429789acdec9528f592940b52fad34aac690e971f199f7dc7",
+      "tests/test_repository_check.py": "3d307181f4f3dc5488438a94ea57cc9f26c321aaae77bf6567a518031d31f777",
+      "tests/test_research.py": "474d528dba6aa40910f34dc11e8ce8625584a6f25c416bfbe78a64e4e6786654",
+      "tests/test_routing.py": "cecd22ed693b75e1449627f69f1b1c0a39543d2b17d87a675013d96a8c79995f",
+      "tests/test_runtime.py": "d8ffad9b88fd0d06e4ee2167c31772feed43db7ce5df1f19f02e966c2f3284ce",
+      "tests/test_tailoring.py": "bc02e54995ddddf10a7d8844f43e1c057811b3eec506cbd09da2f8388b8b4d40",
+      "tests/test_throughput.py": "116cdd06b61d523bd1982ba9db639ddebfd734cfffd2925b493ffc05e0fbfbfa",
+      "tests_optional/test_previews.py": "171a8d2b4707e429e318f1531fa322cef70a48d0294877c27cf52dfe618ad0be",
+      "tests_optional/test_rendering.py": "0b69def8da630ccf4c61678194ef3a0cff6eef20584448415b8437cdbec2181e"
+    }
+  },
+  "local_validation": {
+    "baseline_tests": 185,
+    "baseline_seconds": 408.15,
+    "completed_tests": 203,
+    "completed_seconds": 330.49,
+    "test_elapsed_is_not_a_speed_comparison": true
+  },
+  "legacy_baseline": {
+    "fictional_only": true,
+    "jobs": 100,
+    "samples": 7,
+    "python": "3.12.14",
+    "content_model": {
+      "milliseconds": [
+        68.009,
+        61.933,
+        59.727,
+        62.912,
+        57.557,
+        58.125,
+        54.014
+      ],
+      "median_ms": 59.727,
+      "job_document_reads": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "resume": {
+      "milliseconds": [
+        1408.072,
+        1465.575,
+        1421.209,
+        1349.145,
+        1329.743,
+        1429.478,
+        2103.746
+      ],
+      "median_ms": 1421.209,
+      "job_document_reads": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "tracker": {
+      "milliseconds": [
+        12.023,
+        6.524,
+        6.991,
+        7.692,
+        6.834,
+        7.606,
+        7.499
+      ],
+      "median_ms": 7.499,
+      "job_document_reads": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "legacy_enhanced": {
+    "fictional_only": true,
+    "jobs": 100,
+    "samples": 7,
+    "python": "3.12.14",
+    "content_model": {
+      "milliseconds": [
+        69.041,
+        62.286,
+        57.729,
+        61.381,
+        60.074,
+        58.802,
+        60.267
+      ],
+      "median_ms": 60.267,
+      "job_document_reads": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "resume": {
+      "milliseconds": [
+        1404.282,
+        1470.56,
+        1384.421,
+        1447.84,
+        1837.097,
+        1789.058,
+        1414.674
+      ],
+      "median_ms": 1447.84,
+      "job_document_reads": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ]
+    },
+    "tracker": {
+      "milliseconds": [
+        7.7,
+        4.423,
+        4.455,
+        4.785,
+        4.577,
+        4.43,
+        4.417
+      ],
+      "median_ms": 4.455,
+      "job_document_reads": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "wording_handoff": {
+    "schema_version": "1.0",
+    "fixture_version": "wording-1",
+    "fictional_only": true,
+    "samples_per_candidate": 7,
+    "candidates": 3,
+    "python": "3.12.14",
+    "scope": "Equivalent deterministic import plus review packet. Setup, semantic review, rendering, human wait and application execution excluded.",
+    "network_calls": 0,
+    "model_calls_in_script": 0,
+    "host_tokens": null,
+    "results": {
+      "separate": {
+        "cli_starts_per_packet": 2,
+        "median_ms": 710.513,
+        "range_ms": [
+          599.595,
+          813.782
+        ],
+        "samples": [
+          {
+            "sample": 1,
+            "candidate": "data",
+            "duration_ms": 648.396,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 1,
+            "candidate": "technical",
+            "duration_ms": 717.904,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 1,
+            "candidate": "commercial",
+            "duration_ms": 717.277,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 2,
+            "candidate": "data",
+            "duration_ms": 710.513,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 2,
+            "candidate": "technical",
+            "duration_ms": 599.595,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 2,
+            "candidate": "commercial",
+            "duration_ms": 713.97,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 3,
+            "candidate": "data",
+            "duration_ms": 685.837,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 3,
+            "candidate": "technical",
+            "duration_ms": 668.106,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 3,
+            "candidate": "commercial",
+            "duration_ms": 755.591,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 4,
+            "candidate": "data",
+            "duration_ms": 813.782,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 4,
+            "candidate": "technical",
+            "duration_ms": 627.235,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 4,
+            "candidate": "commercial",
+            "duration_ms": 648.983,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 5,
+            "candidate": "data",
+            "duration_ms": 767.328,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 5,
+            "candidate": "technical",
+            "duration_ms": 649.325,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 5,
+            "candidate": "commercial",
+            "duration_ms": 616.297,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 6,
+            "candidate": "data",
+            "duration_ms": 784.397,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 6,
+            "candidate": "technical",
+            "duration_ms": 777.611,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 6,
+            "candidate": "commercial",
+            "duration_ms": 660.892,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 7,
+            "candidate": "data",
+            "duration_ms": 688.391,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 7,
+            "candidate": "technical",
+            "duration_ms": 742.705,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 7,
+            "candidate": "commercial",
+            "duration_ms": 726.262,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          }
+        ]
+      },
+      "combined": {
+        "cli_starts_per_packet": 1,
+        "median_ms": 446.41,
+        "range_ms": [
+          372.101,
+          807.994
+        ],
+        "samples": [
+          {
+            "sample": 1,
+            "candidate": "data",
+            "duration_ms": 743.186,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 1,
+            "candidate": "technical",
+            "duration_ms": 404.968,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 1,
+            "candidate": "commercial",
+            "duration_ms": 378.588,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 2,
+            "candidate": "data",
+            "duration_ms": 402.272,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 2,
+            "candidate": "technical",
+            "duration_ms": 432.347,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 2,
+            "candidate": "commercial",
+            "duration_ms": 447.933,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 3,
+            "candidate": "data",
+            "duration_ms": 403.647,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 3,
+            "candidate": "technical",
+            "duration_ms": 389.463,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 3,
+            "candidate": "commercial",
+            "duration_ms": 372.101,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 4,
+            "candidate": "data",
+            "duration_ms": 461.677,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 4,
+            "candidate": "technical",
+            "duration_ms": 463.985,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 4,
+            "candidate": "commercial",
+            "duration_ms": 449.522,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 5,
+            "candidate": "data",
+            "duration_ms": 420.043,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 5,
+            "candidate": "technical",
+            "duration_ms": 457.602,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 5,
+            "candidate": "commercial",
+            "duration_ms": 432.045,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 6,
+            "candidate": "data",
+            "duration_ms": 473.249,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 6,
+            "candidate": "technical",
+            "duration_ms": 807.994,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 6,
+            "candidate": "commercial",
+            "duration_ms": 446.41,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          },
+          {
+            "sample": 7,
+            "candidate": "data",
+            "duration_ms": 390.245,
+            "packet_digest": "91188581861fae5c76ddfc60e4d82b400a773110cd214768c9c817c87f9404d7"
+          },
+          {
+            "sample": 7,
+            "candidate": "technical",
+            "duration_ms": 490.78,
+            "packet_digest": "df09956a0fc763a4fbe865262f75b5fa21017669633e726d9dc16e4a8236de7d"
+          },
+          {
+            "sample": 7,
+            "candidate": "commercial",
+            "duration_ms": 527.76,
+            "packet_digest": "b33f66fd59ad3f296e12627f9d00ce7f2d75dd61cd31f31153096925afbf69a8"
+          }
+        ]
+      }
+    }
+  },
+  "failed_benchmark_run": {
+    "error": "subprocess.TimeoutExpired",
+    "timeout_seconds": 30,
+    "operation": "import-wording --include-review-packet",
+    "cause": "Unconfirmed; no credentials or network involved. Isolated diagnostic subsequently passed.",
+    "partial_samples": "Unavailable: benchmark aborts without aggregate; excluded from speed calculation.",
+    "followup": "One fresh bounded seven-sample cohort completed. Failure limits robustness claims."
+  },
+  "ci": {
+    "run_id": 39769610258,
+    "head": "a8220e04abba636c9aae3d705c7fc9f995e2327b",
+    "conclusion": "success",
+    "standard_matrix": "203 tests each; Ubuntu/Windows Python 3.11/3.12 passed",
+    "optional_tests": 7,
+    "optional_seconds": 9.041,
+    "duplicate_pr_run": 39769692686,
+    "duplicate_pr_conclusion": "cancelled; all standard jobs passed, document job cancelled"
+  },
+  "real_document_qa": [
+    {
+      "fixture": "v2-data",
+      "page_count": 1,
+      "renderer": {
+        "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+        "python_docx": "1.2.0",
+        "pypdf": "6.10.0",
+        "pypdfium2": "5.14.0",
+        "pillow": "12.3.0",
+        "font": "DejaVu Sans",
+        "preview_dpi": 144
+      },
+      "metrics": {
+        "schema_version": "1.0",
+        "clock": "perf_counter_ns",
+        "stages": [
+          {
+            "name": "docx_generation_and_reopen",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 29.352
+          },
+          {
+            "name": "converter_inventory_startup",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 64.626
+          },
+          {
+            "name": "converter_startup_and_conversion",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 812.177
+          },
+          {
+            "name": "pdf_text_and_embedded_font_checks",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 5.272
+          },
+          {
+            "name": "page_images",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 38.433
+          }
+        ],
+        "observed": {
+          "render_count": 1,
+          "converter_processes": 2,
+          "page_images": 1
+        },
+        "unavailable": [
+          "host_model_calls",
+          "host_tokens",
+          "host_tool_calls",
+          "host_context_tokens",
+          "human_wait",
+          "provider_cost"
+        ],
+        "scope": "Only named local stages; absence of a measurement is not zero."
+      },
+      "file_hashes": {
+        "docx": "075d3db87d5655aad7b328c8f09dd3ab720532790941fb783bb4c6802f35a0cb",
+        "pdf": "5c1f5dacd956336aa0f02f92a7f2432d1785bf534f2df331dc2350923da34632",
+        "content": "f28bd45ba33edc9083557423a23bbc158932391b0561eb22611e8eb51c0b5d63"
+      },
+      "page_hashes": [
+        "a528b5bb6f5bfe1fd28889ffef81547f2caca5e4a73278a54f2e0960bc6a0898"
+      ],
+      "visual_review": "Viewed all pages; readable grouping, no clipping/overlap/missing glyphs observed. Not a blind editorial comparison."
+    },
+    {
+      "fixture": "v2-technical",
+      "page_count": 1,
+      "renderer": {
+        "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+        "python_docx": "1.2.0",
+        "pypdf": "6.10.0",
+        "pypdfium2": "5.14.0",
+        "pillow": "12.3.0",
+        "font": "DejaVu Sans",
+        "preview_dpi": 144
+      },
+      "metrics": {
+        "schema_version": "1.0",
+        "clock": "perf_counter_ns",
+        "stages": [
+          {
+            "name": "docx_generation_and_reopen",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 28.089
+          },
+          {
+            "name": "converter_inventory_startup",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 69.744
+          },
+          {
+            "name": "converter_startup_and_conversion",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 852.85
+          },
+          {
+            "name": "pdf_text_and_embedded_font_checks",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 10.953
+          },
+          {
+            "name": "page_images",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 36.728
+          }
+        ],
+        "observed": {
+          "render_count": 1,
+          "converter_processes": 2,
+          "page_images": 1
+        },
+        "unavailable": [
+          "host_model_calls",
+          "host_tokens",
+          "host_tool_calls",
+          "host_context_tokens",
+          "human_wait",
+          "provider_cost"
+        ],
+        "scope": "Only named local stages; absence of a measurement is not zero."
+      },
+      "file_hashes": {
+        "docx": "1e7bcccaa21ec9174dd4e70d5c995dc201e3e2e4dff9167720e91b429a43ab6e",
+        "pdf": "ed55f31bc5fc46ed9071b85f9cc39271e82ff10be93964e2f406a1c56092d265",
+        "content": "73fd0a0cb61de916deb6f2c91a2476207ef629d4efc72fcce98009d8de961cff"
+      },
+      "page_hashes": [
+        "99fc4e02dc4d1004cea223055b6b0acce41c2c4df1ef4c77ef4ff8a303d7930f"
+      ],
+      "visual_review": "Viewed all pages; readable grouping, no clipping/overlap/missing glyphs observed. Not a blind editorial comparison."
+    },
+    {
+      "fixture": "v2-commercial",
+      "page_count": 1,
+      "renderer": {
+        "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+        "python_docx": "1.2.0",
+        "pypdf": "6.10.0",
+        "pypdfium2": "5.14.0",
+        "pillow": "12.3.0",
+        "font": "DejaVu Sans",
+        "preview_dpi": 144
+      },
+      "metrics": {
+        "schema_version": "1.0",
+        "clock": "perf_counter_ns",
+        "stages": [
+          {
+            "name": "docx_generation_and_reopen",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 28.283
+          },
+          {
+            "name": "converter_inventory_startup",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 64.534
+          },
+          {
+            "name": "converter_startup_and_conversion",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 838.882
+          },
+          {
+            "name": "pdf_text_and_embedded_font_checks",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 5.875
+          },
+          {
+            "name": "page_images",
+            "category": "machine",
+            "status": "ok",
+            "duration_ms": 39.507
+          }
+        ],
+        "observed": {
+          "render_count": 1,
+          "converter_processes": 2,
+          "page_images": 1
+        },
+        "unavailable": [
+          "host_model_calls",
+          "host_tokens",
+          "host_tool_calls",
+          "host_context_tokens",
+          "human_wait",
+          "provider_cost"
+        ],
+        "scope": "Only named local stages; absence of a measurement is not zero."
+      },
+      "file_hashes": {
+        "docx": "0436b5b3c6c0951d11f6b6c8c25a45860ec96be95471cc4aad71f6c4498735ca",
+        "pdf": "3d8355638e77c03a64ef099493394d74bbb863fac665be7b1dc02981d0e722a2",
+        "content": "d8a424245be3e2fe2130ac97233fd8a3b875dd7f6264e5cc035782b662c16e53"
+      },
+      "page_hashes": [
+        "0ff1b727b3378b4b3babc337001fdf245790b1761b5b2b70c7ab941ce0bb8497"
+      ],
+      "visual_review": "Viewed all pages; readable grouping, no clipping/overlap/missing glyphs observed. Not a blind editorial comparison."
+    }
+  ],
+  "deferred": [
+    "Full four-way equivalent reviewed rendered-package benchmark",
+    "Blind editorial comparison",
+    "Live providers/browser execution",
+    "Candidate cache/queues/form plans/TinyFish"
+  ],
+  "host_tokens": null,
+  "live_applications": 0
+}

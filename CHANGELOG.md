@@ -11,6 +11,8 @@
   packet, three fictional candidate families, a versioned twelve-JD cohort and
   adversarial tests. See docs/QUALITY_FAST_PLAN.md for the completed slice and
   explicitly pending caching, queues, form plans and full quality comparisons.
+  Publish equivalent handoff timing samples (21 per mode), the earlier local
+  timeout, and real LibreOffice/page evidence without claiming live throughput.
 
 - Introduce versioned public-research contracts and an original Firecrawl v2
   HTTP boundary with fixed-origin pagination, explicit capabilities and no SDK.

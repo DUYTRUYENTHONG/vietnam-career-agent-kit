@@ -1,5 +1,15 @@
 # Faster preparation and execution
 
+## Source-bound wording handoff, 22 October 2026
+
+The [quality-gated slice report](QUALITY_FAST_REPORT.md) records an equivalent
+three-candidate comparison: two CLI starts → one, completed-run median
+710.513 → 446.410 ms, seven samples per candidate/mode. Same packet digests and
+fresh checks; ranges overlap and an earlier timeout is explicitly retained.
+This excludes semantic review/rendering/execution and establishes no live job
+application-rate or token/cost claim. Real v2 renderer stage timings, baseline
+regressions and deferred complete-package quality comparison are recorded there.
+
 ## Combined launch measurement, 22 October 2026
 
 `python scripts/benchmark_launch.py --samples 7` compares the existing
