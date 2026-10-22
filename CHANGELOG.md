@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add experimental bounded public Greenhouse board discovery with three concurrent reads, stable lead fingerprints, duplicate suppression and explicit partial failures. Add fictional transport/CLI tests and a reproducible scheduling benchmark; no submission API, ledger migration or live 100/hour claim.
+
 - Add a reusable auto-proceed prompt with source-backed screening answers and
   the existing receipt-before-tab-close harness. Document ownership checks,
   absence verification, pending cleanup and uncertain-attempt preservation.

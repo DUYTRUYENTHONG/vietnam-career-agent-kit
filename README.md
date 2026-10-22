@@ -1,5 +1,8 @@
 # Vietnam Career Agent Kit
 
+Bulk public Greenhouse discovery is available through `discover-greenhouse`.
+See [the bounded reader, benchmark and performance limits](docs/BULK_DISCOVERY.md).
+
 [Standing authorization](docs/STANDING_AUTHORIZATION.md) reuses one approved
 recipient/answer/consent scope across later reviewed CVs and finite batches.
 It shares one application cap, expiry and revocation; host-required confirmations

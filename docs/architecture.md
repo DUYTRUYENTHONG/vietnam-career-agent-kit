@@ -73,3 +73,7 @@ Optional deterministic host planning uses `route-task` and
 does not introduce a second model API, dispatcher service or native model switch.
 
 Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.py` and `python scripts/demo_slice1.py --data-dir ../career-demo-private`. The demo uses only checked-in fictional inputs and records a clearly labelled fictional confirmation. Integration tests execute the real CLI without model calls. CI covers Linux/Windows and Python 3.11/3.12; no external accounts are accessed.
+
+## Experimental bulk discovery
+
+`discover-greenhouse` performs fixed-origin, bounded read-only public GETs with up to three workers; normalization uses stable post identities and fingerprints. It does not access candidate workspaces, write the ledger or submit. See [contract, review and limits](BULK_DISCOVERY.md). Submission execution retains its single-writer and fresh-action checks.

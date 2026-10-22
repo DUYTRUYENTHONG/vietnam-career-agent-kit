@@ -8,8 +8,9 @@ found no remaining material issues. Generic CLI and fictional bridge coverage
 include terminal cleanup resume, recovery exceptions, exact bridge binding,
 changed screenshots, ownership/intent flags, immutable/idempotent receipts and
 separate tracker status. No new browser driver, native runtime certification or
-real-employer integration is claimed. Discovery acceleration is instruction-only;
-the network connector gate remains pending. Published CI is a separate result.
+real-employer integration is claimed. At that launch/cleanup increment discovery
+was instruction-only; the later experimental Greenhouse increment is scoped below.
+Published CI is a separate result.
 The disposable demo, source hygiene, generated adapter and whitespace checks
 passed. A separate seven-sample fictional launch benchmark is recorded in
 PERFORMANCE.md; it does not certify native browser or live-employer throughput.
@@ -80,3 +81,9 @@ Canonical skills are .agents/skills. Claude wrappers point there and are generat
 The optional hook helper is tested as a standalone JSON process only. Native lifecycle callbacks and arbitrary tool coverage are unverified. Generic controls and shell wrappers can escape coverage. A failed/missing guard never authorizes disclosure. See HOOKS.md.
 
 Without browsing, use manual structured JD import. Without computer use, produce drafts/reports/manual handoff. Without rendering, report Markdown only. Without native hooks, use the explicit local preflight operations; those operations cannot sandbox unrelated host tools. No fallback is described as a missing capability.
+
+## Experimental Greenhouse discovery, 22 October 2026
+
+The stdlib CLI adds independent public discovery without a workspace schema change. Fictional mocked-transport, bounds, deduplication, concurrency and CLI tests are in `tests/test_discovery.py`. No native runtime, live employer or submission performance certification is added. See [scope and contract](BULK_DISCOVERY.md).
+
+Local validation: the full Windows regression run passed 146 tests in 226.251 seconds. After final compact-output and error-path refinements, all eight discovery tests passed separately. The disposable fictional demo, repository hygiene, generated adapter check and whitespace check passed. No real candidate files or employer accounts were used. CI is reported separately in the pull request.

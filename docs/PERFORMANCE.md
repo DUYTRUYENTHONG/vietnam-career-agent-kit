@@ -159,3 +159,7 @@ classification, tests or metrics. Its native host dispatch and token savings are
 unmeasured. A 100/hour live KPI remains unverified; `throughput` reports actual
 rolling qualifying confirmations rather than treating local benchmark capacity
 as applications.
+
+## Bulk discovery scheduling, 22 October 2026
+
+See [the architecture review and benchmark](BULK_DISCOVERY.md). Seven alternating fictional 12-board runs with 50 ms simulated read latency reduced median serial 631.272 ms to 215.581 ms with three workers. This measures scheduling only, not live Internet or application throughput. No freshness checks were removed.
