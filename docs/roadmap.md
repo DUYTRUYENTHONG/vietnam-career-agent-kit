@@ -1,5 +1,11 @@
 # Vertical-slice roadmap
 
+Quality-gated preparation enhancement: [first complete wording/review/render
+consumption slice](QUALITY_FAST_PLAN.md), with v1 fallback and optional real
+renderer CI. Candidate-local caches, bounded progressive queues, TinyFish,
+validated form plans and blind complete-package evaluation are separate pending
+increments; none is implied by v2 schema support.
+
 This records implemented evidence separately from intended product scope. No later slice is complete merely because a prompt describes it.
 
 | Slice | Acceptance gate | State |

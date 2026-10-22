@@ -1,0 +1,11 @@
+{
+  "schema_version":"2.0","candidate_id":"fictional-data","job_id":1,"language":"en",
+  "author":"host-drafting-pass","prompt_version":"wording-1",
+  "model_configuration":"existing host; exact model identifier unavailable",
+  "sections":[{"kind":"skills","groups":[{"context_fact_id":null,"statements":[{
+    "id":"S-F1","text":"Used SQL to query a fictional sales dataset.",
+    "source_fact_ids":["F1"],"source_locators":["CV1#project/classroom#bullet"],
+    "requirement_ids":["R1"],"transformation":"faithful_paraphrase",
+    "retained_qualifiers":["fictional"],"unresolved_questions":[],"review_status":"pending"
+  }]}]}]
+}

@@ -1,5 +1,13 @@
 # Portable core architecture
 
+Opt-in [CV content v2](CV_CONTENT_V2.md) adds `core/tailoring.py` as a Documents
+mixin using existing canonical drafts and source/profile/JD/assessment hashes.
+No new DB/schema or model API is introduced. Reviewed actual wording drives one
+ordered line model for Markdown/DOCX/PDF; v1 exact selection remains unchanged.
+See [quality-and-speed slice plan](QUALITY_FAST_PLAN.md) for pending concurrency,
+evidence reuse and form plans. `core/metrics.py` records local monotonic stages
+only; unobservable host usage is explicitly unavailable.
+
 ## Capability map and build order
 
 | Module | Responsibility | Depends on |
