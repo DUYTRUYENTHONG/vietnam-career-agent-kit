@@ -69,6 +69,10 @@ Dùng trợ lý AI và CV của riêng bạn để tìm việc tại Việt Nam 
 
 **Engine mới:** điều phối tuần tự inspect/fill/upload/review/submit/verify qua công cụ trình duyệt được host hỗ trợ; ghi lần thử trước khi nộp, giới hạn hữu hạn và chỉ đọc để xác minh lần nộp chưa rõ kết quả. Xem [hướng dẫn execution](docs/execution.md). Agent cung cấp kết nối trình duyệt; CLI không tự đăng nhập hay tạo trình duyệt.
 
+Xem [hướng dẫn xử lý các bước trước khi nộp](docs/PRE_SUBMISSION_GATES.md) khi có
+thỏa thuận mới, giá trị trường bị che hoặc cần chờ biên nhận. Hướng dẫn mô tả
+hợp đồng hiện có; không bổ sung trình điều khiển hay xác nhận tốc độ nộp thực tế.
+
 **Chưa có:** trích xuất CV PDF/DOCX, tìm việc tự động qua mạng, worker trình duyệt chạy độc lập và adapter nhà tuyển dụng đã được xác minh. Skill/hook, tên nhà cung cấp AI hoặc một bản ghi phê duyệt không chứng minh các khả năng này đã hoạt động.
 
 ## Chạy thử bằng dữ liệu hư cấu

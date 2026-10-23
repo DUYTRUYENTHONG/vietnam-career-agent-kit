@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+- Document immediate email-delivery rejection checks before confirmation,
+  preservation of Sent and failure evidence, the existing failed-verify state
+  mapping and recipient-change boundaries. Clarify that automatic late-bounce
+  reconciliation is not implemented. Instruction-only; no schema, adapter or
+  measured throughput change.
+
+- Document late consent and preliminary application screens with explicit
+  engine-state/counting rules, private handoff evidence, redacted contact
+  verification, minimized compose controls and bounded semantic receipt waits.
+  Preserve issued submit attempts and read-only recovery. Instruction-only;
+  no schema, approval, adapter or measured throughput change.
+
+- Document a host interaction runbook for preserving reviewed email paragraphs,
+  refreshing replaced compose controls, resolving observed native file-picker
+  failures and verifying Sent recipients/attachments before tab cleanup.
+  Instruction-only; no adapter, schema, authorization or throughput change.
+
 - Add opt-in evidence-bound CV wording v2: structured sections, single-fact
   paraphrases/translations, exact scope/requirement links, conservative factual
   alarms and independently recorded statement review. Markdown/DOCX/PDF now

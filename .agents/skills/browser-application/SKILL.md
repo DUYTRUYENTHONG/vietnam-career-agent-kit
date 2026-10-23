@@ -34,6 +34,14 @@ and fresh action checks below remain required. See ../../../docs/FAST_WEB.md.
 7. Repeat sequentially. Only APPROVED_BATCH returns submit, after a durable unique attempt has already been committed. Click once. Acknowledge it, then verify visible employer/requisition/success and retain a private screenshot. An issued click is not confirmation.
 8. Stop on non-ok outcomes. A pending submit resumes as read-only verify; it never returns another submit. A terminal unknown may use recover-execution for reconciliation only. Do not retry that vacancy, continue other entries or infer success. ASSIST ends after review without submitting.
 
+For email applications, inspect the matching conversation for an immediate
+delivery rejection during the bounded verify pass. A Sent message does not
+override a mailbox-not-found response. Save both privately, return a failed
+verify receipt with the observed reason, and do not confirm or resend. The
+current engine uses its broader non-confirmed state; automatic late-bounce
+reclassification is not implemented. See the email verification section in
+../../../docs/execution.md before reporting counts or closing a completed tab.
+
 ## Standing authorization
 
 An exact manifest may derive from approved standing campaign authority. Reuse
