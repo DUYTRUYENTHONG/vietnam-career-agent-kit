@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Document immediate email-delivery rejection checks before confirmation,
+  preservation of Sent and failure evidence, the existing failed-verify state
+  mapping and recipient-change boundaries. Clarify that automatic late-bounce
+  reconciliation is not implemented. Instruction-only; no schema, adapter or
+  measured throughput change.
+
 - Document late consent and preliminary application screens with explicit
   engine-state/counting rules, private handoff evidence, redacted contact
   verification, minimized compose controls and bounded semantic receipt waits.

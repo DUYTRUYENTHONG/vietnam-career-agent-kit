@@ -242,6 +242,32 @@ message and attachment. Save the private evidence before closing the owned tab.
 A Sent receipt establishes sending, not independent delivery to the employer.
 This runbook changes no schema, approval requirement or measured throughput.
 
+### Check immediate delivery failures before confirming email
+
+During the existing bounded verification pass, inspect the matching conversation
+for an immediately returned delivery-status message. Do not add an indefinite
+inbox monitor or inspect unrelated mail. A Sent message and an explicit rejection
+can coexist; the rejection prevents a qualifying application confirmation.
+
+For example, an observed `550 5.1.1` mailbox-not-found response is a delivery
+failure. Save the exact recipient, original Sent message, rejection text and
+private screenshot. Return a non-ok verify receipt (`status: "failed"` with an
+accurate `reason`); never set `confirmed: true` or invent a `delivery_failed`
+protocol field. With a reserved attempt, the current engine records
+`submission_unknown` / `submission_uncertain` and excludes it from confirmations.
+Describe the known delivery failure precisely in the handoff even though the
+portable state is broader. Preserve the consumed attempt and stop that run.
+
+Do not resend, guess a different address, forward the same CV to support, or
+create a replacement run to recover a failed delivery. A new recipient requires
+independent recruitment-route evidence and current disclosure authority.
+
+A later bounce after an already committed confirmation needs separate canonical
+reconciliation. Preserve the original append-only snapshot and save the newer
+evidence; protocol 1.0 has no automatic late-bounce reclassification command.
+Do not claim that the original confirmation proves delivery, rewrite its receipt,
+or report a corrected count before the canonical record has been reconciled.
+
 ## Interruptions and limits
 
 ```sh

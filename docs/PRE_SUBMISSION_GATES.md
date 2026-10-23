@@ -76,6 +76,9 @@ the current state; do not repeat the final action. Verify the exact recipient,
 message and attachment, save evidence, then close only the completed agent-owned
 tab under the [cleanup contract](execution.md#close-completed-application-tabs).
 Sending evidence does not independently establish delivery or hiring acceptance.
+If the matching conversation also contains an immediate delivery rejection,
+follow the [email failure verification guidance](execution.md#check-immediate-delivery-failures-before-confirming-email).
+Do not turn a known rejection into a successful application receipt.
 
 ## Verification and limits
 
