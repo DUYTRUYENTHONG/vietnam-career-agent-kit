@@ -13,6 +13,8 @@
   `codex/parallel-tinyfish`: PRs, five app-pinned CI checks, up-to-date branches,
   resolved conversations and no force-push/deletion. Applying it to GitHub is a
   separate authorized administrative action; the file alone enables no rules.
+- Use only app-pinned `checks` in that payload: the live GitHub API rejects
+  combining it with legacy `contexts`, including an empty list.
 
 - Document immediate email-delivery rejection checks before confirmation,
   preservation of Sent and failure evidence, the existing failed-verify state

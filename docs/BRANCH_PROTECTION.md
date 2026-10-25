@@ -24,6 +24,10 @@ protect `main`, merge the existing PR, configure all `codex/*` branches, install
 hooks, or grant another account access. Keep actual checks and their names aligned
 with [CI](../.github/workflows/ci.yml) before changing the policy.
 
+Use the app-pinned `checks` form only. GitHub rejects a payload containing both
+legacy `contexts` and `checks` with HTTP 422 (`oneOf` ambiguity), even when
+`contexts` is empty. This was verified against the live endpoint.
+
 ## Apply after the current change is pushed
 
 An administrator can run these commands from the repository root with an
