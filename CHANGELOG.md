@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- Add English/Vietnamese README entry points, Mermaid workflow diagrams and a
+  detailed reusable campaign prompt covering setup, evidence, bounded public
+  research, document review, exact disclosure, isolated lanes and receipt recovery.
+  Clarify implemented experimental TinyFish Fetch, the local host-bridge engine,
+  serialized shared sessions and unverified live execution/throughput. Correct
+  stale README claims that all network retrieval is pending. Documentation only;
+  no runtime permissions, defaults, schemas or execution behavior change.
+- Add an explicit branch-protection payload and maintainer guide for
+  `codex/parallel-tinyfish`: PRs, five app-pinned CI checks, up-to-date branches,
+  resolved conversations and no force-push/deletion. Applying it to GitHub is a
+  separate authorized administrative action; the file alone enables no rules.
+
 - Document immediate email-delivery rejection checks before confirmation,
   preservation of Sent and failure evidence, the existing failed-verify state
   mapping and recipient-change boundaries. Clarify that automatic late-bounce

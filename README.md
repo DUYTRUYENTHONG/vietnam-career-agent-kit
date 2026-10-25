@@ -4,6 +4,44 @@
 
 Created and maintained by DUYTRUYENTHONG, with community contributions welcome. The kit is free to use, modify and share under the [MIT License](LICENSE). Preserve its copyright and license notices when redistributing it. Optional external AI/browser services may charge their own fees. See [authorship and credits](AUTHORS.md).
 
+Bring your own agent and CV. Research suitable jobs, prepare truthful documents,
+review an exact application package, and track what actually happened.
+
+## Start here
+
+| Your next step | Open this |
+|---|---|
+| Understand the workflow and its boundaries | [Visual guide: four workflow diagrams](docs/USER_GUIDE.md) |
+| Run a real campaign with your own facts and limits | [Detailed copy-and-paste agent prompt](prompts/GUIDED_CAMPAIGN.md) |
+| Try the tools without accounts or personal data | [Fictional quick start](#try-the-working-slice) |
+| Configure documents or a supported execution bridge | [Document setup](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
+| Understand ten-lane concurrency and TinyFish | [Parallel applications and measured limits](docs/PARALLEL_APPLICATIONS.md) |
+
+```mermaid
+flowchart LR
+  A[Your CV and preferences] --> B[Confirm source-backed facts]
+  B --> C[Research and deduplicate jobs]
+  C --> D[Assess fit and missing evidence]
+  D --> E[Tailor and inspect every CV page]
+  E --> F[Review exact disclosure scope]
+  F --> G[Permitted host actions or manual handoff]
+  G --> H[Save outcome and resume tracker]
+```
+
+**What runs today:** local preparation, document/approval checks and durable
+request/receipt orchestration. Experimental public research includes Firecrawl,
+bounded Greenhouse reads and TinyFish **Fetch** (up to ten public URLs per batch).
+The application engine can coordinate up to ten isolated host sessions; this
+repository does not include a live browser driver or provision those sessions.
+TinyFish Agent/browser submissions remain unsupported. A shared authenticated
+session uses one action stream. [See the current capability table](docs/USER_GUIDE.md#what-is-implemented).
+
+The prompt guides an agent through setup to receipts; it grants no new tool
+permissions and does not override runtime confirmation. No live 100x speedup or
+100-applications/hour result is established by the local tests.
+
+## Feature references
+
 [Source-bound CV wording v2](docs/CV_CONTENT_V2.md) adds structured sections,
 reviewed paraphrasing and a shared Markdown/DOCX/PDF content model. Exact-quote
 mode remains available. `import-wording --include-review-packet` combines two
@@ -67,7 +105,7 @@ guide successive finite batches, resume from one private ledger, and count only
 confirmed new submissions toward a user-selected target. Persistent goals require
 a supported host; this guidance does not add a scheduler or browser worker.
 
-**Not yet implemented:** PDF/DOCX CV extraction, network job connectors, standalone unattended browser workers and verified employer-specific adapters. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
+**Not yet implemented:** built-in PDF/DOCX CV extraction, standalone unattended browser workers and verified employer-specific submission adapters. Experimental public retrieval does not supply an authenticated application connector. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice
 
@@ -91,6 +129,11 @@ On Windows, `py -3` or an absolute real interpreter path may be needed; the Stor
 Open the clone in your chosen agent and paste:
 
 > This is a job-seeker request. Read prompts/STARTUP.md and docs/job-seeker-policy.md. Diagnose my selected runtime, reuse or initialize one explicitly chosen external private workspace, and ask only for missing candidate facts/preferences. Start in PREPARE. Use only capabilities reported by the installed kit. Do not upload, enter personal data or submit without an exact permitted disclosure scope and my approval.
+
+For explicit role filters, finite budgets, optional public providers, isolated
+lanes and recovery instructions, use the [full campaign prompt](prompts/GUIDED_CAMPAIGN.md).
+Replace its placeholders with your choices; no candidate biography or job target
+is supplied by default.
 
 The agent may draft versioned inputs using [schemas/contracts.schema.json](schemas/contracts.schema.json) and examples. Import your authorized text CV with `import-cv`, then a source-backed profile with `import-profile`. That returns `needs_input` until you review and explicitly confirm its fingerprint. Generated prose is not evidence. Pending/rejected facts cannot enter the CV; exact quotes preserve qualifiers. The kit validates linkage and structure, not the truth of a human's claim or every semantic requirement.
 
@@ -134,7 +177,8 @@ Structured operations return `schema_version`, `outcome`, `data`, `issues`, `mes
 
 [Faster discovery guidance](docs/DISCOVERY_ACCELERATION.md) covers public ATS
 listings, coverage reuse and candidate-authorized adjacent role families. It is
-instruction-only; the network connector remains pending.
+instruction-only; implemented experimental readers and their limits are listed
+in the [visual guide](docs/USER_GUIDE.md#what-is-implemented).
 
 ## Costs, hooks and development
 
@@ -152,5 +196,9 @@ python scripts/demo_slice1.py
 Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md) and maintainer AGENTS.md. CI uses fictional data, no paid model calls and no real employer applications. [MIT](LICENSE) covers original code; [third-party notices](THIRD_PARTY_NOTICES.md) and the [pinned reference review](docs/REFERENCE_REVIEW.md) distinguish ideas from copied code. No reference candidate examples, installers or orchestrators are bundled.
 
 ## Ten-job batch workflow
+
+Maintainers: see [branch protection](docs/BRANCH_PROTECTION.md) for the policy
+template and separate verification of actual GitHub enforcement. A checked-in
+configuration does not itself enable server protection.
 
 Opt-in schema6 application lanes and TinyFish public Fetch batches are documented in [the architecture and CLI guide](docs/PARALLEL_APPLICATIONS.md). Use the [detailed agent prompt](prompts/ten-job-batch.md). Requires an authorized host bridge with isolated concurrent sessions for actual simultaneous applications; no live browser driver is bundled.

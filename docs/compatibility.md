@@ -1,5 +1,17 @@
 # Runtime compatibility evidence
 
+## Visual guide and reusable campaign prompt
+
+The [visual guide](USER_GUIDE.md) and [campaign prompt](../prompts/GUIDED_CAMPAIGN.md)
+document current local CLI contracts and distinguish experimental public Fetch
+from unsupported TinyFish Agent/browser submissions. They are instruction-only;
+no new runtime, browser driver, schema or live throughput evidence is introduced.
+Concurrent applications require host-provided isolated sessions; a shared
+authenticated session must remain serialized. A checked-in branch policy is
+not proof of server enforcement; see [branch protection](BRANCH_PROTECTION.md).
+
+## Earlier implementation evidence
+
 Wording v2 (22 October 2026): opt-in stdlib CLI and source-bound content model,
 with deterministic fictional tests and no new model API, hooks, provider or
 browser integration. Three profile families and EN/VI qualifier tests do not
