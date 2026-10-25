@@ -116,3 +116,13 @@ redistributed, installed or relicensed. Hosted terms and account capability are
 not established by reading the spec. Tests use original fictional fake transport;
 live provider/account verification has not run. TinyFish APIs are not implemented
 or certified by this review.
+
+## TinyFish ten-URL Fetch review
+
+Official reference: https://github.com/tinyfish-io/tinyfish-cookbook at revision `78b7c3336289f0f3e1a3696801945de8489ab097` (MIT). Read-only checkout; no reference hooks, installers, SDKs or code copied. Original standard-library adapter implements the documented Fetch JSON request: POST https://api.fetch.tinyfish.ai with urls and format=markdown.
+
+Reviewed source SHA256:
+- README.md: `8b3a8a642e18054c048276e77dfa0dd1a011339f4187fbb9c66a24b8e0f7a3f1`
+- skills/tinyskill/SKILL.md: `9d976035919f78865eaa17fdb00f67305159f4ab52c83007a3f799774bf572b6`
+
+Fetch supports up to ten URLs per batch. Server scheduling is provider-controlled. Agent and direct Browser execution were deliberately excluded from this increment. Only fictional injected transport is tested; no account quota, price, live latency or employer application support is certified.

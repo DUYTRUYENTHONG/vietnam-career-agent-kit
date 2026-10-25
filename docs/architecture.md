@@ -96,3 +96,8 @@ Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.
 ## Experimental bulk discovery
 
 `discover-greenhouse` performs fixed-origin, bounded read-only public GETs with up to three workers; normalization uses stable post identities and fingerprints. It does not access candidate workspaces, write the ledger or submit. See [contract, review and limits](BULK_DISCOVERY.md). Submission execution retains its single-writer and fresh-action checks.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.

@@ -27,10 +27,22 @@
       "scope": "Public unauthenticated research only; explicit reviewed plan and source permissions required"
     },
     {
-      "id": "tinyfish",
-      "status": "Unsupported",
-      "operations": [],
-      "reason": "Interactive public research and direct Browser execution require separately tested increments and disclosure contracts"
+      "id": "tinyfish-fetch",
+      "status": "Experimental",
+      "base_url": "https://api.fetch.tinyfish.ai",
+      "operations": [
+        "fetch_batch"
+      ],
+      "max_urls": 10,
+      "sdk": null,
+      "dependencies": [],
+      "credentials": "TINYFISH_API_KEY environment only",
+      "live_account_verified": false,
+      "tests": [
+        "tests/test_tinyfish.py",
+        "tests/test_tinyfish_research.py"
+      ],
+      "scope": "Public URLs only; durable intent, no retry, no Agent/browser/private disclosure"
     }
   ]
 }

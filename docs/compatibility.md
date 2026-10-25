@@ -134,3 +134,10 @@ Local validation: the full Windows regression run passed 146 tests in 226.251 se
 Post-measurement HTTP failure-classification hardening passed six focused
 provider tests. The complete current suite has 185 cases; its CI state is reported
 separately in the PR, without relabelling the earlier 184-test local run.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.
+
+Local validation for the parallel increment: 223-test full discovery completed with 222 passes and one subprocess timeout after a host clock interruption (negative remaining timeout). The affected real-CLI execution-loop test passed on isolated rerun in 8.097s. No test expectation or timeout was weakened. Provider/parallel tests use fictional transports and workspaces. Public-source hygiene (185 files), wrapper drift check and fictional preparation demo passed. Live provider credentials were absent; live browser concurrency was not exercised.

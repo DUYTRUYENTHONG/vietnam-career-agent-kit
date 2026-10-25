@@ -25,7 +25,6 @@ class Executor(Campaign):
             'CREATE TABLE IF NOT EXISTS execution_runs(id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL UNIQUE REFERENCES campaign_manifests(fingerprint), owner TEXT NOT NULL, state TEXT NOT NULL, payload TEXT NOT NULL, deadline_utc TEXT NOT NULL, created_utc TEXT NOT NULL)',
             "CREATE UNIQUE INDEX IF NOT EXISTS execution_one_active ON execution_runs((1)) WHERE state='active'",
             'CREATE TABLE IF NOT EXISTS execution_actions(id TEXT PRIMARY KEY, run_id TEXT NOT NULL REFERENCES execution_runs(id), job_id INTEGER NOT NULL REFERENCES jobs(id), action TEXT NOT NULL, payload TEXT NOT NULL, receipt TEXT, created_utc TEXT NOT NULL, completed_utc TEXT)',
-            'CREATE UNIQUE INDEX IF NOT EXISTS execution_one_pending ON execution_actions(run_id) WHERE receipt IS NULL',
             'CREATE TABLE IF NOT EXISTS execution_attempts(id TEXT PRIMARY KEY, run_id TEXT NOT NULL REFERENCES execution_runs(id), job_id INTEGER NOT NULL UNIQUE REFERENCES jobs(id), fingerprint TEXT NOT NULL, snapshot_json TEXT NOT NULL, snapshot_sha256 TEXT NOT NULL, created_utc TEXT NOT NULL)',
             'CREATE TABLE IF NOT EXISTS execution_submissions(id TEXT PRIMARY KEY, attempt_id TEXT NOT NULL UNIQUE REFERENCES execution_attempts(id), job_id INTEGER NOT NULL UNIQUE REFERENCES jobs(id), snapshot_json TEXT NOT NULL, snapshot_sha256 TEXT NOT NULL, recorded_utc TEXT NOT NULL)',
             'CREATE TABLE IF NOT EXISTS campaign_authorizations(fingerprint TEXT PRIMARY KEY,payload TEXT NOT NULL,approved_utc TEXT,revoked_utc TEXT,reason TEXT,created_utc TEXT NOT NULL)',
@@ -45,14 +44,22 @@ class Executor(Campaign):
             db.execute("CREATE TRIGGER IF NOT EXISTS campaign_authorizations_no_delete BEFORE DELETE ON campaign_authorizations BEGIN SELECT RAISE(ABORT,'append-only standing scopes'); END")
             from .research_store import migrate
             migrate(db)
+            from .parallel_execution import migrate_parallel
+            migrate_parallel(db)
             db.commit()
-        return Outcome('ok',{'workspace':str(self.data_dir),'schema':5,'language':self.language()},[])
+        return Outcome('ok',{'workspace':str(self.data_dir),'schema':6,'language':self.language()},[])
 
     def _run(self, db, run_id):
         row=db.execute('SELECT * FROM execution_runs WHERE id=?',(run_id,)).fetchone()
         if not row:raise WorkflowError('needs_input','Unknown execution run')
         if row['owner']!=self.actor:raise WorkflowError('blocked','A different coordinator owns this run')
-        return dict(row),json.loads(row['payload'])
+        payload=json.loads(row['payload'])
+        if 'lanes' in payload and not getattr(self,'_parallel_lane',False):
+            raise WorkflowError('blocked','Use parallel execution commands for this run')
+        return dict(row),payload
+
+    def _pending_action(self, db, run_id):
+        return db.execute('SELECT * FROM execution_actions WHERE run_id=? AND receipt IS NULL',(run_id,)).fetchone()
 
     def _manifest_snapshot(self, fingerprint):
         with self._db() as db:
@@ -70,7 +77,7 @@ class Executor(Campaign):
         db.execute('UPDATE jobs SET state=?,version=version+1,updated_utc=? WHERE id=?',
                    (state,utc_now(),job_id))
 
-    def start_execution(self, fingerprint, bridge_id, runtime_minutes):
+    def start_execution(self, fingerprint, bridge_id, runtime_minutes, *, _flow_factory=None):
         text(bridge_id,'bridge_id')
         with self._db() as db:
             db.execute('BEGIN IMMEDIATE')
@@ -90,6 +97,8 @@ class Executor(Campaign):
             deadline=min(now_utc()+timedelta(minutes=runtime_minutes),timestamp(manifest['expires_utc'],'expiry'))
             payload={'entry_index':0,'step':'inspect','binding_id':None,'inspection':None,
                      'bridge_id':bridge_id,'attempt_id':None}
+            if _flow_factory is not None:
+                payload=_flow_factory(db,manifest,payload)
             db.execute('INSERT INTO execution_runs VALUES(?,?,?,?,?,?,?)',
                 (run_id,fingerprint,self.actor,'active',json.dumps(payload),deadline.isoformat(),utc_now()))
             self._event(db,'execution_started',run_id,fingerprint);db.commit()
@@ -130,7 +139,7 @@ class Executor(Campaign):
             db.execute('BEGIN IMMEDIATE');run,flow=self._run(db,run_id)
             if run['state']!='active':return self._status(run,flow)
             manifest=self._manifest_snapshot(run['fingerprint'])
-            pending=db.execute('SELECT * FROM execution_actions WHERE run_id=? AND receipt IS NULL',(run_id,)).fetchone()
+            pending=self._pending_action(db,run_id)
             if pending:
                 if pending['action']!='submit':
                     raise WorkflowError('needs_input','An action is outstanding; record its receipt or stop. Never replay a pending browser mutation blindly.')
@@ -256,6 +265,8 @@ class Executor(Campaign):
                 raise ContractError('Receipt contains fields for another action')
             self._validate_identity(receipt,request)
             manifest=self._manifest_snapshot(run['fingerprint']);entry=manifest['entries'][flow['entry_index']]
+            if row['job_id']!=entry['job_id']:
+                raise WorkflowError('blocked','Receipt belongs to another application lane')
             if receipt['status']=='ok' and action in {'inspect','fill','upload','review'}:
                 form=object_fields(receipt.get('form'),{'fields','required_fields','consents','upload_extensions','blockers'},set(),'form observation')
                 self._inspect(form,entry)

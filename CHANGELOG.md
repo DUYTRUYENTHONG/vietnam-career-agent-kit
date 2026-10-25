@@ -121,3 +121,10 @@
 - Optional inactive hook examples, fictional tests, source reviews and Linux/Windows CI.
 
 Native host callbacks and live application submissions have not been tested. This initial release provides preparation tools and a supervised workflow; browser control and document rendering come from the user's environment.
+
+## Unreleased: concurrent application lanes
+
+- Add schema6 per-job pending actions and an opt-in ten-lane host bridge coordinator.
+- Add public-only TinyFish Fetch batches with durable intent and no uncertain replay.
+- Add CLI operations, reusable batch prompt, failure isolation and concurrency tests.
+- No live employer submission or provider speed claim is implied by local tests.

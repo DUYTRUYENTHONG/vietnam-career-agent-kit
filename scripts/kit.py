@@ -39,6 +39,10 @@ def parser() -> Parser:
     web_bench=commands.add_parser('benchmark-web',help='fictional transport benchmark; never calls a provider')
     web_bench.add_argument('--samples',type=int,default=7)
     web_bench.add_argument('--latency-ms',type=int,default=30)
+    tiny=commands.add_parser('tinyfish-fetch',help='opt-in public batch fetch of 1-10 URLs; preview by default')
+    tiny.add_argument('--plan',type=Path,required=True)
+    tiny.add_argument('--live',action='store_true')
+    tiny.add_argument('--approve-plan')
     research=commands.add_parser('discover',help='opt-in bounded Firecrawl public research; dry-run by default')
     research.add_argument('--plan',type=Path,required=True)
     mode=research.add_mutually_exclusive_group()
@@ -102,6 +106,17 @@ def parser() -> Parser:
     start.add_argument('--fingerprint',required=True)
     start.add_argument('--bridge-id',required=True)
     start.add_argument('--runtime-minutes',type=int,required=True)
+    parallel=commands.add_parser('start-parallel-execution',help='start up to ten isolated host-browser lanes; no browser acquired')
+    parallel.add_argument('--fingerprint',required=True)
+    parallel.add_argument('--bridge-id',required=True)
+    parallel.add_argument('--runtime-minutes',type=int,required=True)
+    parallel.add_argument('--workers',type=int,default=10)
+    for name in ['parallel-cleanup','record-parallel-cleanup','parallel-status','next-parallel-action','record-parallel-action','check-parallel-action','recover-parallel-execution','stop-parallel-execution']:
+        cmd=commands.add_parser(name);cmd.add_argument('--run-id',required=True)
+        if name in {'next-parallel-action','recover-parallel-execution'}:cmd.add_argument('--job-id',type=int,required=True)
+        if name in {'record-parallel-action','record-parallel-cleanup'}:cmd.add_argument('--receipt',type=Path,required=True)
+        if name=='check-parallel-action':cmd.add_argument('--request-id',required=True)
+        if name=='stop-parallel-execution':cmd.add_argument('--reason',required=True)
     launch=commands.add_parser('launch-execution',help='reuse standing authority, start and return the first guarded request')
     launch.add_argument('--fingerprint',required=True);launch.add_argument('--authorization',required=True)
     launch.add_argument('--bridge-id',required=True);launch.add_argument('--runtime-minutes',type=int,required=True)
@@ -156,7 +171,10 @@ def execute(args) -> Outcome:
         from adapters.providers.firecrawl import CAPABILITIES
         return Outcome('ok',{'provider':'firecrawl-v2','credentials_configured':bool(os.environ.get('FIRECRAWL_API_KEY')),
             'capabilities':asdict(CAPABILITIES),'network_calls':0,'account_capabilities_verified':False,
-            'tinyfish':'Unsupported in this increment','dependencies':'Python standard library; no SDK installed'},[])
+            'tinyfish':{'status':'Experimental public Fetch only','credentials_configured':bool(os.environ.get('TINYFISH_API_KEY')),'max_urls':10,'live_verified':False},'dependencies':'Python standard library; no SDK installed'},[])
+    if command=='tinyfish-fetch' and not args.live:
+        from adapters.providers.tinyfish_research import preview
+        return preview(load_input(args.plan))
     if command=='discover' and not args.live:
         from adapters.providers.research import Research
         return Research(None).preview(load_input(args.plan))
@@ -174,7 +192,7 @@ def execute(args) -> Outcome:
     if command not in legacy:
         with work._db() as db:
             schema=db.execute('PRAGMA user_version').fetchone()[0]
-            if schema not in {1,2,3,4,5}:
+            if schema not in {1,2,3,4,5,6}:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
@@ -182,7 +200,7 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
             if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest','launch-execution'} and schema<4:
                 raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
-            if command in {'discover','research-status','cancel-research','research-report','import-research-jd'} and schema<5:
+            if command in {'tinyfish-fetch','discover','research-status','cancel-research','research-report','import-research-jd'} and schema<5:
                 raise WorkflowError('needs_input','Run init for additive public research schema 5')
     if command in {'discover','research-status','cancel-research','research-report','import-research-jd'}:
         from adapters.providers.research import Research
@@ -196,6 +214,24 @@ def execute(args) -> Outcome:
         except ProviderError as error:
             return Outcome('manual_required',{'provider_error':error.code,'possibly_accepted':error.possibly_accepted},
                            ['Inspect persisted tasks; do not relaunch an uncertain request.'])
+    if command in {'parallel-cleanup','record-parallel-cleanup','start-parallel-execution','parallel-status','next-parallel-action','record-parallel-action','check-parallel-action','recover-parallel-execution','stop-parallel-execution'}:
+        from core.parallel_execution import ParallelExecutor
+        parallel=ParallelExecutor(args.data_dir,actor=args.actor)
+        if command=='start-parallel-execution':return parallel.start_parallel_execution(args.fingerprint,args.bridge_id,args.runtime_minutes,workers=args.workers)
+        if command=='parallel-cleanup':return parallel.parallel_cleanup(args.run_id)
+        if command=='record-parallel-cleanup':return parallel.record_parallel_cleanup(args.run_id,work.private_json(args.receipt))
+        if command=='parallel-status':return parallel.parallel_status(args.run_id)
+        if command=='next-parallel-action':return parallel.next_parallel_action(args.run_id,args.job_id)
+        if command=='record-parallel-action':return parallel.record_parallel_action(args.run_id,work.private_json(args.receipt))
+        if command=='check-parallel-action':return parallel.check_parallel_action(args.run_id,args.request_id)
+        if command=='recover-parallel-execution':return parallel.recover_parallel_execution(args.run_id,args.job_id)
+        return parallel.stop_parallel_execution(args.run_id,args.reason)
+    if command=='tinyfish-fetch':
+        from adapters.providers.tinyfish_research import fetch
+        from adapters.providers.contracts import ProviderError
+        try:return fetch(work,load_input(args.plan),args.approve_plan)
+        except ProviderError as error:
+            return Outcome('manual_required',{'provider_error':error.code,'possibly_accepted':error.possibly_accepted},['Inspect persisted task state before any retry.'])
     if command=='import-cv':return work.import_cv(args.file,args.source_id)
     if command=='import-profile':return work.import_profile(load_input(args.file))
     if command=='profile':return work.inspect_profile()

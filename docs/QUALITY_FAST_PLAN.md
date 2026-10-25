@@ -37,3 +37,8 @@ implemented scheduler**. Unknown costs remain unknown; no paid top-ups.
 
 Stop here after the complete wording/review/render-consumption slice. Do not
 leave speculative queues, caches or form-plan modules half implemented.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.

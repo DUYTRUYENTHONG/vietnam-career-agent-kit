@@ -79,5 +79,15 @@
     "provider_record": "connectors/providers.json",
     "source_review": "docs/REFERENCE_REVIEW.md",
     "tinyfish": "Unsupported in this increment"
+  },
+  "tinyfish_fetch": {
+    "runtime_dependencies": [],
+    "sdk_installed": false,
+    "reference_repository": "https://github.com/tinyfish-io/tinyfish-cookbook",
+    "reference_revision": "78b7c3336289f0f3e1a3696801945de8489ab097",
+    "reference_license": "MIT",
+    "copied_source": false,
+    "evidence": "docs/REFERENCE_REVIEW.md",
+    "live_service_verified": false
   }
 }
