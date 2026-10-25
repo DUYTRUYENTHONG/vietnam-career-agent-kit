@@ -1,4 +1,6 @@
 import json
+import io
+from contextlib import redirect_stdout
 from pathlib import Path
 import tempfile
 import unittest
@@ -92,3 +94,38 @@ class TinyFishResearchTests(unittest.TestCase):
         with self.assertRaises(WorkflowError):
             fetch(self.work, self.raw, preview(self.raw).data['fingerprint'], self.provider)
         self.assertEqual(self.calls, [])
+
+    def test_shared_cli_reports_tinyfish_without_firecrawl_calls(self):
+        from scripts.kit import main
+        fetch(self.work,self.raw,self.fingerprint,self.provider)
+        with patch('adapters.providers.research.Firecrawl',side_effect=AssertionError('wrong provider')):
+            for command in ['research-report','research-status','cancel-research']:
+                with self.subTest(command=command):
+                    output=io.StringIO()
+                    with redirect_stdout(output):
+                        code=main(['--data-dir',str(self.work.data_dir),command,'--fingerprint',self.fingerprint])
+                    result=json.loads(output.getvalue())
+                    self.assertEqual(code,0)
+                    self.assertEqual(result['outcome'],'ok')
+                    self.assertIsNone(result['data']['observed_credits'])
+                    self.assertEqual(len(result['data']['evidence']),1)
+        self.assertEqual(len(self.calls),1)
+
+    def test_uncertain_tinyfish_status_never_uses_firecrawl_recovery(self):
+        from adapters.providers.research import Research
+        def fail(*args):raise RuntimeError('fictional uncertain post')
+        self.provider.transport=fail
+        result=fetch(self.work,self.raw,self.fingerprint,self.provider)
+        with patch('adapters.providers.research.Firecrawl',side_effect=AssertionError('wrong provider')):
+            for cancel in [False,True]:
+                status=Research(self.work).status(self.fingerprint,cancel=cancel)
+                self.assertEqual(status.outcome,'manual_required')
+                self.assertEqual(status.data['tasks'][0]['state'],'uncertain')
+        # A non-null ID must not route a different provider's task to Firecrawl.
+        with self.work._db() as db:
+            db.execute("UPDATE provider_tasks SET state='running',remote_id='other-provider-id' WHERE id=?",(result.data['task_id'],))
+        with patch('adapters.providers.research.Firecrawl',side_effect=AssertionError('wrong provider')):
+            for cancel in [False,True]:
+                status=Research(self.work).status(self.fingerprint,cancel=cancel)
+                self.assertIsNone(status.data['observed_credits'])
+                self.assertEqual(status.data['tasks'][0]['state'],'running')

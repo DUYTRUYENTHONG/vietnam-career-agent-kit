@@ -225,6 +225,10 @@ def run_parallel_with_bridge(work, run_id, bridge):
                 result = work.parallel_status(run_id)
                 result.data['worker_errors'] = errors
                 cleanup=work.parallel_cleanup(run_id)
+                from .cleanup import through_bridge
+                cleanup_issues.extend(through_bridge(work._cleanup_lane(run_id),run_id,bridge,
+                                                    cleanup.data['requests'],attempted_cleanup))
+                cleanup=work.parallel_cleanup(run_id)
                 result.data['cleanup']=cleanup.data
                 result.issues.extend(cleanup_issues+cleanup.issues)
                 return result

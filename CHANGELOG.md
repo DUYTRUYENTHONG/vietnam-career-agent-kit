@@ -128,3 +128,11 @@ Native host callbacks and live application submissions have not been tested. Thi
 - Add public-only TinyFish Fetch batches with durable intent and no uncertain replay.
 - Add CLI operations, reusable batch prompt, failure isolation and concurrency tests.
 - No live employer submission or provider speed claim is implied by local tests.
+
+## Community attribution and QA follow-up
+
+- Add prominent English/Vietnamese DUYTRUYENTHONG creator attribution and community-sharing guidance, with an AUTHORS page linked to the existing MIT license and contribution guide.
+- Keep optional external service fees distinct from the freely shared toolkit.
+- Fix resumed confirmed-run cleanup so interrupted tab closure can finish without replaying applications.
+- Fix shared reports for TinyFish per-URL results and isolate provider-specific polling/cancellation.
+- Refresh README and roadmap descriptions to distinguish implemented experimental Fetch/parallel execution from unsupported direct cloud submission.

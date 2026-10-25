@@ -289,8 +289,10 @@ class Research:
         plan = self._plan(fingerprint)
         # Recovery can inspect/cancel already-created IDs after scope/runtime
         # expiry. It never starts a new task or grants current source permission.
+        # Only Firecrawl batch tasks implement this polling/cancellation API.
+        # Other providers share the ledger, never this remote-ID namespace.
         with self.work._db() as db:
-            tasks = [dict(r) for r in db.execute("SELECT * FROM provider_tasks WHERE plan_fingerprint=? AND remote_id IS NOT NULL AND state IN ('running','cancel_requested')", (fingerprint,))]
+            tasks = [dict(r) for r in db.execute("SELECT * FROM provider_tasks WHERE plan_fingerprint=? AND operation='batch' AND remote_id IS NOT NULL AND state IN ('running','cancel_requested')", (fingerprint,))]
         for task in tasks:
             # Unknown accepted starts have no ID; do not create replacements.
             if cancel and task['state'] != 'cancel_requested':
@@ -400,7 +402,9 @@ class Research:
                 with self.work._db() as db:
                     present = {r[0] for r in db.execute('SELECT url_key FROM research_evidence WHERE task_id=?', (task['id'],))}
                 task['missing_url_keys'] = [canonical_hash(u) for u in requested if canonical_hash(u) not in present]
-            credit = response.get('creditsUsed')
+            # TinyFish stores per-URL results, not a Firecrawl response object;
+            # its observed billing is unavailable rather than estimated here.
+            credit = response.get('creditsUsed') if isinstance(response,dict) else None
             task['observed_credits'] = credit if type(credit) in (int, float) and math.isfinite(credit) and credit >= 0 else None
             observed_credits.append(task['observed_credits'])
         plan = ResearchPlan.parse(json.loads(run['payload']))

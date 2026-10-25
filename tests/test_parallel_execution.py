@@ -186,5 +186,28 @@ class ParallelExecutionTests(unittest.TestCase):
             self.assertEqual(db.execute("SELECT count(*) FROM execution_actions WHERE action='cleanup'").fetchone()[0],2)
             self.assertEqual(db.execute('SELECT count(*) FROM execution_submissions').fetchone()[0],2)
 
+    def test_restart_finishes_saved_confirmation_cleanup_once(self):
+        run=self.start(1);test=self;closed=[]
+        # Simulate process interruption after confirmation is committed but
+        # before the bridge receives its cleanup request.
+        for _ in range(6):
+            request=self.work.next_parallel_action(run,1).data['request']
+            self.work.record_parallel_action(run,self.receipt(request))
+        self.assertEqual(len(self.work.parallel_cleanup(run).data['requests']),1)
+        class Bridge:
+            def perform(self,request):
+                raise AssertionError('Completed application must not be replayed')
+            def close_application_tab(self,request):
+                test.assertEqual(test.work.get_job(request['job_id'])['state'],'confirmed_submitted')
+                closed.append(request['request_id'])
+                return {'schema_version':'1.0','request_id':request['request_id'],
+                    'bridge_id':request['bridge_id'],'binding_id':request['binding_id'],
+                    'status':'closed','agent_owned':True,'cleanup_requested':True}
+        first=run_parallel_with_bridge(self.work,run,Bridge())
+        self.assertEqual(first.data['cleanup']['requests'],[])
+        second=run_parallel_with_bridge(self.work,run,Bridge())
+        self.assertEqual(second.data['cleanup']['requests'],[])
+        self.assertEqual(len(closed),1)
+
 
 if __name__=='__main__':unittest.main()

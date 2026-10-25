@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+**Được xây dựng bởi [DUYTRUYENTHONG](https://github.com/DUYTRUYENTHONG) — mã nguồn mở, chia sẻ miễn phí cùng cộng đồng.**
+
+DUYTRUYENTHONG sáng lập và duy trì dự án, luôn chào đón đóng góp từ cộng đồng. Bạn được sử dụng, chỉnh sửa và chia sẻ bộ công cụ miễn phí theo [giấy phép MIT](LICENSE); khi phân phối lại, hãy giữ thông báo bản quyền và giấy phép. Các dịch vụ AI hoặc trình duyệt bên ngoài tùy chọn có thể tính phí riêng. Xem [tác giả và ghi nhận đóng góp](AUTHORS.md).
+
 [Nội dung CV v2 có dẫn chứng](docs/CV_CONTENT_V2.md): chia mục CV, nhập cách diễn
 đạt đã được kiểm tra độc lập và dùng chung nội dung cho Markdown/DOCX/PDF.
 Chế độ chọn nguyên văn vẫn được giữ. `import-wording --include-review-packet`
@@ -9,8 +13,9 @@ kết tốc độ nộp hồ sơ thực tế.
 
 [Fast Web Pipeline tùy chọn](docs/FAST_WEB.md): tìm kiếm và đọc trang công khai
 bằng Firecrawl v2, lưu tác vụ/bằng chứng riêng tư và nhập JD có dẫn chứng vào
-SQLite hiện có. Mặc định không gọi mạng; không thêm thư viện Python. TinyFish và
-nộp hồ sơ qua trình duyệt cloud chưa được hỗ trợ trong đợt này.
+SQLite hiện có. Mặc định không gọi mạng; không thêm thư viện Python. [TinyFish Fetch
+và các luồng ứng tuyển song song](docs/PARALLEL_APPLICATIONS.md) là tính năng thử nghiệm,
+chỉ bật khi được yêu cầu. Chưa hỗ trợ nộp hồ sơ trực tiếp qua TinyFish Agent/browser.
 
 [Prompt tiếp tục chiến dịch và đóng tab đã hoàn tất](prompts/AUTO_PROCEED.md):
 tái sử dụng câu trả lời đã xác nhận và phạm vi ủy quyền còn hiệu lực; lưu bằng

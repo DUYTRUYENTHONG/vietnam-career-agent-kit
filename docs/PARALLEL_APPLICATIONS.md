@@ -72,3 +72,9 @@ On the development Windows host, `python scripts/benchmark_parallel.py --jobs 10
 | 10 | 26.812 | 4 | 10 | 10 |
 
 Observed fixture ratio: **1.592x**. Both runs performed 60 simulated browser actions. Preparation, live employer latency, model usage and provider calls were excluded. This is one local sample, not a confidence interval or production guarantee. A separate barrier test proves ten simultaneous inspect and submit calls; short action latency plus serialized validation means the timing fixture did not saturate all ten workers. The remaining serial validation/ledger work bounds speedup; further optimization must profile it without skipping fresh checks. An earlier run under concurrent test load measured 1.445x and is not the final timing sample.
+
+## Recovery QA follow-up
+
+Restarting a completed parallel run also services eligible saved-confirmation cleanup requests when the bridge supplies close_application_tab. Recorded successful closes are not repeated, and application actions are never replayed for cleanup.
+
+The shared research-report, research-status and cancel-research commands can inspect TinyFish records. TinyFish Fetch has no cancellation API in this adapter: cancel-research only reports its persisted state and never polls or cancels it through Firecrawl. Observed TinyFish billing remains unknown. Uncertain requests require reconciliation rather than another POST.

@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+**Made by [DUYTRUYENTHONG](https://github.com/DUYTRUYENTHONG). Open source and shared freely with the community.**
+
+Created and maintained by DUYTRUYENTHONG, with community contributions welcome. The kit is free to use, modify and share under the [MIT License](LICENSE). Preserve its copyright and license notices when redistributing it. Optional external AI/browser services may charge their own fees. See [authorship and credits](AUTHORS.md).
+
 [Source-bound CV wording v2](docs/CV_CONTENT_V2.md) adds structured sections,
 reviewed paraphrasing and a shared Markdown/DOCX/PDF content model. Exact-quote
 mode remains available. `import-wording --include-review-packet` combines two
@@ -9,8 +13,9 @@ or a measured live application-rate guarantee.
 
 [Optional Fast Web Pipeline](docs/FAST_WEB.md): explicit Firecrawl v2 public
 search, selected scrape/batch retrieval, durable task recovery and private
-evidence import. Offline by default; no new Python dependency. TinyFish and cloud
-application execution remain unsupported in this increment.
+evidence import. Offline by default; no new Python dependency. [TinyFish Fetch and
+parallel application lanes](docs/PARALLEL_APPLICATIONS.md) are experimental, opt-in additions.
+Direct TinyFish Agent/browser application execution remains unsupported.
 
 [Auto-decide campaign prompt](prompts/AUTO_DECIDE.md): let the agent rank jobs,
 tailor supported evidence and reuse known answers without routine questions.

@@ -2,9 +2,9 @@
 
 Quality-gated preparation enhancement: [first complete wording/review/render
 consumption slice](QUALITY_FAST_PLAN.md), with v1 fallback and optional real
-renderer CI. Candidate-local caches, bounded progressive queues, TinyFish,
-validated form plans and blind complete-package evaluation are separate pending
-increments; none is implied by v2 schema support.
+renderer CI. [Ten-lane execution and TinyFish Fetch](PARALLEL_APPLICATIONS.md) are
+experimental opt-in additions. Candidate-local caches, validated form plans and
+blind complete-package evaluation remain separate pending increments; none is implied by v2 schema support.
 
 This records implemented evidence separately from intended product scope. No later slice is complete merely because a prompt describes it.
 
