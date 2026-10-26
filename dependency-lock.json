@@ -173,6 +173,16 @@
     "provider": "TinyFish Browser REST; separate paid account and scoped disclosure",
     "browser_binary_install": false
   },
+  "writing_skill_reference": {
+    "repository": "https://github.com/guilhermeborgesbastos/live-resume",
+    "revision": "07c0680129ecf0226d802d23233fe7d1bea9121f",
+    "license": "MIT",
+    "source_record": "adapters/live-resume.source.json",
+    "adoption_review": "docs/LIVE_RESUME_REVIEW.md",
+    "copied_source": false,
+    "upstream_installed": false,
+    "runtime_dependencies": []
+  },
   "optional_local_plugins": {
     "lock": "requirements-plugins.lock",
     "inputs": "requirements-plugins.in",

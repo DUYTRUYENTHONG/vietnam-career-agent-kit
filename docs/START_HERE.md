@@ -116,6 +116,10 @@ and supply your own CV, role filters, locations, target and finite limits.
 For plugin installation use [LOCAL_PLUGINS_SETUP](../prompts/LOCAL_PLUGINS_SETUP.md).
 Start in `PREPARE`; account login alone is not application authority.
 
+For a CV and matching application email, use [TAILOR_AND_EMAIL](../prompts/TAILOR_AND_EMAIL.md)
+after confirming evidence. [Writing guidance and worked cases](LIVE_RESUME_REVIEW.md)
+explain the source-first language review; no Humanizer plugin is required.
+
 The first batch follows this checklist:
 
 1. Import authorized UTF-8 TXT/Markdown evidence and review the profile facts.

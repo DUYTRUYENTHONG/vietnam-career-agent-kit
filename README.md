@@ -81,6 +81,11 @@ native host installation acceptance remain separate.
 
 ## Feature references
 
+[CV and application-email writing](docs/LIVE_RESUME_REVIEW.md): the shared tailoring
+skill now includes evidence-first drafting, concise language editing and bilingual
+fact checks. [Copy the preparation prompt](prompts/TAILOR_AND_EMAIL.md).
+The Live Resume reference is pinned and reviewed; no upstream plugin install is required.
+
 [Source-bound CV wording v2](docs/CV_CONTENT_V2.md) adds structured sections,
 reviewed paraphrasing and a shared Markdown/DOCX/PDF content model. Exact-quote
 mode remains available. `import-wording --include-review-packet` combines two

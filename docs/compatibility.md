@@ -1,5 +1,14 @@
 # Runtime compatibility evidence
 
+## Evidence-first writing guidance
+
+The [Live Resume review](LIVE_RESUME_REVIEW.md) adds instruction-only CV/email
+writing guidance to the existing canonical tailoring skill. Five fictional
+worked cases passed manual source/meaning review. Wrapper synchronization is
+checked separately. No upstream skill/plugin or new runtime dependency is
+installed; native model compliance, semantic automation, quality and latency
+improvements are unverified. Existing review/manifest and send checks still apply.
+
 ## Local email/browser MCP plugins
 
 Experimental local plugins using a pinned optional Windows/Python 3.12 profile.

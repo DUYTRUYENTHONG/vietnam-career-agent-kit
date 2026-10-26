@@ -53,6 +53,10 @@ reclassification is not implemented. See the email verification section in
 
 ## Optional local MCP plugins
 
+Draft and review application emails through the application-tailoring skill's
+references/evidence-writing.md before freezing the exact package. That writing
+workflow never grants disclosure or send authority.
+
 Read ../../../docs/LOCAL_PLUGINS.md for Gmail OAuth and isolated local employer
 windows. Use the same canonical workspace and exact bridge-specific reviewed
 manifests. Login does not approve applications. Verify the connected sender;

@@ -1,13 +1,14 @@
 ---
 name: application-tailoring
-description: Prepare job-specific truthful draft content by selecting and ordering confirmed source evidence; do not invent experience to match a JD.
+description: Draft job-specific CV wording and application emails from confirmed evidence, preserving factual qualifiers and the employer's language and format.
 ---
 
 Read ../../../docs/job-seeker-policy.md first. Root AGENTS.md governs maintainer work; this skill activates only for an explicit career request.
 
 ## Purpose and invocation
 
-Prepare job-specific truthful draft content by selecting and ordering confirmed source evidence; do not invent experience to match a JD.
+Draft job-specific CV wording and application emails from confirmed evidence.
+Select and order relevant facts; improve readability without adding experience.
 
 ## Inputs
 
@@ -38,6 +39,20 @@ every statement before review-wording; at most one focused repair, then block or
 fall back to reviewed exact claims. Never use the fictional demo review helper
 for an actual person. Metadata records the real observed host configuration or
 an explicit unavailable value; it does not change the running host model.
+
+For CV rewrites, cover notes or application emails, read
+references/evidence-writing.md. Use its source-first draft, concise language edit
+and fact comparison within the existing wording/review pass; do not add another
+model call solely to remove generic phrasing. Preserve language, qualifiers and
+metric units after editing or translation. New candidate facts require evidence,
+not a more persuasive rewrite.
+
+Email drafting returns a private draft and evidence map, not a send command.
+Match the actual employer/requisition, published recipient, verified sending
+mailbox, exact subject/body and reviewed attachment. For the Gmail plugin, use
+the existing sender/to/subject/body answer-provenance contract; generated prose
+is not candidate-confirmed merely because it was drafted. Follow the existing
+manifest or standing-scope review before execution. See ../../../prompts/TAILOR_AND_EMAIL.md.
 
 ## Outputs
 

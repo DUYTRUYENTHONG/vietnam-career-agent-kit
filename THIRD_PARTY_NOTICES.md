@@ -1,5 +1,12 @@
 # Third-party notices
 
+Live Resume writing reference: `guilhermeborgesbastos/live-resume` revision
+`07c0680129ecf0226d802d23233fe7d1bea9121f`, MIT, copyright 2020 Guilherme Borges
+Bastos. No upstream code, skill text, templates, assets or candidate content is
+redistributed. Original writing guidance adapts source-checking/review ideas;
+Humanizer and Angular/Firebase dependencies are not adopted. See
+docs/LIVE_RESUME_REVIEW.md and adapters/live-resume.source.json.
+
 Optional local plugins use separately installed MCP Python SDK 1.30.0 (MIT),
 google-auth-oauthlib 1.5.0 (Apache-2.0), keyring 25.7.0 (MIT), and Playwright
 1.58.0 (Apache-2.0), plus their dependencies. No library or browser executable is

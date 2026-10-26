@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "repository": "https://github.com/guilhermeborgesbastos/live-resume",
+  "revision": "07c0680129ecf0226d802d23233fe7d1bea9121f",
+  "reviewed_utc_date": "2026-10-26",
+  "license": "MIT",
+  "copyright": "2020 Guilherme Borges Bastos",
+  "upstream_package_version": "2.0.0",
+  "upstream_skill": "add-post",
+  "upstream_skill_version": null,
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "5ea93e8da70969586a92f24fa788d1349a1725bf3224ca0eb37b7a3655d74495",
+      "bytes": 1080
+    },
+    {
+      "path": "README.md",
+      "sha256": "f006389fefb758c93a4c40df2334f99af4a02a3f8c1ebf83b1e4222045961c74",
+      "bytes": 12621
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "9ed0e2d8342893fcdb5dd793eed691e092fab3631b0830bf28a1ad4706df5cc5",
+      "bytes": 8908
+    },
+    {
+      "path": "package.json",
+      "sha256": "5882f9b2d540cf8f4d93fb47dc679a5545310db5900d908c3ef649cdbe23ae9d",
+      "bytes": 2199
+    },
+    {
+      "path": ".claude/skills/add-post/SKILL.md",
+      "sha256": "07980f791b05c34f803d96c65542f5c2803a11b212cda1a3ed585facfa7017fb",
+      "bytes": 6856
+    },
+    {
+      "path": ".claude/skills/add-post/post-template.json",
+      "sha256": "de8f414ca6469a0d5ac6b5f8ed055e3adb14d37b3a5838e17d2beeb384158204",
+      "bytes": 355
+    },
+    {
+      "path": ".claude/skills/add-post/scripts/posts.mjs",
+      "sha256": "c561e19bb6206dc7efbcc2f9e5195affd8e5a95ac9668ae3df57708dd10bdc54",
+      "bytes": 7666
+    },
+    {
+      "path": "docs/add-post-skill.md",
+      "sha256": "174eb1f9e52da3cc848b36aafcfe92297859ee9659778d0f58a1e633a37984de",
+      "bytes": 5972
+    }
+  ],
+  "adoption": "Original evidence-first writing guidance in the existing application-tailoring skill; no upstream text, code, assets or candidate content copied",
+  "upstream_installed": false,
+  "upstream_executed": false,
+  "runtime_dependencies": [],
+  "excluded": [
+    "Humanizer plugin requirement and installation",
+    "Angular/Firebase/analytics/contact form",
+    "Portuguese/English-only locale rules",
+    "275-character post-card limit and HTML markup",
+    "thumbnail downloads and article publication",
+    "deploy scripts and model defaults"
+  ],
+  "acceptance": "Instruction-level fictional writing cases and existing core guards; no native host/model quality or delivery certification",
+  "guide": "docs/LIVE_RESUME_REVIEW.md"
+}
