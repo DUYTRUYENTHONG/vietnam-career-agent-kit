@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add a clone/fork first-run guide, five Mermaid system models and an accessible
+  editable SVG overview. Link onboarding from both READMEs and the plugin/agent
+  guides; align clone instructions with the local-plugin development branch.
+  Clarify role/model dispatch, public versus private data, ordered Gmail sends,
+  isolated browser lanes and uncertain-outcome recovery. Documentation only.
+
 - Add optional local email/browser MCP plugins and a private configuration-package
   generator. Gmail Desktop OAuth uses the OS vault, exact sender/recipient/message
   and reviewed PDF, durable no-replay claims and canonical API send receipts.

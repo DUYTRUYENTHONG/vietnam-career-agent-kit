@@ -1,5 +1,7 @@
 # From your CV to a verified application outcome
 
+New user? [Clone/fork walkthrough](START_HERE.md) · [System models and diagrams](SYSTEM_MODELS.md).
+
 This guide explains the current kit. Use the [detailed campaign prompt](../prompts/GUIDED_CAMPAIGN.md)
 to give your own agent a concrete task. [English README](../README.md) ·
 [README tiếng Việt](../README.vi.md).
@@ -91,9 +93,10 @@ or mailbox therefore uses one mutation stream, even if public research is parall
 
 `start-parallel-execution --workers 10` configures the local engine; it does not
 create ten browsers. A permitted host bridge must implement `perform(request)`
-and return real receipts. The Python runner is usable orchestration code tested
-with fictional bridges, while live driver integration is supplied by the host
-and remains separately unverified. See [commands and benchmark](PARALLEL_APPLICATIONS.md).
+and return real receipts. Optional [local Chromium](LOCAL_PLUGINS.md) and
+[TinyFish Browser](TINYFISH_BROWSER.md) adapters supply scoped execution paths;
+production employer/provider acceptance remains separately unverified.
+See [commands and benchmark](PARALLEL_APPLICATIONS.md).
 Do not turn fixture speed or a worker count into a live 100x or 100/hour claim.
 
 ## 4. Record outcomes before cleanup
@@ -116,8 +119,9 @@ flowchart TD
 
 An upload, click, prepared PDF or successful CLI exit is not a submission receipt.
 Keep candidate-reported submissions distinct from host-observed confirmations.
-For email, inspect the matching Sent item and immediate rejection evidence; the
-kit does not automatically reconcile later bounces. Uncertain submissions are
+For host-operated email, inspect the matching Sent item and immediate rejection
+evidence. The Gmail API plugin records a send acknowledgement without inbox
+access; it does not inspect bounces or prove delivery. Uncertain submissions are
 not counted and never retried automatically. Cleanup failure does not undo a
 confirmed application; retrying submission cannot fix tab cleanup.
 
@@ -135,6 +139,8 @@ and [throughput semantics](THROUGHPUT.md).
 | TinyFish Fetch | Experimental batch POST for 1–10 public URLs; durable intent/results | Reviewed plan, private key and live account verification |
 | Greenhouse discovery | Experimental bounded public board reads | Permitted board and subsequent JD/liveness review |
 | Sequential/parallel execution | Implemented local requests, attempts, receipt validation and recovery | Supported permitted host bridge; isolation for concurrent lanes |
+| Local Gmail MCP | Exact reviewed PDF/message, Desktop OAuth, ordered API send and canonical receipt | [Optional plugin setup](LOCAL_PLUGINS.md); own OAuth client/vault and live account acceptance |
+| Local Chromium MCP | Isolated mapped same-origin forms, bounded lanes and owned-window cleanup | [Optional plugin setup](LOCAL_PLUGINS.md); native host and real employer acceptance |
 | TinyFish Browser sessions | Experimental single-page guest-form driver; fictional tests only | [Optional client, exact cloud scope and live verification](TINYFISH_BROWSER.md) |
 | TinyFish Agent-goal submissions | Unsupported | No autonomous submit-goal translation |
 | Native runtime integration | Scope depends on named interface/version/OS | [Compatibility evidence](compatibility.md); wrappers alone are instruction-only |

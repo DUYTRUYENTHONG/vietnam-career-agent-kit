@@ -1,5 +1,7 @@
 # Portable core architecture
 
+New user? [Clone/fork walkthrough](START_HERE.md) · [System models and diagrams](SYSTEM_MODELS.md).
+
 ## Optional local plugin transports
 
 `adapters/plugin_server.py` exposes separate stdio MCP email and browser servers.

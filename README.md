@@ -9,6 +9,15 @@ review an exact application package, and track what actually happened.
 
 ## Start here
 
+**New clone or fork?** Follow the [first-run walkthrough](docs/START_HERE.md).
+It covers the matching development branch, a fictional demo, private workspace,
+agent skills and optional email/browser setup.
+
+![Agent, local core, private tracker and optional application transports](docs/diagrams/system-overview.svg)
+
+[Five system models](docs/SYSTEM_MODELS.md) explain components, agent roles,
+OAuth sending, concurrent browser lanes and recovery. They render directly on GitHub.
+
 | Your next step | Open this |
 |---|---|
 | Set up Codex, Claude Code, or another tool-enabled agent | [Agent setup: skills, hooks, roles and browsers](docs/AGENT_SETUP.md) |
@@ -136,14 +145,14 @@ guide successive finite batches, resume from one private ledger, and count only
 confirmed new submissions toward a user-selected target. Persistent goals require
 a supported host; this guidance does not add a scheduler or browser worker.
 
-**Not yet implemented:** built-in PDF/DOCX CV extraction, standalone unattended browser workers and verified employer-specific submission adapters. Experimental public retrieval does not supply an authenticated application connector. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
+**Remaining acceptance gates:** built-in PDF/DOCX CV extraction, production unattended operation and verified employer-specific submission mappings. Optional local browser execution is implemented for mapped same-origin forms; its live acceptance remains separate. Experimental public retrieval does not supply an authenticated application connector. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice
 
 Requires Git and a real Python 3.11+ interpreter. No pip install, API key, account login, browser driver or model call is needed for these commands.
 
 ```sh
-git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone --branch codex/local-application-plugins https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py --data-dir ../career-demo-private

@@ -1,5 +1,7 @@
 # Local email and application browser plugins
 
+New user? [Clone/fork walkthrough](START_HERE.md) · [System models and diagrams](SYSTEM_MODELS.md).
+
 Made by **DUYTRUYENTHONG**, MIT licensed, free community sharing.
 These are optional desktop MCP servers, not hosted services or public-directory
 listings. Each user runs them on their own computer and private workspace.
