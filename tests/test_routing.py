@@ -8,10 +8,29 @@ import tempfile
 import unittest
 
 from core.contracts import ContractError
-from core.routing import DEFAULT_POLICY, route_task
+from core.routing import DEFAULT_POLICY, route_task, dispatch_task
 
 
 class RoutingTests(unittest.TestCase):
+    def test_dispatch_once_exact_owner_and_effective_override(self):
+        calls=[]
+        def host(selection):calls.append(selection);return selection
+        result=dispatch_task(self.packet(),host)
+        self.assertEqual(result.data['dispatch_state'],'host_acknowledged')
+        self.assertEqual(len(calls),1)
+        self.assertEqual(calls[0]['owner_id'],'existing-owner')
+        self.assertEqual(calls[0]['model'],DEFAULT_POLICY['simple']['model'])
+        self.assertFalse(result.data['dispatch_required'])
+
+    def test_dispatch_unavailable_tool_or_uncertain_never_retries(self):
+        calls=[]
+        def host(selection):calls.append(selection);raise RuntimeError('host failed')
+        self.assertEqual(dispatch_task(self.packet(available_models={}),host).outcome,'blocked')
+        self.assertEqual(dispatch_task(self.packet(task_kind='test'),host).data['execution'],'tool')
+        self.assertEqual(calls,[])
+        self.assertEqual(dispatch_task(self.packet(),host).data['dispatch_state'],'unknown')
+        self.assertEqual(len(calls),1)
+        self.assertEqual(dispatch_task(self.packet(),lambda s:{**s,'model':'different'}).outcome,'blocked')
     def packet(self, **changes):
         packet = {'schema_version': '1.0', 'owner_id': 'existing-owner', 'task_kind': 'coding',
                   'risk': 'low', 'complexity': 'simple',

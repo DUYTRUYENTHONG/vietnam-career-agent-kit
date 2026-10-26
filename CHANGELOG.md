@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Enforce finite action/cleanup waits; quarantine stalled pending requests without
+  replay or late receipt commits. Preserve read-only verification after expiry.
+- Connect deterministic routing to an explicit host callback with effective
+  override checks. Native host dispatch remains supplied by the caller.
+
 - Add an offline BrowserAct session planner for issued, exactly authorized
   requests. It checks coordinator/bridge/binding and current authority, plans
   compact inspection/recovery commands, and returns manual_required for form
