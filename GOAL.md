@@ -17,6 +17,14 @@ The product serves independent job seekers using their own private workspaces an
 
 The full product remains a multi-slice goal. A passing first slice does not prove browser support, rendered documents or approved-batch execution. See docs/roadmap.md for evidence and pending capabilities.
 
+## Each user's setup and campaign goal
+
+The [agent setup guide](docs/AGENT_SETUP.md) and [setup-and-goal prompt](prompts/SETUP_AND_GOAL.md)
+let users supply their own runtime, private evidence, role scope, target and
+limits. This product goal stays public; personal goals and receipts stay private.
+Parallel applications depend on tested host isolation, not the number of agents
+or browser tabs named in a prompt. Unidentified runtimes use a generic handoff.
+
 ## Current iteration acceptance — Slice 1
 
 - Existing approval checks and legacy ledger behavior remain tested and usable.

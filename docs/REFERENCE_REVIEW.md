@@ -126,3 +126,17 @@ Reviewed source SHA256:
 - skills/tinyskill/SKILL.md: `9d976035919f78865eaa17fdb00f67305159f4ab52c83007a3f799774bf572b6`
 
 Fetch supports up to ten URLs per batch. Server scheduling is provider-controlled. Agent and direct Browser execution were deliberately excluded from this increment. Only fictional injected transport is tested; no account quota, price, live latency or employer application support is certified.
+
+## Setup documentation source check — 26 October 2026
+
+The new setup guides describe the existing original adapter and CLI. Rechecked
+the official [TinyFish Fetch contract](https://docs.tinyfish.ai/fetch-api/reference)
+and [authentication](https://docs.tinyfish.ai/authentication),
+[OpenAI skill discovery](https://learn.chatgpt.com/docs/build-skills),
+[Claude Code skills](https://code.claude.com/docs/en/skills) and
+[hooks](https://code.claude.com/docs/en/hooks). These establish upstream interfaces,
+not kit-native acceptance. No upstream code, SDK, installer or hook was adopted;
+the pinned cookbook review above remains the implementation reference. The guide
+explicitly records the adapter's narrower Fetch request, absent `.env` loading,
+unforwarded freshness field and separate host-browser requirements. Grokbot/Muse
+native integration remains unverified and is not inferred from these sources.

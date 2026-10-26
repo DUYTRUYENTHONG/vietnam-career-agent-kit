@@ -4,6 +4,9 @@ This guide explains the current kit. Use the [detailed campaign prompt](../promp
 to give your own agent a concrete task. [English README](../README.md) ·
 [README tiếng Việt](../README.vi.md).
 
+New clone? Start with [agent/skill/hook setup](AGENT_SETUP.md), configure optional
+[TinyFish Fetch](TINYFISH_SETUP.md), then fill the [setup-and-goal prompt](../prompts/SETUP_AND_GOAL.md).
+
 ## 1. Prepare once, review each job
 
 ```mermaid

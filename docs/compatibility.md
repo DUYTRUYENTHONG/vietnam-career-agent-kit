@@ -1,5 +1,23 @@
 # Runtime compatibility evidence
 
+## Guided agent and TinyFish setup
+
+[Agent setup](AGENT_SETUP.md), [TinyFish setup](TINYFISH_SETUP.md) and the
+[setup-and-goal prompt](../prompts/SETUP_AND_GOAL.md) document existing contracts.
+Muse is an unidentified runtime with no native adapter; use the generic manual
+path without a native compatibility claim. These instruction-only additions do
+not install hooks, provision browsers, call models or establish live provider
+or employer integration. Local command/CI evidence is reported with the change.
+
+Local setup review on 26 October 2026 (Windows, Python 3.12.14): all 226 standard
+tests passed in 293.073s. Four runtime diagnostics, provider-doctor, zero-network
+TinyFish preview, fictional demo, isolated initialization and wrapper checks
+passed. Relative links, setup heading anchors and fences were checked; both key
+input snippets passed shell parsing without being executed. The bounded hygiene
+check covered 193 UTF-8 source files. A separate read-only review checked the
+guides against CLI/provider/bridge code and found no required corrections. This
+does not verify live credentials, native hook callbacks or employer submissions.
+
 ## Visual guide and reusable campaign prompt
 
 The [visual guide](USER_GUIDE.md) and [campaign prompt](../prompts/GUIDED_CAMPAIGN.md)
