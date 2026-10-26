@@ -76,7 +76,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install optional hash-locked local plugin profile
-        run: python -m pip install --require-hashes --only-binary=:all: -r requirements-plugins.lock
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements-plugins.lock
       - name: Provision matched Chromium for fictional pages only
         run: python -m playwright install chromium
       - name: MCP stdio, vault boundaries and real Chromium fictional form QA
