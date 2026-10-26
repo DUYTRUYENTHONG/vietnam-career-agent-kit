@@ -1,5 +1,25 @@
 # Runtime compatibility evidence
 
+## BrowserAct offline session planner
+
+`browser-act-plan` is Experimental local Python planning; BrowserAct native
+execution remains Instruction-only. Nine focused fictional regressions passed
+on Windows/Python 3.12.14: canonical authority, coordinator/bridge/binding checks,
+completed requests, stale files/expiry/revocation, no subprocess/ledger mutation,
+unsupported writes and read-only recovery after one durable submit attempt.
+The installed host browser is not acquired or replaced. Reviewed upstream CLI
+1.4.5 and skill 2.0.2 are distinct versions; no binary was installed/executed.
+See [source/dependency review and live test limits](BROWSERACT.md).
+
+Release gate on 26 October 2026: all 235 standard tests passed in 362.420s.
+Source hygiene passed for 197 UTF-8 files, shared wrappers were synchronized,
+changed Markdown links resolved, and the real CLI help/plan path was checked.
+One bounded independent read-only review found no required defects within this
+offline scope. The optional skill-creator quick validator could not run because
+PyYAML is absent; the repository's required frontmatter/adapter checks passed.
+No live accounts, employer submissions, upstream executable or paid model API
+were used for this feature's tests. GitHub CI is reported separately in the PR.
+
 ## Guided agent and TinyFish setup
 
 [Agent setup](AGENT_SETUP.md), [TinyFish setup](TINYFISH_SETUP.md) and the

@@ -13,6 +13,7 @@ xem trước chính xác hồ sơ sẽ gửi và theo dõi kết quả thực t�
 |---|---|
 | Thiết lập Codex, Claude Code hoặc agent có công cụ cục bộ | [Skills, hooks, vai trò agent và trình duyệt](docs/AGENT_SETUP.md) |
 | Cấu hình TinyFish và kiểm tra trước khi gọi mạng | [Hướng dẫn TinyFish](docs/TINYFISH_SETUP.md) |
+| Đánh giá BrowserAct, phiên trình duyệt và quyền thực thi | [Kiểm tra nguồn, thiết lập và lập kế hoạch ngoại tuyến](docs/BROWSERACT.md) |
 | Giao việc thiết lập và đặt mục tiêu riêng | [Prompt thiết lập và mục tiêu](prompts/SETUP_AND_GOAL.md) |
 | Hiểu quy trình và giới hạn | [Hướng dẫn trực quan với bốn sơ đồ](docs/USER_GUIDE.md) |
 | Giao agent chạy chiến dịch theo dữ kiện và giới hạn của bạn | [Prompt chi tiết, có mẫu tiếng Việt](prompts/GUIDED_CAMPAIGN.md) |

@@ -126,6 +126,9 @@ in [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md). It permits 1-10 workers
 the kit neither launches browsers nor implements `bridge.perform(request)` for
 you. Without that bridge, keep preparation automated and hand browser work off.
 TinyFish Fetch is a separate [public research setup](TINYFISH_SETUP.md).
+BrowserAct has an optional [review and offline session planner](BROWSERACT.md).
+Its CLI is separate from the internal host browser; live form writes are not
+implemented by that planner. Installation and native driver support are separate.
 
 ## 6. Set the goal and verify the first batch
 

@@ -111,6 +111,10 @@ def parser() -> Parser:
     parallel.add_argument('--bridge-id',required=True)
     parallel.add_argument('--runtime-minutes',type=int,required=True)
     parallel.add_argument('--workers',type=int,default=10)
+    browser_act=commands.add_parser('browser-act-plan',help='offline session/state plan for an issued request; never launches a browser')
+    browser_act.add_argument('--run-id',required=True)
+    browser_act.add_argument('--request-id',required=True)
+    browser_act.add_argument('--browser-id',required=True)
     for name in ['parallel-cleanup','record-parallel-cleanup','parallel-status','next-parallel-action','record-parallel-action','check-parallel-action','recover-parallel-execution','stop-parallel-execution']:
         cmd=commands.add_parser(name);cmd.add_argument('--run-id',required=True)
         if name in {'next-parallel-action','recover-parallel-execution'}:cmd.add_argument('--job-id',type=int,required=True)
@@ -196,7 +200,7 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
-            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action','cleanup-execution','record-cleanup'} and schema<3:
+            if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action','cleanup-execution','record-cleanup','browser-act-plan'} and schema<3:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
             if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest','launch-execution'} and schema<4:
                 raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
@@ -214,6 +218,10 @@ def execute(args) -> Outcome:
         except ProviderError as error:
             return Outcome('manual_required',{'provider_error':error.code,'possibly_accepted':error.possibly_accepted},
                            ['Inspect persisted tasks; do not relaunch an uncertain request.'])
+    if command=='browser-act-plan':
+        from adapters.browser_act import plan_session
+        from core.parallel_execution import ParallelExecutor
+        return plan_session(ParallelExecutor(args.data_dir,actor=args.actor),args.run_id,args.request_id,args.browser_id)
     if command in {'parallel-cleanup','record-parallel-cleanup','start-parallel-execution','parallel-status','next-parallel-action','record-parallel-action','check-parallel-action','recover-parallel-execution','stop-parallel-execution'}:
         from core.parallel_execution import ParallelExecutor
         parallel=ParallelExecutor(args.data_dir,actor=args.actor)
