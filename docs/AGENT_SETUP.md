@@ -123,8 +123,9 @@ another browser is usable only through an actually supported host bridge.
 
 After exact package/host authority is established, follow the runnable protocol
 in [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md). It permits 1-10 workers;
-the kit neither launches browsers nor implements `bridge.perform(request)` for
-you. Without that bridge, keep preparation automated and hand browser work off.
+a supplied host bridge is still required unless you explicitly configure the
+experimental [TinyFish Browser adapter](TINYFISH_BROWSER.md). Without a supported
+bridge, keep preparation automated and hand browser work off.
 TinyFish Fetch is a separate [public research setup](TINYFISH_SETUP.md).
 BrowserAct has an optional [review and offline session planner](BROWSERACT.md).
 Its CLI is separate from the internal host browser; live form writes are not

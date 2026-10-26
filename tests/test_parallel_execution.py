@@ -22,12 +22,12 @@ class ParallelExecutionTests(unittest.TestCase):
     plan = fixtures.ManifestTests.plan
     approve = fixtures.ManifestTests.approve
 
-    def start(self, count=2, limit=None, workers=10):
+    def start(self, count=2, limit=None, workers=10, bridge_id='fictional-browser'):
         self.work=ParallelExecutor(self.root);self.work.init()
         fixture=Path(__file__).resolve().parents[1]/'examples/fictional'
         load=lambda name:json.loads((fixture/name).read_text(encoding='utf8'))
         plan=self.plan()
-        plan['execution']={'bridge_id':'fictional-browser','runtime_minutes':30}
+        plan['execution']={'bridge_id':bridge_id,'runtime_minutes':30}
         for index in range(2,count+1):
             job=load('job.json');job.update(platform_job_id=f'FICT-{index}',req_id=f'FICT-{index}')
             job_id=self.work.import_job(job).data['job']['id']
@@ -46,7 +46,7 @@ class ParallelExecutionTests(unittest.TestCase):
         self.entries={e['job_id']:e for e in result['manifest']['entries']}
         (self.root/'confirmation.png').write_bytes(base64.b64decode(
             'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII='))
-        return self.work.start_parallel_execution(self.fingerprint,'fictional-browser',30,workers).data['run_id']
+        return self.work.start_parallel_execution(self.fingerprint,bridge_id,30,workers).data['run_id']
 
     def receipt(self, request):
         e=self.entries[request['job_id']]

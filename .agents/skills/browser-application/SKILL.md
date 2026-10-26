@@ -15,12 +15,15 @@ Exact current approval, recipient/destination, allowed mode/actions, documents/a
 
 ## Required capabilities
 
-A supported authorized host browser and the execution CLI. Read ../../../docs/execution.md for protocol 1.0 and measured limits. No standalone browser driver is bundled.
+A supported authorized host browser and the execution CLI. Read ../../../docs/execution.md for protocol 1.0 and measured limits. Optional experimental TinyFish Browser uses separate cloud scope and a client dependency; see ../../../docs/TINYFISH_BROWSER.md.
 
 ## Steps
 
-Firecrawl research is not this browser bridge. TinyFish direct sessions are
-unsupported in the current increment. Never convert a host-bound manifest into
+Firecrawl and TinyFish Fetch are public research, not application bridges.
+TinyFish Browser is opt-in for explicit single-page guest forms. Preview its
+exact cloud/form fingerprint, review the extra provider disclosure and start
+with one worker. It never reuses host logins or submits autonomous Agent goals.
+Never convert a host-bound manifest into
 cloud disclosure, send private files to a research provider, or fabricate staged
 receipts after an autonomous remote-agent application. The six-stage host loop
 and fresh action checks below remain required. See ../../../docs/FAST_WEB.md.

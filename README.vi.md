@@ -13,6 +13,7 @@ xem trước chính xác hồ sơ sẽ gửi và theo dõi kết quả thực t�
 |---|---|
 | Thiết lập Codex, Claude Code hoặc agent có công cụ cục bộ | [Skills, hooks, vai trò agent và trình duyệt](docs/AGENT_SETUP.md) |
 | Cấu hình TinyFish và kiểm tra trước khi gọi mạng | [Hướng dẫn TinyFish](docs/TINYFISH_SETUP.md) |
+| Chạy phiên ứng tuyển TinyFish độc lập | [Browser runtime thử nghiệm, phạm vi và khôi phục](docs/TINYFISH_BROWSER.md) |
 | Đánh giá BrowserAct, phiên trình duyệt và quyền thực thi | [Kiểm tra nguồn, thiết lập và lập kế hoạch ngoại tuyến](docs/BROWSERACT.md) |
 | Giao việc thiết lập và đặt mục tiêu riêng | [Prompt thiết lập và mục tiêu](prompts/SETUP_AND_GOAL.md) |
 | Hiểu quy trình và giới hạn | [Hướng dẫn trực quan với bốn sơ đồ](docs/USER_GUIDE.md) |
@@ -50,9 +51,9 @@ flowchart LR
 **Hiện có:** chuẩn bị cục bộ, kiểm tra tài liệu/phê duyệt và engine điều phối yêu
 cầu/biên nhận. Nghiên cứu công khai thử nghiệm gồm Firecrawl, đọc Greenhouse có
 giới hạn và TinyFish **Fetch** (tối đa mười URL công khai mỗi đợt). Engine có thể
-điều phối tối đa mười phiên host độc lập, nhưng repo không kèm trình điều khiển
-trình duyệt thật hoặc tự tạo các phiên đó. Chưa hỗ trợ TinyFish Agent/browser
-nộp hồ sơ. Một phiên đăng nhập dùng chung phải thao tác tuần tự.
+điều phối tối đa mười phiên độc lập. Adapter TinyFish Browser tùy chọn hỗ trợ
+form khách một trang đã duyệt; chưa xác minh API/CDP trực tiếp. Chưa hỗ trợ
+nộp hồ sơ bằng Agent goal. Một phiên đăng nhập dùng chung phải thao tác tuần tự.
 
 Prompt không cấp thêm quyền công cụ hoặc thay thế xác nhận bắt buộc của runtime.
 Kiểm thử cục bộ chưa chứng minh tốc độ thực tế nhanh gấp 100 lần hay 100 đơn/giờ.
@@ -70,7 +71,8 @@ kết tốc độ nộp hồ sơ thực tế.
 bằng Firecrawl v2, lưu tác vụ/bằng chứng riêng tư và nhập JD có dẫn chứng vào
 SQLite hiện có. Mặc định không gọi mạng; không thêm thư viện Python. [TinyFish Fetch
 và các luồng ứng tuyển song song](docs/PARALLEL_APPLICATIONS.md) là tính năng thử nghiệm,
-chỉ bật khi được yêu cầu. Chưa hỗ trợ nộp hồ sơ trực tiếp qua TinyFish Agent/browser.
+chỉ bật khi được yêu cầu. [TinyFish Browser](docs/TINYFISH_BROWSER.md) có adapter
+thử nghiệm riêng, cần phạm vi cloud và client tùy chọn; Agent goal chưa hỗ trợ.
 
 [Prompt tiếp tục chiến dịch và đóng tab đã hoàn tất](prompts/AUTO_PROCEED.md):
 tái sử dụng câu trả lời đã xác nhận và phạm vi ủy quyền còn hiệu lực; lưu bằng

@@ -1,5 +1,19 @@
 # Community references and attribution
 
+## TinyFish Browser runtime, 26 October 2026
+
+Reviewed cookbook revision `78b7c3336289f0f3e1a3696801945de8489ab097`
+(MIT), official Browser REST documentation and official Playwright CDP reference.
+Exact source URLs, fetched-byte hashes and byte sizes are recorded in
+`adapters/tinyfish-browser.source.json`. No upstream code was copied or executed.
+The implementation is original MIT kit code. The optional Playwright 1.58.0,
+pyee 13.0.0, greenlet 3.1.1 and typing_extensions 4.16.0 wheel closure was generated
+from exact PyPI release metadata into requirements-browser.lock; versions,
+dependencies, hashes and license metadata are in dependency-lock.json. No package
+was installed by this change's tests. Live Browser API calls are paid and require
+separate scoped provider disclosure; fictional transport/page tests are the
+current acceptance boundary. See [setup and limitations](TINYFISH_BROWSER.md).
+
 ## Wording v2 and monotonic traces, 22 October 2026
 
 Original stdlib implementation; no third-party code, templates, SDKs, model

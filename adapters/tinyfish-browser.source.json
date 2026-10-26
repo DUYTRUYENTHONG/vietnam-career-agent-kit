@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "reviewed_date": "2026-10-26",
+  "cookbook_revision": "78b7c3336289f0f3e1a3696801945de8489ab097",
+  "cookbook_license": "MIT",
+  "copied_code": false,
+  "executed_upstream_code": false,
+  "sources": [
+    {
+      "url": "https://docs.tinyfish.ai/browser-api/reference",
+      "sha256": "09b9937d48ff1fc0910ec7aba81ceb97e1d1fbb5dd2df19d8d33deeb29053e21",
+      "bytes": 331519
+    },
+    {
+      "url": "https://playwright.dev/python/docs/api/class-browsertype",
+      "sha256": "43c096047c1f026f6694652300c265d131abf5660860feeb14a77231b16eb05d",
+      "bytes": 137988
+    },
+    {
+      "url": "https://raw.githubusercontent.com/tinyfish-io/tinyfish-cookbook/78b7c3336289f0f3e1a3696801945de8489ab097/LICENSE",
+      "sha256": "4d4da43c65dc3974303640a51c2217eaa12db4b81220074357bc6d4b7b13f87f",
+      "bytes": 1065
+    }
+  ],
+  "acceptance": "Fictional transport/page tests only; live API/CDP unverified",
+  "runtime_dependencies": "../requirements-browser.lock"
+}

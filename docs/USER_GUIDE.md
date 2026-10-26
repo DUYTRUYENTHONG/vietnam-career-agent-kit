@@ -135,7 +135,8 @@ and [throughput semantics](THROUGHPUT.md).
 | TinyFish Fetch | Experimental batch POST for 1–10 public URLs; durable intent/results | Reviewed plan, private key and live account verification |
 | Greenhouse discovery | Experimental bounded public board reads | Permitted board and subsequent JD/liveness review |
 | Sequential/parallel execution | Implemented local requests, attempts, receipt validation and recovery | Supported permitted host bridge; isolation for concurrent lanes |
-| TinyFish Agent/browser submissions | Unsupported | No direct cloud application driver is bundled |
+| TinyFish Browser sessions | Experimental single-page guest-form driver; fictional tests only | [Optional client, exact cloud scope and live verification](TINYFISH_BROWSER.md) |
+| TinyFish Agent-goal submissions | Unsupported | No autonomous submit-goal translation |
 | Native runtime integration | Scope depends on named interface/version/OS | [Compatibility evidence](compatibility.md); wrappers alone are instruction-only |
 
 TinyFish Fetch never receives candidate CVs, account cookies or application answers.
