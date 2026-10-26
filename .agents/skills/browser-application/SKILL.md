@@ -37,6 +37,12 @@ and fresh action checks below remain required. See ../../../docs/FAST_WEB.md.
 7. Repeat sequentially within each job lane. Opt-in isolated parallel lanes use the concurrent-batch protocol below. Only APPROVED_BATCH returns submit, after a durable unique attempt has already been committed. Click once. Acknowledge it, then verify visible employer/requisition/success and retain a private screenshot. An issued click is not confirmation.
 8. Stop on non-ok outcomes. A pending submit resumes as read-only verify; it never returns another submit. A terminal unknown may use recover-execution for reconciliation only. Do not retry that vacancy or infer success. Sequential runs stop; independent parallel lanes may continue under their own valid scope. ASSIST ends after review without submitting.
 
+For mailbox duplicate/receipt checks, distinguish exact application evidence
+from related search suggestions. Prefer Most recent when offered, wait for the
+query to settle, and verify the actual message's account, recipients, role and
+date. Missing email evidence never authorizes resubmission. Read the mailbox
+search section in ../../../docs/execution.md; do not collect unrelated mail.
+
 For email applications, inspect the matching conversation for an immediate
 delivery rejection during the bounded verify pass. A Sent message does not
 override a mailbox-not-found response. Save both privately, return a failed

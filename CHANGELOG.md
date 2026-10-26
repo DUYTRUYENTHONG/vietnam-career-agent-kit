@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Clarify Gmail receipt/duplicate verification: use bounded searches, distinguish
+  related suggestions from actual matching messages, and preserve uncertain
+  attempts when no confirmation is found. Synchronize host skill instructions;
+  no Gmail driver, schema change or throughput improvement is claimed.
+
 - Add opt-in TinyFish Browser REST/CDP sessions for reviewed single-page guest
   forms, separate cloud scope, persistent connections, fresh form guards, PDF byte
   verification, redirect rejection and confirmed owned-session cleanup.

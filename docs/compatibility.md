@@ -1,5 +1,13 @@
 # Runtime compatibility evidence
 
+## Mailbox verification guidance
+
+The email search runbook is Instruction-only host guidance, informed by Google's
+documented related-result fallback and relevance/chronological search modes.
+Operators still inspect actual matching envelopes and application content.
+This adds no Gmail API/browser adapter, automatic mailbox monitor or measured
+throughput claim. No candidate messages or account state are included in fixtures.
+
 ## TinyFish Browser and bounded workers
 
 See [release QA and measured fixture limits](TINYFISH_RUNTIME_QA.md) for the full
