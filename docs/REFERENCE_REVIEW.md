@@ -1,5 +1,25 @@
 # Community references and attribution
 
+## Local MCP email/browser plugins, 26 October 2026
+
+Original implementation; no upstream source, sample code or skills copied.
+Reviewed official Google Desktop OAuth/PKCE and Gmail messages.send documentation,
+Playwright authentication/BrowserContext routing, OpenAI portable plugin packaging,
+and the MCP Python SDK maintenance release notes. Concrete source links are in
+[LOCAL_PLUGINS.md](LOCAL_PLUGINS.md). The initially evaluated SDK1.26.0 was replaced
+with maintenance1.30.0 after the upstream release review; the retained stdio API
+supports the tested 2025-era initialization/tools protocol, not an untested 2026
+protocol claim.
+
+Adopted optional package versions: MCP1.30.0 MIT, google-auth-oauthlib1.5.0
+Apache-2.0, keyring25.7.0 MIT and Playwright1.58.0 Apache-2.0. Exact PyPI metadata
+URLs/hashes and all 48 resolved distribution versions/license declarations live
+in `adapters/local-plugins.source.json`; wheel hashes in
+`requirements-plugins.lock`. This Windows/Python3.12 closure is separate from the
+core and document/browser profiles. No binaries are redistributed. Acceptance is
+scoped to [fictional local QA](LOCAL_PLUGINS_QA.md), not live account/provider or
+native plugin installation. No account access or credentials follow from this review.
+
 ## TinyFish Browser runtime, 26 October 2026
 
 Reviewed cookbook revision `78b7c3336289f0f3e1a3696801945de8489ab097`

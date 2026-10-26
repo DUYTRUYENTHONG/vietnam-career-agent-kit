@@ -20,6 +20,7 @@ review an exact application package, and track what actually happened.
 | Run a real campaign with your own facts and limits | [Detailed copy-and-paste agent prompt](prompts/GUIDED_CAMPAIGN.md) |
 | Try the tools without accounts or personal data | [Fictional quick start](#try-the-working-slice) |
 | Configure documents or a supported execution bridge | [Document setup](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
+| Connect your own Gmail and isolated employer windows | [Local email/browser MCP plugins](docs/LOCAL_PLUGINS.md) |
 | Understand ten-lane concurrency and TinyFish | [Parallel applications and measured limits](docs/PARALLEL_APPLICATIONS.md) |
 
 ### Set up in four steps
@@ -61,6 +62,13 @@ session uses one action stream. [See the current capability table](docs/USER_GUI
 The prompt guides an agent through setup to receipts; it grants no new tool
 permissions and does not override runtime confirmation. No live 100x speedup or
 100-applications/hour result is established by the local tests.
+
+Optional [local MCP plugins](docs/LOCAL_PLUGINS.md) now add Gmail OAuth/API sending
+and isolated local Chromium form execution using the same canonical ledger.
+Generate private install packages with `scripts/plugin_config.py`; connect your
+own Google Desktop OAuth app. See [scoped QA](docs/LOCAL_PLUGINS_QA.md) and the
+[copyable setup prompt](prompts/LOCAL_PLUGINS_SETUP.md). Live account/employer and
+native host installation acceptance remain separate.
 
 ## Feature references
 

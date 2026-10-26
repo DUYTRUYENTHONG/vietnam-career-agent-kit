@@ -1,5 +1,14 @@
 # Third-party notices
 
+Optional local plugins use separately installed MCP Python SDK 1.30.0 (MIT),
+google-auth-oauthlib 1.5.0 (Apache-2.0), keyring 25.7.0 (MIT), and Playwright
+1.58.0 (Apache-2.0), plus their dependencies. No library or browser executable is
+vendored or relicensed. Exact dependency versions, PyPI metadata hashes/license
+declarations and the Windows/Python3.12 profile are recorded in
+adapters/local-plugins.source.json and requirements-plugins.lock. Preserve
+installed distribution notices if redistributing those binaries. Google and
+OpenAI documentation guided original implementation; no sample source copied.
+
 BrowserAct review: `browser-act/skills` revision
 `11c057b03f92101642cadc9f840564574120d184` is MIT, copyright 2026 BrowserAct.
 No upstream code, skill text, assets or binaries are bundled. The offline session

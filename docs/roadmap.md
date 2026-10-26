@@ -14,6 +14,11 @@ blind complete-package evaluation remain separate pending increments; none is im
 
 This records implemented evidence separately from intended product scope. No later slice is complete merely because a prompt describes it.
 
+Optional local email/browser plugin transports now have implementations; see
+[setup](LOCAL_PLUGINS.md) and [scoped QA](LOCAL_PLUGINS_QA.md). They reuse the
+canonical ledger and do not close native host, live OAuth, real-employer or
+public-directory acceptance gates.
+
 | Slice | Acceptance gate | State |
 |---|---|---|
 | 1 | Clone/diagnose/private init/CV+profile+JD import/confirmed evidence matrix/Markdown draft/tracker/resume; two-user and failure tests | Implemented; measured evidence in RELEASE_SLICE1.md |

@@ -172,5 +172,16 @@
     },
     "provider": "TinyFish Browser REST; separate paid account and scoped disclosure",
     "browser_binary_install": false
+  },
+  "optional_local_plugins": {
+    "lock": "requirements-plugins.lock",
+    "inputs": "requirements-plugins.in",
+    "profile": "Windows Python3.12",
+    "metadata": "adapters/local-plugins.source.json",
+    "auto_install": false,
+    "live_google_send_verified": false,
+    "native_plugin_install_verified": false,
+    "mcp_protocol": "Local stdio; no remote HTTP endpoint",
+    "dependency_count": 48
   }
 }

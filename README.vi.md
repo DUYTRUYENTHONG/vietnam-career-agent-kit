@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+[Plugin email và trình duyệt cục bộ](docs/LOCAL_PLUGINS.md): đăng nhập Google
+qua OAuth, gửi CV theo phạm vi đã duyệt và mở các cửa sổ ứng tuyển độc lập.
+Công cụ MCP cục bộ; chưa phải dịch vụ công khai hoặc xác minh gửi email thật.
+
 **Được xây dựng bởi [DUYTRUYENTHONG](https://github.com/DUYTRUYENTHONG) — mã nguồn mở, chia sẻ miễn phí cùng cộng đồng.**
 
 DUYTRUYENTHONG sáng lập và duy trì dự án, luôn chào đón đóng góp từ cộng đồng. Bạn được sử dụng, chỉnh sửa và chia sẻ bộ công cụ miễn phí theo [giấy phép MIT](LICENSE); khi phân phối lại, hãy giữ thông báo bản quyền và giấy phép. Các dịch vụ AI hoặc trình duyệt bên ngoài tùy chọn có thể tính phí riêng. Xem [tác giả và ghi nhận đóng góp](AUTHORS.md).

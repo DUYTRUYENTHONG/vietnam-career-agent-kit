@@ -51,6 +51,18 @@ current engine uses its broader non-confirmed state; automatic late-bounce
 reclassification is not implemented. See the email verification section in
 ../../../docs/execution.md before reporting counts or closing a completed tab.
 
+## Optional local MCP plugins
+
+Read ../../../docs/LOCAL_PLUGINS.md for Gmail OAuth and isolated local employer
+windows. Use the same canonical workspace and exact bridge-specific reviewed
+manifests. Login does not approve applications. Verify the connected sender;
+never create approval evidence through a tool. Gmail API acknowledgement proves
+sending, not employer delivery. On a lost acknowledgement, preserve the uncertain
+attempt and never resend. Local browsing stops on new terms, challenges, frames
+or origin changes; user login stays inside its dedicated window. No imported
+personal browser profiles, cookies or passwords. Native host compatibility must
+be verified separately from stdio protocol tests.
+
 ## Standing authorization
 
 An exact manifest may derive from approved standing campaign authority. Reuse

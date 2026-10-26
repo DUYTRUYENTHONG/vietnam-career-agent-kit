@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Add optional local email/browser MCP plugins and a private configuration-package
+  generator. Gmail Desktop OAuth uses the OS vault, exact sender/recipient/message
+  and reviewed PDF, durable no-replay claims and canonical API send receipts.
+- Add isolated local Chromium application sessions with user-controlled sign-in,
+  reused form verification, unsupported-transport blocking and owned-window cleanup.
+  Existing reviewed scopes remain required; no approval-generation tool is exposed.
+- Add hash-locked optional dependencies, MCP/Chromium integration CI and setup/QA
+  documentation. Live OAuth/employer acceptance and native host installation are
+  separate unverified gates; no hosted service or public-directory publication.
+
 - Clarify Gmail receipt/duplicate verification: use bounded searches, distinguish
   related suggestions from actual matching messages, and preserve uncertain
   attempts when no confirmation is found. Synchronize host skill instructions;

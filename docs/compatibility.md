@@ -1,5 +1,15 @@
 # Runtime compatibility evidence
 
+## Local email/browser MCP plugins
+
+Experimental local plugins using a pinned optional Windows/Python 3.12 profile.
+Verified interfaces and precise QA results are in [LOCAL_PLUGINS_QA.md](LOCAL_PLUGINS_QA.md):
+fictional canonical email attempts/receipts, local stdio tool discovery and a real
+headless Chromium form with mocked network. These checks do not verify a real
+Google OAuth grant/vault, real employer form, native marketplace discovery or a
+host's permission UI. Public plugin-directory publication and remote HTTP hosting
+are not provided. [Setup and per-provider limitations](LOCAL_PLUGINS.md).
+
 ## Mailbox verification guidance
 
 The email search runbook is Instruction-only host guidance, informed by Google's
