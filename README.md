@@ -13,6 +13,7 @@ review an exact application package, and track what actually happened.
 |---|---|
 | Set up Codex, Claude Code, or another tool-enabled agent | [Agent setup: skills, hooks, roles and browsers](docs/AGENT_SETUP.md) |
 | Configure TinyFish without exposing your API key | [TinyFish setup and offline preview](docs/TINYFISH_SETUP.md) |
+| Evaluate BrowserAct sessions and authorization | [BrowserAct review, setup and offline planner](docs/BROWSERACT.md) |
 | Give your agent a setup task and your own campaign goal | [Copyable setup-and-goal prompt](prompts/SETUP_AND_GOAL.md) |
 | Understand the workflow and its boundaries | [Visual guide: four workflow diagrams](docs/USER_GUIDE.md) |
 | Run a real campaign with your own facts and limits | [Detailed copy-and-paste agent prompt](prompts/GUIDED_CAMPAIGN.md) |

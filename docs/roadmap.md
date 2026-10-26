@@ -21,6 +21,11 @@ This records implemented evidence separately from intended product scope. No lat
 
 ## Current implementation sequence
 
+BrowserAct integration currently provides an offline authorized-request session
+planner and reviewed skill guidance. Native browser acquisition, form-write
+translation and live latency/isolation acceptance remain pending; see
+[the integration scope](BROWSERACT.md). This does not close Slice 5's native gate.
+
 Optional Fast Web increments 1–2 add contracts, the opt-in boundary and a complete
 Firecrawl public research/evidence-import slice. Live verification remains
 pending. Increment 3 (TinyFish interactive public research) and increment 4
