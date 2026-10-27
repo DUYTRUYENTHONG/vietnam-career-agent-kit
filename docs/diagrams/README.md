@@ -6,6 +6,7 @@ These are original documentation assets, not screenshots of candidate accounts.
 | Asset | Edit | View |
 |---|---|---|
 | System overview | `system-overview.svg`: text, shapes and arrows in plain XML | Browser or GitHub image preview |
+| Real campaign snapshot | `campaign-results.svg`: aggregated counts; no candidate data | [Meaning and evidence limits](../CAMPAIGN_RESULTS.md) |
 | Five detailed models | Mermaid blocks in [SYSTEM_MODELS.md](../SYSTEM_MODELS.md) | GitHub Markdown preview or a Mermaid renderer |
 
 The SVG has a fixed 1200 × 880 viewBox, a title/description for assistive tools,

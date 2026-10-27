@@ -19,6 +19,15 @@ The full product remains a multi-slice goal. A passing first slice does not prov
 
 ## Each user's setup and campaign goal
 
+Default: **100 new best-fit confirmed applications**, counted from reviewed
+Strong fit/Plausible fit and observed unique receipts in the user's own scope.
+This is a total campaign target, not an hourly guarantee, job offer or grant of
+disclosure authority. `start-campaign --cv FILE` creates a private intake/goal
+packet; `--target N` overrides 100. See [CV-first setup](docs/COMMUNITY_START.md).
+Only an explicit job-seeker request activates the campaign; cloning or maintaining
+the product does not. Do not relax fit or import the public case-study rows to
+inflate a new user's progress.
+
 The [agent setup guide](docs/AGENT_SETUP.md) and [setup-and-goal prompt](prompts/SETUP_AND_GOAL.md)
 let users supply their own runtime, private evidence, role scope, target and
 limits. This product goal stays public; personal goals and receipts stay private.

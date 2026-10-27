@@ -22,7 +22,7 @@ Employment types and exclusions: [my choices]
 Prior applications: [tracker or supplied list]
 Availability, work authorization and salary basis: [confirmed facts or unknown]
 
-Campaign target: [number of new suitable confirmed applications]
+Campaign target: 100 new best-fit confirmed applications by default [explicit override if wanted]
 Persistent host goal explicitly requested: [yes/no]
 Research/preparation batch size and time limit: [finite limits]
 Public providers: [none / TinyFish Fetch / other installed permitted reader]
@@ -47,6 +47,9 @@ Close completed agent-owned tabs after saved confirmation: [yes/no]
    the existing goal or create one if none exists. Otherwise save a private goal
    note without claiming scheduled/background work. Do not create a competing
    active goal. Preserve scope changes and previous confirmed history.
+   For CV-first intake use start-campaign --cv FILE; target defaults to 100.
+   Strong fit/Plausible fit qualify; do not lower fit to meet a quota. This local
+   starter is not a running host goal, factual confirmation or disclosure approval.
 5. Research a finite eligible batch. If TinyFish is selected, follow its setup
    guide: preview a public plan, use only privately configured credentials and
    dispatch once within its exact plan/budget. No candidate data goes to Fetch.

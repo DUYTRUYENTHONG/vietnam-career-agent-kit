@@ -13,6 +13,20 @@ xem trước chính xác hồ sơ sẽ gửi và theo dõi kết quả thực t�
 
 ## Bắt đầu tại đây
 
+**Bản chia sẻ cộng đồng:** [Tải mã nguồn](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
+và đọc [hướng dẫn bắt đầu bằng CV](docs/COMMUNITY_START.md). Đính kèm CV rồi dùng
+[prompt ngắn](prompts/COMMUNITY_START.md) với Codex, Claude Code hoặc agent có công cụ
+phù hợp. Agent chỉ hỏi các thông tin quan trọng còn thiếu. Mục tiêu mặc định:
+**100 đơn ứng tuyển mới phù hợp, có xác nhận nộp thành công**; không phải 100 lời mời
+nhận việc hoặc cam kết 100 đơn/giờ. PDF/DOCX cần công cụ trích xuất của host.
+
+```sh
+python scripts/kit.py --data-dir ../my-career-private start-campaign --cv /path/to/my-cv.pdf --language vi
+```
+
+[Tracker 100 đơn thực tế đã ẩn danh và kết quả phản hồi](docs/CAMPAIGN_RESULTS.md).
+CV, email riêng, tin nhắn tuyển dụng và biên nhận không được đưa lên GitHub.
+
 **Mới clone hoặc fork?** Đọc [hướng dẫn chạy lần đầu](docs/START_HERE.md)
 (tiếng Anh): chọn đúng nhánh, chạy demo hư cấu, tạo thư mục riêng và thiết lập plugin.
 Xem [năm sơ đồ hệ thống](docs/SYSTEM_MODELS.md) để hiểu vai trò agent, dữ liệu,
@@ -157,7 +171,7 @@ hợp đồng hiện có; không bổ sung trình điều khiển hay xác nhậ
 Cần Git và Python thật phiên bản 3.11 trở lên. Không cần pip install, API key hay gọi mô hình AI.
 
 ```sh
-git clone --branch codex/local-application-plugins https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py --candidate b --data-dir ../career-demo-vi-private

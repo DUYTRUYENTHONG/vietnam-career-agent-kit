@@ -1,5 +1,16 @@
 # Runtime compatibility evidence
 
+## Community starter and source package
+
+The CV-first starter and Git-tree ZIP builder are local Python interfaces.
+Fictional tests cover finite defaults, no approval/fact creation, separate users,
+resume preservation, changed inputs, bad formats, exact committed-source hashes,
+untracked-private exclusion and tracked-private rejection. Release-gate evidence
+is recorded in [community QA](COMMUNITY_RELEASE_QA.md). No native Codex/Claude
+discovery, PDF/DOCX extraction or universal browser execution is certified by
+these tests. Other models use the same CLI/instructions only where their host
+actually supplies the necessary tools. No new SDK, provider or active hook.
+
 ## Evidence-first writing guidance
 
 The [Live Resume review](LIVE_RESUME_REVIEW.md) adds instruction-only CV/email
