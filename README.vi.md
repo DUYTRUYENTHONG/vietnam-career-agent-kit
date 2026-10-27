@@ -13,7 +13,7 @@ xem trước chính xác hồ sơ sẽ gửi và theo dõi kết quả thực t�
 
 ## Bắt đầu tại đây
 
-**Bản chia sẻ cộng đồng:** [Tải mã nguồn](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
+**Bản mới nhất:** clone nhánh `main` theo lệnh bên dưới, hoặc [tải bản preview cố định](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
 và đọc [hướng dẫn bắt đầu bằng CV](docs/COMMUNITY_START.md). Đính kèm CV rồi dùng
 [prompt ngắn](prompts/COMMUNITY_START.md) với Codex, Claude Code hoặc agent có công cụ
 phù hợp. Agent chỉ hỏi các thông tin quan trọng còn thiếu. Mục tiêu mặc định:
@@ -52,8 +52,8 @@ OAuth, các phiên trình duyệt và khôi phục khi chưa rõ kết quả.
 
 ### Bốn bước thiết lập
 
-1. Dùng [lệnh clone nhánh phát triển cụ thể](docs/AGENT_SETUP.md#1-clone-and-prove-the-local-tools-work)
-   rồi chạy demo hư cấu. `main` có thể chưa chứa hướng dẫn/tính năng chưa được merge này.
+1. Dùng [lệnh clone nhánh `main`](docs/AGENT_SETUP.md#1-clone-and-prove-the-local-tools-work)
+   rồi chạy demo hư cấu. Không cần chọn nhánh phát triển để dùng bộ công cụ mới nhất.
 2. Mở clone bằng agent của bạn; xác minh skills và công cụ thực tế theo
    [hướng dẫn thiết lập](docs/AGENT_SETUP.md). Hooks là tùy chọn.
 3. Điền [prompt thiết lập và mục tiêu](prompts/SETUP_AND_GOAL.md) bằng CV, thư mục
@@ -171,7 +171,7 @@ hợp đồng hiện có; không bổ sung trình điều khiển hay xác nhậ
 Cần Git và Python thật phiên bản 3.11 trở lên. Không cần pip install, API key hay gọi mô hình AI.
 
 ```sh
-git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py --candidate b --data-dir ../career-demo-vi-private

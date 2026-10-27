@@ -14,29 +14,30 @@ execution transports and one private application tracker.
 
 ## 1. Get the matching code
 
-Use the pinned `community-v0.2.0` preview tag or its source ZIP. It includes the
-CV-first starter, latest skills and optional local plugins. This preview may be
-ahead of `main`; it is not a claim that the development PRs have merged.
+Use the default `main` branch for the latest merged kit. It includes the
+CV-first starter, current skills and optional local plugins. A normal clone
+needs no feature-branch switch. The immutable `community-v0.2.0` preview and ZIP
+remain available for reproducing that earlier snapshot.
 
 **Clone to use the kit:**
 
 ```sh
-git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 git rev-parse --short HEAD
 ```
 
 **Fork to maintain your own copy:** use GitHub's Fork screen and clone your fork.
-Add the upstream remote and fetch the preview tag if it is absent from your fork:
+Add the upstream remote and fetch its current `main`:
 
 ```sh
 git remote add upstream https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
-git fetch upstream tag community-v0.2.0
+git fetch upstream main
 git remote -v
 ```
 
 Fetching changes no working files. After saving your work, create your own branch
-from the fetched tag: `git switch -c codex/my-career-kit community-v0.2.0`.
+from the fetched main: `git switch -c codex/my-career-kit upstream/main`.
 Do not merge upstream updates blindly into your modifications.
 
 ## 2. Prove the core works without accounts

@@ -9,8 +9,9 @@ review an exact application package, and track what actually happened.
 
 ## Start here
 
-**Community preview:** [Download the source package](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
-or follow [CV-first setup](docs/COMMUNITY_START.md). Attach your CV, answer only
+**Latest kit:** clone `main` and follow [CV-first setup](docs/COMMUNITY_START.md).
+A [pinned preview source package](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
+is also available. Attach your CV, answer only
 missing material information, and use your own tool-enabled Codex, Claude Code
 or compatible agent. The default goal is **100 new best-fit confirmed applications**;
 it is not 100 offers, an hourly guarantee or blanket disclosure permission.
@@ -26,7 +27,7 @@ Read [the real anonymized 100-row campaign tracker and outcomes](docs/CAMPAIGN_R
 ![Real host-assisted campaign results and response breakdown](docs/diagrams/campaign-results.svg)
 
 **New clone or fork?** Follow the [first-run walkthrough](docs/START_HERE.md).
-It covers the pinned preview tag, a fictional demo, private workspace,
+It covers the latest `main`, a fictional demo, private workspace,
 agent skills and optional email/browser setup.
 
 ![Agent, local core, private tracker and optional application transports](docs/diagrams/system-overview.svg)
@@ -53,8 +54,8 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 ### Set up in four steps
 
-1. Follow the [pinned community release instructions](docs/COMMUNITY_START.md)
-   and run the fictional demo. The preview tag may be ahead of `main`.
+1. Follow the [community setup instructions](docs/COMMUNITY_START.md)
+   to clone `main` and run the fictional demo. No feature-branch selection is needed.
 2. Open the clone in your agent. Follow [agent setup](docs/AGENT_SETUP.md) to
    verify its shared skills and actual local/browser tools; hooks are optional.
 3. Fill the [setup-and-goal prompt](prompts/SETUP_AND_GOAL.md) with your own CV,
@@ -176,7 +177,7 @@ a supported host; this guidance does not add a scheduler or browser worker.
 Requires Git and a real Python 3.11+ interpreter. No pip install, API key, account login, browser driver or model call is needed for these commands.
 
 ```sh
-git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py --data-dir ../career-demo-private

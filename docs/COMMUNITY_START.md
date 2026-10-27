@@ -4,14 +4,14 @@ Made by **[DUYTRUYENTHONG](https://github.com/DUYTRUYENTHONG)**. Free to use,
 modify, fork and redistribute under [MIT](../LICENSE). Keep the notices.
 Your AI subscription and optional browser/provider services may have their own costs.
 
-## 1. Download the pinned preview
+## 1. Clone the latest main
 
-[Community v0.2.0 release](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
-includes a source ZIP, per-file SHA256 manifest and no candidate workspace.
-Extract the ZIP, or clone the same tag:
+The default `main` branch includes the merged community kit, so a normal clone
+gets the latest CV-first starter, skills and optional transports. Clone and
+verify the local tools:
 
 ```sh
-git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py
@@ -19,8 +19,11 @@ python scripts/demo_slice1.py
 
 Requires Git and Python 3.11+. `python3` or `py -3` may be your Python command.
 The core and fictional demo need no pip install, account, browser or model API.
-If you fork only `main`, fetch this release tag from upstream before following
-the guide: the preview tag is the distribution point, not a claim that PRs merged.
+Fork `main` for the latest source. To update an existing fork without losing
+your changes, follow [the fork walkthrough](START_HERE.md). For a reproducible
+snapshot, the [community-v0.2.0 release](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
+remains available with its source ZIP and SHA256 manifest; it is not moved when
+`main` changes. [Main integration QA](MAIN_RELEASE_QA.md) records the merge gate.
 
 ## 2. Attach a CV and seven small answers
 
@@ -100,7 +103,8 @@ They are a host-assisted case study, not a benchmark of unattended kit execution
 
 ## Share or maintain your fork
 
-Share the [release link](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
+Share the [repository](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit)
+for the latest `main`, or the [pinned release link](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
 or fork the source. Retain LICENSE/AUTHORS/THIRD_PARTY_NOTICES and use fictional
 fixtures when contributing. A source ZIP has no Git history; clone/fork for Git work.
 Maintainers can rebuild a checked archive from an exact committed tree:
