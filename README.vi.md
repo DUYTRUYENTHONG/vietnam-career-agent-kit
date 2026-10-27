@@ -11,11 +11,30 @@ xem trước chính xác hồ sơ sẽ gửi và theo dõi kết quả thực t�
 
 | Bạn muốn làm gì? | Tài liệu |
 |---|---|
+| Thiết lập Codex, Claude Code hoặc agent có công cụ cục bộ | [Skills, hooks, vai trò agent và trình duyệt](docs/AGENT_SETUP.md) |
+| Cấu hình TinyFish và kiểm tra trước khi gọi mạng | [Hướng dẫn TinyFish](docs/TINYFISH_SETUP.md) |
+| Đánh giá BrowserAct, phiên trình duyệt và quyền thực thi | [Kiểm tra nguồn, thiết lập và lập kế hoạch ngoại tuyến](docs/BROWSERACT.md) |
+| Giao việc thiết lập và đặt mục tiêu riêng | [Prompt thiết lập và mục tiêu](prompts/SETUP_AND_GOAL.md) |
 | Hiểu quy trình và giới hạn | [Hướng dẫn trực quan với bốn sơ đồ](docs/USER_GUIDE.md) |
 | Giao agent chạy chiến dịch theo dữ kiện và giới hạn của bạn | [Prompt chi tiết, có mẫu tiếng Việt](prompts/GUIDED_CAMPAIGN.md) |
 | Thử công cụ không cần tài khoản hay CV thật | [Demo hư cấu bên dưới](#chạy-thử-bằng-dữ-liệu-hư-cấu) |
 | Cấu hình tài liệu và kết nối host | [Dựng tài liệu](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
 | Hiểu mười luồng ứng tuyển và TinyFish | [Kiến trúc và số đo](docs/PARALLEL_APPLICATIONS.md) |
+
+### Bốn bước thiết lập
+
+1. Dùng [lệnh clone nhánh phát triển cụ thể](docs/AGENT_SETUP.md#1-clone-and-prove-the-local-tools-work)
+   rồi chạy demo hư cấu. `main` có thể chưa chứa hướng dẫn/tính năng chưa được merge này.
+2. Mở clone bằng agent của bạn; xác minh skills và công cụ thực tế theo
+   [hướng dẫn thiết lập](docs/AGENT_SETUP.md). Hooks là tùy chọn.
+3. Điền [prompt thiết lập và mục tiêu](prompts/SETUP_AND_GOAL.md) bằng CV, thư mục
+   riêng ngoài repo, nhóm việc, mục tiêu và giới hạn của chính bạn.
+4. Nếu cần, bật [TinyFish Fetch](docs/TINYFISH_SETUP.md) để đọc trang công khai.
+   Chỉ ứng tuyển song song khi host có các phiên độc lập đã được kiểm chứng;
+   một phiên đăng nhập dùng chung phải chạy tuần tự.
+
+Grokbot/Muse chưa có adapter native được xác định và kiểm thử. Có thể dùng
+prompt chung và bàn giao thủ công; tài khoản chat không tự tạo công cụ trình duyệt.
 
 ```mermaid
 flowchart LR

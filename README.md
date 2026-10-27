@@ -11,11 +11,31 @@ review an exact application package, and track what actually happened.
 
 | Your next step | Open this |
 |---|---|
+| Set up Codex, Claude Code, or another tool-enabled agent | [Agent setup: skills, hooks, roles and browsers](docs/AGENT_SETUP.md) |
+| Configure TinyFish without exposing your API key | [TinyFish setup and offline preview](docs/TINYFISH_SETUP.md) |
+| Evaluate BrowserAct sessions and authorization | [BrowserAct review, setup and offline planner](docs/BROWSERACT.md) |
+| Give your agent a setup task and your own campaign goal | [Copyable setup-and-goal prompt](prompts/SETUP_AND_GOAL.md) |
 | Understand the workflow and its boundaries | [Visual guide: four workflow diagrams](docs/USER_GUIDE.md) |
 | Run a real campaign with your own facts and limits | [Detailed copy-and-paste agent prompt](prompts/GUIDED_CAMPAIGN.md) |
 | Try the tools without accounts or personal data | [Fictional quick start](#try-the-working-slice) |
 | Configure documents or a supported execution bridge | [Document setup](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
 | Understand ten-lane concurrency and TinyFish | [Parallel applications and measured limits](docs/PARALLEL_APPLICATIONS.md) |
+
+### Set up in four steps
+
+1. Follow the [explicit development-branch clone instructions](docs/AGENT_SETUP.md#1-clone-and-prove-the-local-tools-work)
+   and run the fictional demo. `main` may lag these unreleased guides/features.
+2. Open the clone in your agent. Follow [agent setup](docs/AGENT_SETUP.md) to
+   verify its shared skills and actual local/browser tools; hooks are optional.
+3. Fill the [setup-and-goal prompt](prompts/SETUP_AND_GOAL.md) with your own CV,
+   external private workspace, role filters, target and finite operating limits.
+4. Add [TinyFish public Fetch](docs/TINYFISH_SETUP.md) if wanted. Prepare and
+   review a batch; use concurrent applications only after the host bridge proves
+   independent sessions. One shared login uses one action stream.
+
+Codex and Claude Code have project skill entry points. Grokbot and Muse can use
+the generic prompt/manual path; native adapters for those unidentified runtimes
+are not supplied. A chat account alone does not provide local or browser tools.
 
 ```mermaid
 flowchart LR
@@ -170,6 +190,7 @@ Structured operations return `schema_version`, `outcome`, `data`, `issues`, `mes
 | Codex desktop tool execution; CLI 0.137.0 inventory | Experimental | This development flow executes local tools; separate fictional browser fill/upload/submit smoke passed; engine bridge tested deterministically; native skill/hooks and real employer integration unverified |
 | Claude Code 2.1.205 inventory | Instruction-only | Generated shared-skill wrappers; native agent execution/hooks not tested |
 | Grok Bot / unidentified Grok runtime | Unsupported natively | Generic text/manual path only; no invented SDK, hooks or browser support |
+| Muse / unidentified agent runtime | Unsupported natively | Generic instructions/manual path; identify actual tools before claiming execution |
 
 [Compatibility evidence](docs/compatibility.md) lists versions, OS, documentation and limits. Coding CLIs and consumer chat websites differ. Ten wrappers do not create ten installed tools. `python scripts/generate_adapters.py --dry-run` previews repository-owned wrapper changes; `--check` detects drift. No global settings or active hooks are overwritten.
 

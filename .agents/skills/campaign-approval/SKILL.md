@@ -38,6 +38,14 @@ bridge/runtime to derive authority, start and return the first request in one
 call. It does not create approval proof. If the response identifies an existing
 run, reconcile its pending action; never replay launch or browser mutations.
 
+## BrowserAct authorization
+
+For BrowserAct, service `auth login` is separate from candidate authority. Bind
+the exact execution scope to browser-act before using its session planner;
+another bridge's approval cannot be borrowed. Upstream confirmation guidance
+does not replace these checks or host action-time confirmations. See
+../../../docs/BROWSERACT.md for the reviewed integration boundary.
+
 ## Outputs
 
 Reviewable exact manifest or explicit needs_input/manual_required; never a manufactured approval.

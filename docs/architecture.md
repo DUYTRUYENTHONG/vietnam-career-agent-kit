@@ -47,6 +47,11 @@ These core paths are shared by scripts/kit.py. core/execution.py adds a durable 
 
 ## Boundaries
 
+`adapters/browser_act.py` is an offline planner for already-issued requests. It
+reuses canonical action checks and returns owned session/state argument arrays,
+never a browser process or application receipt. Write translation remains
+unimplemented. See [BrowserAct scope and source audit](BROWSERACT.md).
+
 Optional public network research is isolated under `adapters/providers/` and
 explicit new CLI commands. Schema 5 adds private research tables to the same
 database; ordinary commands make no provider calls. See [ADR](ADR-FAST-WEB.md)

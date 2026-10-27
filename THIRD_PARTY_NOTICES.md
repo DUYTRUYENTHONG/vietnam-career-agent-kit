@@ -1,5 +1,12 @@
 # Third-party notices
 
+BrowserAct review: `browser-act/skills` revision
+`11c057b03f92101642cadc9f840564574120d184` is MIT, copyright 2026 BrowserAct.
+No upstream code, skill text, assets or binaries are bundled. The offline session
+planner is original code. The separately distributed CLI1.4.5 metadata supplies
+no license expression; its compiled wheels and dependencies are not adopted or
+relicensed. See docs/REFERENCE_REVIEW.md and adapters/browser-act.source.json.
+
 Original toolkit code is licensed under LICENSE (MIT). No code, templates, biographies, candidate files or settings from the four reference repositories are vendored. Their ideas informed this original implementation. A public repository is not automatically reusable without its license.
 
 | Reference | Reviewed commit | Root license and scope |

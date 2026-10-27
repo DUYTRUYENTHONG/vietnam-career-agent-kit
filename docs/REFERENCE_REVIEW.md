@@ -126,3 +126,38 @@ Reviewed source SHA256:
 - skills/tinyskill/SKILL.md: `9d976035919f78865eaa17fdb00f67305159f4ab52c83007a3f799774bf572b6`
 
 Fetch supports up to ten URLs per batch. Server scheduling is provider-controlled. Agent and direct Browser execution were deliberately excluded from this increment. Only fictional injected transport is tested; no account quota, price, live latency or employer application support is certified.
+
+## Setup documentation source check — 26 October 2026
+
+The new setup guides describe the existing original adapter and CLI. Rechecked
+the official [TinyFish Fetch contract](https://docs.tinyfish.ai/fetch-api/reference)
+and [authentication](https://docs.tinyfish.ai/authentication),
+[OpenAI skill discovery](https://learn.chatgpt.com/docs/build-skills),
+[Claude Code skills](https://code.claude.com/docs/en/skills) and
+[hooks](https://code.claude.com/docs/en/hooks). These establish upstream interfaces,
+not kit-native acceptance. No upstream code, SDK, installer or hook was adopted;
+the pinned cookbook review above remains the implementation reference. The guide
+explicitly records the adapter's narrower Fetch request, absent `.env` loading,
+unforwarded freshness field and separate host-browser requirements. Grokbot/Muse
+native integration remains unverified and is not inferred from these sources.
+
+## BrowserAct session and authorization review, 26 October 2026
+
+Reviewed https://github.com/browser-act/skills at `11c057b03f92101642cadc9f840564574120d184` as untrusted source text. Entry skill version2.0.2. No upstream installers, runtime `get-skills`, hooks, executable code or profile tools were run. No source/skill text or binary is copied.
+
+| Exact inspected path | SHA-256 of Git blob bytes |
+|---|---|
+| LICENSE | ea8eaae0fd525d840d432430af5133224cb363703cc0e3b265988d34c7601906 |
+| browser-act/SKILL.md | b0a3a22320d22610bb2b0dac085514c57c8f3dbfc1249b717af6ecd714913372 |
+| docs/commands.md | b0517aff6f007afe795a22d554a4036d2797b3603d3504af9aed314cdf8bc617 |
+| docs/concurrency.md | b12aaba78f8f89bb9772e5715dafbd32a7cd84fba68783a6709886ceb525f6cb |
+| docs/agent-design.md | 6683490b4581de619dcc6b600dc2bb9b43d43be4f579bdf660b65bdd270266d2 |
+| docs/installation.md | f6f0e06f52efd7384ce8481e69560269ab9cd7ba233fda4a3a1631142c66931a |
+| docs/remote-assist.md | cec0c1208364cd2aaecab988f74a8fe53e8d8231fd276ea6e5c8268dc9e8eb46 |
+| docs/skills.md | 0671c02f8803fbad36a5c3453d4f22a6008c6b1d590d27db89cfe6af80e63fef |
+
+The repository is MIT (2026 BrowserAct). [Pinned CLI1.4.5 metadata](https://pypi.org/project/browser-act-cli/1.4.5/) declares Python==3.12.*, many ranged dependencies and platform-specific compiled wheels; it declares no license/license-expression. Full dependency and wheel hashes are retained in [the source record](../adapters/browser-act.source.json), not installed as kit dependencies. A static skill review is not a binary audit or license grant for those artifacts.
+
+Adopted through original code: deterministic owned session names, compact-state planning and the existing exact-action/standing authorization checks. Confirmation gates in the upstream agent-design guide are conversation-level guidance, not CLI hard-blocks. Service authentication is separate from candidate/host authority. Same-browser sessions share cookies; upstream non-correlation, local-only and speed claims are not certified. Runtime instruction updates, profile/cookie import, network captures, remote-access links, proxies, CAPTCHA services and diagnostic log uploads are not adopted.
+
+Acceptance: offline planner and fictional authorization/receipt-recovery tests only; fill/upload/submit returns manual_required. CLI installation, native browser driving, real-employer throughput and binary/transitive security remain unverified. See [integration review](BROWSERACT.md).

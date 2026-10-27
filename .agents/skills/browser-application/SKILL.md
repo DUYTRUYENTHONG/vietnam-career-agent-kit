@@ -94,3 +94,14 @@ python scripts/kit.py --data-dir PATH execution-status --run-id ID; tests/test_e
 ## Concurrent batches
 
 For explicitly authorized batches, use ../../../docs/PARALLEL_APPLICATIONS.md and ../../../prompts/ten-job-batch.md. Keep the above action sequence per lane; only independent isolated bindings may progress concurrently. One coordinator writes the ledger. Never use a shared tab across workers.
+
+## Optional BrowserAct host
+
+When BrowserAct is explicitly selected and the host permits it, read
+../../../docs/BROWSERACT.md. `browser-act-plan` checks an already-issued request
+and returns offline session/state argument arrays. It does not launch a browser
+or translate fill/upload/submit; those return manual_required. Recheck the
+listed canonical preflight before any host action. Keep one owned session per
+job, refresh compact state after UI changes and preserve unknown outcomes for
+read-only recovery. Same-browser sessions share cookies; shared accounts use
+one worker. A planned session name is not proof of live isolation.

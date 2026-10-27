@@ -89,5 +89,17 @@
     "copied_source": false,
     "evidence": "docs/REFERENCE_REVIEW.md",
     "live_service_verified": false
+  },
+  "browser_act_session_planning": {
+    "implementation": "Original standard-library offline adapter; no subprocess or browser acquisition",
+    "runtime_dependencies": [],
+    "source_record": "adapters/browser-act.source.json",
+    "reference_revision": "11c057b03f92101642cadc9f840564574120d184",
+    "reference_repository_license": "MIT",
+    "cli_package_installed": false,
+    "cli_binary_or_transitive_audit_complete": false,
+    "submission_translation_implemented": false,
+    "native_driver_verified": false,
+    "live_speedup_measured": false
   }
 }

@@ -50,6 +50,9 @@ Use recover-parallel-execution only for read-only reconciliation after an uncert
 
 ## TinyFish Fetch
 
+First-time setup: [private key, offline preview and plan walkthrough](TINYFISH_SETUP.md).
+For agent roles and session-isolation checks, read [agent setup](AGENT_SETUP.md).
+
 ```sh
 python scripts/kit.py provider-doctor
 python scripts/kit.py tinyfish-fetch --plan PUBLIC_PLAN_JSON

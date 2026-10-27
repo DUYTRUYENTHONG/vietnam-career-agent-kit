@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- Add an offline BrowserAct session planner for issued, exactly authorized
+  requests. It checks coordinator/bridge/binding and current authority, plans
+  compact inspection/recovery commands, and returns manual_required for form
+  writes. Add a pinned source/package review, setup and authorization guide;
+  update the existing browser/approval skills. No CLI install, browser launch,
+  new runtime dependency, automatic approval or live throughput claim.
+
+- Add a guided setup entry point for shared skills, optional preparation hooks,
+  coordinator/research/tailoring/browser roles and isolated host sessions.
+  Add hidden-input TinyFish key setup, an offline preview, a public-plan/live
+  walkthrough and a portable setup-and-goal prompt. Clarify the generic
+  Grokbot/Muse path, absent `.env` loading and TinyFish freshness/driver limits;
+  correct setup migration guidance to schema 6. Documentation only; no new
+  permissions, runtime adapter, dependency or throughput claim.
+
 - Add English/Vietnamese README entry points, Mermaid workflow diagrams and a
   detailed reusable campaign prompt covering setup, evidence, bounded public
   research, document review, exact disclosure, isolated lanes and receipt recovery.
