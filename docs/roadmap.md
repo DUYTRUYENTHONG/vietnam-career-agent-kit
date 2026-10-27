@@ -1,5 +1,11 @@
 # Vertical-slice roadmap
 
+Community preview 0.2.0 adds CV-first intake with a default 100 application goal,
+an anonymized real campaign case study and a checked source ZIP builder. This
+closes those bounded onboarding/distribution tasks, not the unverified native
+runtime, host installation or live-employer acceptance gates below. See
+[community setup](COMMUNITY_START.md) and [QA](COMMUNITY_RELEASE_QA.md).
+
 Experimental runtime increment: [TinyFish Browser](TINYFISH_BROWSER.md) adds
 explicit single-page guest forms, finite worker deadlines and safe quarantine.
 Fictional tests verify protocol behavior; live CDP/provider acceptance, broader

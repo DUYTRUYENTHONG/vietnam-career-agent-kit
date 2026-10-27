@@ -11,6 +11,13 @@ approved execution manifest. The core's finite limits and expiry still apply.
 
 ## Record the goal privately
 
+The CV-first starter defaults to 100 new best-fit confirmed applications:
+`--data-dir PATH start-campaign --cv FILE`. Use `--target N` to override it.
+Only reviewed Strong fit/Plausible fit within the user's scope qualify by default.
+The starter creates local intake/goal notes, not a running host goal or execution
+authority. See [community setup](COMMUNITY_START.md). Existing finite manifest
+caps and expiry are independent of the overall campaign target.
+
 When the user explicitly requests a persistent goal and the host supports it,
 create or reuse that host goal. Do not create a competing active goal. Otherwise
 save an operator note in the selected external private workspace and explain that

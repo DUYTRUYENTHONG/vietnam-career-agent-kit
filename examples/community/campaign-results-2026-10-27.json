@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-10-27",
+  "kind": "real_host_assisted_campaign_anonymized_snapshot",
+  "author": "DUYTRUYENTHONG",
+  "confirmed_new_submissions": 100,
+  "response_counts": {
+    "acknowledged": 34,
+    "assessment_invited": 1,
+    "interview_invited": 2,
+    "no_response_found": 62,
+    "rejected": 1
+  },
+  "offers_observed": 0,
+  "frozen_strong_or_plausible_fit_count": null,
+  "privacy": "Anonymous application references only; no candidate contacts, employer identities, private URLs, recruiter messages, receipts or workspace paths.",
+  "count_scope": "Observed employer confirmations or observed email sending under the candidate-approved original/adjacent/stretch scope. Not 100 offers and not a certified 100-best-fit cohort.",
+  "provenance": "Maintainer summary from the existing private canonical ledger and an authenticated two-mailbox review including Spam. Raw evidence stays private; public readers cannot independently audit it.",
+  "measurement_limits": [
+    "Host-assisted campaign; not a replay of the portable kit end-to-end",
+    "Sending does not guarantee employer inbox delivery",
+    "No100/hour or100x improvement measured",
+    "Snapshot, not a live inbox monitor",
+    "No response found is not an employer rejection"
+  ]
+}

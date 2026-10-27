@@ -67,6 +67,10 @@ def parser() -> Parser:
     route.add_argument('--packet',type=Path,required=True)
     init=commands.add_parser('init',help='additive local workspace initialization')
     init.add_argument('--language',choices=['en','vi'],default='en')
+    starter=commands.add_parser('start-campaign',help='create private CV intake and a default 100-application goal; no extraction or submission')
+    starter.add_argument('--cv',type=Path,required=True)
+    starter.add_argument('--target',type=int,default=100)
+    starter.add_argument('--language',choices=['en','vi'],default='en')
     for name in ['status','profile','resume','source-registry']:
         commands.add_parser(name)
     cv=commands.add_parser('import-cv',help='copy an explicitly supplied UTF-8 TXT/Markdown CV into private evidence')
@@ -200,6 +204,9 @@ def execute(args) -> Outcome:
         raise WorkflowError('needs_input','--data-dir is required; choose an explicit external private workspace')
     work=Executor(args.data_dir,actor=args.actor)
     if command=='init':return work.init(args.language)
+    if command=='start-campaign':
+        from core.starter import start_campaign
+        return start_campaign(work,args.cv,target=args.target,language=args.language)
     if not work.db_path.is_file():
         raise WorkflowError('needs_input','Workspace not initialized; run init first with this --data-dir')
     legacy={'status','add-job','check-package','check-approval','record-approval','invalidate'}

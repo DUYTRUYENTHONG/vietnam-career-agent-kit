@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## [0.2.0] - 2026-10-27 (community preview)
+
+- Add CV-first `start-campaign`: one external private intake packet, a default
+  target of 100 confirmed Strong/Plausible-fit applications and resumable setup
+  without overwriting user edits. PDF/DOCX extraction stays host supplied; no
+  factual confirmation, running goal, disclosure or submission is implied.
+- Package the exact committed public source as an external ZIP and per-file
+  SHA256 manifest, with bounded artifact/credential checks. Add a CV-first agent
+  prompt, pinned clone/fork guide, community release instructions and an
+  anonymized 100-row real host-assisted campaign snapshot with response outcomes.
+  Keep private evidence out of Git; distinguish historical approved stretch roles
+  from the new default best-fit goal, and submissions from offers or live speed.
+
 - Review Agent Skills for Context Engineering at an immutable revision; record
   selected Git-blob hashes, dependencies and linked-license caveats. Add a compact
   checkpoint procedure to the management guide without another skill or ledger.

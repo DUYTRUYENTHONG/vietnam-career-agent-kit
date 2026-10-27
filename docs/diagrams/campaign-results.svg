@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="500" viewBox="0 0 1040 500" role="img" aria-labelledby="title desc">
+  <title id="title">Real campaign results: 27 October 2026</title>
+  <desc id="desc">One hundred host-assisted confirmed submissions: two interview invitations, one assessment and recorded interview request, one rejection, thirty-four acknowledgments and sixty-two without a matching reply. Zero offers observed. An anonymized snapshot, not an automation speed benchmark.</desc>
+  <rect width="1040" height="500" rx="24" fill="#f3f7fc"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172c46">
+    <text x="40" y="54" font-size="28" font-weight="700">Real campaign · anonymous results</text>
+    <text x="40" y="86" font-size="17">27 October 2026 · host-assisted campaign · two-mailbox reply review</text>
+    <rect x="40" y="114" width="960" height="110" rx="16" fill="#172c46"/>
+    <text x="65" y="176" font-size="52" font-weight="700" fill="white">100</text>
+    <text x="204" y="157" font-size="23" font-weight="700" fill="white">confirmed new submissions</text>
+    <text x="204" y="192" font-size="16" fill="#dce8f8">A submitted application is not a job offer. No offers observed.</text>
+    <rect x="40" y="249" width="19.2" height="26" fill="#136f63"/>
+    <rect x="59.2" y="249" width="9.6" height="26" fill="#3674c5"/>
+    <rect x="68.8" y="249" width="9.6" height="26" fill="#b83c50"/>
+    <rect x="78.4" y="249" width="326.4" height="26" fill="#8c64b6"/>
+    <rect x="404.8" y="249" width="595.2" height="26" fill="#becadb"/>
+    <circle cx="50" cy="316" r="7" fill="#136f63"/><text x="70" y="322" font-size="18">2 interview invitations</text>
+    <circle cx="50" cy="355" r="7" fill="#3674c5"/><text x="70" y="361" font-size="18">1 assessment / recorded interview</text>
+    <circle cx="50" cy="394" r="7" fill="#b83c50"/><text x="70" y="400" font-size="18">1 rejection</text>
+    <circle cx="565" cy="316" r="7" fill="#8c64b6"/><text x="585" y="322" font-size="18">34 acknowledgments</text>
+    <circle cx="565" cy="355" r="7" fill="#becadb"/><text x="585" y="361" font-size="18">62 no matching reply found</text>
+    <text x="40" y="453" font-size="16">Snapshot, not live tracking or a 100/hour benchmark. Raw candidate records remain private.</text>
+    <text x="40" y="480" font-size="14" fill="#455e7a">Made by DUYTRUYENTHONG · MIT · free community sharing</text>
+  </g>
+</svg>

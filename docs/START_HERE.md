@@ -14,32 +14,30 @@ execution transports and one private application tracker.
 
 ## 1. Get the matching code
 
-The email/browser plugins are on `codex/local-application-plugins`. This is a
-development branch, not a merged default-branch release. Use it to follow this
-guide; record your commit so later upgrades are deliberate.
+Use the pinned `community-v0.2.0` preview tag or its source ZIP. It includes the
+CV-first starter, latest skills and optional local plugins. This preview may be
+ahead of `main`; it is not a claim that the development PRs have merged.
 
 **Clone to use the kit:**
 
 ```sh
-git clone --branch codex/local-application-plugins https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 git rev-parse --short HEAD
 ```
 
-**Fork to maintain your own copy:** use GitHub's Fork screen, select your owner
-and repository name, and clear **Copy the default branch only** to include the
-development branch. Clone the fork's HTTPS URL with the same `--branch` option.
-Keep the upstream remote for reviewing future changes:
+**Fork to maintain your own copy:** use GitHub's Fork screen and clone your fork.
+Add the upstream remote and fetch the preview tag if it is absent from your fork:
 
 ```sh
 git remote add upstream https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git fetch upstream tag community-v0.2.0
 git remote -v
 ```
 
-If a fork has only `main`, fetch the development branch explicitly before
-following this guide. `git fetch upstream codex/local-application-plugins` downloads
-it without changing your files; create a local branch from `FETCH_HEAD` only after
-checking your work is saved. Do not merge updates blindly into your modifications.
+Fetching changes no working files. After saving your work, create your own branch
+from the fetched tag: `git switch -c codex/my-career-kit community-v0.2.0`.
+Do not merge upstream updates blindly into your modifications.
 
 ## 2. Prove the core works without accounts
 
@@ -110,6 +108,11 @@ and matching receipts. The engine permits up to ten isolated lanes. Shared mailb
 sends stay ordered. No live 100/hour or 100x speedup has been established.
 
 ## 5. Give your agent a concrete setup task
+
+For the shortest CV-first path, use [community quick start](COMMUNITY_START.md)
+and [its short prompt](../prompts/COMMUNITY_START.md). `start-campaign --cv FILE`
+creates a private intake/goal packet with target 100; it does not extract PDF/DOCX
+or authorize applications. Only ask for missing material information.
 
 Copy [SETUP_AND_GOAL](../prompts/SETUP_AND_GOAL.md), replace its placeholders,
 and supply your own CV, role filters, locations, target and finite limits.

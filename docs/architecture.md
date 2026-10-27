@@ -1,5 +1,20 @@
 # Portable core architecture
 
+## Community starter and source distribution
+
+`core/starter.py`, exposed as `start-campaign`, records a private CV path/hash,
+nullable intake fields and a default 100-application goal note. It reuses normal
+workspace initialization, never imports/confirms candidate facts or acquires
+browser/model tools, and refuses to overwrite a different or edited packet.
+There is no database migration or new execution authority. `--target` changes
+the total goal only; finite execution caps remain separately validated.
+
+`scripts/package_community.py` archives one committed Git tree and scans the
+archive before writing an external ZIP/digest manifest. It excludes untracked
+workspaces and Git metadata. The anonymized public campaign snapshot is a
+documentation case study, never imported into a candidate ledger or counted by
+the engine. See [setup and release scope](COMMUNITY_START.md).
+
 New user? [Clone/fork walkthrough](START_HERE.md) · [System models and diagrams](SYSTEM_MODELS.md).
 
 ## Optional local plugin transports
