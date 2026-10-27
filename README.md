@@ -7,6 +7,10 @@ remain separate. Opt-in CLI support uses additive schema 4.
 
 Bring your own AI agent and CV. Run an organized, evidence-based Vietnam job search with reusable tools and controlled application automation.
 
+[Continue and close completed application tabs](prompts/AUTO_PROCEED.md) provides
+a reusable campaign prompt: reuse confirmed answers and valid authority, save the
+receipt, close the exact agent-created tab, verify absence and update the tracker.
+
 [Tiếng Việt](README.vi.md) · [Product goal](GOAL.md) · [Architecture](docs/architecture.md) · [Compatibility](docs/compatibility.md) · [Roadmap](docs/roadmap.md)
 
 **Working now:** a local preparation CLI: diagnose → private workspace → UTF-8 CV/profile import → exact profile confirmation → structured JD import → evidence matrix → tailored Markdown draft → tracker/report/manual handoff → resume. Ten shared skills and Claude wrappers support the workflow. Fictional examples cover two users, cities, roles and languages.
@@ -73,6 +77,8 @@ Keep CVs, evidence, salary, answers, trackers and screenshots in the selected di
 | `render`, `review-documents`, `reject-documents` | Optional local DOCX/PDF/page generation and explicit review; no disclosure |
 | `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite authorization records and expiry/hash checks; execution requires an explicitly reviewed bridge/runtime scope |
 | `create-authorization`, `approve-authorization`, `check-authorization`, `revoke-authorization`, `authorize-manifest` | Opt-in bounded standing delegation across reviewed batches; shared allocations and revocation, with host confirmations separate |
+| `launch-execution` | Combine standing authorization, start and first request; reuse existing authority without another local prompt, never replay an existing run |
+| `cleanup-execution`, `record-cleanup` | After saved confirmation, return exact tab cleanup instructions and record host-reported closure; preserve uncertain/user-owned tabs |
 | `resume`, `status`, `report`, `handoff` | Local checkpoint or explicit manual handoff |
 | `tracker` | Fast recorded-status table; does not validate artifacts, approvals or live vacancies |
 | `route-task --packet task.json` | Read-only model/tool plan using explicit host capabilities; no workspace or model API required |
@@ -95,6 +101,10 @@ Structured operations return `schema_version`, `outcome`, `data`, `issues`, `mes
 [Compatibility evidence](docs/compatibility.md) lists versions, OS, documentation and limits. Coding CLIs and consumer chat websites differ. Ten wrappers do not create ten installed tools. `python scripts/generate_adapters.py --dry-run` previews repository-owned wrapper changes; `--check` detects drift. No global settings or active hooks are overwritten.
 
 [connectors/registry.json](connectors/registry.json) declares discover/read/extract/fill/upload/submit/verify separately. Manual structured JD import works. Employer pages, feeds, universities and LinkedIn/Indeed/JobsGO/ITviec/TopCV/VietnamWorks/CareerViet are potential sources, not enabled connectors. Unknown permissions stay manual; snippets are leads, and only executed finite searches count as coverage.
+
+[Faster discovery guidance](docs/DISCOVERY_ACCELERATION.md) covers public ATS
+listings, coverage reuse and candidate-authorized adjacent role families. It is
+instruction-only; the network connector remains pending.
 
 ## Costs, hooks and development
 

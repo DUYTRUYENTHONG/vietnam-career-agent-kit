@@ -21,3 +21,9 @@ recipient/answer/consent scopes; see STANDING_AUTHORIZATION.md. Unknown source
 permission, required answers and host confirmations remain actionable exceptions.
 A handoff separates the CV from private source-map review artifacts; the source
 map is not an employer attachment.
+
+launch-execution composes approved standing derivation, start and first request.
+cleanup-execution/record-cleanup manage exact completed-tab instructions and
+host-reported results after saved confirmation. Only the supported host closes
+tabs, after verifying cleanup intent and agent ownership; the CLI cannot close
+the browser itself. See execution.md for recovery and trust boundaries.

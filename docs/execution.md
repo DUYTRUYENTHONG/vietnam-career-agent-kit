@@ -73,6 +73,25 @@ accidental coordinator mixing; local database access is not an authorization bou
 
 ## Fewer orchestration round trips
 
+For a new reviewed manifest under standing authority, combine authorize/start/next:
+
+```sh
+python scripts/kit.py --data-dir ../career-private launch-execution --fingerprint MANIFEST --authorization AUTHORIZATION --bridge-id selected-supported-host-session --runtime-minutes 30
+```
+
+The three existing operations become one CLI call; no live speed estimate is
+implied. Invalid bridge/runtime is rejected before quota allocation. Missing,
+expired or revoked standing authority still blocks a new launch. Host challenges,
+specific disclosure confirmations and legal agreements remain separate blockers.
+
+A repeated launch returns the existing run ID and pending-action metadata without
+reissuing a request, renewing authority or reserving quota again. `needs_input`
+here means the operator must reconcile its host observation and saved receipt;
+it is not a new approval prompt. Pending submits recover through next-action as
+read-only verification. Terminal manifests never restart. If authorization or a
+run committed before a later step failed, the result preserves that state and its
+identifiers. Inspect it before continuing; do not create a replacement run.
+
 After the first `next-action`, prefer:
 
 ```sh
@@ -196,6 +215,55 @@ snapshot. This internal metadata is retained on confirmation and supports the
 read-only `throughput` KPI. Older snapshots stay readable and unmodified; absent
 fit is never inferred. This adds no browser receipt field, disclosure scope or
 database migration. See [rolling KPI semantics](THROUGHPUT.md).
+
+## Close completed application tabs
+
+Use [the reusable continuation prompt](../prompts/AUTO_PROCEED.md) to request
+this harness alongside source-backed answers and bounded campaign execution.
+
+When the candidate requests this cleanup, successful verification returns
+`data.cleanup.requests` after the immutable confirmation and screenshot have
+been saved. `advance-execution` retains these instructions alongside a successor
+request or a successor failure. Each instruction names the exact recorded
+bridge/binding, employer, requisition and saved screenshot. No instruction is produced
+for an unsubmitted, ASSIST-only or uncertain application.
+
+```sh
+python scripts/kit.py --data-dir ../career-private cleanup-execution --run-id RUN_ID
+# The host verifies candidate cleanup intent and its own agent-created tab registry,
+# closes only the matching application tab through supported tools, and observes
+# that the tab is closed/absent before writing the local receipt.
+python scripts/kit.py --data-dir ../career-private record-cleanup --run-id RUN_ID --receipt ../career-private/cleanup-receipt.json
+```
+
+The receipt uses schema_version, request_id, bridge_id, binding_id, status
+(`closed`, `already_absent`, `failed`), agent_owned and cleanup_requested.
+Successful closure requires both booleans true. Failed closure requires a reason.
+Use the shapes in execution.schema.json. The local flags cannot authenticate
+intent, ownership or browser state; the host must establish them before closing.
+Recheck cleanup-execution and refresh the visible employer/requisition immediately
+before closing. Later recorded application activity that reuses the same bridge
+and binding suppresses old cleanup; an acknowledgement for it is rejected. Local
+bookkeeping cannot observe unreported navigation or authenticate the host.
+Never close unrelated/user-owned tabs, explicit deliverables or pending handoffs.
+This operation does not close the browser application or its other tabs.
+
+Exact successful receipt replay is idempotent. Changed/missing saved evidence
+blocks closure, preserves the confirmed application and reports a cleanup
+blocker. Cleanup failures never resubmit or change application counts. Separate
+cleanup can continue after run completion, expiry or revocation; it grants no
+new disclosure permission. Receipts are completed immutable execution_actions
+records, so schemas 3/4 require no new migration. Keep the private workspace.
+
+Caller-supplied bridges may explicitly provide `close_application_tab(request)`
+to handle requested cleanup and return its observed receipt. run_with_bridge
+invokes it after canonical confirmation, including cleanup-only terminal resume.
+It attempts each cleanup once per invocation, reports exceptions and preserves
+pending cleanup. A bridge without that optional method returns the instructions
+for the operator; no closure is claimed. CLI commands never acquire a browser.
+The bridge eligibility check repeats before each callback. Tracker output keeps
+cleanup_status/cleanup_blocker separate from the latest application action and
+blocker; successful closure cannot become an application failure.
 
 ## Verification scope
 

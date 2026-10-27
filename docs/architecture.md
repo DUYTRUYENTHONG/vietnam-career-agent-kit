@@ -34,6 +34,11 @@ These core paths are shared by scripts/kit.py. core/execution.py adds a durable 
 
 ## Boundaries
 
+`core/dispatch.py` composes standing derivation/start/first request with explicit
+partial-commit and nonreplay results. `core/cleanup.py` derives closure requests
+only from saved confirmed bindings and verifies evidence before recording host
+cleanup receipts. It does not drive a browser, infer ownership or alter counts.
+
 Schema 4 adds opt-in standing delegation in `core/authorization.py`. An approved
 profile/recipient/answer/consent scope derives exact reviewed manifests;
 immutable child allocations share one cap. `Campaign.check_manifest` rechecks

@@ -79,6 +79,12 @@ This conservative rule prevents recycling uncertain attempts. Allocations are
 separate from confirmed applications in `tracker` and `throughput`. Zero-limit
 ASSIST scopes cannot evade the cap; use separately approved ASSIST manifests.
 
+For a new manifest, `launch-execution --fingerprint MANIFEST --authorization
+FINGERPRINT --bridge-id selected-supported-host-session --runtime-minutes 30`
+combines derivation, start and the first request. Repeated launch reports the
+existing run without replaying requests or allocating again. See execution.md
+for partial-failure and reconciliation results.
+
 ```sh
 python scripts/kit.py --data-dir ../career-private revoke-authorization --fingerprint FINGERPRINT --reason "Candidate stopped this scope"
 ```

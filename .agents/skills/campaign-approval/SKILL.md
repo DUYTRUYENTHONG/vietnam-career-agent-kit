@@ -33,6 +33,11 @@ manifest hashes and reviews remain mandatory. check-authorization reports quota
 allocations, not submitted jobs. Host-required specific disclosure/action-time
 confirmations remain separate. New recipients/answers/consents stay exceptions.
 
+Prefer launch-execution with the exact manifest/standing fingerprints and reviewed
+bridge/runtime to derive authority, start and return the first request in one
+call. It does not create approval proof. If the response identifies an existing
+run, reconcile its pending action; never replay launch or browser mutations.
+
 ## Outputs
 
 Reviewable exact manifest or explicit needs_input/manual_required; never a manufactured approval.

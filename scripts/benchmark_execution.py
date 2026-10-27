@@ -22,7 +22,7 @@ def fake_render(content, directory, soffice=None):
     return {'page_count': 1, 'renderer': {'test_double': True}}
 
 
-def approved_batch(work, jobs):
+def approved_batch(work, jobs, approve=True):
     now = datetime.now(timezone.utc)
     entries = []
     with patch('core.documents.render_files', side_effect=fake_render):
@@ -48,9 +48,10 @@ def approved_batch(work, jobs):
             'submission_limit': jobs, 'entries': entries,
             'execution': {'bridge_id': 'fictional-browser', 'runtime_minutes': 60}}
     result = work.create_manifest(copy.deepcopy(plan)).data
-    proof = work.data_dir / 'fictional-approval.txt'
-    proof.write_text('APPROVE MANIFEST ' + result['fingerprint'], encoding='utf8')
-    work.approve_manifest(result['fingerprint'], proof)
+    if approve:
+        proof = work.data_dir / 'fictional-approval.txt'
+        proof.write_text('APPROVE MANIFEST ' + result['fingerprint'], encoding='utf8')
+        work.approve_manifest(result['fingerprint'], proof)
     return result
 
 
