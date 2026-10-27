@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence-bound wording import and independent review 2.0",
+  "description": "Select model or review. Core adds current candidate/JD/assessment/source checks, scope and qualifier alarms. Schema validity alone does not establish entailment.",
+  "$defs": {
+    "strings": {"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},
+    "statement": {
+      "type":"object","additionalProperties":false,
+      "required":["id","text","source_fact_ids","source_locators","requirement_ids","transformation","retained_qualifiers","unresolved_questions","review_status"],
+      "properties": {
+        "id":{"type":"string","minLength":1},"text":{"type":"string","minLength":1,"maxLength":2000},
+        "source_fact_ids":{"type":"array","minItems":1,"maxItems":1,"items":{"type":"string","minLength":1}},
+        "source_locators":{"type":"array","minItems":1,"maxItems":1,"items":{"type":"string","minLength":1}},
+        "requirement_ids":{"$ref":"#/$defs/strings"},
+        "transformation":{"enum":["exact_selection","faithful_compression","reordering","translation","faithful_paraphrase"]},
+        "retained_qualifiers":{"$ref":"#/$defs/strings"},"unresolved_questions":{"type":"array","maxItems":0},
+        "review_status":{"const":"pending"}
+      }
+    },
+    "group": {
+      "type":"object","additionalProperties":false,"required":["context_fact_id","statements"],
+      "properties":{"context_fact_id":{"type":["string","null"]},
+        "statements":{"type":"array","minItems":1,"maxItems":30,"items":{"$ref":"#/$defs/statement"}}}
+    },
+    "section": {
+      "type":"object","additionalProperties":false,"required":["kind","groups"],
+      "properties":{"kind":{"enum":["summary","skills","employment","projects","education","certifications","languages"]},
+        "groups":{"type":"array","minItems":1,"maxItems":30,"items":{"$ref":"#/$defs/group"}}}
+    },
+    "model": {
+      "type":"object","additionalProperties":false,
+      "required":["schema_version","candidate_id","job_id","language","author","prompt_version","model_configuration","sections"],
+      "properties": {
+        "schema_version":{"const":"2.0"},"candidate_id":{"type":"string","minLength":1},
+        "job_id":{"type":"integer","minimum":1},"language":{"enum":["en","vi"]},
+        "author":{"type":"string","minLength":1},"prompt_version":{"type":"string","minLength":1},
+        "model_configuration":{"type":"string","minLength":1},
+        "sections":{"type":"array","minItems":1,"maxItems":7,"items":{"$ref":"#/$defs/section"}}
+      }
+    },
+    "statement_review": {
+      "type":"object","additionalProperties":false,
+      "required":["entailed","scope_preserved","qualifiers_preserved","language_correct","requirement_mapping","rationale"],
+      "properties":{"entailed":{"const":true},"scope_preserved":{"const":true},"qualifiers_preserved":{"const":true},
+        "language_correct":{"const":true},"requirement_mapping":{"const":true},"rationale":{"type":"string","minLength":1}}
+    },
+    "dimension": {
+      "type":"object","additionalProperties":false,"required":["score","statement_ids","rationale"],
+      "properties":{"score":{"type":"integer","minimum":0,"maximum":3},
+        "statement_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},
+        "rationale":{"type":"string","minLength":1}}
+    },
+    "review": {
+      "type":"object","additionalProperties":false,
+      "required":["schema_version","fingerprint","policy","reviewer","independent_pass","statements","editorial"],
+      "properties":{"schema_version":{"const":"2.0"},"fingerprint":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "policy":{"const":"wording-review-1"},"reviewer":{"type":"string","minLength":1},"independent_pass":{"const":true},
+        "statements":{"type":"object","minProperties":1,"additionalProperties":{"$ref":"#/$defs/statement_review"}},
+        "editorial":{"type":"object","additionalProperties":false,
+          "required":["relevance","specificity","coverage","clarity","concision","readability"],
+          "properties":{"relevance":{"$ref":"#/$defs/dimension"},"specificity":{"$ref":"#/$defs/dimension"},
+            "coverage":{"$ref":"#/$defs/dimension"},"clarity":{"$ref":"#/$defs/dimension"},
+            "concision":{"$ref":"#/$defs/dimension"},"readability":{"$ref":"#/$defs/dimension"}}}}
+    }
+  }
+}

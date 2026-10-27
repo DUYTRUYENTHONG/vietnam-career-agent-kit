@@ -68,6 +68,13 @@ def parser() -> Parser:
         cmd=commands.add_parser(name);cmd.add_argument('--job-id',type=int,required=True)
         cmd.add_argument('--'+flag,type=Path,required=True)
     handoff=commands.add_parser('handoff');handoff.add_argument('--job-id',type=int,required=True)
+    for name in ['import-wording','wording-packet','review-wording']:
+        cmd=commands.add_parser(name,help='local opt-in source-bound v2 wording; no model call or disclosure')
+        cmd.add_argument('--job-id',type=int,required=True)
+        if name!='wording-packet':cmd.add_argument('--file',type=Path,required=True)
+        if name=='import-wording':cmd.add_argument('--include-review-packet',action='store_true',help='return the same fresh packet in this CLI call')
+    reject_wording=commands.add_parser('reject-wording',help='invalidate factual review and dependent current renders')
+    reject_wording.add_argument('--job-id',type=int,required=True);reject_wording.add_argument('--reason',required=True)
     duplicates=commands.add_parser('duplicate-candidates',help='read-only same-employer identity hints; never merges or clears a job')
     duplicates.add_argument('--job-id',type=int,required=True)
     render=commands.add_parser('render',help='local DOCX/PDF conversion and page previews; no external disclosure')
@@ -197,6 +204,13 @@ def execute(args) -> Outcome:
     if command=='duplicate-candidates':return work.duplicate_candidates(args.job_id)
     if command=='assess':return work.assess(args.job_id,load_input(args.matrix))
     if command=='prepare':return work.prepare(args.job_id,load_input(args.plan))
+    if command=='import-wording':
+        result=work.import_wording(args.job_id,work.private_json(args.file))
+        if args.include_review_packet:result.data['review_packet']=work.wording_packet(args.job_id).data
+        return result
+    if command=='wording-packet':return work.wording_packet(args.job_id)
+    if command=='review-wording':return work.review_wording(args.job_id,work.private_json(args.file))
+    if command=='reject-wording':return work.reject_wording(args.job_id,args.reason)
     if command=='render':return work.render(args.job_id,args.soffice)
     if command=='review-documents':return work.review_documents(args.render_id,args.review)
     if command=='reject-documents':return work.reject_documents(args.render_id,args.reason)

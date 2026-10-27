@@ -26,9 +26,26 @@ to relax source-bound claims, PDFium locking or converter isolation.
 
 Use prepare with the versioned plan. Keep target headline distinct from historical titles. Select/reorder confirmed quotes; retain classroom/prototype/team/metric qualifiers. Keep source map out of the CV. Follow employer document language, with separate versions.
 
+For source-bound rewriting, use the opt-in v2 contract in docs/CV_CONTENT_V2.md
+and schemas/cv-content-v2.schema.json. Produce one structured wording pass from
+selected exact facts, complete requirements and current matrix. Keep original
+evidence unchanged. First v2 slice permits one fact per statement; employment/
+project groups require approved matching scope#locator annotations. Missing
+evidence returns needs_input before drafting. No invented synthesis or outcomes.
+Use import-wording --include-review-packet to remove a separate packet CLI start
+while retaining fresh checks. A separately prompted independent pass must review
+every statement before review-wording; at most one focused repair, then block or
+fall back to reviewed exact claims. Never use the fictional demo review helper
+for an actual person. Metadata records the real observed host configuration or
+an explicit unavailable value; it does not change the running host model.
+
 ## Outputs
 
 Markdown CV draft, private source map, hashes and review_required state.
+
+V2 additionally returns the actual wording fingerprint and optional compact
+review packet. Imported wording is pending, never disclosure authority. Markdown,
+DOCX and PDF consume the same approved content model after factual review.
 
 ## Failure behavior
 

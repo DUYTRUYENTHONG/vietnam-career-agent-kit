@@ -9,11 +9,12 @@ from .contracts import Outcome, object_fields, text, version
 from .ledger import canonical_hash, utc_now
 from .rendering import render_files
 from .workflow import Preparation, WorkflowError
+from .tailoring import Wording
 
 TERMINAL={'confirmed_submitted','user_reported_submitted','submission_uncertain'}
 
 
-class Documents(Preparation):
+class Documents(Wording, Preparation):
     def init(self, language='en'):
         super().init(language)
         with self._db() as db:
@@ -37,6 +38,8 @@ class Documents(Preparation):
 
     def content_model(self, job_id):
         draft=self.current_draft(job_id)
+        if draft.get('content_version')=='2.0':
+            return self.reviewed_wording_content(job_id,draft)
         profile=self.confirmed_profile()['profile']
         job,_=self.job_document(job_id)
         selected=json.loads(self.inside(draft['files']['source_map']['path']).read_text(encoding='utf8'))
@@ -79,6 +82,7 @@ class Documents(Preparation):
             'files':{key:self.file_record(target/name) for key,name in
                 [('docx','cv.docx'),('pdf','cv.pdf'),('content','content.json')]},
             'pages':[self.file_record(target/f'page-{n:03}.png') for n in range(1,result['page_count']+1)]}
+        if 'metrics' in result:payload['metrics']=result['metrics']
         fingerprint=canonical_hash(payload)
         with self._db() as db:
             db.execute('BEGIN IMMEDIATE')
@@ -141,6 +145,8 @@ class Documents(Preparation):
             'Local review recorded; this does not authenticate a human or approve external disclosure.')
 
     def handoff(self,job_id):
+        draft=self.current_draft(job_id)
+        if draft.get('content_version')=='2.0':self.content_model(job_id)
         base=super().handoff(job_id)
         with self._db() as db:
             row=db.execute('SELECT id FROM document_sets WHERE job_id=? ORDER BY created_utc DESC LIMIT 1',(job_id,)).fetchone()

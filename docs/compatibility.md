@@ -1,5 +1,22 @@
 # Runtime compatibility evidence
 
+Wording v2 (22 October 2026): opt-in stdlib CLI and source-bound content model,
+with deterministic fictional tests and no new model API, hooks, provider or
+browser integration. Three profile families and EN/VI qualifier tests do not
+establish general translation quality. Separate factual review is an asserted
+host workflow, not authenticated peer independence. Exact-quote mode and schema
+1–5 workspaces remain compatible. Real DOCX/PDF is a distinct optional Linux CI
+gate; local Windows LibreOffice is unavailable. Codex/Claude instructions do not
+establish native model switching or caching; Grok remains unsupported as a
+native runtime. See [bounded release evidence](QUALITY_FAST_REPORT.md).
+
+Implementation a8220e0 subsequently passed the complete Linux/Windows 3.11/3.12
+203-test CI matrix and seven optional Linux real-document tests on LibreOffice
+24.2.7.2. All three new v2 page previews were inspected after artifact/hash
+verification. This verifies the named local/CI interfaces, not native agent or
+employer execution. One duplicate PR workflow was cancelled; the complete push
+workflow passed. Final documentation-only head checks are reported separately.
+
 Fast Web research (22 October 2026): **Experimental**, original Python stdlib
 Firecrawl v2 HTTP adapter, deterministic fake transports and local CLI only.
 Schema 5 is additive; existing execution/authorization/cleanup tests still apply.

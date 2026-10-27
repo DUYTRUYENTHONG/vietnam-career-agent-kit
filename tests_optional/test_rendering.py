@@ -16,6 +16,7 @@ from core.documents import Documents
 from core.rendering import build_docx, render_files, verify_pdf
 from core.workflow import WorkflowError
 from scripts.demo_slice1 import demo
+from scripts.demo_wording import seed, fictional_review
 
 
 class RenderTests(unittest.TestCase):
@@ -23,6 +24,25 @@ class RenderTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
 
     def tearDown(self):self.tmp.cleanup()
+
+    def test_v2_real_docx_pdf_and_page_images_use_reviewed_wording(self):
+        for candidate in ['data', 'technical', 'commercial']:
+            with self.subTest(candidate=candidate):
+                work, model = seed(self.root/candidate, candidate)
+                if candidate == 'data':
+                    model['sections'][1]['groups'][0]['statements'][0].update(
+                        text='Used SQL to query a fictional sales dataset.', transformation='faithful_paraphrase')
+                work.import_wording(1, model)
+                work.review_wording(1, fictional_review(work.wording_packet(1).data))
+                rendered = work.render(1, os.environ['CAREER_KIT_SOFFICE']).data
+                content = work.content_model(1)
+                from docx import Document
+                from core.rendering import paragraphs
+                self.assertEqual(paragraphs(content), [p.text for p in Document(
+                    work.inside(rendered['files']['docx']['path'])).paragraphs])
+                self.assertEqual(rendered['page_count'], verify_pdf(content, work.inside(rendered['files']['pdf']['path'])))
+                self.assertEqual(5, len(rendered['metrics']['stages']))
+                self.export_qa('v2-'+candidate, work.inside(rendered['files']['pdf']['path']).parent, rendered)
 
     def cli(self,workspace,*args,code=0):
         result=subprocess.run([sys.executable,str(ROOT/'scripts/kit.py'),'--data-dir',str(workspace),*args],

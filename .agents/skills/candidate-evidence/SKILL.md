@@ -21,6 +21,13 @@ Local CLI; Slice 1 imports UTF-8 TXT/Markdown only.
 
 Run import-cv, then import-profile. Map exact claim/quote/source/locator/status and conflict keys. Inspect profile, ask only unresolved facts, then record confirm-profile only after actual review of its exact fingerprint. Never create user confirmation on behalf of a real person.
 
+For opt-in v2 grouped history, retain exact context facts and use reviewed
+scope#location locators for each employment/project. Matching locator prefixes
+are scope annotations, not proof of a source span. Reconfirm changed profile
+annotations; do not rewrite evidence to fit a draft. Candidate-local working-set
+and bullet-variant caches are not implemented in this slice. Keep original
+qualifiers, dates and contribution scope in the authoritative facts.
+
 ## Outputs
 
 Immutable normalized UTF-8 evidence, profile fingerprint, conflicts and confirmation state.
