@@ -5,6 +5,9 @@ from core.workflow import WorkflowError
 
 
 def make_server(work, kind, *, client=None):
+    if kind == 'career':
+        from .career_mcp import make_career_server
+        return make_career_server(work)
     from mcp.server.fastmcp import FastMCP
     server = FastMCP('career-kit-' + kind, instructions=
         'Use one explicit private workspace. Login grants access, not application approval. '

@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('kind', choices=['email', 'browser'])
+    parser.add_argument('kind', choices=['email', 'browser', 'career'])
     parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument('--actor', default='local-user')
     parser.add_argument('--client-file', default='credentials/google-desktop-client.json',

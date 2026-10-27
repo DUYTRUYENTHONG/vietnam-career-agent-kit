@@ -8,6 +8,12 @@ listings. Each user runs them on their own computer and private workspace.
 No second model API, subscription to this kit, or candidate cloud database is added.
 Google/browser providers and the user's agent have their own access requirements.
 
+The opt-in third [career server](CAREER_MEMORY.md) adds local confirmed-fact
+retrieval, professional email briefs, reviewed dataset exports and observed
+model-usage reporting. Add `--include-career` to configuration generation; the
+default two-server setup stays compatible. Career-only use needs no browser or
+Gmail authorization. It offers no submission, training or approval tool.
+
 ```mermaid
 flowchart LR
   U[User signs in directly] --> G[Google OAuth / isolated employer window]

@@ -65,6 +65,29 @@ def parser() -> Parser:
     research_import.add_argument('--file',type=Path,required=True)
     route=commands.add_parser('route-task',help='deterministic model/tool plan; no model call or workspace access')
     route.add_argument('--packet',type=Path,required=True)
+    performance=commands.add_parser('performance-record',help='import one source-bound per-call usage observation; no model/API call')
+    performance.add_argument('--file',type=Path,required=True)
+    performance=commands.add_parser('performance-report',help='private per-model timing/token coverage; unknown usage is not zero')
+    performance.add_argument('--model-id')
+    performance.add_argument('--phase')
+    performance.add_argument('--workload-id')
+    performance.add_argument('--format',choices=['json','md','csv'],default='json')
+    performance.add_argument('--output',help='new snapshot path inside reports/performance/')
+    context=commands.add_parser('career-context',help='retrieve cited current confirmed facts; experimental local BM25')
+    context.add_argument('--query',required=True)
+    context.add_argument('--limit',type=int,default=5)
+    context.add_argument('--max-chars',type=int,default=6000)
+    context=commands.add_parser('career-email-context',help='prepare an English/Vietnamese email writing brief, never send')
+    context.add_argument('--job-id',type=int,required=True)
+    context.add_argument('--language',choices=['en','vi'],default='en')
+    context.add_argument('--limit',type=int,default=5)
+    context=commands.add_parser('career-evaluate',help='evaluate labelled queries and a token-overlap baseline locally')
+    context.add_argument('--file',type=Path,required=True)
+    learning=commands.add_parser('learning-export',help='export only independently reviewed current CV wording; no training/upload')
+    learning.add_argument('--job-id',type=int,action='append',required=True)
+    learning.add_argument('--output',required=True,help='new datasets/ subdirectory in the private workspace')
+    learning=commands.add_parser('learning-check',help='recheck dataset bytes, evidence, reviews and split consistency')
+    learning.add_argument('--directory',required=True)
     init=commands.add_parser('init',help='additive local workspace initialization')
     init.add_argument('--language',choices=['en','vi'],default='en')
     starter=commands.add_parser('start-campaign',help='create private CV intake and a default 100-application goal; no extraction or submission')
@@ -225,6 +248,22 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init for additive public research schema 5')
             if command=='tinyfish-browser' and schema<6:
                 raise WorkflowError('needs_input','Run init for additive parallel execution schema 6')
+    if command in {'career-context','career-email-context','career-evaluate'}:
+        from core.career_memory import retrieve, email_context, evaluate
+        if command=='career-context':return retrieve(work,args.query,limit=args.limit,max_chars=args.max_chars)
+        if command=='career-email-context':return email_context(work,args.job_id,language=args.language,limit=args.limit)
+        return evaluate(work,work.private_json(args.file))
+    if command in {'learning-export','learning-check'}:
+        from core.learning import export_reviewed, check_export
+        if command=='learning-export':return export_reviewed(work,args.job_id,args.output)
+        return check_export(work,args.directory)
+    if command in {'performance-record','performance-report'}:
+        from core.performance import record, report, export
+        if command=='performance-record':return record(work,work.private_json(args.file))
+        filters={key:getattr(args,key) for key in ('model_id','phase','workload_id')}
+        if args.output:return export(work,args.output,args.format,**filters)
+        if args.format!='json':raise ContractError('Choose a new --output under reports/performance/ for Markdown/CSV')
+        return report(work,**filters)
     if command in {'discover','research-status','cancel-research','research-report','import-research-jd'}:
         from adapters.providers.research import Research
         from adapters.providers.contracts import ProviderError

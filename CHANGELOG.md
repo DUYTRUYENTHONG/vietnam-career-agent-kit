@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add an opt-in local career MCP server and CLI: confirmed source-cited BM25
+  context, English/Vietnamese email briefs, labelled retrieval evaluation against
+  token overlap, and private exports of independently reviewed CV wording with
+  provenance/current-evidence checks and grouped held-out splits. Reuse MCP 1.30.0;
+  no extra model API, automatic fact promotion, submission or weight training.
+
+- Add source-bound per-model timing/token observations and private JSON/Markdown/CSV
+  reports with missing-data coverage, immutable IDs and currency separation. Keep
+  model/API usage unknown unless explicitly supplied; no inferred prices or savings.
+  Run full QA on PRs/main/manual dispatch instead of duplicate feature push + PR runs.
+
 - Protect upstream `main` with required PRs, all six GitHub Actions QA jobs,
   up-to-date branches, resolved conversations and administrator enforcement.
   Block force pushes/deletion; record the source policy and fork setup without

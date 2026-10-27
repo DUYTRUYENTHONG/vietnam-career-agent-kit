@@ -1,5 +1,16 @@
 # Runtime compatibility evidence
 
+## Local performance and career memory
+
+The CLI has fictional behavioral tests for source-bound timing/token observations,
+current confirmed-fact retrieval, multilingual BM25 evaluation and independently
+reviewed JSONL exports. The optional career server uses the existing MCP 1.30.0
+lock and real stdio client tests on fictional data. Exact local execution and
+benchmark evidence: [QA](PERFORMANCE_MEMORY_QA.md). Retrieval is **Experimental**
+lexical BM25, not verified production hybrid/vector RAG. Native host install,
+automatic usage capture, email generation quality, model training and live
+application speed remain unverified. No new dependency or application schema.
+
 ## Community starter and source package
 
 The CV-first starter and Git-tree ZIP builder are local Python interfaces.

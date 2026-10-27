@@ -1,5 +1,12 @@
 # Vertical-slice roadmap
 
+Experimental local [career memory](CAREER_MEMORY.md) adds source-cited lexical
+retrieval, labelled evaluation, professional email briefs and independently
+reviewed CV training-data export without a second model API. The optional stdio
+server shares the CLI core. [Observed performance tracking](PERFORMANCE_TRACKER.md)
+keeps unknown usage explicit; [QA scope](PERFORMANCE_MEMORY_QA.md) does not close
+production hybrid retrieval, automatic host metering or model-training gates.
+
 Community preview 0.2.0 adds CV-first intake with a default 100 application goal,
 an anonymized real campaign case study and a checked source ZIP builder. This
 closes those bounded onboarding/distribution tasks, not the unverified native

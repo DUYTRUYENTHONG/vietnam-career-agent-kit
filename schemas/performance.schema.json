@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Caller-reported per-call performance observation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "task_id", "workload_id", "phase", "provider_id", "model_id", "effort", "status", "accepted", "observed_utc", "duration_ms", "usage", "cost", "source"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "event_id": {"$ref": "#/$defs/id"},
+    "task_id": {"$ref": "#/$defs/id"},
+    "workload_id": {"$ref": "#/$defs/id"},
+    "phase": {"$ref": "#/$defs/id"},
+    "provider_id": {"$ref": "#/$defs/id"},
+    "model_id": {"anyOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "effort": {"anyOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "status": {"enum": ["success", "failed", "cancelled", "unknown"]},
+    "accepted": {"type": "boolean"},
+    "observed_utc": {"type": "string", "format": "date-time"},
+    "duration_ms": {"type": ["number", "null"], "minimum": 0, "maximum": 86400000},
+    "usage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "input_tokens", "output_tokens", "cached_input_tokens", "reasoning_tokens"],
+      "properties": {
+        "kind": {"const": "per_call"},
+        "input_tokens": {"$ref": "#/$defs/tokens"},
+        "output_tokens": {"$ref": "#/$defs/tokens"},
+        "cached_input_tokens": {"$ref": "#/$defs/tokens"},
+        "reasoning_tokens": {"$ref": "#/$defs/tokens"}
+      }
+    },
+    "cost": {"anyOf": [{"type": "null"}, {
+      "type": "object", "additionalProperties": false, "required": ["amount", "currency"],
+      "properties": {
+        "amount": {"type": "string", "pattern": "^\\d{1,12}(?:\\.\\d{1,12})?$"},
+        "currency": {"type": "string", "pattern": "^[A-Z]{3}$"}
+      }
+    }]},
+    "source": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": {"enum": ["host_export", "provider_response", "local_timer", "manual_observation"]},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"accepted": {"const": true}}}, "then": {"properties": {"status": {"const": "success"}}}},
+    {"if": {"properties": {"model_id": {"type": "null"}}}, "then": {"properties": {"effort": {"type": "null"}}}}
+  ],
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"},
+    "tokens": {"type": ["integer", "null"], "minimum": 0, "maximum": 1000000000000}
+  }
+}
