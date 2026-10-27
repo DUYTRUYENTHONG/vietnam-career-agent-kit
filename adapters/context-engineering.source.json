@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "repository": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
+  "revision": "9ff0c99108b36d3b886defd825d8ac1f47dba374",
+  "reviewed_date": "2026-10-27",
+  "hash_basis": "Exact immutable Git blob bytes; checkout newline conversion excluded",
+  "inventory": {
+    "skills_under_skills_directory": 18
+  },
+  "metadata_version": "2.6.0",
+  "license": "MIT",
+  "copyright": "2025 Context Engineering Agent Skills Contributors",
+  "license_caveats": [
+    {
+      "path": "skills/self-managed-context/references/harness-protocol.md",
+      "observation": "Attributes source implementation to CC BY-NC 4.0 material; not a blanket MIT license assertion for linked code",
+      "decision": "Do not copy or port the reference or linked implementation"
+    }
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "65bc33b0759a48b980962833b12bcb820404da9f5256bff39c00e89471bcf209",
+      "bytes": 1103,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/LICENSE",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "README.md",
+      "sha256": "bd550f19c97d539f6de2af09583edcf56a91b91a6893292d5ef55212beac5a4f",
+      "bytes": 24668,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/README.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "edce54caa04c3718fd210e0fbce225a6038bc5363af7b8961fef6e391a6e4c6f",
+      "bytes": 11210,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "requirements-dev.txt",
+      "sha256": "75723c9e5f8e3967b98007509c28548d4dfac15bd6b615277ce275779893a22c",
+      "bytes": 57,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/requirements-dev.txt",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "sha256": "f924467d535c67ddc43c747d6b3361469414ca8c5d15c2e8b406d4bbb7c7ca1e",
+      "bytes": 2014,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/.claude-plugin/marketplace.json",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": ".plugin/plugin.json",
+      "sha256": "e9a029bd6f3e8c16a2e55c536bf1ba4a0a9fb3ecd84da41056b51465f05c8018",
+      "bytes": 829,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/.plugin/plugin.json",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/context-compression/SKILL.md",
+      "sha256": "ab4fd1e1046db339d83ead5089d4cb9d9c487232945d4ff6be90e08a03f6cfea",
+      "bytes": 18507,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/context-compression/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/context-compression/references/evaluation-framework.md",
+      "sha256": "2584d5ab6c1322c0df7a581a6f5354be052bae077e16f76ef7c772f750ef81d2",
+      "bytes": 8449,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/context-compression/references/evaluation-framework.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/context-compression/scripts/compression_evaluator.py",
+      "sha256": "425d07d73420073304ce58c078c561cddd61420816efdb080b40778f5c1ed350",
+      "bytes": 30303,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/context-compression/scripts/compression_evaluator.py",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/filesystem-context/SKILL.md",
+      "sha256": "91cd7f071e38dbeee15dbebd9dd549c9116affae939702f05409ed1952355f50",
+      "bytes": 16138,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/filesystem-context/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/filesystem-context/scripts/filesystem_context.py",
+      "sha256": "daccf94285ec679ff39f28d3531dea92528a9443736009d8949e488bb21330bb",
+      "bytes": 15086,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/filesystem-context/scripts/filesystem_context.py",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/context-optimization/SKILL.md",
+      "sha256": "96fbd47c16d163857b92d477ba5c7ec3ae947127772e327b8236d05d64d5b123",
+      "bytes": 16052,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/context-optimization/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/context-optimization/scripts/compaction.py",
+      "sha256": "7d7986d82639e60cf6c8aca470fc8d2b80507e33340dc208b00d7727a168a978",
+      "bytes": 19723,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/context-optimization/scripts/compaction.py",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/self-managed-context/SKILL.md",
+      "sha256": "0b077da6d7725af414a42a627321a11ce9ffc90b4c3e583a1ae126968a8bbd26",
+      "bytes": 24111,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/self-managed-context/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/self-managed-context/references/harness-protocol.md",
+      "sha256": "029484e7b1a695017f65b6125a5f231a3e27156aae9865b16a26079ad8794b2c",
+      "bytes": 12599,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/self-managed-context/references/harness-protocol.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/latent-briefing/SKILL.md",
+      "sha256": "d84e7abe51f037a353dc3ccf18498498099fc633373a0d223bd6cc45277fd0bd",
+      "bytes": 13029,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/latent-briefing/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/multi-agent-patterns/SKILL.md",
+      "sha256": "786ff9345eb49f1d8e1bc5183e437a6d882f15b50bdb2ce0055a9d54390a3ce2",
+      "bytes": 18649,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/multi-agent-patterns/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/harness-engineering/SKILL.md",
+      "sha256": "dde3d8f46d4d09dbab41358baa3e8310d7fdfcd2fbefa127153ac4f6b5ef7b16",
+      "bytes": 11413,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/harness-engineering/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/evaluation/SKILL.md",
+      "sha256": "1f31cda0910dfd48d928e1485b303b739608ceeb0babca0e9a6f821cbf4320ff",
+      "bytes": 16829,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/evaluation/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    },
+    {
+      "path": "skills/self-improvement-loops/SKILL.md",
+      "sha256": "de088dd42e92de999da54c6d1a17bed7daf3404688888482735deaa4f482d846",
+      "bytes": 22494,
+      "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/9ff0c99108b36d3b886defd825d8ac1f47dba374/skills/self-improvement-loops/SKILL.md",
+      "review_scope": "Targeted source inspection; hashing the full blob does not imply exhaustive review"
+    }
+  ],
+  "dependency_observations": {
+    "requirements-dev.txt": [
+      "pyyaml (unpinned)",
+      "skills-ref (unpinned)",
+      "jsonschema==4.26.0",
+      "referencing==0.37.0"
+    ],
+    "installed": false,
+    "full_transitive_audit": false,
+    "script_caveats": [
+      "Heuristic token estimates and illustrative cache metrics",
+      "Compression judge is a stub with a documented model API example",
+      "Filesystem helpers can write and clean scratch files"
+    ]
+  },
+  "decisions": {
+    "adapt": [
+      "Selective file retrieval and output references",
+      "Exact durable checkpoint and continuation probes",
+      "Deterministic validation and outcome evidence"
+    ],
+    "retain_existing": [
+      "Ten canonical skills",
+      "Single canonical private ledger",
+      "Current router, execution and disclosure contracts"
+    ],
+    "defer": [
+      "Host live-context rewrite",
+      "Model KV cache sharing",
+      "Autonomous self-improvement/researcher runtime"
+    ]
+  },
+  "compatibility": "Instruction-only original guidance; no native integration verified",
+  "copied_code_or_skill_text": false,
+  "upstream_installed": false,
+  "upstream_executed": false,
+  "new_runtime_dependencies": [],
+  "acceptance": "Six fictional manual continuation cases; repository checks reported separately in PR. No live benchmark or cost claim."
+}

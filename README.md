@@ -20,6 +20,9 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 | Your next step | Open this |
 |---|---|
+| Keep skills small, current and efficient | [Canonical owners and progressive skill loading](docs/SKILL_MANAGEMENT.md) |
+| Evaluate context-management techniques | [Pinned Context Engineering collection review](docs/CONTEXT_ENGINEERING_REVIEW.md) |
+| Evaluate Awesome Copilot for browser work | [Pinned agents, skills, plugins and cookbook review](docs/AWESOME_COPILOT_REVIEW.md) |
 | Set up Codex, Claude Code, or another tool-enabled agent | [Agent setup: skills, hooks, roles and browsers](docs/AGENT_SETUP.md) |
 | Configure TinyFish without exposing your API key | [TinyFish setup and offline preview](docs/TINYFISH_SETUP.md) |
 | Connect isolated TinyFish application sessions | [Experimental Browser runtime, scope and recovery](docs/TINYFISH_BROWSER.md) |

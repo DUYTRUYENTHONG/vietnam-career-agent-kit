@@ -19,6 +19,10 @@ A supported authorized host browser and the execution CLI. Read ../../../docs/ex
 
 ## Steps
 
+For dynamic forms and compact browser context, load references/observed-ui.md
+only when needed. Use current observed controls, dependency-aware action groups
+and finite readiness waits; preserve the execution checks and host-specific APIs.
+
 Firecrawl and TinyFish Fetch are public research, not application bridges.
 TinyFish Browser is opt-in for explicit single-page guest forms. Preview its
 exact cloud/form fingerprint, review the extra provider disclosure and start
