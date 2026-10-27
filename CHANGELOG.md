@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+- Review Live Resume at a pinned MIT revision and adapt its source-first writing
+  workflow into the existing tailoring skill, shared email-writing reference and
+  copyable prompt. Preserve factual qualifiers and English/Vietnamese meaning;
+  record source hashes, exclusions and five fictional manual acceptance cases.
+  No upstream skill/code copy, Humanizer requirement or runtime dependency added.
+
+- Add a clone/fork first-run guide, five Mermaid system models and an accessible
+  editable SVG overview. Link onboarding from both READMEs and the plugin/agent
+  guides; align clone instructions with the local-plugin development branch.
+  Clarify role/model dispatch, public versus private data, ordered Gmail sends,
+  isolated browser lanes and uncertain-outcome recovery. Documentation only.
+
+- Add optional local email/browser MCP plugins and a private configuration-package
+  generator. Gmail Desktop OAuth uses the OS vault, exact sender/recipient/message
+  and reviewed PDF, durable no-replay claims and canonical API send receipts.
+- Add isolated local Chromium application sessions with user-controlled sign-in,
+  reused form verification, unsupported-transport blocking and owned-window cleanup.
+  Existing reviewed scopes remain required; no approval-generation tool is exposed.
+- Add hash-locked optional dependencies, MCP/Chromium integration CI and setup/QA
+  documentation. Live OAuth/employer acceptance and native host installation are
+  separate unverified gates; no hosted service or public-directory publication.
+
 - Clarify Gmail receipt/duplicate verification: use bounded searches, distinguish
   related suggestions from actual matching messages, and preserve uncertain
   attempts when no confirmation is found. Synchronize host skill instructions;

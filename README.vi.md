@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+[Plugin email và trình duyệt cục bộ](docs/LOCAL_PLUGINS.md): đăng nhập Google
+qua OAuth, gửi CV theo phạm vi đã duyệt và mở các cửa sổ ứng tuyển độc lập.
+Công cụ MCP cục bộ; chưa phải dịch vụ công khai hoặc xác minh gửi email thật.
+
 **Được xây dựng bởi [DUYTRUYENTHONG](https://github.com/DUYTRUYENTHONG) — mã nguồn mở, chia sẻ miễn phí cùng cộng đồng.**
 
 DUYTRUYENTHONG sáng lập và duy trì dự án, luôn chào đón đóng góp từ cộng đồng. Bạn được sử dụng, chỉnh sửa và chia sẻ bộ công cụ miễn phí theo [giấy phép MIT](LICENSE); khi phân phối lại, hãy giữ thông báo bản quyền và giấy phép. Các dịch vụ AI hoặc trình duyệt bên ngoài tùy chọn có thể tính phí riêng. Xem [tác giả và ghi nhận đóng góp](AUTHORS.md).
@@ -8,6 +12,13 @@ Mang theo agent và CV của bạn: tìm việc phù hợp, chuẩn bị tài li
 xem trước chính xác hồ sơ sẽ gửi và theo dõi kết quả thực tế.
 
 ## Bắt đầu tại đây
+
+**Mới clone hoặc fork?** Đọc [hướng dẫn chạy lần đầu](docs/START_HERE.md)
+(tiếng Anh): chọn đúng nhánh, chạy demo hư cấu, tạo thư mục riêng và thiết lập plugin.
+Xem [năm sơ đồ hệ thống](docs/SYSTEM_MODELS.md) để hiểu vai trò agent, dữ liệu,
+OAuth, các phiên trình duyệt và khôi phục khi chưa rõ kết quả.
+
+![Agent, công cụ cục bộ, tracker riêng và các kết nối tùy chọn](docs/diagrams/system-overview.svg)
 
 | Bạn muốn làm gì? | Tài liệu |
 |---|---|
@@ -136,14 +147,14 @@ Xem [hướng dẫn xử lý các bước trước khi nộp](docs/PRE_SUBMISSIO
 thỏa thuận mới, giá trị trường bị che hoặc cần chờ biên nhận. Hướng dẫn mô tả
 hợp đồng hiện có; không bổ sung trình điều khiển hay xác nhận tốc độ nộp thực tế.
 
-**Chưa có:** bộ trích xuất CV PDF/DOCX tích hợp, worker trình duyệt chạy độc lập và adapter nộp hồ sơ theo nhà tuyển dụng đã được xác minh. Các bộ đọc công khai thử nghiệm không cung cấp kết nối ứng tuyển có đăng nhập. Skill/hook, tên nhà cung cấp AI hoặc một bản ghi phê duyệt không chứng minh các khả năng này đã hoạt động.
+**Còn cần hoàn thiện hoặc xác minh:** trích xuất CV PDF/DOCX tích hợp, vận hành tự động trong môi trường thực tế và mapping theo từng nhà tuyển dụng. Plugin Chromium cục bộ đã hỗ trợ form một trang cùng origin; khả năng tương thích với nhà tuyển dụng thật cần kiểm chứng riêng. Các bộ đọc công khai thử nghiệm không cung cấp kết nối ứng tuyển có đăng nhập.
 
 ## Chạy thử bằng dữ liệu hư cấu
 
 Cần Git và Python thật phiên bản 3.11 trở lên. Không cần pip install, API key hay gọi mô hình AI.
 
 ```sh
-git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone --branch codex/local-application-plugins https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py --candidate b --data-dir ../career-demo-vi-private

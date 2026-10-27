@@ -1,0 +1,369 @@
+{
+  "schema_version": "1.0",
+  "profile": "Optional local plugins, resolved Windows Python3.12",
+  "reviewed_date": "2026-10-26",
+  "auto_install": false,
+  "copied_upstream_source": false,
+  "packages": [
+    {
+      "package": "annotated-types",
+      "version": "0.8.0",
+      "metadata_source": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+      "metadata_sha256": "a6e8e5b10c8fd2f596bba53e015cd37f6279fb5cec26ce0c5e9968625be4fefa",
+      "license": "MIT"
+    },
+    {
+      "package": "anyio",
+      "version": "4.15.1",
+      "metadata_source": "https://pypi.org/pypi/anyio/4.15.1/json",
+      "metadata_sha256": "e2ee22fad2fab3e66be503cba9b41945607d3076c9b7aa49b6e2f95ac323efab",
+      "license": "MIT"
+    },
+    {
+      "package": "attrs",
+      "version": "26.1.0",
+      "metadata_source": "https://pypi.org/pypi/attrs/26.1.0/json",
+      "metadata_sha256": "a882bf941fb4a0bb748d0194df544121cc130f5fb15a710ab6b804c17d2899b7",
+      "license": "MIT"
+    },
+    {
+      "package": "certifi",
+      "version": "2026.10.23",
+      "metadata_source": "https://pypi.org/pypi/certifi/2026.10.23/json",
+      "metadata_sha256": "546ce90e02c152f5ff565baca6bc2a8f43c355855f637756f49a0143e312bdb2",
+      "license": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ]
+    },
+    {
+      "package": "cffi",
+      "version": "2.1.1",
+      "metadata_source": "https://pypi.org/pypi/cffi/2.1.1/json",
+      "metadata_sha256": "2255e530e3f80593a354e3d84a29966924d0e10309d1e3a6d50f845ab7d8df66",
+      "license": "MIT-0"
+    },
+    {
+      "package": "charset-normalizer",
+      "version": "3.5.2",
+      "metadata_source": "https://pypi.org/pypi/charset-normalizer/3.5.2/json",
+      "metadata_sha256": "9fda300857ae6a0486b4cd2d2fec7817ed2d45657249a6dfc0c2bbd1a44267b6",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "click",
+      "version": "8.5.0",
+      "metadata_source": "https://pypi.org/pypi/click/8.5.0/json",
+      "metadata_sha256": "4e36adc9b46f837e10ce801b7a478f9146fefdfb287292b7668fc64b1474e41d",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "package": "cryptography",
+      "version": "50.0.2",
+      "metadata_source": "https://pypi.org/pypi/cryptography/50.0.2/json",
+      "metadata_sha256": "7423990cc0948676ef47a71ea62a476ece4c76245e6bebd1c3a71f03c4ffc0f4",
+      "license": "Apache-2.0 OR BSD-3-Clause"
+    },
+    {
+      "package": "google-auth",
+      "version": "2.62.0",
+      "metadata_source": "https://pypi.org/pypi/google-auth/2.62.0/json",
+      "metadata_sha256": "1fa3d7f366e108c7bdabb0e0cd5bce66724edf377662fba762c13ae731e72eed",
+      "license": [
+        "License :: OSI Approved :: Apache Software License"
+      ]
+    },
+    {
+      "package": "google-auth-oauthlib",
+      "version": "1.5.0",
+      "metadata_source": "https://pypi.org/pypi/google-auth-oauthlib/1.5.0/json",
+      "metadata_sha256": "d3c940d14b46191eb5403204b2d4626215db6817ea5c665df8667067444bb041",
+      "license": [
+        "License :: OSI Approved :: Apache Software License"
+      ]
+    },
+    {
+      "package": "greenlet",
+      "version": "3.5.6",
+      "metadata_source": "https://pypi.org/pypi/greenlet/3.5.6/json",
+      "metadata_sha256": "c7dc3bdf600092ea1294ae9fac80198bb2b463943668f410f5174c16a4761d74",
+      "license": "MIT AND PSF-2.0"
+    },
+    {
+      "package": "h11",
+      "version": "0.16.0",
+      "metadata_source": "https://pypi.org/pypi/h11/0.16.0/json",
+      "metadata_sha256": "97f4efb9cc00826f0408076983adc1a1e48e8f2cabf403aaf250f724e081440d",
+      "license": [
+        "License :: OSI Approved :: MIT License"
+      ]
+    },
+    {
+      "package": "httpcore",
+      "version": "1.0.9",
+      "metadata_source": "https://pypi.org/pypi/httpcore/1.0.9/json",
+      "metadata_sha256": "e26eca5c3d288fe9e6446af9bcbca1038ba688629d5c8a2886c47d74718d87a2",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "package": "httpx",
+      "version": "0.28.1",
+      "metadata_source": "https://pypi.org/pypi/httpx/0.28.1/json",
+      "metadata_sha256": "293bfab7bf587fcd0825f1bd8eed8e6303285ba14801b15659853827cbe30796",
+      "license": [
+        "License :: OSI Approved :: BSD License"
+      ]
+    },
+    {
+      "package": "httpx-sse",
+      "version": "0.4.3",
+      "metadata_source": "https://pypi.org/pypi/httpx-sse/0.4.3/json",
+      "metadata_sha256": "10290174877d76e44ac10aaa9ee06a591b140b99943bfde6c9ccf031527f1f59",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "idna",
+      "version": "3.20",
+      "metadata_source": "https://pypi.org/pypi/idna/3.20/json",
+      "metadata_sha256": "e7cbd26e23ce60f6cb3a151d2adf3b1b087bb8f10ac2d9d6db70fdccbf3bb041",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "package": "jaraco-classes",
+      "version": "3.4.0",
+      "metadata_source": "https://pypi.org/pypi/jaraco-classes/3.4.0/json",
+      "metadata_sha256": "d53d49a46a7f31f251e0624b76adb30ef3b90630b7d6b1dd870ea1dc5133b837",
+      "license": [
+        "License :: OSI Approved :: MIT License"
+      ]
+    },
+    {
+      "package": "jaraco-context",
+      "version": "6.1.2",
+      "metadata_source": "https://pypi.org/pypi/jaraco-context/6.1.2/json",
+      "metadata_sha256": "8a49e998d60899ee4d37fcad2bd4b2db69744636bfc2bad4498d40557540d744",
+      "license": "MIT"
+    },
+    {
+      "package": "jaraco-functools",
+      "version": "4.6.0",
+      "metadata_source": "https://pypi.org/pypi/jaraco-functools/4.6.0/json",
+      "metadata_sha256": "dda934fa7526f77f8b88f201f151bc429dbc4a828c184473aa69328b7d0da563",
+      "license": "MIT"
+    },
+    {
+      "package": "jsonschema",
+      "version": "4.26.0",
+      "metadata_source": "https://pypi.org/pypi/jsonschema/4.26.0/json",
+      "metadata_sha256": "d0c9ccdfa30c3cdc57b048c2be21123dfb0c2f4d6bef2e8324dcb4eac985cfcf",
+      "license": "MIT"
+    },
+    {
+      "package": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "metadata_source": "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
+      "metadata_sha256": "91810d8f79384375ad0c0cf631e06903e2790b030d3fad2f1ad657b20ddd839e",
+      "license": "MIT"
+    },
+    {
+      "package": "keyring",
+      "version": "25.7.0",
+      "metadata_source": "https://pypi.org/pypi/keyring/25.7.0/json",
+      "metadata_sha256": "bea557241660bfd985b7506043b3cdc1816a28b2f225feec55215ffba7f633c3",
+      "license": "MIT"
+    },
+    {
+      "package": "mcp",
+      "version": "1.30.0",
+      "metadata_source": "https://pypi.org/pypi/mcp/1.30.0/json",
+      "metadata_sha256": "eed19fb444508429a58ca815b0692a8ccafa88392b35eb4096565275c3be414b",
+      "license": [
+        "License :: OSI Approved :: MIT License"
+      ]
+    },
+    {
+      "package": "more-itertools",
+      "version": "11.2.1",
+      "metadata_source": "https://pypi.org/pypi/more-itertools/11.2.1/json",
+      "metadata_sha256": "220d4b6d902f81a42289fb7bed119f123cf19c379175060818fb7d73461448af",
+      "license": "MIT"
+    },
+    {
+      "package": "oauthlib",
+      "version": "4.0.0",
+      "metadata_source": "https://pypi.org/pypi/oauthlib/4.0.0/json",
+      "metadata_sha256": "d8ea69403cf94b7197eaebaa62ba80f881e81ac60cf3d9d2b8bc03e076debe3e",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "playwright",
+      "version": "1.58.0",
+      "metadata_source": "https://pypi.org/pypi/playwright/1.58.0/json",
+      "metadata_sha256": "73bb326e15cf17093a83c35200589185f962303577faa18251d3194680557bc2",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "pyasn1",
+      "version": "0.6.4",
+      "metadata_source": "https://pypi.org/pypi/pyasn1/0.6.4/json",
+      "metadata_sha256": "cce3a342bc3f2027bcf079357de8886d17f1c058c5233b3f348b749a9ed2c38b",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "pyasn1-modules",
+      "version": "0.4.2",
+      "metadata_source": "https://pypi.org/pypi/pyasn1-modules/0.4.2/json",
+      "metadata_sha256": "5176a4663fb2345b3a0cd53e6d72d541fab642ed1ad815b1224c124f8287cc8e",
+      "license": [
+        "License :: OSI Approved :: BSD License"
+      ]
+    },
+    {
+      "package": "pycparser",
+      "version": "3.12",
+      "metadata_source": "https://pypi.org/pypi/pycparser/3.12/json",
+      "metadata_sha256": "e919b291615d54a2328a0da6128cd9d95601ad04d27cec48eeb75e0d57c3b6ad",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "package": "pydantic",
+      "version": "2.14.1",
+      "metadata_source": "https://pypi.org/pypi/pydantic/2.14.1/json",
+      "metadata_sha256": "7413703dd60983a01d25e54730f9153c4d7a83fc788c77955b5237269cf9f071",
+      "license": "MIT"
+    },
+    {
+      "package": "pydantic-core",
+      "version": "2.50.1",
+      "metadata_source": "https://pypi.org/pypi/pydantic-core/2.50.1/json",
+      "metadata_sha256": "e93d77eaf72dda287409887550bda890a4067311ea072bf9b274df9ce6d96804",
+      "license": "MIT"
+    },
+    {
+      "package": "pydantic-settings",
+      "version": "2.16.1",
+      "metadata_source": "https://pypi.org/pypi/pydantic-settings/2.16.1/json",
+      "metadata_sha256": "ed92f7c49b82990ee77ed8dd20229249a65c5c195faa637a284562753cd5d995",
+      "license": "MIT"
+    },
+    {
+      "package": "pyee",
+      "version": "13.0.1",
+      "metadata_source": "https://pypi.org/pypi/pyee/13.0.1/json",
+      "metadata_sha256": "dc4bebe1a6fd5d99bef4677a2808678335b94fac2cee06ed1a45a2d420369192",
+      "license": [
+        "License :: OSI Approved :: MIT License"
+      ]
+    },
+    {
+      "package": "pyjwt",
+      "version": "2.15.1",
+      "metadata_source": "https://pypi.org/pypi/pyjwt/2.15.1/json",
+      "metadata_sha256": "f13089db8caff0efbdec85ab5c3fa281a3cc76d5b708c74fab427c98e1f29a0d",
+      "license": "MIT"
+    },
+    {
+      "package": "python-dotenv",
+      "version": "1.2.4",
+      "metadata_source": "https://pypi.org/pypi/python-dotenv/1.2.4/json",
+      "metadata_sha256": "89701376846132aefd76202d07dad6e84febe4a426a12973004e13018af15c41",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "python-multipart",
+      "version": "0.0.32",
+      "metadata_source": "https://pypi.org/pypi/python-multipart/0.0.32/json",
+      "metadata_sha256": "f94ae178a5196b01730490f0b3b10b2ad32bf92aa2fba5c3f7ffd6b5235c9697",
+      "license": "Apache-2.0"
+    },
+    {
+      "package": "pywin32",
+      "version": "312",
+      "metadata_source": "https://pypi.org/pypi/pywin32/312/json",
+      "metadata_sha256": "f142c39d2740c13a932c795fb7f47af150185dbf6713cefa93ee5bd1e030d31f",
+      "license": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ]
+    },
+    {
+      "package": "pywin32-ctypes",
+      "version": "0.2.3",
+      "metadata_source": "https://pypi.org/pypi/pywin32-ctypes/0.2.3/json",
+      "metadata_sha256": "31b3fd15200f74e96940467fd34bb11cab92fbcc8a7f9e0fb0f90599e56e1604",
+      "license": "See upstream distribution license files"
+    },
+    {
+      "package": "referencing",
+      "version": "0.37.0",
+      "metadata_source": "https://pypi.org/pypi/referencing/0.37.0/json",
+      "metadata_sha256": "a67968d8e03aa45e650fc2ff0d07796676db1a7841ce8e810bf2dba5af689464",
+      "license": "MIT"
+    },
+    {
+      "package": "requests",
+      "version": "2.34.2",
+      "metadata_source": "https://pypi.org/pypi/requests/2.34.2/json",
+      "metadata_sha256": "8622e50ffd295ed759ec793f2a009172a4ed0204bbc5e948de23111bc3d2aeae",
+      "license": [
+        "License :: OSI Approved :: Apache Software License"
+      ]
+    },
+    {
+      "package": "requests-oauthlib",
+      "version": "2.0.0",
+      "metadata_source": "https://pypi.org/pypi/requests-oauthlib/2.0.0/json",
+      "metadata_sha256": "a9b92f6c975ebc99dcc16a15472313b20f6f06e5fa22522eb1399e802e6eebf5",
+      "license": [
+        "License :: OSI Approved :: BSD License"
+      ]
+    },
+    {
+      "package": "rpds-py",
+      "version": "2026.9.1",
+      "metadata_source": "https://pypi.org/pypi/rpds-py/2026.9.1/json",
+      "metadata_sha256": "93808b9ff27aabe26d9a4f03b28422d1d05c3fb8716d88f3826e7ddf4b0b258b",
+      "license": "MIT"
+    },
+    {
+      "package": "sse-starlette",
+      "version": "3.6.0",
+      "metadata_source": "https://pypi.org/pypi/sse-starlette/3.6.0/json",
+      "metadata_sha256": "593d0b3b6a2d1ce4e44038c3f05f910308fd5deb0b8509fdf994afecc804b508",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "package": "starlette",
+      "version": "1.10.0",
+      "metadata_source": "https://pypi.org/pypi/starlette/1.10.0/json",
+      "metadata_sha256": "97b97206e2e6e29b5283cd401a9c8d0a75738705f3fbc7f5db1fc487dfafdc9a",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "package": "typing-extensions",
+      "version": "4.16.0",
+      "metadata_source": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+      "metadata_sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a",
+      "license": "PSF-2.0"
+    },
+    {
+      "package": "typing-inspection",
+      "version": "0.4.4",
+      "metadata_source": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+      "metadata_sha256": "0605416f2f37f2df04e45360cf5ce4ca5eeca6d414bb6ddb1ec5a9893c62ac30",
+      "license": "MIT"
+    },
+    {
+      "package": "urllib3",
+      "version": "2.8.0",
+      "metadata_source": "https://pypi.org/pypi/urllib3/2.8.0/json",
+      "metadata_sha256": "5315e7401db3cacccd0c2ce5daf81f752a9cc3614b18c37f2b79930b7159ce2f",
+      "license": "MIT"
+    },
+    {
+      "package": "uvicorn",
+      "version": "0.54.0",
+      "metadata_source": "https://pypi.org/pypi/uvicorn/0.54.0/json",
+      "metadata_sha256": "a308e83961793f6114221aefe9e046ef587da0fc986c4dc50ace1ee43fbe9bcb",
+      "license": "BSD-3-Clause"
+    }
+  ]
+}

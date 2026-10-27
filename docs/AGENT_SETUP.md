@@ -4,6 +4,9 @@ Made by [DUYTRUYENTHONG](https://github.com/DUYTRUYENTHONG), freely shared under
 [MIT](../LICENSE). Use your own AI account and facts. No extra model API is
 required by the local core. Start here, then copy [SETUP_AND_GOAL](../prompts/SETUP_AND_GOAL.md).
 
+For a guided first run and a fork checklist, see [Start here](START_HERE.md).
+For the component and execution diagrams, see [System models](SYSTEM_MODELS.md).
+
 ## 1. Clone and prove the local tools work
 
 These instructions describe the development branch below, including its stacked
@@ -12,7 +15,7 @@ explicit branch to reproduce the documented capabilities, rather than assuming
 the default clone has unreleased features. No release tag is implied.
 
 ```sh
-git clone --branch codex/setup-playbook https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone --branch codex/local-application-plugins https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py
@@ -124,7 +127,8 @@ another browser is usable only through an actually supported host bridge.
 After exact package/host authority is established, follow the runnable protocol
 in [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md). It permits 1-10 workers;
 a supplied host bridge is still required unless you explicitly configure the
-experimental [TinyFish Browser adapter](TINYFISH_BROWSER.md). Without a supported
+experimental [TinyFish Browser adapter](TINYFISH_BROWSER.md) or the optional
+[local Chromium plugin](LOCAL_PLUGINS.md). Without a supported
 bridge, keep preparation automated and hand browser work off.
 TinyFish Fetch is a separate [public research setup](TINYFISH_SETUP.md).
 BrowserAct has an optional [review and offline session planner](BROWSERACT.md).

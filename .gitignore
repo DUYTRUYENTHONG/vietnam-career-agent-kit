@@ -18,6 +18,7 @@ screenshots/
 __pycache__/
 *.py[cod]
 .venv/
+.venv-*/
 node_modules/
 .codex/hooks.json
 .codex/config.toml

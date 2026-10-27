@@ -1,5 +1,31 @@
 # Portable core architecture
 
+New user? [Clone/fork walkthrough](START_HERE.md) · [System models and diagrams](SYSTEM_MODELS.md).
+
+## Optional local plugin transports
+
+`adapters/plugin_server.py` exposes separate stdio MCP email and browser servers.
+`scripts/plugin_config.py` writes configured install packages only in an explicitly
+selected external workspace; no global configuration or hook is installed.
+The server opens an existing workspace and has no candidate/approval creation API.
+
+`adapters/email_execution.py` binds the reserved `gmail-api-local` bridge to
+the existing finite manifest and execution tables. A verified, prepared Google
+session precedes an atomic unique attempt claim; one POST then returns an API
+acknowledgement or uncertainty. Canonical tracker/counts see the same immutable
+submission snapshots. `sending` survives crashes without replay. Browser starts
+cannot reinterpret this transport. No new database/schema version is introduced.
+`gmail_client.py` uses scoped Desktop OAuth, OS-vault credentials and a fixed API
+endpoint. The identity lookup and send share the same session; no inbox access.
+
+`adapters/local_browser.py` supplies an owned local session bridge over existing
+parallel lanes and `PlaywrightForms`. It reuses current form/answer/consent/PDF
+verification rather than creating another form engine. Per-job contexts/logins
+stay in memory. HTTP redirects/off-origin requests and WebSockets are blocked;
+unsupported WebRTC/WebTransport APIs are disabled. These checks are not an OS
+network sandbox. Setup/cleanup failures retain unresolved handles and intents.
+See [setup, limits and source references](LOCAL_PLUGINS.md).
+
 The optional [TinyFish Browser runtime](TINYFISH_BROWSER.md) supplies a narrow
 concrete cloud bridge, separate from public Fetch. Receipt writes remain
 coordinator-owned; workers can read fresh authority guards. Finite action waits

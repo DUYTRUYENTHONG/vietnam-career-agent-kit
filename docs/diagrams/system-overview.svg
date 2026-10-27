@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="880" viewBox="0 0 1200 880" role="img" aria-labelledby="title desc">
+  <title id="title">Vietnam Career Agent Kit: system overview</title>
+  <desc id="desc">Your tool-enabled AI agent follows shared skills and calls the local kit. One external private workspace holds evidence and the canonical SQLite tracker. Optional public research is separate from Gmail sending and isolated application browser lanes. Packages are reviewed and scoped before execution; uncertain attempts never automatically retry.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#576d88"/></marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; }
+      .title { font-size: 32px; font-weight: 700; fill: #102238; }
+      .subtitle { font-size: 17px; fill: #435a74; }
+      .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 1.5px; fill: #42617c; }
+      .heading { font-size: 21px; font-weight: 700; fill: #102238; }
+      .body { font-size: 16px; fill: #304a64; }
+      .small { font-size: 14px; fill: #435a74; }
+      .card { fill: #ffffff; stroke: #c8d5e4; stroke-width: 1.5; }
+      .line { fill: none; stroke: #576d88; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="880" rx="20" fill="#f3f6fa"/>
+  <text x="40" y="54" class="title">Your agent. Your evidence. One application record.</text>
+  <text x="40" y="86" class="subtitle">Vietnam Career Agent Kit · made by DUYTRUYENTHONG · MIT / free community sharing</text>
+
+  <rect x="30" y="114" width="350" height="450" rx="16" fill="#e8f0ff"/>
+  <rect x="400" y="114" width="360" height="450" rx="16" fill="#e5f4ee"/>
+  <rect x="780" y="114" width="390" height="450" rx="16" fill="#fff2df"/>
+  <text x="50" y="146" class="eyebrow">01 / YOUR AGENT</text>
+  <text x="420" y="146" class="eyebrow">02 / LOCAL CORE + PRIVATE DATA</text>
+  <text x="800" y="146" class="eyebrow">03 / OPTIONAL TRANSPORTS</text>
+
+  <rect x="50" y="168" width="310" height="116" rx="12" class="card"/>
+  <text x="68" y="200" class="heading">Bring your own runtime</text>
+  <text x="68" y="228" class="body">Codex / Claude / compatible host</text>
+  <text x="68" y="255" class="small">Actual local and browser tools required</text>
+
+  <rect x="50" y="308" width="310" height="116" rx="12" class="card"/>
+  <text x="68" y="340" class="heading">Shared skills + prompts</text>
+  <text x="68" y="368" class="body">Research → tailor → review → track</text>
+  <text x="68" y="395" class="small">Hooks optional; no auto-created workers</text>
+
+  <text x="68" y="463" class="body">You confirm facts and scope.</text>
+  <text x="68" y="489" class="body">You sign in directly to providers.</text>
+  <text x="68" y="527" class="small">No second model API in the local core</text>
+
+  <rect x="420" y="168" width="320" height="116" rx="12" class="card"/>
+  <text x="438" y="200" class="heading">CLI / local stdio MCP</text>
+  <text x="438" y="228" class="body">Validate evidence, files and authority</text>
+  <text x="438" y="255" class="small">One coordinator; fresh action checks</text>
+
+  <rect x="420" y="308" width="320" height="140" rx="12" class="card"/>
+  <text x="438" y="340" class="heading">External private workspace</text>
+  <text x="438" y="368" class="body">CV evidence / PDFs / exact manifests</text>
+  <text x="438" y="396" class="body">workflow.sqlite3 / observed receipts</text>
+  <text x="438" y="425" class="small">Never put candidate records in public Git</text>
+  <text x="438" y="488" class="body">Commit attempt before final action.</text>
+  <text x="438" y="515" class="body">Save receipt before cleanup.</text>
+  <text x="438" y="542" class="small">OAuth tokens: supported OS vault</text>
+
+  <rect x="800" y="168" width="350" height="100" rx="12" class="card"/>
+  <text x="818" y="199" class="heading">Gmail API / local plugin</text>
+  <text x="818" y="226" class="body">Exact message + one reviewed PDF</text>
+  <text x="818" y="252" class="small">Ordered sends; API receipt ≠ delivery</text>
+
+  <rect x="800" y="288" width="350" height="112" rx="12" class="card"/>
+  <text x="818" y="320" class="heading">Application browser lanes</text>
+  <text x="818" y="347" class="body">Local Chromium / experimental TinyFish</text>
+  <text x="818" y="375" class="small">1–10 isolated lanes; live acceptance varies</text>
+
+  <rect x="800" y="420" width="350" height="112" rx="12" class="card"/>
+  <text x="818" y="452" class="heading">Public research adapters</text>
+  <text x="818" y="479" class="body">TinyFish Fetch / Firecrawl / board reads</text>
+  <text x="818" y="506" class="small">Separate path; excludes CVs and contacts</text>
+
+  <path d="M 360 224 H 420" class="line"/>
+  <path d="M 580 284 V 308" class="line"/>
+  <path d="M 740 218 H 800" class="line"/>
+  <path d="M 740 344 H 800" class="line"/>
+
+  <rect x="30" y="590" width="1140" height="158" rx="16" fill="#102b46"/>
+  <text x="50" y="624" font-size="13" font-weight="700" letter-spacing="1.5" fill="#a8d8ff">FIRST RUN / PROVE ONE LANE BEFORE INCREASING CONCURRENCY</text>
+  <text x="50" y="663" font-size="20" font-weight="700" fill="#ffffff">Clone or fork → fictional demo → private workspace → reviewed package → scoped execution</text>
+  <text x="50" y="700" font-size="17" fill="#d6e6f6">Track separately: prepared / confirmed / manual / uncertain. Uncertain attempts never automatically resend.</text>
+  <text x="50" y="728" font-size="15" fill="#b6cde4">Start here: docs/START_HERE.md     ·     Components and sequences: docs/SYSTEM_MODELS.md</text>
+
+  <text x="40" y="794" class="body">Local tests verify contracts and fictional flows. Live OAuth, employer compatibility and native host setup need acceptance.</text>
+  <text x="40" y="824" class="body">A ten-lane setting is capacity, not proof of 100 applications/hour. No live 100x speedup is claimed.</text>
+  <text x="40" y="856" class="small">Editable, accessible SVG · no external fonts, scripts, trackers or image dependencies</text>
+</svg>

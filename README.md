@@ -9,6 +9,15 @@ review an exact application package, and track what actually happened.
 
 ## Start here
 
+**New clone or fork?** Follow the [first-run walkthrough](docs/START_HERE.md).
+It covers the matching development branch, a fictional demo, private workspace,
+agent skills and optional email/browser setup.
+
+![Agent, local core, private tracker and optional application transports](docs/diagrams/system-overview.svg)
+
+[Five system models](docs/SYSTEM_MODELS.md) explain components, agent roles,
+OAuth sending, concurrent browser lanes and recovery. They render directly on GitHub.
+
 | Your next step | Open this |
 |---|---|
 | Set up Codex, Claude Code, or another tool-enabled agent | [Agent setup: skills, hooks, roles and browsers](docs/AGENT_SETUP.md) |
@@ -20,6 +29,7 @@ review an exact application package, and track what actually happened.
 | Run a real campaign with your own facts and limits | [Detailed copy-and-paste agent prompt](prompts/GUIDED_CAMPAIGN.md) |
 | Try the tools without accounts or personal data | [Fictional quick start](#try-the-working-slice) |
 | Configure documents or a supported execution bridge | [Document setup](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
+| Connect your own Gmail and isolated employer windows | [Local email/browser MCP plugins](docs/LOCAL_PLUGINS.md) |
 | Understand ten-lane concurrency and TinyFish | [Parallel applications and measured limits](docs/PARALLEL_APPLICATIONS.md) |
 
 ### Set up in four steps
@@ -62,7 +72,19 @@ The prompt guides an agent through setup to receipts; it grants no new tool
 permissions and does not override runtime confirmation. No live 100x speedup or
 100-applications/hour result is established by the local tests.
 
+Optional [local MCP plugins](docs/LOCAL_PLUGINS.md) now add Gmail OAuth/API sending
+and isolated local Chromium form execution using the same canonical ledger.
+Generate private install packages with `scripts/plugin_config.py`; connect your
+own Google Desktop OAuth app. See [scoped QA](docs/LOCAL_PLUGINS_QA.md) and the
+[copyable setup prompt](prompts/LOCAL_PLUGINS_SETUP.md). Live account/employer and
+native host installation acceptance remain separate.
+
 ## Feature references
+
+[CV and application-email writing](docs/LIVE_RESUME_REVIEW.md): the shared tailoring
+skill now includes evidence-first drafting, concise language editing and bilingual
+fact checks. [Copy the preparation prompt](prompts/TAILOR_AND_EMAIL.md).
+The Live Resume reference is pinned and reviewed; no upstream plugin install is required.
 
 [Source-bound CV wording v2](docs/CV_CONTENT_V2.md) adds structured sections,
 reviewed paraphrasing and a shared Markdown/DOCX/PDF content model. Exact-quote
@@ -128,14 +150,14 @@ guide successive finite batches, resume from one private ledger, and count only
 confirmed new submissions toward a user-selected target. Persistent goals require
 a supported host; this guidance does not add a scheduler or browser worker.
 
-**Not yet implemented:** built-in PDF/DOCX CV extraction, standalone unattended browser workers and verified employer-specific submission adapters. Experimental public retrieval does not supply an authenticated application connector. Do not infer these capabilities from a skill, approval record, hook example or provider name. [Slice gates](docs/roadmap.md) remain explicit.
+**Remaining acceptance gates:** built-in PDF/DOCX CV extraction, production unattended operation and verified employer-specific submission mappings. Optional local browser execution is implemented for mapped same-origin forms; its live acceptance remains separate. Experimental public retrieval does not supply an authenticated application connector. [Slice gates](docs/roadmap.md) remain explicit.
 
 ## Try the working slice
 
 Requires Git and a real Python 3.11+ interpreter. No pip install, API key, account login, browser driver or model call is needed for these commands.
 
 ```sh
-git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone --branch codex/local-application-plugins https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py --data-dir ../career-demo-private

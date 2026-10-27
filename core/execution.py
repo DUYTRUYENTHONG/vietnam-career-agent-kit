@@ -99,6 +99,10 @@ class Executor(Campaign):
                      'bridge_id':bridge_id,'attempt_id':None}
             if _flow_factory is not None:
                 payload=_flow_factory(db,manifest,payload)
+            if bridge_id == 'gmail-api-local' and payload.get('transport') != 'email':
+                raise WorkflowError('blocked','Gmail manifests must start through the owning email adapter')
+            if payload.get('transport') == 'email' and bridge_id != 'gmail-api-local':
+                raise WorkflowError('blocked','Email transport requires its reserved Gmail bridge')
             db.execute('INSERT INTO execution_runs VALUES(?,?,?,?,?,?,?)',
                 (run_id,fingerprint,self.actor,'active',json.dumps(payload),deadline.isoformat(),utc_now()))
             self._event(db,'execution_started',run_id,fingerprint);db.commit()
@@ -137,6 +141,8 @@ class Executor(Campaign):
     def next_action(self, run_id):
         with self._db() as db:
             db.execute('BEGIN IMMEDIATE');run,flow=self._run(db,run_id)
+            if flow.get('transport') == 'email':
+                raise WorkflowError('blocked','Use the Gmail plugin for this email run; browser actions are disabled')
             if run['state']!='active':return self._status(run,flow)
             manifest=self._manifest_snapshot(run['fingerprint'])
             pending=self._pending_action(db,run_id)

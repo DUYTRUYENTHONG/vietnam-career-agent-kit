@@ -1,0 +1,5 @@
+# Optional local plugins. Resolve/verify separately from the dependency-free core.
+mcp==1.30.0
+google-auth-oauthlib==1.5.0
+keyring==25.7.0
+playwright==1.58.0

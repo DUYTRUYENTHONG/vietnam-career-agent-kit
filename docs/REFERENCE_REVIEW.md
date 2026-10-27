@@ -1,5 +1,38 @@
 # Community references and attribution
 
+## Live Resume writing guidance, 26 October 2026
+
+Reviewed `guilhermeborgesbastos/live-resume` at
+`07c0680129ecf0226d802d23233fe7d1bea9121f` (MIT, 2020 Guilherme Borges Bastos).
+Eight exact Git-blob hashes and dependency/exclusion decisions are recorded in
+[the source record](../adapters/live-resume.source.json). Its only discovered
+skill creates bilingual portfolio post cards, not CVs or emails. Original
+evidence-first guidance is integrated into the existing tailoring skill and
+email prompt; no upstream text, code, website, Humanizer dependency, installer
+or candidate content is copied or run. Five fictional instruction-level cases
+passed manual review. Native host/model compliance and measured quality/latency
+improvements remain unverified. See [adoption and cases](LIVE_RESUME_REVIEW.md).
+
+## Local MCP email/browser plugins, 26 October 2026
+
+Original implementation; no upstream source, sample code or skills copied.
+Reviewed official Google Desktop OAuth/PKCE and Gmail messages.send documentation,
+Playwright authentication/BrowserContext routing, OpenAI portable plugin packaging,
+and the MCP Python SDK maintenance release notes. Concrete source links are in
+[LOCAL_PLUGINS.md](LOCAL_PLUGINS.md). The initially evaluated SDK1.26.0 was replaced
+with maintenance1.30.0 after the upstream release review; the retained stdio API
+supports the tested 2025-era initialization/tools protocol, not an untested 2026
+protocol claim.
+
+Adopted optional package versions: MCP1.30.0 MIT, google-auth-oauthlib1.5.0
+Apache-2.0, keyring25.7.0 MIT and Playwright1.58.0 Apache-2.0. Exact PyPI metadata
+URLs/hashes and all 48 resolved distribution versions/license declarations live
+in `adapters/local-plugins.source.json`; wheel hashes in
+`requirements-plugins.lock`. This Windows/Python3.12 closure is separate from the
+core and document/browser profiles. No binaries are redistributed. Acceptance is
+scoped to [fictional local QA](LOCAL_PLUGINS_QA.md), not live account/provider or
+native plugin installation. No account access or credentials follow from this review.
+
 ## TinyFish Browser runtime, 26 October 2026
 
 Reviewed cookbook revision `78b7c3336289f0f3e1a3696801945de8489ab097`
