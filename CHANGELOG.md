@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Clarify browser preflight ordering: verify controlled fields retain approved
+  values before a human verification handoff, treat redacted values as unavailable,
+  and keep post-handoff work to fresh action checks and the permitted next step.
+  Reuse valid approval and existing attempts. Instruction-only; no new browser
+  capability, challenge handling or measured throughput claim.
+
 - Add an opt-in local career MCP server and CLI: confirmed source-cited BM25
   context, English/Vietnamese email briefs, labelled retrieval evaluation against
   token overlap, and private exports of independently reviewed CV wording with
