@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0",
+  "repository": "https://github.com/github/awesome-copilot",
+  "revision": "d106008300bd4c8396e9c3c085c7c8e3ed976d48",
+  "reviewed_date": "2026-10-27",
+  "hash_basis": "Exact Git blob bytes from git show REV:path, not CRLF-converted checkout files",
+  "inventory": {
+    "agents": 222,
+    "skills": 462,
+    "plugins": 108,
+    "hook_manifests": 8,
+    "cookbook_markdown_files": 51
+  },
+  "license": "MIT",
+  "copyright": "GitHub, Inc.",
+  "license_exceptions": [
+    {
+      "path": "plugins/gem-team/plugin.json",
+      "declared_license": "Apache-2.0",
+      "decision": "Not copied or installed; root MIT is not a blanket per-package license claim"
+    }
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "e32449d23085399adc1222f7a17408b730550258e51627c153cb108ca9955823",
+      "bytes": 1059,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/LICENSE"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2f3f9fc3632b88726f2325e95242e3e24e3e734dcd131a27cfe242f2096baaca",
+      "bytes": 92200,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/README.md"
+    },
+    {
+      "path": "agents/playwright-tester.agent.md",
+      "sha256": "67b9e4210df2fff06ed111fbcc67261f90f36cd3d4ff5b09dadaa4c31772b079",
+      "bytes": 1327,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/agents/playwright-tester.agent.md"
+    },
+    {
+      "path": "agents/gem-browser-tester.agent.md",
+      "sha256": "bdff12ca9c4adca47582e823accc06c9f8b0193f4e193c90bdcceb190d03ee7e",
+      "bytes": 2684,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/agents/gem-browser-tester.agent.md"
+    },
+    {
+      "path": "skills/webapp-testing/SKILL.md",
+      "sha256": "c4629221463d79c84555721ae2a30a6c345dd4d16c38cf6dbe735126e2426044",
+      "bytes": 3814,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/webapp-testing/SKILL.md"
+    },
+    {
+      "path": "skills/webapp-testing/assets/test-helper.js",
+      "sha256": "4a9b5c0f27cfe63ad5b4c781d4c96d7149870d8ac3d5ef32fd51b0f90f78766f",
+      "bytes": 1521,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/webapp-testing/assets/test-helper.js"
+    },
+    {
+      "path": "skills/playwright-explore-website/SKILL.md",
+      "sha256": "1496280e250b5b79c2c3081f093fa1fea22ac19a2fdc05074589875cdd9f55d3",
+      "bytes": 681,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/playwright-explore-website/SKILL.md"
+    },
+    {
+      "path": "skills/playwright-automation-fill-in-form/SKILL.md",
+      "sha256": "ed10ea649ed942b29707738ceb78de7f1a5bfddafe348d23b2ef81e8e3a4b80b",
+      "bytes": 650,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/playwright-automation-fill-in-form/SKILL.md"
+    },
+    {
+      "path": "skills/playwright-generate-test/SKILL.md",
+      "sha256": "79dbb1a49fc5a6502788ccba1a4bd30769a017a1cc31d9db329d1326ea3d898f",
+      "bytes": 877,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/playwright-generate-test/SKILL.md"
+    },
+    {
+      "path": "skills/what-context-needed/SKILL.md",
+      "sha256": "65ed7445bf561a5e5199ac77478d2691c05019e0dc32fdddc23db9e45bd9d135",
+      "bytes": 881,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/what-context-needed/SKILL.md"
+    },
+    {
+      "path": "skills/context-map/SKILL.md",
+      "sha256": "af0037b06a0b56a5014e16a32538ac419725638659428b7e229ed5bbb9087a37",
+      "bytes": 1146,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/context-map/SKILL.md"
+    },
+    {
+      "path": "instructions/context-engineering.instructions.md",
+      "sha256": "303780cee09b1707be6b2aa99ad2215514f2f76cbd2da59378194483dc6bf499",
+      "bytes": 2477,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/instructions/context-engineering.instructions.md"
+    },
+    {
+      "path": "skills/ai-team-orchestration/SKILL.md",
+      "sha256": "cfc07008fcab5f0638ff92441cd51367132591ca0b44cefaebd6e389cc81291c",
+      "bytes": 3965,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/ai-team-orchestration/SKILL.md"
+    },
+    {
+      "path": "skills/ai-team-orchestration/references/anti-patterns.md",
+      "sha256": "0f083609978631e2b9e119f2513794a6664de74893efd9fe689d403c80a0265d",
+      "bytes": 2554,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/skills/ai-team-orchestration/references/anti-patterns.md"
+    },
+    {
+      "path": "plugins/testing-automation/plugin.json",
+      "sha256": "2af2fd44c1813828be90476dc8af24e8fd79e50d03cb7bf444e7dae45cbe3fa3",
+      "bytes": 1075,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/testing-automation/plugin.json"
+    },
+    {
+      "path": "plugins/frontend-web-dev/plugin.json",
+      "sha256": "474d576e8f7ad50491781119d529fdb2705e5b1e83f7c76ded3ccb273434de77",
+      "bytes": 893,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/frontend-web-dev/plugin.json"
+    },
+    {
+      "path": "plugins/context-engineering/plugin.json",
+      "sha256": "2d7e8389fc15acc069d2ac0226080037b2bfd526f3e7ff99980582b1881500e1",
+      "bytes": 902,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/context-engineering/plugin.json"
+    },
+    {
+      "path": "plugins/context-matic/plugin.json",
+      "sha256": "c27adddba4fa0c48c42566bfa46eba2e1f01ca260c8e397aa7137103fa9521ed",
+      "bytes": 1045,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/context-matic/plugin.json"
+    },
+    {
+      "path": "plugins/ai-team-orchestration/plugin.json",
+      "sha256": "8b8983ad11d147356aad340ec38e9811420c5d1636aae2b32c701555007f2943",
+      "bytes": 864,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/ai-team-orchestration/plugin.json"
+    },
+    {
+      "path": "plugins/gem-team/plugin.json",
+      "sha256": "9a9d99135202073e8fa13b9bf423c849426fcf2084b6a463339c254c88f2d144",
+      "bytes": 1376,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/gem-team/plugin.json"
+    },
+    {
+      "path": "plugins/chromium-control-canvas/plugin.json",
+      "sha256": "6e53237eade31c72e9fd3554e2f1ea0f80a117268a2056032658fdb681336488",
+      "bytes": 770,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/plugins/chromium-control-canvas/plugin.json"
+    },
+    {
+      "path": "extensions/chromium-control-canvas/README.md",
+      "sha256": "b38dbe907eae07768b4d0e5420927e688440bb4fa44a12c13ad1f033d0fd61d4",
+      "bytes": 4126,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/extensions/chromium-control-canvas/README.md"
+    },
+    {
+      "path": "extensions/chromium-control-canvas/package.json",
+      "sha256": "14fa07ee2954678a3cb1bc5004b785cbf130f34dca508f0d1a1d94b25f14e352",
+      "bytes": 571,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/extensions/chromium-control-canvas/package.json"
+    },
+    {
+      "path": "extensions/chromium-control-canvas/package-lock.json",
+      "sha256": "d5d4494e32a89d9932441a08c192e82e08dcc53711a14f52d3dd41f6d8d16048",
+      "bytes": 8400,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/extensions/chromium-control-canvas/package-lock.json"
+    },
+    {
+      "path": "extensions/chromium-control-canvas/copilot-extension.json",
+      "sha256": "bbee504847cce186cfcd8e680b9dc100185bb0cf2121755e158879c4346997c0",
+      "bytes": 56,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/extensions/chromium-control-canvas/copilot-extension.json"
+    },
+    {
+      "path": "extensions/chromium-control-canvas/extension.mjs",
+      "sha256": "d11964f07b520c158bda6b99d2d8b2de8020e14c13e7a41746277162e35156f1",
+      "bytes": 23649,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/extensions/chromium-control-canvas/extension.mjs"
+    },
+    {
+      "path": "extensions/chromium-control-canvas/index.html",
+      "sha256": "355c73c33c3931f14ddb926360632cf0513e163de5e760df31fa67833de25360",
+      "bytes": 13063,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/extensions/chromium-control-canvas/index.html"
+    },
+    {
+      "path": "cookbook/copilot-sdk/README.md",
+      "sha256": "1a4bb580f1c7c01bacd4c9725b1933753551792aaf3168799eb7c2a3ab780916",
+      "bytes": 6903,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/cookbook/copilot-sdk/README.md"
+    },
+    {
+      "path": "cookbook/copilot-sdk/python/multiple-sessions.md",
+      "sha256": "c0ae2019d8e03da0f6e3a4a0a2e495f00d4c58cf8cf532f333875766f9baf25d",
+      "bytes": 2604,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/cookbook/copilot-sdk/python/multiple-sessions.md"
+    },
+    {
+      "path": "cookbook/copilot-sdk/python/error-handling.md",
+      "sha256": "7bda4f47aae88dc491f32f0e1573158d98e9833944dc101623ce5504baa87550",
+      "bytes": 2842,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/cookbook/copilot-sdk/python/error-handling.md"
+    },
+    {
+      "path": "cookbook/copilot-sdk/python/recipe/requirements.txt",
+      "sha256": "15b3212b97a4c35625ce0eaf0d949e015b02b326fc006d6ce1f39496e4bf1c7d",
+      "bytes": 63,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/cookbook/copilot-sdk/python/recipe/requirements.txt"
+    },
+    {
+      "path": "hooks/tool-guardian/README.md",
+      "sha256": "149a8dc2095bad189ac6808d2adc274d5c1181c9163f3ae50aea0a6b96eca048",
+      "bytes": 7527,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/hooks/tool-guardian/README.md"
+    },
+    {
+      "path": "hooks/tool-guardian/guard-tool.sh",
+      "sha256": "6aa80acf7d5b504247c38470a75cef7bdb05cfe067cbdf1ea5114280a415395b",
+      "bytes": 8781,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/hooks/tool-guardian/guard-tool.sh"
+    },
+    {
+      "path": "hooks/tool-guardian/hooks.json",
+      "sha256": "44a0487683ba1652335648d9fb86f5ce6c5e264b44f4a21003b227176d54d973",
+      "bytes": 264,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/hooks/tool-guardian/hooks.json"
+    },
+    {
+      "path": "hooks/session-auto-commit/README.md",
+      "sha256": "23ad287d5e5f0961db3ca4eba62197594c5dc176ec31925e82f7d3f869eeacc7",
+      "bytes": 2592,
+      "url": "https://github.com/github/awesome-copilot/blob/d106008300bd4c8396e9c3c085c7c8e3ed976d48/hooks/session-auto-commit/README.md"
+    }
+  ],
+  "decisions": [
+    {
+      "area": "browser skills",
+      "source_paths": [
+        "agents/playwright-tester.agent.md",
+        "agents/gem-browser-tester.agent.md",
+        "skills/webapp-testing/SKILL.md",
+        "skills/webapp-testing/assets/test-helper.js",
+        "skills/playwright-explore-website/SKILL.md",
+        "skills/playwright-automation-fill-in-form/SKILL.md",
+        "skills/playwright-generate-test/SKILL.md"
+      ],
+      "decision": "Adapt selected observe/semantic-locator/verify/owned-cleanup ideas into existing browser-application reference; no upstream content copied",
+      "compatibility": "Instruction-only"
+    },
+    {
+      "area": "skill management",
+      "source_paths": [
+        "skills/what-context-needed/SKILL.md",
+        "skills/context-map/SKILL.md",
+        "instructions/context-engineering.instructions.md",
+        "skills/ai-team-orchestration/SKILL.md"
+      ],
+      "decision": "Use small task context, one owner and proportionate review; retain existing deterministic router; do not require extra user file handoffs or another orchestrator",
+      "compatibility": "Instruction-only"
+    },
+    {
+      "area": "Copilot plugin bundles",
+      "source_paths": [
+        "plugins/testing-automation/plugin.json",
+        "plugins/frontend-web-dev/plugin.json",
+        "plugins/context-engineering/plugin.json",
+        "plugins/context-matic/plugin.json",
+        "plugins/ai-team-orchestration/plugin.json",
+        "plugins/gem-team/plugin.json"
+      ],
+      "decision": "Reference candidates only; Copilot tool IDs/manifests are not a tested Codex install; no automatic external MCP service or model selection",
+      "compatibility": "Unsupported as native Codex plugins by this review"
+    },
+    {
+      "area": "Chromium Control Canvas",
+      "source_paths": [
+        "plugins/chromium-control-canvas/plugin.json",
+        "extensions/chromium-control-canvas/extension.mjs"
+      ],
+      "decision": "Defer runtime port; Copilot-specific experiment, shared persistent profile, optional arbitrary CDP attachment and sample blocklist are not the kit isolated-session/exact-authority contract",
+      "compatibility": "Unsupported as a Codex browser bridge by this review"
+    },
+    {
+      "area": "Copilot SDK cookbook",
+      "source_paths": [
+        "cookbook/copilot-sdk/python/multiple-sessions.md",
+        "cookbook/copilot-sdk/python/error-handling.md"
+      ],
+      "decision": "Reference lifecycle/timeout patterns only; conversations are not browser contexts. Exclude approve_all, example model IDs and SDK dependency from kit execution",
+      "compatibility": "Instruction-only concepts; no SDK integration"
+    },
+    {
+      "area": "upstream hooks",
+      "source_paths": [
+        "hooks/tool-guardian/guard-tool.sh",
+        "hooks/session-auto-commit/README.md"
+      ],
+      "decision": "Do not install: Bash/Copilot payload assumptions and regex guard are not exact application authority; broad stage/auto-push risks private material",
+      "compatibility": "Not adopted"
+    }
+  ],
+  "canvas_dependency_observations": {
+    "manifest_version": "1.0.0",
+    "declared_dependencies": {
+      "@github/copilot-sdk": "latest",
+      "playwright": "^1.60.0"
+    },
+    "lock_versions": {
+      "@github/copilot-sdk": "1.0.1",
+      "playwright": "1.60.0"
+    },
+    "installed": false,
+    "executed": false,
+    "full_transitive_audit": false
+  },
+  "copied_code_or_skill_text": false,
+  "upstream_installed": false,
+  "upstream_executed": false,
+  "new_runtime_dependencies": [],
+  "acceptance": "Eight fictional instruction-level decision cases and existing repository checks; no live browser, Copilot canvas, model usage/cost or speed benchmark claimed"
+}

@@ -6,6 +6,9 @@ required by the local core. Start here, then copy [SETUP_AND_GOAL](../prompts/SE
 
 For a guided first run and a fork checklist, see [Start here](START_HERE.md).
 For the component and execution diagrams, see [System models](SYSTEM_MODELS.md).
+For canonical skill ownership, selective loading and upstream updates, see
+[Skill management](SKILL_MANAGEMENT.md). External collections remain references;
+the [Awesome Copilot review](AWESOME_COPILOT_REVIEW.md) is not a plugin installer.
 
 ## 1. Clone and prove the local tools work
 

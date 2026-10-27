@@ -1,5 +1,36 @@
 # Community references and attribution
 
+## Context Engineering collection, 27 October 2026
+
+Reviewed selected files at `9ff0c99108b36d3b886defd825d8ac1f47dba374` from
+`muratcankoylan/Agent-Skills-for-Context-Engineering` as untrusted data, cloned
+outside the kit. Exact file hashes, inspected scope and dependency observations
+are in [the source record](../adapters/context-engineering.source.json).
+Root MIT; the self-managed-context harness reference attributes its source
+implementation to CC BY-NC 4.0 material, which is not copied or ported here.
+No upstream scripts, plugins, researcher loop or installation were executed.
+Original guide adaptations cover selective retrieval and durable checkpoints;
+no new canonical skill, second ledger, model API or runtime control is added.
+Six fictional manual continuation cases are documented in
+[the targeted review](CONTEXT_ENGINEERING_REVIEW.md). Compatibility is
+Instruction-only; KV sharing, live-message rewriting and performance claims
+remain unverified. Repository gates are reported separately in the PR.
+
+## Awesome Copilot browser and context patterns, 27 October 2026
+
+Cloned `github/awesome-copilot` at
+`d106008300bd4c8396e9c3c085c7c8e3ed976d48` for targeted static review.
+Thirty-five pinned Git-blob hashes, inventory counts, licenses, dependencies and
+adopt/defer/exclude decisions are recorded in
+[`adapters/awesome-copilot.source.json`](../adapters/awesome-copilot.source.json).
+Root MIT copyright GitHub, Inc.; the GEM team plugin declares Apache-2.0 and is
+not copied. No upstream code, skill text, assets, hooks or installers were run or
+redistributed. Original observed-UI guidance extends the existing browser skill;
+the skill-management guide retains ten canonical owners and progressive loading.
+Eight fictional instruction cases received a separate manual review. Native
+Codex/Copilot-canvas support and measured speed/cost improvements are unverified.
+See [the review](AWESOME_COPILOT_REVIEW.md) and [management guide](SKILL_MANAGEMENT.md).
+
 ## Live Resume writing guidance, 26 October 2026
 
 Reviewed `guilhermeborgesbastos/live-resume` at

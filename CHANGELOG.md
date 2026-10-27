@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- Review Agent Skills for Context Engineering at an immutable revision; record
+  selected Git-blob hashes, dependencies and linked-license caveats. Add a compact
+  checkpoint procedure to the management guide without another skill or ledger.
+  No upstream code, plugin installation, live-context/KV integration or measured
+  performance improvement is claimed.
+
+- Review Awesome Copilot at a pinned revision with exact source hashes, license
+  exceptions and browser/plugin dependency evidence. Add original observed-UI
+  guidance to the existing browser skill and a guide to ten canonical skill
+  owners, progressive loading, deterministic routing and controlled updates.
+  Exclude auto-install, approve-all, shared-profile and auto-commit defaults.
+  No upstream content copy, native plugin installation or speed claim.
+
 - Review Live Resume at a pinned MIT revision and adapt its source-first writing
   workflow into the existing tailoring skill, shared email-writing reference and
   copyable prompt. Preserve factual qualifiers and English/Vietnamese meaning;
