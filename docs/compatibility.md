@@ -1,5 +1,15 @@
 # Runtime compatibility evidence
 
+Standing authorization (22 October 2026) adds deterministic schema-4/CLI delegation tests with
+fictional reviewed documents, quota races, revoked issued actions, URL scope,
+profile drift, latest-assessment downgrades and host-confirmation blockers. The
+final local Windows suite passed all 122 tests, including 18 standing-authorization
+tests, in 142.789 seconds. Repository hygiene, generated adapters, whitespace and
+the disposable fictional demo also passed. The consolidated feature review and
+focused freshness review found no material issues. Published CI is a separate
+result. No native host/employer verification is added, and no private campaign
+was migrated or used as a product fixture.
+
 Checked 21 October 2026. Labels apply to the named scope, not every product from a provider.
 
 The performance increment adds local selected-job validation, a ledger-only

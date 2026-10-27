@@ -60,6 +60,14 @@ def parser() -> Parser:
     check.add_argument('--intent',type=Path)
     revoke_manifest=commands.add_parser('revoke-manifest');revoke_manifest.add_argument('--fingerprint',required=True)
     revoke_manifest.add_argument('--reason',required=True)
+    delegation=commands.add_parser('create-authorization',help='prepare an opt-in bounded standing campaign scope')
+    delegation.add_argument('--plan',type=Path,required=True)
+    for name in ['approve-authorization','check-authorization','revoke-authorization']:
+        cmd=commands.add_parser(name);cmd.add_argument('--fingerprint',required=True)
+        if name=='approve-authorization':cmd.add_argument('--confirmation',type=Path,required=True)
+        if name=='revoke-authorization':cmd.add_argument('--reason',required=True)
+    delegated=commands.add_parser('authorize-manifest',help='derive exact reviewed authority within an approved standing scope')
+    delegated.add_argument('--fingerprint',required=True);delegated.add_argument('--authorization',required=True)
     start=commands.add_parser('start-execution',help='opt in to an exact approved host-browser scope; does not acquire a browser')
     start.add_argument('--fingerprint',required=True)
     start.add_argument('--bridge-id',required=True)
@@ -116,12 +124,14 @@ def execute(args) -> Outcome:
     if command not in legacy:
         with work._db() as db:
             schema=db.execute('PRAGMA user_version').fetchone()[0]
-            if schema not in {1,2,3}:
+            if schema not in {1,2,3,4}:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
             if command in {'start-execution','next-action','execution-status','recover-execution','stop-execution','record-action','advance-execution','check-action'} and schema<3:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
+            if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest'} and schema<4:
+                raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
     if command=='import-cv':return work.import_cv(args.file,args.source_id)
     if command=='import-profile':return work.import_profile(load_input(args.file))
     if command=='profile':return work.inspect_profile()
@@ -136,6 +146,11 @@ def execute(args) -> Outcome:
     if command=='approve-manifest':return work.approve_manifest(args.fingerprint,args.confirmation)
     if command=='check-manifest':return work.check_manifest(args.fingerprint,work.private_json(args.intent) if args.intent else None)
     if command=='revoke-manifest':return work.revoke_manifest(args.fingerprint,args.reason)
+    if command=='create-authorization':return work.create_authorization(work.private_json(args.plan))
+    if command=='approve-authorization':return work.approve_authorization(args.fingerprint,args.confirmation)
+    if command=='check-authorization':return work.check_authorization(args.fingerprint)
+    if command=='revoke-authorization':return work.revoke_authorization(args.fingerprint,args.reason)
+    if command=='authorize-manifest':return work.authorize_manifest(args.fingerprint,args.authorization)
     if command=='start-execution':return work.start_execution(args.fingerprint,args.bridge_id,args.runtime_minutes)
     if command=='next-action':return work.next_action(args.run_id)
     if command=='execution-status':return work.execution_status(args.run_id)

@@ -11,7 +11,7 @@ The product serves independent job seekers using their own private workspaces an
 3. Ten focused skills with shared factual/disclosure policy, synchronized host wrappers, honest runtime compatibility and bounded optional hooks.
 4. English/Vietnamese user instructions and documents, preserved diacritics/official titles, explicit salary bases and unknown eligibility answers.
 5. Separate discover/read/extract/fill/upload/submit/verify source permissions. Unknown writes require handoff. No universal coverage, employment, ATS or account-safety guarantees.
-6. Exact, expiring candidate/employer/job/destination/artifact/answer/consent/action/limit approval. Single-writer attempt recording before any possible final submission; unknown outcomes never retry automatically.
+6. Exact, expiring candidate/employer/job/destination/artifact/answer/consent/action/limit authority, directly approved or derived from an explicitly approved bounded standing scope. Single-writer attempt recording before any possible final submission; unknown outcomes never retry automatically. Host confirmations remain separate.
 7. Fictional multi-user tests for unsupported claims, conflicts, duplicates, localization, stale approvals, missing tools, rendering failures, browser interruptions and uncertain submissions. No paid model calls in deterministic CI and no fake employer applications.
 8. Public-only source distribution: English/Vietnamese README, license/notices, contribution/security guides, dependency lock, compatibility/source registries, measured setup and safe upgrade/uninstall documentation.
 

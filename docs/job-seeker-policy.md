@@ -15,3 +15,12 @@ Before typing/upload, show recipient/job/destination, file and answer hashes, co
 Before any possible final submission, persist a unique attempt under a single-writer transaction. Submit once; uncertain outcomes never automatically retry. Confirmed submission requires visible matching evidence, separate from user-reported submission. An upload/click/navigation is not confirmation. Recheck actual state and current hashes on resume. Keep submitted snapshots immutable and never delete evidence automatically.
 
 Unavailable rendering/browser/authorization must yield an actionable manual handoff. Hooks are optional defense in depth, never authority; missing/failed/uncovered hooks do not authorize live actions. Never trust/install downloaded hooks or global settings automatically. Current implemented capabilities and pending gates are in docs/roadmap.md and docs/compatibility.md.
+
+Opt-in standing campaign authority can replace repeat local batch approval
+prompts only within an actually approved profile/recipient-prefix/ordinary-answer/
+consent/action/cap/expiry scope. Later reviewed CVs need new exact manifests but
+can derive authority with authorize-manifest. Strong/Plausible fit and current
+source/document checks still apply. Host-required specific disclosure and
+action-time confirmations remain separate; report them as blockers. No global
+auto-approval, automatic renewal or manufactured proof is allowed. See
+STANDING_AUTHORIZATION.md for schema 4 and quota/revocation semantics.

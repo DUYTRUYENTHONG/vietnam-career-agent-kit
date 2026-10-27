@@ -34,6 +34,13 @@ These core paths are shared by scripts/kit.py. core/execution.py adds a durable 
 
 ## Boundaries
 
+Schema 4 adds opt-in standing delegation in `core/authorization.py`. An approved
+profile/recipient/answer/consent scope derives exact reviewed manifests;
+immutable child allocations share one cap. `Campaign.check_manifest` rechecks
+the parent before the executor can disclose, including issued-action preflight.
+Read-only receipt recovery remains available after revocation.
+See [scope and trust boundaries](STANDING_AUTHORIZATION.md).
+
 Selected-job document/handoff checks use a shared targeted checkpoint rather than
 full-workspace resume. Frequent `tracker` output is a separate read-only ledger
 projection with explicit nonvalidation semantics. `advance-execution` combines

@@ -29,6 +29,26 @@ def operations(value,label):
 
 
 class Campaign(Documents):
+    def create_authorization(self,raw):
+        from .authorization import create
+        return create(self,raw)
+
+    def approve_authorization(self,fingerprint,confirmation):
+        from .authorization import approve
+        return approve(self,fingerprint,confirmation)
+
+    def authorize_manifest(self,fingerprint,authorization_fingerprint):
+        from .authorization import derive
+        return derive(self,fingerprint,authorization_fingerprint)
+
+    def revoke_authorization(self,fingerprint,reason):
+        from .authorization import revoke
+        return revoke(self,fingerprint,reason)
+
+    def check_authorization(self,fingerprint):
+        from .authorization import check
+        return check(self,fingerprint)
+
     def validate_answers(self,entry,profile):
         answers=entry['answers']
         if not isinstance(answers,dict):raise ContractError('answers: expected an object')
@@ -192,6 +212,9 @@ class Campaign(Documents):
         return manifest
 
     def approve_manifest(self,fingerprint,confirmation):
+        from .authorization import link
+        if link(self,fingerprint):
+            raise WorkflowError('blocked','Derived standing scope cannot become an exact reapproval; prepare a fresh manifest')
         self.current_manifest(fingerprint)
         file=Path(confirmation).resolve(strict=True)
         if (not file.is_relative_to(self.data_dir) or file.stat().st_size>1024 or
@@ -208,7 +231,9 @@ class Campaign(Documents):
         return self.check_manifest(fingerprint)
 
     def check_manifest(self,fingerprint,intent=None):
+        from .authorization import check_link
         manifest=self.current_manifest(fingerprint)
+        authority=check_link(self,fingerprint,manifest) or {'approval_basis':'exact_manifest'}
         with self._db() as db:
             approval=db.execute('SELECT * FROM campaign_approvals WHERE fingerprint=?',(fingerprint,)).fetchone()
         if not approval or approval['revoked_utc']:
@@ -222,7 +247,7 @@ class Campaign(Documents):
             if (not entry or intent['action'] not in entry['operations'] or
                     any(intent[key]!=entry[key] for key in keys-{'action','schema_version'})):
                 raise WorkflowError('blocked','Intent differs from the approved job, destination, CV, answers, consents or operation')
-        return Outcome('ok',{'fingerprint':fingerprint,'approved':True,'execution_enabled':manifest.get('execution_enabled',False),
+        return Outcome('ok',{'fingerprint':fingerprint,'approved':True,**authority,'execution_enabled':manifest.get('execution_enabled',False),
             'mode':manifest['mode'],'submission_limit':manifest['submission_limit'],'expires_utc':manifest['expires_utc']},
             ['Local approval bookkeeping cannot authenticate a human or grant browser/platform permissions.'])
 

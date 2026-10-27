@@ -28,6 +28,8 @@ class Executor(Campaign):
             'CREATE UNIQUE INDEX IF NOT EXISTS execution_one_pending ON execution_actions(run_id) WHERE receipt IS NULL',
             'CREATE TABLE IF NOT EXISTS execution_attempts(id TEXT PRIMARY KEY, run_id TEXT NOT NULL REFERENCES execution_runs(id), job_id INTEGER NOT NULL UNIQUE REFERENCES jobs(id), fingerprint TEXT NOT NULL, snapshot_json TEXT NOT NULL, snapshot_sha256 TEXT NOT NULL, created_utc TEXT NOT NULL)',
             'CREATE TABLE IF NOT EXISTS execution_submissions(id TEXT PRIMARY KEY, attempt_id TEXT NOT NULL UNIQUE REFERENCES execution_attempts(id), job_id INTEGER NOT NULL UNIQUE REFERENCES jobs(id), snapshot_json TEXT NOT NULL, snapshot_sha256 TEXT NOT NULL, recorded_utc TEXT NOT NULL)',
+            'CREATE TABLE IF NOT EXISTS campaign_authorizations(fingerprint TEXT PRIMARY KEY,payload TEXT NOT NULL,approved_utc TEXT,revoked_utc TEXT,reason TEXT,created_utc TEXT NOT NULL)',
+            'CREATE TABLE IF NOT EXISTS manifest_authorizations(fingerprint TEXT PRIMARY KEY REFERENCES campaign_manifests(fingerprint),authorization_fingerprint TEXT NOT NULL REFERENCES campaign_authorizations(fingerprint),allocated_submissions INTEGER NOT NULL CHECK(allocated_submissions BETWEEN 0 AND 100))',
         ]
         with self._db() as db:
             db.execute('BEGIN IMMEDIATE')
@@ -37,8 +39,12 @@ class Executor(Campaign):
                     db.execute(f"CREATE TRIGGER IF NOT EXISTS {table}_no_{operation.lower()} BEFORE {operation} ON {table} BEGIN SELECT RAISE(ABORT,'immutable execution evidence'); END")
             db.execute("CREATE TRIGGER IF NOT EXISTS execution_actions_no_rewrite BEFORE UPDATE ON execution_actions WHEN OLD.receipt IS NOT NULL OR NEW.payload<>OLD.payload OR NEW.id<>OLD.id OR NEW.run_id<>OLD.run_id OR NEW.job_id<>OLD.job_id OR NEW.action<>OLD.action OR NEW.created_utc<>OLD.created_utc BEGIN SELECT RAISE(ABORT,'immutable action or completed receipt'); END")
             db.execute("CREATE TRIGGER IF NOT EXISTS execution_actions_no_delete BEFORE DELETE ON execution_actions BEGIN SELECT RAISE(ABORT,'append-only actions'); END")
-            db.execute('PRAGMA user_version=3');db.commit()
-        return Outcome('ok',{'workspace':str(self.data_dir),'schema':3,'language':self.language()},[])
+            for operation in ['UPDATE','DELETE']:
+                db.execute(f"CREATE TRIGGER IF NOT EXISTS manifest_authorizations_no_{operation.lower()} BEFORE {operation} ON manifest_authorizations BEGIN SELECT RAISE(ABORT,'immutable standing allocation'); END")
+            db.execute("CREATE TRIGGER IF NOT EXISTS campaign_authorizations_no_rewrite BEFORE UPDATE ON campaign_authorizations WHEN NEW.fingerprint<>OLD.fingerprint OR NEW.payload<>OLD.payload OR NEW.created_utc<>OLD.created_utc BEGIN SELECT RAISE(ABORT,'immutable standing scope'); END")
+            db.execute("CREATE TRIGGER IF NOT EXISTS campaign_authorizations_no_delete BEFORE DELETE ON campaign_authorizations BEGIN SELECT RAISE(ABORT,'append-only standing scopes'); END")
+            db.execute('PRAGMA user_version=4');db.commit()
+        return Outcome('ok',{'workspace':str(self.data_dir),'schema':4,'language':self.language()},[])
 
     def _run(self, db, run_id):
         row=db.execute('SELECT * FROM execution_runs WHERE id=?',(run_id,)).fetchone()
