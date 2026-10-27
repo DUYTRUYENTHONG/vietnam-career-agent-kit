@@ -7,7 +7,7 @@ This records implemented evidence separately from intended product scope. No lat
 | 1 | Clone/diagnose/private init/CV+profile+JD import/confirmed evidence matrix/Markdown draft/tracker/resume; two-user and failure tests | Implemented; measured evidence in RELEASE_SLICE1.md |
 | 2 | Accurate DOCX/PDF from approved content; rendered page review; exact expiring manifests | Implemented; optional Linux renderer and local approval validation, evidence in RELEASE_SLICE2.md; preparation-only scopes stay disabled |
 | 3 | Measured Codex/Claude runtime execution, synchronized project setup/dry run/backups/uninstall | Pending; wrappers alone are instruction-only |
-| 4 | One permitted discovery connector plus manual import; permission evidence/rate limits/coverage/dedup tests | Manual import in Slice 1; network connector pending |
+| 4 | One permitted discovery connector plus manual import; permission evidence/rate limits/coverage/dedup tests | Manual import plus experimental bounded Greenhouse public GET; fictional coverage/dedup tests. Live employer verification pending; see BULK_DISCOVERY.md |
 | 5 | Explicit browser bridge and local mock portals; ASSIST plus complete handoff; interruption tests | Host request/receipt engine implemented; deterministic bridge/CLI tests and separate Codex local UI smoke. Real employer/native end-to-end integration pending |
 | 6 | Finite approved-batch authorization and sequential submission; unique attempts before final action; confirmation/unknown recovery | Implemented in deterministic engine/CLI tests; production host/employer verification remains separate |
 | 7 | Identified Grok runtime integration with version/OS test evidence; additional sources | Pending; no runtime identity invented |

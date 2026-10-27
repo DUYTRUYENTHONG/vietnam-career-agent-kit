@@ -29,10 +29,20 @@ Do not expand location, seniority or fit merely to reach a numerical target.
 When the candidate authorizes adjacent role families, use
 ../../../docs/DISCOVERY_ACCELERATION.md to broaden discovery while preserving
 evidence-based assessment. Prefer permitted documented board lists, deduplicate
-before full-JD reasoning and retain dated coverage. This guide adds no connector
-or source permission; unsupported reads stay manual.
+before full-JD reasoning and retain dated coverage. The guide alone grants no
+source permission; the experimental Greenhouse reader is described below, and
+other unsupported reads stay manual.
 
 ## Outputs
+
+For verified Greenhouse board tokens, use `python scripts/kit.py discover-greenhouse
+--board TOKEN` to read up to twelve boards with at most three workers. See
+../../../docs/BULK_DISCOVERY.md. This experimental read-only connector returns
+untrusted leads and explicit partial failures, not assessed/imported jobs. Compare
+stable IDs and fingerprints with dated coverage and the canonical application
+tracker before full-JD reasoning. Never count discovery as an application or infer
+Vietnam remote eligibility from a generic remote label. Other unsupported sources
+remain manual; this command does not grant fill/upload/submission permission.
 
 Dated source coverage and candidate job inputs with verified or explicitly unverified status.
 

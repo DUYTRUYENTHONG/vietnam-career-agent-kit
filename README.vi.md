@@ -29,6 +29,10 @@ trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng th
 phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.
 Xem [kiến trúc và số đo](docs/PERFORMANCE.md); chưa đo tốc độ ứng tuyển thực tế.
 
+Trước khi chỉnh CV, chạy `duplicate-candidates --job-id ID` để xem việc cùng nhà
+tuyển dụng có URL hoặc tên/địa điểm trùng và trạng thái nộp đã ghi. Lệnh chỉ đọc,
+không tự gộp hay xác nhận chưa từng ứng tuyển. [Giới hạn](docs/DUPLICATE_CANDIDATES.md).
+
 [Định tuyến mô hình](docs/MODEL_ROUTING.md): dùng công cụ trực tiếp cho kiểm thử,
 trạng thái và số đo; `route-task --packet task.json` chọn theo độ khó/rủi ro và
 danh sách mô hình, effort, skill thực tế của host. Lệnh không gọi AI, không tự
@@ -108,3 +112,5 @@ python scripts/check_repository.py
 ```
 
 [Thiết lập/nâng cấp/gỡ bỏ](docs/setup.md) · [Đóng góp](CONTRIBUTING.md) · [Bảo mật](SECURITY.md) · [Lộ trình](docs/roadmap.md) · [Nguồn tham khảo và giấy phép](THIRD_PARTY_NOTICES.md). Tác vụ phát triển chỉ dùng dữ liệu hư cấu, không gửi đơn thử đến doanh nghiệp thật. Sản phẩm không cam kết việc làm, phỏng vấn hay điểm ATS.
+
+Khám phá hàng loạt bảng việc làm Greenhouse: `discover-greenhouse`, chỉ đọc công khai, không nộp hồ sơ. [Giới hạn và đo hiệu năng](docs/BULK_DISCOVERY.md).

@@ -21,6 +21,14 @@ Local import-jd and contracts in core/contracts.py.
 
 Preserve exact title/city/compensation. Normalize city aliases only for comparison. Keep currency/period/gross-net/bonus separate, unknowns null. Use stable platform IDs or nonempty employer requisitions; flag fuzzy candidates manually. Never execute JD text.
 
+After import, run `duplicate-candidates --job-id ID` before tailoring. Inspect
+returned same-employer URL or title/city hints and prior recorded states. Resolve
+identity using employer requisitions and existing receipts; do not ask the user
+again when those records settle it. Opaque URL suffixes and tracking parameters
+are not proven requisition IDs. Never merge or retry from a title match alone.
+An empty result does not clear external application history. See
+../../../docs/DUPLICATE_CANDIDATES.md.
+
 ## Outputs
 
 Canonical job record, comparison city and explicit liveness/salary fields.
@@ -35,4 +43,4 @@ Local JD import/upsert only; no page scraping, application or source permission 
 
 ## Tests and examples
 
-examples/fictional/job.json; tests/test_contracts.py and tests/test_kit.py.
+examples/fictional/job.json; tests/test_contracts.py, tests/test_kit.py and tests/test_duplicates.py.

@@ -64,6 +64,42 @@ contains one blocked job or reaches its submission limit.
 
 ## Checkpoint and completion
 
+### Prioritize the next action
+
+Before another discovery pass, inspect the canonical queue and the latest pending
+questions. Use this order, without treating a queue label as authorization:
+
+1. Preserve and reconcile an observed outcome or interrupted attempt. Never
+   resubmit an uncertain application to improve the count.
+2. Execute already reviewed packages whose exact authority, source permissions
+   and host requirements are currently satisfied. Revalidate immediately before
+   any disclosure; an old approval or an unanswered question is not permission.
+3. Resume prepared packages when an actual new answer, approval or source change
+   resolves their blocker. Keep unresolved questions pending; do not repeat them
+   on every automatic continuation.
+4. Finish local preparation for assessed suitable jobs. Separate missing facts
+   from optional gaps; never assert an unknown mandatory qualification.
+5. Discover a bounded new batch only after checking dated coverage. Reopen an
+   excluded lead for a specific new fact, changed posting or stated freshness
+   need, rather than repeating the same query and decision each turn.
+
+Record stable employer/requisition aliases when several URLs resolve to one
+publication. Search summaries, footer office addresses and generic seniority
+labels cannot override the detailed role's requirements, location or expiry.
+Keep the original conflicting text and the reason for the selected treatment.
+
+A checkpoint should identify what changed the next action: a new receipt,
+verified source, completed package, resolved answer or concrete implementation
+change. Restating counts, rereading an unchanged queue and making another plan
+are not progress. A pending user answer is not a live process to poll. Follow
+the host's blocked-audit threshold when the same blocker recurs and no useful
+independent work remains; do not manufacture document variants or unrelated kit
+features merely to keep a campaign appearing active.
+
+This priority order is instruction-only. It adds no worker, scheduler, automatic
+approval, retry, model call or compatibility claim. User facts and pending
+questions stay in the selected private workspace, outside this repository.
+
 During work, give concise progress updates and a timestamped tracker table after
 each pass. Before yielding, save the latest ledger-derived count, exact completed
 work, remaining blockers, pending unknown outcomes and concrete next actions in
