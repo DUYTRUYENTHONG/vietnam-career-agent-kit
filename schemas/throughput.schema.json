@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rolling confirmation KPI 1.0 (inside Outcome.data)",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "window_start_utc", "window_end_utc", "window_minutes", "target", "qualifying_confirmations", "other_fit_confirmations", "fit_unrecorded_confirmations", "target_met", "remaining", "observed_per_hour", "validates_artifacts", "basis"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "window_start_utc": {"type": "string", "format": "date-time"},
+    "window_end_utc": {"type": "string", "format": "date-time"},
+    "window_minutes": {"type": "integer", "minimum": 1, "maximum": 1440},
+    "target": {"type": "integer", "minimum": 1, "maximum": 10000},
+    "qualifying_confirmations": {"type": "integer", "minimum": 0},
+    "other_fit_confirmations": {"type": "integer", "minimum": 0},
+    "fit_unrecorded_confirmations": {"type": "integer", "minimum": 0},
+    "target_met": {"type": "boolean"},
+    "remaining": {"type": "integer", "minimum": 0},
+    "observed_per_hour": {"type": "number", "minimum": 0},
+    "validates_artifacts": {"const": false},
+    "basis": {"type": "string"}
+  }
+}

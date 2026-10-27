@@ -40,6 +40,13 @@ projection with explicit nonvalidation semantics. `advance-execution` combines
 receipt acknowledgement and one successor request without merging their durable
 transactions. See [measured architecture decision](PERFORMANCE.md).
 
+Every manifest entry still validates its current profile, JD, draft, rendered
+bytes and review. Source/runtime/expiry are checked again after long passes.
+Nothing is cached across browser actions. New immutable attempts retain assessed
+fit classification. `throughput` projects qualifying confirmation records over
+an explicit rolling window without reading artifact files; it cannot authorize
+an action. See [KPI semantics](THROUGHPUT.md).
+
 - Core setup/import/assessment/draft/report commands are local. They do not browse, call models, upload or submit.
 - Maintainer instructions are AGENTS.md/CLAUDE.md. Job-seeker workflow is prompts/MASTER_PROMPT.md and canonical skills/policy, activated only by a career request.
 - Source connectors declare operations separately. A registry entry is not an implemented connector or permission. Manual structured JD import is the working first connector.
@@ -48,5 +55,9 @@ transactions. See [measured architecture decision](PERFORMANCE.md).
 - External computer tools outside this CLI are not sandboxed by core checks. Missing/failed host hooks never grant permission.
 
 ## Verification
+
+Optional deterministic host planning uses `route-task` and
+[MODEL_ROUTING.md](MODEL_ROUTING.md). It is independent of candidate state and
+does not introduce a second model API, dispatcher service or native model switch.
 
 Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.py` and `python scripts/demo_slice1.py --data-dir ../career-demo-private`. The demo uses only checked-in fictional inputs and records a clearly labelled fictional confirmation. Integration tests execute the real CLI without model calls. CI covers Linux/Windows and Python 3.11/3.12; no external accounts are accessed.

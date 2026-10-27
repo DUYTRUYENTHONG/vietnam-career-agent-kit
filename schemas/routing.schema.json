@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Deterministic routing packet 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "owner_id", "task_kind", "risk", "complexity"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "owner_id": {"$ref": "#/$defs/text"},
+    "task_kind": {"enum": ["test", "build", "format", "status", "metrics", "planning", "consolidated_review", "coding", "auth", "data_migration", "debugging", "business"]},
+    "risk": {"enum": ["low", "medium", "high"]},
+    "complexity": {"enum": ["simple", "routine", "complex"]},
+    "available_models": {"type": "object", "propertyNames": {"$ref": "#/$defs/text"}, "additionalProperties": {"$ref": "#/$defs/texts"}},
+    "available_skill_names": {"$ref": "#/$defs/texts"},
+    "skill_candidates": {"$ref": "#/$defs/texts"},
+    "policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["planning", "simple", "routine", "complex"],
+      "properties": {
+        "planning": {"$ref": "#/$defs/selection"},
+        "simple": {"$ref": "#/$defs/selection"},
+        "routine": {"$ref": "#/$defs/selection"},
+        "complex": {"$ref": "#/$defs/selection"}
+      }
+    },
+    "previous_failure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "count", "model"],
+      "properties": {
+        "kind": {"enum": ["credentials", "infrastructure", "code"]},
+        "count": {"type": "integer", "minimum": 1},
+        "model": {"$ref": "#/$defs/text"}
+      }
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S", "not": {"pattern": "\u0000"}},
+    "texts": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "selection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["model", "effort"],
+      "properties": {"model": {"$ref": "#/$defs/text"}, "effort": {"$ref": "#/$defs/text"}}
+    }
+  }
+}

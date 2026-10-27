@@ -30,6 +30,11 @@ A supported authorized host browser and the execution CLI. Read ../../../docs/ex
 
 ## Outputs
 
+For rate targets, use small exact finite batches and record actual confirmation
+time; see ../../../docs/THROUGHPUT.md. All-entry checks still run for every action.
+Do not put 100 jobs in one manifest merely to pursue a 100/hour KPI, omit required
+checks, infer missing answers or replay a pending action to raise throughput.
+
 Permitted observed outcome or accurate manual handoff with documents, missing questions, destination verification and steps. Finish each pass with the application-tracking skill's timestamped tracker table. Reuse an existing still-current exact approved scope without requesting the same approval again; host confirmations and material scope changes still apply.
 
 ## Failure behavior

@@ -183,6 +183,12 @@ class Campaign(Documents):
             self.validate_policy(entry,now)
             if not rendered['reviewed'] or rendered['fingerprint']!=entry['render_fingerprint']:
                 raise WorkflowError('blocked','Manifest document review is absent/stale')
+        # Long passes must not return authority from a profile/expiry that
+        # changed during their last entry's validation.
+        if self.confirmed_profile()['fingerprint']!=profile['fingerprint']:
+            raise WorkflowError('blocked','Manifest profile changed during validation')
+        if now_utc()>=timestamp(manifest['expires_utc'],'expires_utc'):
+            raise WorkflowError('blocked','Manifest expired during validation; review a new finite scope')
         return manifest
 
     def approve_manifest(self,fingerprint,confirmation):

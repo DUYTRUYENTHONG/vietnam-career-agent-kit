@@ -84,3 +84,48 @@ Local verification: all 83 standard-library tests passed, including the real
 subprocess loop and existing stale-source/approval/duplicate/recovery cases.
 Repository hygiene and generated-wrapper synchronization passed. Optional real
 conversion remains a separate Linux CI gate; no local LibreOffice run is claimed.
+
+## Execution validation experiment, 21 October 2026
+
+Reproducible command:
+
+```sh
+python scripts/benchmark_execution.py --jobs 100 --samples 7
+python scripts/benchmark_execution.py --jobs 10 --samples 7
+```
+
+Python 3.12.14 on Windows; fictional jobs and a **mock renderer**. Setup,
+rendering, review and approval are outside the timed region. No model, network,
+browser, live application or real document converter is timed. Each timed sample
+still runs full manifest validation. Timings are milliseconds.
+
+| Workload | Baseline median (range) | Experiment median (range) | Decision |
+|---|---|---|---|
+| 100-entry check-manifest | 4474.023 (2442.255–6701.950) | 4477.160 (2980.021–5081.499) | Revert profile sharing: no timing gain |
+| 100-entry check-action | 2107.154 (1622.352–4267.408) | 3517.190 (2633.276–6022.372) | Revert: slower median, broad overlapping variance |
+
+The experiment shared one validated profile within a pass and reduced profile
+validations from 201 to 2 while retaining 200 JD reads. That work-count reduction
+did **not** establish a reliable latency improvement. Its production changes were
+removed. Reference baseline was main at `73a77b7`, run in a detached disposable
+worktree with the same benchmark script; the experiment followed sequentially.
+An earlier run overlapped the test suite and is excluded from the comparison.
+No speedup or token/cost saving is claimed from this rejected experiment.
+
+The final implementation retains per-entry validation and adds a final
+source/expiry/runtime recheck for long passes. Its separate **10-entry** operating
+point measured:
+
+| Operation | Median (range), ms | Profile validations | JD reads |
+|---|---|---|---|
+| check-manifest | 239.146 (236.155–255.462) | 22 | 20 |
+| check-action | 155.628 (147.441–158.724) | 22 | 20 |
+
+This is a different batch size, not a before/after speedup on identical work.
+Use small finite batches as described in [THROUGHPUT.md](THROUGHPUT.md), measure
+the actual host/employer steps, and preserve the same checks per manifest entry.
+The [deterministic routing planner](MODEL_ROUTING.md) adds no model calls for
+classification, tests or metrics. Its native host dispatch and token savings are
+unmeasured. A 100/hour live KPI remains unverified; `throughput` reports actual
+rolling qualifying confirmations rather than treating local benchmark capacity
+as applications.

@@ -185,6 +185,12 @@ are not tamper-proof storage against someone who can rewrite the database itself
 Recorded host receipts are not independent employer verification. Reports show
 attempts, observed confirmations and uncertain states separately.
 
+New attempts freeze the current draft's `fit_classification` with their immutable
+snapshot. This internal metadata is retained on confirmation and supports the
+read-only `throughput` KPI. Older snapshots stay readable and unmodified; absent
+fit is never inferred. This adds no browser receipt field, disclosure scope or
+database migration. See [rolling KPI semantics](THROUGHPUT.md).
+
 ## Verification scope
 
 `tests/test_execution.py` tests the engine and real CLI with a deterministic

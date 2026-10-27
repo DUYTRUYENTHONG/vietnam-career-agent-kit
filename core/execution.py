@@ -110,6 +110,8 @@ class Executor(Campaign):
             intent={k:entry[k] for k in ['job_id','destination','document_sha256','answers_sha256','consents_sha256']}
             intent.update(schema_version='1.0',action=action)
         self.check_manifest(run['fingerprint'],intent)
+        if now_utc()>=timestamp(run['deadline_utc'],'runtime deadline'):
+            raise WorkflowError('blocked','Execution runtime expired during validation; approve a fresh finite scope')
 
     def next_action(self, run_id):
         with self._db() as db:
@@ -154,7 +156,8 @@ class Executor(Campaign):
                     raise WorkflowError('blocked','Vacancy already has a durable attempt; verify instead of retrying')
                 flow['attempt_id']=uuid.uuid4().hex
                 snapshot={'manifest_fingerprint':run['fingerprint'],'entry':entry,'binding_id':flow['binding_id'],
-                          'actor':self.actor,'document':self._frozen_document(entry)}
+                          'actor':self.actor,'document':self._frozen_document(entry),
+                          'fit_classification':self.current_draft(entry['job_id'])['classification']}
                 db.execute('INSERT INTO execution_attempts VALUES(?,?,?,?,?,?,?)',
                     (flow['attempt_id'],run_id,entry['job_id'],run['fingerprint'],json.dumps(snapshot,ensure_ascii=False),canonical_hash(snapshot),utc_now()))
                 self._job_state(db,entry['job_id'],'submission_uncertain')
@@ -323,6 +326,10 @@ class Executor(Campaign):
     def tracker(self):
         from .tracking import checkpoint
         return checkpoint(self)
+
+    def throughput(self, target, window_minutes=60):
+        from .tracking import throughput
+        return throughput(self,target,window_minutes)
 
     def stop_execution(self, run_id, reason):
         text(reason,'reason')

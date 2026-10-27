@@ -30,6 +30,12 @@ blocked vacancies without widening execution scope or repeating final attempts.
 
 ## Outputs
 
+When the user sets a rate KPI, also run throughput --target N --window-minutes M.
+Read ../../../docs/THROUGHPUT.md. Report the actual rolling qualifying count and
+target_met; never replace it with extrapolated speed, attempt counts or old
+records lacking frozen fit. Keep the campaign goal active while its target is
+unmet. A local benchmark does not prove live employer throughput.
+
 Return a timestamped Markdown tracker table after every application pass, including
 when the pass is blocked. Include employer/role, source URL, recorded status,
 blocker, next step and last update. Link the complete private report for longer
