@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Integrate the reviewed feature PR stack into `main` in dependency order. Make
+  normal clone/fork instructions use the default branch, preserve the immutable
+  community preview, and record exact-tree merge and clean-clone QA evidence.
+
 ## [0.2.0] - 2026-10-27 (community preview)
 
 - Add CV-first `start-campaign`: one external private intake packet, a default

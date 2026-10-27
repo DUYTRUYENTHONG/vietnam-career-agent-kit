@@ -12,13 +12,15 @@ the [Awesome Copilot review](AWESOME_COPILOT_REVIEW.md) is not a plugin installe
 
 ## 1. Clone and prove the local tools work
 
-These instructions use the pinned `community-v0.2.0` preview tag. It includes the
-CV-first starter, current skills and optional plugin code; it may be ahead of
-`main`. For the shortest CV-plus-required-information path, use
-[community setup](COMMUNITY_START.md). Native host/browser acceptance is separate.
+These instructions clone the default `main` branch, which includes the merged
+CV-first starter, current skills and optional plugin code. No feature branch or
+preview tag is required. For the shortest CV-plus-required-information path, use
+[community setup](COMMUNITY_START.md). The immutable `community-v0.2.0` release
+remains available for a reproducible snapshot. Native host/browser acceptance
+is separate from source publication.
 
 ```sh
-git clone --branch community-v0.2.0 https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
+git clone https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit.git
 cd vietnam-career-agent-kit
 python scripts/kit.py doctor --runtime generic
 python scripts/demo_slice1.py

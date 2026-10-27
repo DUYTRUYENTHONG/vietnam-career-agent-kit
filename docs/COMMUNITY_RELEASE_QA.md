@@ -84,3 +84,7 @@ demo and a fresh default-100 `start-campaign` succeeded from the extracted sourc
 The starter retained `execution_authorized:false`. Relative links and Markdown
 fences passed for all 18 changed guides. The final release is rebuilt from its
 published commit; the attached digest manifest identifies those exact bytes.
+
+The preview evidence above is historical. The reviewed stack is now integrated
+into `main`; see [main release QA](MAIN_RELEASE_QA.md) for the merge and
+community-clone acceptance. The preview tag and its archive remain immutable.
