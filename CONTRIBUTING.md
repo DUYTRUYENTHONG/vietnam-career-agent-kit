@@ -1,5 +1,11 @@
 # Contributing
 
+The upstream `main` branch requires PRs and all six app-pinned QA checks, with an
+up-to-date base and resolved review conversations. The rules apply to admins too;
+force pushes and branch deletion are disabled. Human approvals are optional, so
+do not describe passing CI as independent peer review. See
+[the policy, maintenance and fork setup](docs/BRANCH_PROTECTION.md).
+
 Read GOAL.md, AGENTS.md, docs/architecture.md and the current slice in docs/roadmap.md. Product development never requires a real CV or live application. Use examples/fictional and local test portals. Keep private workspaces, screenshots, account data and approvals out of issues, fixtures and commits.
 
 Core needs Python 3.11+ and the standard library. No model/API credential or pip install is required:

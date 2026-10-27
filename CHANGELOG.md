@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Protect upstream `main` with required PRs, all six GitHub Actions QA jobs,
+  up-to-date branches, resolved conversations and administrator enforcement.
+  Block force pushes/deletion; record the source policy and fork setup without
+  imposing a second human approver or changing the test suite.
+
 - Integrate the reviewed feature PR stack into `main` in dependency order. Make
   normal clone/fork instructions use the default branch, preserve the immutable
   community preview, and record exact-tree merge and clean-clone QA evidence.
