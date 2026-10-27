@@ -279,11 +279,11 @@ class ResearchTests(unittest.TestCase):
     def test_migration_preserves_new_version_and_blocks_future(self):
         Preparation(self.work.data_dir).init(); self.work.init()
         with self.work._db() as db:
-            self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 5)
-            db.execute('PRAGMA user_version=6')
+            self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 6)
+            db.execute('PRAGMA user_version=7')
         with self.assertRaises(WorkflowError): self.work.init()
         with self.work._db() as db:
-            self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 6)
+            self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0], 7)
 
     def test_cli_doctor_and_dry_run_without_keys(self):
         file = Path(self.temp.name)/'plan.json'; file.write_text(json.dumps(plan()), encoding='utf8')

@@ -367,3 +367,8 @@ Optional preparation-only hook examples remain deny-by-default and incompatible
 with live browser control. The engine does not disable them or weaken host policy.
 If the selected host denies an action, stop and use manual handoff. Broader native
 hook integration is a separate measured gate, not implied by the bridge protocol.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.

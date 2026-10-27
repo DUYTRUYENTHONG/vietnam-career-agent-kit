@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- Add English/Vietnamese README entry points, Mermaid workflow diagrams and a
+  detailed reusable campaign prompt covering setup, evidence, bounded public
+  research, document review, exact disclosure, isolated lanes and receipt recovery.
+  Clarify implemented experimental TinyFish Fetch, the local host-bridge engine,
+  serialized shared sessions and unverified live execution/throughput. Correct
+  stale README claims that all network retrieval is pending. Documentation only;
+  no runtime permissions, defaults, schemas or execution behavior change.
+- Add an explicit branch-protection payload and maintainer guide for
+  `codex/parallel-tinyfish`: PRs, five app-pinned CI checks, up-to-date branches,
+  resolved conversations and no force-push/deletion. Applying it to GitHub is a
+  separate authorized administrative action; the file alone enables no rules.
+- Use only app-pinned `checks` in that payload: the live GitHub API rejects
+  combining it with legacy `contexts`, including an empty list.
+
 - Document immediate email-delivery rejection checks before confirmation,
   preservation of Sent and failure evidence, the existing failed-verify state
   mapping and recipient-change boundaries. Clarify that automatic late-bounce
@@ -121,3 +135,18 @@
 - Optional inactive hook examples, fictional tests, source reviews and Linux/Windows CI.
 
 Native host callbacks and live application submissions have not been tested. This initial release provides preparation tools and a supervised workflow; browser control and document rendering come from the user's environment.
+
+## Unreleased: concurrent application lanes
+
+- Add schema6 per-job pending actions and an opt-in ten-lane host bridge coordinator.
+- Add public-only TinyFish Fetch batches with durable intent and no uncertain replay.
+- Add CLI operations, reusable batch prompt, failure isolation and concurrency tests.
+- No live employer submission or provider speed claim is implied by local tests.
+
+## Community attribution and QA follow-up
+
+- Add prominent English/Vietnamese DUYTRUYENTHONG creator attribution and community-sharing guidance, with an AUTHORS page linked to the existing MIT license and contribution guide.
+- Keep optional external service fees distinct from the freely shared toolkit.
+- Fix resumed confirmed-run cleanup so interrupted tab closure can finish without replaying applications.
+- Fix shared reports for TinyFish per-URL results and isolate provider-specific polling/cancellation.
+- Refresh README and roadmap descriptions to distinguish implemented experimental Fetch/parallel execution from unsupported direct cloud submission.

@@ -145,3 +145,8 @@ normalization is not an autonomous-extractor accuracy result. The interactive
 fixture explicitly reports unsupported. Live host/TinyFish/browser timing,
 provider queueing, billing and application throughput remain unmeasured. See
 PERFORMANCE.md for the actual run, without treating mock capacity as applications.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.

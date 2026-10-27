@@ -2,9 +2,9 @@
 
 Quality-gated preparation enhancement: [first complete wording/review/render
 consumption slice](QUALITY_FAST_PLAN.md), with v1 fallback and optional real
-renderer CI. Candidate-local caches, bounded progressive queues, TinyFish,
-validated form plans and blind complete-package evaluation are separate pending
-increments; none is implied by v2 schema support.
+renderer CI. [Ten-lane execution and TinyFish Fetch](PARALLEL_APPLICATIONS.md) are
+experimental opt-in additions. Candidate-local caches, validated form plans and
+blind complete-package evaluation remain separate pending increments; none is implied by v2 schema support.
 
 This records implemented evidence separately from intended product scope. No later slice is complete merely because a prompt describes it.
 
@@ -39,3 +39,8 @@ the native host or real-employer gates. See STANDING_AUTHORIZATION.md.
 5. Synchronize ten skills, document runtime/source support accurately, publish measured setup and a bounded review at the slice gate.
 
 Next after Slice 2: verify actual Codex/Claude native runtime invocation and scoped integration, including installation preview/backups/uninstall. The host-mediated execution engine is now implemented; see execution.md for scope and measured limits. Native hooks and real employer integrations remain separate gates. Rendering is optional and local, without a second AI API.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.

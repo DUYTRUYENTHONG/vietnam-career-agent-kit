@@ -4,8 +4,8 @@ Opt-in [CV content v2](CV_CONTENT_V2.md) adds `core/tailoring.py` as a Documents
 mixin using existing canonical drafts and source/profile/JD/assessment hashes.
 No new DB/schema or model API is introduced. Reviewed actual wording drives one
 ordered line model for Markdown/DOCX/PDF; v1 exact selection remains unchanged.
-See [quality-and-speed slice plan](QUALITY_FAST_PLAN.md) for pending concurrency,
-evidence reuse and form plans. `core/metrics.py` records local monotonic stages
+See [parallel applications](PARALLEL_APPLICATIONS.md) for implemented opt-in concurrency
+and [quality-and-speed slice plan](QUALITY_FAST_PLAN.md) for pending evidence reuse and form plans. `core/metrics.py` records local monotonic stages
 only; unobservable host usage is explicitly unavailable.
 
 ## Capability map and build order
@@ -96,3 +96,8 @@ Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.
 ## Experimental bulk discovery
 
 `discover-greenhouse` performs fixed-origin, bounded read-only public GETs with up to three workers; normalization uses stable post identities and fingerprints. It does not access candidate workspaces, write the ledger or submit. See [contract, review and limits](BULK_DISCOVERY.md). Submission execution retains its single-writer and fresh-action checks.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.

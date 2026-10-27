@@ -1,5 +1,17 @@
 # Runtime compatibility evidence
 
+## Visual guide and reusable campaign prompt
+
+The [visual guide](USER_GUIDE.md) and [campaign prompt](../prompts/GUIDED_CAMPAIGN.md)
+document current local CLI contracts and distinguish experimental public Fetch
+from unsupported TinyFish Agent/browser submissions. They are instruction-only;
+no new runtime, browser driver, schema or live throughput evidence is introduced.
+Concurrent applications require host-provided isolated sessions; a shared
+authenticated session must remain serialized. A checked-in branch policy is
+not proof of server enforcement; see [branch protection](BRANCH_PROTECTION.md).
+
+## Earlier implementation evidence
+
 Wording v2 (22 October 2026): opt-in stdlib CLI and source-bound content model,
 with deterministic fictional tests and no new model API, hooks, provider or
 browser integration. Three profile families and EN/VI qualifier tests do not
@@ -134,3 +146,18 @@ Local validation: the full Windows regression run passed 146 tests in 226.251 se
 Post-measurement HTTP failure-classification hardening passed six focused
 provider tests. The complete current suite has 185 cases; its CI state is reported
 separately in the PR, without relabelling the earlier 184-test local run.
+
+
+## Parallel execution update
+
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.
+
+Local validation for the parallel increment: 223-test full discovery completed with 222 passes and one subprocess timeout after a host clock interruption (negative remaining timeout). The affected real-CLI execution-loop test passed on isolated rerun in 8.097s. No test expectation or timeout was weakened. Provider/parallel tests use fictional transports and workspaces. Public-source hygiene (185 files), wrapper drift check and fictional preparation demo passed. Live provider credentials were absent; live browser concurrency was not exercised.
+
+## Independent QA follow-up
+
+The qa-check-agent and code-review-and-quality workflows found and fixed two issues: saved-confirmation tab cleanup was not serviced on a completed parallel-run restart, and shared research reporting assumed Firecrawl-shaped objects for TinyFish result lists. Regression coverage also ensures TinyFish tasks never use Firecrawl remote-ID polling/cancellation.
+
+The QA preflight found no conflict markers or suspicious bypass patterns. This Python CLI uses the repository-native test, source-hygiene, wrapper-sync and fictional-demo gates; Node package scripts and a web viewport matrix are not applicable. Original c730fdc CI passed the Linux/Windows Python 3.11/3.12 matrices and real fictional document integration. Live provider and employer sessions remain outside this local QA scope.
+
+Final follow-up gate: `python -m unittest discover -s tests -v` passed all 226 tests in 283.160s. Source hygiene passed 186 UTF-8 files; wrapper synchronization, fictional preparation demo and staged diff checks passed. QA decision: PASS for the tested local CLI/core; live-provider/native-browser support remains Experimental.
