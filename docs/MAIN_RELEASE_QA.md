@@ -76,3 +76,15 @@ or an hourly guarantee. Source integration does not certify live employer forms,
 OAuth, paid providers, native host discovery or ten simultaneous sessions. Actual
 host tools and scoped permissions are still required. Personal workspaces remain
 outside the public clone and are not altered by merging this source.
+
+## Final main CI and ongoing protection
+
+The final integration commit `d87902fd3c0ebbd82d0d42068b98bf6a2389cd72`
+passed all six jobs in [main CI run 40452222097](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/actions/runs/40452222097).
+No test or implementation failure required a fix.
+
+After that success, `main` protection was applied and verified through a separate
+GitHub API readback: all six app-pinned checks, strict up-to-date status, required
+PRs, resolved conversations and administrator enforcement; force pushes/deletion
+disabled. See [the current policy and fork instructions](BRANCH_PROTECTION.md).
+The policy/documentation change itself follows this protected PR workflow.

@@ -1,62 +1,76 @@
-# Protecting the parallel execution branch
+# Main QA protection
 
-The maintainer requested protection of `codex/parallel-tinyfish`. The checked-in
-[configuration](../.github/branch-protection.parallel-tinyfish.json) is a REST API
-payload, not a workflow or an automatically installed rule. Cloning the kit does
-not change any repository settings.
+The upstream `main` branch requires a pull request and passing automated QA
+before merging. The source policy is
+[branch-protection.main.json](../.github/branch-protection.main.json).
+The GitHub server setting enforces it; committing this JSON alone does not.
 
-## Rules
+## Required checks
 
-| Rule | Setting and reason |
+All six current jobs in [ci.yml](../.github/workflows/ci.yml) are required:
+
+| Check | Coverage |
 |---|---|
-| Pull request | Required for updates to this branch; use a child branch for new work. |
-| CI | All four Windows/Linux Python 3.11/3.12 test jobs and document integration must pass. |
-| Check producer | GitHub Actions app `15368`, observed on the existing checks. |
-| Current base | The PR branch must be up to date before merging. |
-| Review threads | Conversations must be resolved. |
-| Administrators | The same requirements apply to administrators. |
-| Force-push and deletion | Both disabled. |
-| Mandatory reviewers | Zero, so a solo maintainer can merge their own PR after checks. This is not independent human review. |
-| Branch lock | Off; normal PR development remains possible. |
+| `fictional-tests (ubuntu-latest, 3.11)` | Standard tests, source hygiene, doctor, wrapper synchronization and fictional demo |
+| `fictional-tests (ubuntu-latest, 3.12)` | Same checks with Python 3.12 |
+| `fictional-tests (windows-latest, 3.11)` | Same checks on Windows with Python 3.11 |
+| `fictional-tests (windows-latest, 3.12)` | Same checks on Windows with Python 3.12 |
+| `document-integration` | Fictional DOCX/PDF rendering and approval integration |
+| `local-plugin-integration` | MCP, credential boundaries and fictional Chromium form integration |
 
-The JSON targets this branch only when applied to the endpoint below. It does not
-protect `main`, merge the existing PR, configure all `codex/*` branches, install
-hooks, or grant another account access. Keep actual checks and their names aligned
-with [CI](../.github/workflows/ci.yml) before changing the policy.
+Each check is pinned to the observed GitHub Actions app ID `15368`. A matching
+name from an unrelated status provider does not satisfy this policy. Branches
+must be up to date with `main`, and review conversations must be resolved.
+Use the app-pinned `checks` payload only: combining it with legacy `contexts`
+causes the endpoint to reject the ambiguous configuration.
 
-Use the app-pinned `checks` form only. GitHub rejects a payload containing both
-legacy `contexts` and `checks` with HTTP 422 (`oneOf` ambiguity), even when
-`contexts` is empty. This was verified against the live endpoint.
+The rules also apply to administrators. Force pushes and branch deletion are
+disabled. Merge commits remain supported so stacked PR history is preserved.
 
-## Apply after the current change is pushed
+Human approvals are not a required gate: the configured approving-review count
+is zero. PRs and automated QA are mandatory; this is not independent human review.
+Stale approvals are dismissed when new commits arrive. No user/team/app bypass
+allowance is configured. Authorized administrators can still edit repository
+settings; this rule governs normal push and merge operations.
 
-An administrator can run these commands from the repository root with an
-authenticated GitHub CLI. Inspect existing rules first: a PUT replaces the
-specified protection configuration. Obtain authority before changing another
-repository's settings.
+## Maintainer workflow
 
-```powershell
-gh api repos/DUYTRUYENTHONG/vietnam-career-agent-kit/branches/codex%2Fparallel-tinyfish/protection
-gh api --method PUT repos/DUYTRUYENTHONG/vietnam-career-agent-kit/branches/codex%2Fparallel-tinyfish/protection --input .github/branch-protection.parallel-tinyfish.json
-gh api repos/DUYTRUYENTHONG/vietnam-career-agent-kit/branches/codex%2Fparallel-tinyfish/protection
+1. Create a short `codex/` branch from current `main` and make a focused change.
+2. Run the applicable local checks in [CONTRIBUTING](../CONTRIBUTING.md).
+3. Push the branch and open a PR targeting `main`.
+4. Fix failures; do not skip tests, remove required checks or use `--admin`.
+   If the base moves, update the branch and wait for the new required results.
+5. Resolve review threads, verify all six check results on the current head and
+   merge with exact-head matching. Record the actual CI state afterward.
+
+A cancelled or missing required result is not a pass. Renaming a CI job or
+changing its matrix must include a deliberate policy update; otherwise merges
+will wait for the old required name. Keep the workflow and server rule aligned.
+
+## Forks and verification
+
+GitHub protection settings are not installed by cloning or forking. A fork owner
+can inspect this policy, verify their actual workflow/app names, then apply it
+with repository Administration permission:
+
+```sh
+gh api --method PUT repos/OWNER/REPO/branches/main/protection --input .github/branch-protection.main.json
+gh api repos/OWNER/REPO/branches/main/protection
 ```
 
-Verify the returned server state: strict checks, all five context names/app IDs,
-PR requirements, administrator enforcement, resolved conversations, and disabled
-force-push/deletion. A local JSON file or a successful test run does not prove
-that protection is active. GitHub plan or token permissions may prevent applying
-it; report the actual response without claiming success.
+Inspect existing settings before applying: PUT updates protection and supplied
+arrays replace values. Do not overwrite another repository's stronger controls.
+Check the API readback for all six app-pinned names, strict status checks,
+administrator enforcement, required PRs and resolved conversations, and disabled
+force pushes/deletion. For a non-destructive merge-gate check, inspect a PR while
+its required QA is pending: GitHub should report the merge state as `BLOCKED`.
+Wait for every required result before merging. Do not push a failing commit to
+`main` to test protection.
 
-## Subsequent changes
+Reference: [GitHub's protected-branch API](https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection).
 
-```powershell
-git switch -c codex/next-focused-change
-# Make and verify a focused change using docs/change-workflow.md.
-git push -u origin codex/next-focused-change
-gh pr create --base codex/parallel-tinyfish --head codex/next-focused-change
-```
+## Earlier branch-specific policy
 
-Keep the existing stacked PR's destination unchanged unless a maintainer requests
-a merge or retarget. Do not disable protection to make a routine push succeed.
-
-Primary reference: [GitHub branch-protection REST API](https://docs.github.com/en/rest/branches/branch-protection#update-branch-protection).
+The [parallel-tinyfish policy and instructions](BRANCH_PROTECTION.parallel-tinyfish.md)
+are retained as historical branch-specific guidance. This main policy does not
+change that feature branch or apply a wildcard rule to every `codex/` branch.
