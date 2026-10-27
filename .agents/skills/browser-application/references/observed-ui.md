@@ -35,6 +35,39 @@ Conversation history and a planned session name do not prove browser isolation.
    Close only a completed owned tab/session after the receipt is committed; preserve
    user tabs, deliverables and unresolved handoffs. Cleanup failure does not resend.
 
+## Check retained values before a human handoff
+
+Finish document, source, fit, duplicate and answer review before asking the user
+to complete a short-lived verification step. Confirm that controlled inputs have
+retained the approved values after blur or rerender. A successful fill call does
+not establish this: phone controls may keep a country prefix while dropping the
+subscriber number. Use the host's documented input method and observe the result;
+correct only the already approved value, without changing its meaning.
+
+If the host redacts private fields, a redacted DOM value or comparison is not
+evidence of a match or mismatch. Use supported visual inspection where available;
+otherwise report that the value could not be verified. Never read hidden stores,
+extract challenge tokens or change page state through evaluation.
+
+On return from a human handoff, refresh the actual form: references and layout
+may have changed. Check the current approval/expiry, retained fields, exact file,
+consents, challenge status and existing attempt. Then perform only the next
+permitted action. Keep unrelated research, rerendering and repeat document review
+outside this short path. These ordering rules do not remove execution preflight
+or host confirmation requirements.
+
+An unchecked, disabled or expired verification control is not verified merely
+because the user replied. Preserve the form and its existing attempt; never click
+Submit to test readiness or allocate another attempt. A pending/uncertain submit
+still resumes read-only. Reuse unchanged valid approval rather than requesting it
+again, and ask only for the unresolved human step.
+
+This is instruction-only guidance. No browser adapter, automatic challenge
+handling or measured speed improvement is introduced. Bounded review cases:
+retained text; country-prefix-only phone; redacted values; expired verification;
+and an already pending submit. In each case, visible state and existing execution
+authority determine the next action.
+
 ## Choose the correct execution surface
 
 | Surface | Appropriate use | Evidence still needed |
