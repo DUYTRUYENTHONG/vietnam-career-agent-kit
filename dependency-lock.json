@@ -12,7 +12,7 @@
   "third_party_runtime_dependencies": [],
   "third_party_test_dependencies": [],
   "routing_and_metrics": {
-    "implementation": "Original standard-library Python; no model SDK or native host dispatcher",
+    "implementation": "Original standard-library Python; optional caller-supplied host dispatch callback, no model SDK or bundled native dispatcher",
     "external_runtime_dependencies": [],
     "development_reference": {
       "package": "company-skill-library",
@@ -101,5 +101,76 @@
     "submission_translation_implemented": false,
     "native_driver_verified": false,
     "live_speedup_measured": false
+  },
+  "optional_browser": {
+    "file": "requirements-browser.lock",
+    "auto_install": false,
+    "status": "Pinned wheel metadata only; native Playwright/CDP compatibility not yet live verified",
+    "packages": {
+      "playwright": {
+        "version": "1.58.0",
+        "source": "https://pypi.org/pypi/playwright/1.58.0/json",
+        "wheel_hashes": 8,
+        "requires_dist": [
+          "pyee<14,>=13",
+          "greenlet<4.0.0,>=3.1.1"
+        ],
+        "license": "Apache-2.0",
+        "license_source": "https://raw.githubusercontent.com/microsoft/playwright-python/v1.58.0/LICENSE",
+        "license_sha256": "7fab1461b41970ff376f1c9303a637076bfaaeb71cd12dd3a1c44aaf59a1a2b9"
+      },
+      "pyee": {
+        "version": "13.0.0",
+        "source": "https://pypi.org/pypi/pyee/13.0.0/json",
+        "wheel_hashes": 1,
+        "requires_dist": [
+          "typing-extensions",
+          "build; extra == \"dev\"",
+          "flake8; extra == \"dev\"",
+          "flake8-black; extra == \"dev\"",
+          "pytest; extra == \"dev\"",
+          "pytest-asyncio; python_version >= \"3.4\" and extra == \"dev\"",
+          "pytest-trio; python_version >= \"3.7\" and extra == \"dev\"",
+          "black; extra == \"dev\"",
+          "isort; extra == \"dev\"",
+          "jupyter-console; extra == \"dev\"",
+          "mkdocs; extra == \"dev\"",
+          "mkdocs-include-markdown-plugin; extra == \"dev\"",
+          "mkdocstrings[python]; extra == \"dev\"",
+          "mypy; extra == \"dev\"",
+          "sphinx; extra == \"dev\"",
+          "toml; extra == \"dev\"",
+          "tox; extra == \"dev\"",
+          "trio; extra == \"dev\"",
+          "trio; python_version > \"3.6\" and extra == \"dev\"",
+          "trio-typing; python_version > \"3.6\" and extra == \"dev\"",
+          "twine; extra == \"dev\"",
+          "twisted; extra == \"dev\"",
+          "validate-pyproject[all]; extra == \"dev\""
+        ],
+        "license": "MIT"
+      },
+      "greenlet": {
+        "version": "3.1.1",
+        "source": "https://pypi.org/pypi/greenlet/3.1.1/json",
+        "wheel_hashes": 72,
+        "requires_dist": [
+          "Sphinx; extra == \"docs\"",
+          "furo; extra == \"docs\"",
+          "objgraph; extra == \"test\"",
+          "psutil; extra == \"test\""
+        ],
+        "license": "MIT License"
+      },
+      "typing_extensions": {
+        "version": "4.16.0",
+        "source": "https://pypi.org/pypi/typing_extensions/4.16.0/json",
+        "wheel_hashes": 1,
+        "requires_dist": null,
+        "license": "PSF-2.0"
+      }
+    },
+    "provider": "TinyFish Browser REST; separate paid account and scoped disclosure",
+    "browser_binary_install": false
   }
 }

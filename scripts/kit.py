@@ -43,6 +43,13 @@ def parser() -> Parser:
     tiny.add_argument('--plan',type=Path,required=True)
     tiny.add_argument('--live',action='store_true')
     tiny.add_argument('--approve-plan')
+    browser=commands.add_parser('tinyfish-browser',help='experimental isolated browser runner; offline preview by default')
+    browser.add_argument('--run-id',required=True)
+    browser.add_argument('--forms',type=Path,required=True)
+    browser.add_argument('--cloud-scope',type=Path,required=True)
+    browser.add_argument('--approve-cloud-scope')
+    browser.add_argument('--action-timeout-seconds',type=float,default=120)
+    browser.add_argument('--live',action='store_true')
     research=commands.add_parser('discover',help='opt-in bounded Firecrawl public research; dry-run by default')
     research.add_argument('--plan',type=Path,required=True)
     mode=research.add_mutually_exclusive_group()
@@ -175,7 +182,10 @@ def execute(args) -> Outcome:
         from adapters.providers.firecrawl import CAPABILITIES
         return Outcome('ok',{'provider':'firecrawl-v2','credentials_configured':bool(os.environ.get('FIRECRAWL_API_KEY')),
             'capabilities':asdict(CAPABILITIES),'network_calls':0,'account_capabilities_verified':False,
-            'tinyfish':{'status':'Experimental public Fetch only','credentials_configured':bool(os.environ.get('TINYFISH_API_KEY')),'max_urls':10,'live_verified':False},'dependencies':'Python standard library; no SDK installed'},[])
+            'tinyfish':{'status':'Experimental public Fetch only','credentials_configured':bool(os.environ.get('TINYFISH_API_KEY')),'max_urls':10,'live_verified':False},
+            'tinyfish_browser':{'status':'Experimental single-page guest forms','max_sessions':10,'live_verified':False,
+                'requires':'Exact cloud scope and optional Playwright client; no entitlement check'},
+            'dependencies':'Core uses Python standard library; optional Browser client installed separately'},[])
     if command=='tinyfish-fetch' and not args.live:
         from adapters.providers.tinyfish_research import preview
         return preview(load_input(args.plan))
@@ -206,6 +216,8 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
             if command in {'tinyfish-fetch','discover','research-status','cancel-research','research-report','import-research-jd'} and schema<5:
                 raise WorkflowError('needs_input','Run init for additive public research schema 5')
+            if command=='tinyfish-browser' and schema<6:
+                raise WorkflowError('needs_input','Run init for additive parallel execution schema 6')
     if command in {'discover','research-status','cancel-research','research-report','import-research-jd'}:
         from adapters.providers.research import Research
         from adapters.providers.contracts import ProviderError
@@ -234,6 +246,15 @@ def execute(args) -> Outcome:
         if command=='check-parallel-action':return parallel.check_parallel_action(args.run_id,args.request_id)
         if command=='recover-parallel-execution':return parallel.recover_parallel_execution(args.run_id,args.job_id)
         return parallel.stop_parallel_execution(args.run_id,args.reason)
+    if command=='tinyfish-browser':
+        from core.parallel_execution import ParallelExecutor, run_parallel_with_bridge
+        from adapters.tinyfish_browser import preview, TinyFishBrowserBridge
+        parallel=ParallelExecutor(args.data_dir,actor=args.actor)
+        forms=work.private_json(args.forms);scope=work.private_json(args.cloud_scope)
+        if not args.live:return preview(parallel,args.run_id,forms,scope)
+        bridge=TinyFishBrowserBridge(parallel,args.run_id,forms,scope,args.approve_cloud_scope,
+                                    action_timeout_seconds=args.action_timeout_seconds)
+        return run_parallel_with_bridge(parallel,args.run_id,bridge,action_timeout_seconds=args.action_timeout_seconds)
     if command=='tinyfish-fetch':
         from adapters.providers.tinyfish_research import fetch
         from adapters.providers.contracts import ProviderError

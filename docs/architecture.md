@@ -1,5 +1,11 @@
 # Portable core architecture
 
+The optional [TinyFish Browser runtime](TINYFISH_BROWSER.md) supplies a narrow
+concrete cloud bridge, separate from public Fetch. Receipt writes remain
+coordinator-owned; workers can read fresh authority guards. Finite action waits
+quarantine stalls without retry. `dispatch_task` connects deterministic routing
+to an explicit host callback; native model dispatch remains host-supplied.
+
 Opt-in [CV content v2](CV_CONTENT_V2.md) adds `core/tailoring.py` as a Documents
 mixin using existing canonical drafts and source/profile/JD/assessment hashes.
 No new DB/schema or model API is introduced. Reviewed actual wording drives one
@@ -105,4 +111,4 @@ Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.
 
 ## Parallel execution update
 
-Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments. [TinyFish Browser](TINYFISH_BROWSER.md) now has an opt-in experimental guest-form adapter; Agent-goal submissions remain unsupported.

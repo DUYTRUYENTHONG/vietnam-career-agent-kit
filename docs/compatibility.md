@@ -1,5 +1,28 @@
 # Runtime compatibility evidence
 
+## Mailbox verification guidance
+
+The email search runbook is Instruction-only host guidance, informed by Google's
+documented related-result fallback and relevance/chronological search modes.
+Operators still inspect actual matching envelopes and application content.
+This adds no Gmail API/browser adapter, automatic mailbox monitor or measured
+throughput claim. No candidate messages or account state are included in fixtures.
+
+## TinyFish Browser and bounded workers
+
+See [release QA and measured fixture limits](TINYFISH_RUNTIME_QA.md) for the full
+255-test run, final focused regressions and independent review results.
+
+Experimental local Python adapter: isolated REST sessions plus optional Playwright
+1.58.0 CDP client, exact cloud/form fingerprint and single-page PDF guest forms.
+Fictional transport/page tests verify ordering, observed bytes/values, owned
+cleanup, replay refusal, changed forms and timeout quarantine. This is not live
+Browser API/CDP/employer compatibility. No paid API, login or candidate data was
+used. Protocol 1.0/schema 6 is retained. The optional wheel closure is pinned in
+requirements-browser.lock; it was not installed for these tests. `dispatch_task`
+is tested with fictional callbacks only; native host dispatch remains
+Instruction-only. See [setup and limits](TINYFISH_BROWSER.md).
+
 ## BrowserAct offline session planner
 
 `browser-act-plan` is Experimental local Python planning; BrowserAct native
@@ -188,7 +211,7 @@ separately in the PR, without relabelling the earlier 184-test local run.
 
 ## Parallel execution update
 
-Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments. [TinyFish Browser](TINYFISH_BROWSER.md) now has an opt-in experimental guest-form adapter; Agent-goal submissions remain unsupported.
 
 Local validation for the parallel increment: 223-test full discovery completed with 222 passes and one subprocess timeout after a host clock interruption (negative remaining timeout). The affected real-CLI execution-loop test passed on isolated rerun in 8.097s. No test expectation or timeout was weakened. Provider/parallel tests use fictional transports and workspaces. Public-source hygiene (185 files), wrapper drift check and fictional preparation demo passed. Live provider credentials were absent; live browser concurrency was not exercised.
 

@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- Clarify Gmail receipt/duplicate verification: use bounded searches, distinguish
+  related suggestions from actual matching messages, and preserve uncertain
+  attempts when no confirmation is found. Synchronize host skill instructions;
+  no Gmail driver, schema change or throughput improvement is claimed.
+
+- Add opt-in TinyFish Browser REST/CDP sessions for reviewed single-page guest
+  forms, separate cloud scope, persistent connections, fresh form guards, PDF byte
+  verification, redirect rejection and confirmed owned-session cleanup.
+- Add fictional regressions, optional hashed browser-client lock and setup/source
+  evidence. Live provider/CDP throughput and general ATS coverage remain unverified.
+
+- Enforce finite action/cleanup waits; quarantine stalled pending requests without
+  replay or late receipt commits. Preserve read-only verification after expiry.
+- Connect deterministic routing to an explicit host callback with effective
+  override checks. Native host dispatch remains supplied by the caller.
+
 - Add an offline BrowserAct session planner for issued, exactly authorized
   requests. It checks coordinator/bridge/binding and current authority, plans
   compact inspection/recovery commands, and returns manual_required for form

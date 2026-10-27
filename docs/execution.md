@@ -242,6 +242,26 @@ message and attachment. Save the private evidence before closing the owned tab.
 A Sent receipt establishes sending, not independent delivery to the employer.
 This runbook changes no schema, approval requirement or measured throughput.
 
+### Separate mailbox suggestions from application evidence
+
+Gmail can show related messages when a search has no matches, and its default
+ranking can prioritize relevance. When the UI offers the choice, use **Most
+recent** for a bounded receipt or duplicate check, then wait for the search to
+finish. See [Google's search guidance](https://support.google.com/mail/answer/6593).
+
+Use the intended mailbox and narrow the query by recipient or employer,
+requisition, exact subject and campaign date as appropriate. Do not open or save
+unrelated suggestions. Neither a result count nor a suggested message proves a
+duplicate or a submission. Inspect the actual message's sender, recipients,
+subject, date, body and attachment against the reviewed application. A generic
+older receipt cannot confirm a new attempt for another role.
+
+Save the query, selected search mode and matching evidence privately. No matching
+email means **no email confirmation found**; it does not establish that the
+employer never received an application and does not authorize another send or
+submit. Preserve uncertain attempts for read-only reconciliation. Search UI labels
+and options can vary; this is host guidance, not an automatic Gmail adapter.
+
 ### Check immediate delivery failures before confirming email
 
 During the existing bounded verification pass, inspect the matching conversation
@@ -371,4 +391,4 @@ hook integration is a separate measured gate, not implied by the bridge protocol
 
 ## Parallel execution update
 
-Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments. [TinyFish Browser](TINYFISH_BROWSER.md) now has an opt-in experimental guest-form adapter; Agent-goal submissions remain unsupported.

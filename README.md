@@ -13,6 +13,7 @@ review an exact application package, and track what actually happened.
 |---|---|
 | Set up Codex, Claude Code, or another tool-enabled agent | [Agent setup: skills, hooks, roles and browsers](docs/AGENT_SETUP.md) |
 | Configure TinyFish without exposing your API key | [TinyFish setup and offline preview](docs/TINYFISH_SETUP.md) |
+| Connect isolated TinyFish application sessions | [Experimental Browser runtime, scope and recovery](docs/TINYFISH_BROWSER.md) |
 | Evaluate BrowserAct sessions and authorization | [BrowserAct review, setup and offline planner](docs/BROWSERACT.md) |
 | Give your agent a setup task and your own campaign goal | [Copyable setup-and-goal prompt](prompts/SETUP_AND_GOAL.md) |
 | Understand the workflow and its boundaries | [Visual guide: four workflow diagrams](docs/USER_GUIDE.md) |
@@ -51,9 +52,10 @@ flowchart LR
 **What runs today:** local preparation, document/approval checks and durable
 request/receipt orchestration. Experimental public research includes Firecrawl,
 bounded Greenhouse reads and TinyFish **Fetch** (up to ten public URLs per batch).
-The application engine can coordinate up to ten isolated host sessions; this
-repository does not include a live browser driver or provision those sessions.
-TinyFish Agent/browser submissions remain unsupported. A shared authenticated
+The application engine can coordinate up to ten isolated sessions. The optional
+experimental TinyFish Browser driver supports reviewed single-page guest forms;
+live provider/CDP compatibility is unverified. Agent-goal submissions remain
+unsupported. A shared authenticated
 session uses one action stream. [See the current capability table](docs/USER_GUIDE.md#what-is-implemented).
 
 The prompt guides an agent through setup to receipts; it grants no new tool
@@ -73,7 +75,8 @@ or a measured live application-rate guarantee.
 search, selected scrape/batch retrieval, durable task recovery and private
 evidence import. Offline by default; no new Python dependency. [TinyFish Fetch and
 parallel application lanes](docs/PARALLEL_APPLICATIONS.md) are experimental, opt-in additions.
-Direct TinyFish Agent/browser application execution remains unsupported.
+[TinyFish Browser execution](docs/TINYFISH_BROWSER.md) requires separate cloud
+scope, exact form mappings and an optional client; Agent-goal execution remains unsupported.
 
 [Auto-decide campaign prompt](prompts/AUTO_DECIDE.md): let the agent rank jobs,
 tailor supported evidence and reuse known answers without routine questions.

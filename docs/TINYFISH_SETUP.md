@@ -3,7 +3,9 @@
 This kit's experimental TinyFish integration reads **1-10 selected public URLs**
 per Fetch batch. It uses Python's standard library. You do not need the TinyFish
 SDK, CLI, Chrome extension, MCP server or a second model API for this adapter.
-TinyFish Agent/cloud-browser application submission is not integrated.
+TinyFish Agent-goal submission is unsupported. A separate opt-in experimental
+[Browser runtime](TINYFISH_BROWSER.md) now supports reviewed single-page guest
+forms, with additional provider scope and an optional Playwright client.
 
 ## 1. Create a key and load it privately
 

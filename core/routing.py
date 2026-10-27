@@ -78,3 +78,27 @@ def route_task(packet):
     data.update(execution='agent', skill=skill, dispatch_required=True,
                 review_gate='early-risk-review' if risk == 'high' else 'feature-or-release')
     return Outcome('ok', data, [], 'Plan only; apply through an explicit supported host override.')
+
+
+def dispatch_task(packet, host_dispatch):
+    """Invoke an existing owner's host adapter once with the exact routed override.
+
+    The adapter must actually enforce the override and return its effective
+    owner/model/effort/skill. This is not a model SDK or native host integration.
+    On ambiguous dispatch never issue a second call automatically.
+    """
+    plan=route_task(packet)
+    if plan.outcome!='ok' or plan.data['execution']=='tool':return plan
+    if not callable(host_dispatch):
+        return Outcome('needs_input',plan.data,['A supported host dispatch callback is required'])
+    selection={key:plan.data[key] for key in ['owner_id','model','effort','skill']}
+    try:
+        applied=host_dispatch(dict(selection))
+    except Exception:
+        return Outcome('needs_input',{**plan.data,'dispatch_state':'unknown'},
+                       ['Host dispatch failed or is uncertain; reconcile existing owner before retrying'])
+    if not isinstance(applied,dict) or any(applied.get(k)!=v for k,v in selection.items()):
+        return Outcome('blocked',{**plan.data,'dispatch_state':'mismatch'},
+                       ['Host effective selection differs; do not silently substitute or redispatch'])
+    return Outcome('ok',{**plan.data,'dispatch_required':False,'dispatch_state':'host_acknowledged'},
+                   [],'Host acknowledgment, not independent model execution verification.')

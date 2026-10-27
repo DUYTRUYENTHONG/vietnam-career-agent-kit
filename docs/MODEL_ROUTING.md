@@ -1,5 +1,14 @@
 # Model routing and context budgets
 
+`core.routing.dispatch_task(packet, host_dispatch)` now calls a supplied supported
+host adapter once with the existing owner and exact model/effort/skill. The
+callback must actually enforce the override and return those effective values.
+Unavailable inventories and tool tasks never invoke it. Exceptions return unknown;
+mismatches block without redispatch. No model SDK, native Codex/Claude dispatcher
+or agent creation is bundled. Acknowledgment is not independent verification of
+provider execution. The CLI below remains a read-only planner. Tests use fictional
+callbacks and no paid models; no unobserved cost savings are claimed.
+
 Run `python scripts/kit.py route-task --packet task.json`. This read-only command
 needs no candidate workspace. It returns the normal versioned outcome envelope,
 keeps the existing owner, and makes no model, network or browser calls. The host

@@ -1,5 +1,11 @@
 # Vertical-slice roadmap
 
+Experimental runtime increment: [TinyFish Browser](TINYFISH_BROWSER.md) adds
+explicit single-page guest forms, finite worker deadlines and safe quarantine.
+Fictional tests verify protocol behavior; live CDP/provider acceptance, broader
+ATS mappings and automatic cross-process session reconciliation remain pending.
+Routing has a host callback contract; native dispatch still requires host support.
+
 Quality-gated preparation enhancement: [first complete wording/review/render
 consumption slice](QUALITY_FAST_PLAN.md), with v1 fallback and optional real
 renderer CI. [Ten-lane execution and TinyFish Fetch](PARALLEL_APPLICATIONS.md) are
@@ -48,4 +54,4 @@ Next after Slice 2: verify actual Codex/Claude native runtime invocation and sco
 
 ## Parallel execution update
 
-Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments; TinyFish Agent/browser submissions remain unsupported.
+Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments. [TinyFish Browser](TINYFISH_BROWSER.md) now has an opt-in experimental guest-form adapter; Agent-goal submissions remain unsupported.

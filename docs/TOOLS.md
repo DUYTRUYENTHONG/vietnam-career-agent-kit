@@ -1,5 +1,10 @@
 # Local tools and document workflow
 
+The opt-in experimental `tinyfish-browser` command is an exception to the local-only
+commands below: preview is offline; `--live` explicitly creates cloud sessions and
+executes exact approved form actions. See [Browser setup and limits](TINYFISH_BROWSER.md).
+Core preparation remains standard-library-only; optional CDP uses requirements-browser.lock.
+
 Current Slice 1 adds a working preparation CLI: TXT/Markdown CV import, versioned profile/JD/matrix/plan validation, explicit profile confirmation, source-preserving Markdown drafts, checkpoint/report export and manual handoff. See DATA_CONTRACT.md and setup.md for actual commands/envelopes.
 
 Core preparation/tests remain standard library only. Slice 2 implements optional DOCX/PDF generation and page review using the fully pinned Python closure in requirements-documents.lock plus separately provisioned LibreOffice/DejaVu Sans. See documents-and-approval.md. CV PDF/DOCX extraction remains unimplemented. No browser executor or native integration is implied by shared skills.

@@ -15,12 +15,15 @@ Exact current approval, recipient/destination, allowed mode/actions, documents/a
 
 ## Required capabilities
 
-A supported authorized host browser and the execution CLI. Read ../../../docs/execution.md for protocol 1.0 and measured limits. No standalone browser driver is bundled.
+A supported authorized host browser and the execution CLI. Read ../../../docs/execution.md for protocol 1.0 and measured limits. Optional experimental TinyFish Browser uses separate cloud scope and a client dependency; see ../../../docs/TINYFISH_BROWSER.md.
 
 ## Steps
 
-Firecrawl research is not this browser bridge. TinyFish direct sessions are
-unsupported in the current increment. Never convert a host-bound manifest into
+Firecrawl and TinyFish Fetch are public research, not application bridges.
+TinyFish Browser is opt-in for explicit single-page guest forms. Preview its
+exact cloud/form fingerprint, review the extra provider disclosure and start
+with one worker. It never reuses host logins or submits autonomous Agent goals.
+Never convert a host-bound manifest into
 cloud disclosure, send private files to a research provider, or fabricate staged
 receipts after an autonomous remote-agent application. The six-stage host loop
 and fresh action checks below remain required. See ../../../docs/FAST_WEB.md.
@@ -33,6 +36,12 @@ and fresh action checks below remain required. See ../../../docs/FAST_WEB.md.
 6. Save an observed receipt in the external private workspace and prefer advance-execution to record it and return one successor request. Do not call next-action again when that response already contains a request. record-action plus next-action remains compatible. Successful inspect/fill/upload/review require a fresh unchanged form observation. Review must match visible answers, consent choices and document hash. See protocol for exact keys. Do not copy expectations into receipts without observing the UI.
 7. Repeat sequentially within each job lane. Opt-in isolated parallel lanes use the concurrent-batch protocol below. Only APPROVED_BATCH returns submit, after a durable unique attempt has already been committed. Click once. Acknowledge it, then verify visible employer/requisition/success and retain a private screenshot. An issued click is not confirmation.
 8. Stop on non-ok outcomes. A pending submit resumes as read-only verify; it never returns another submit. A terminal unknown may use recover-execution for reconciliation only. Do not retry that vacancy or infer success. Sequential runs stop; independent parallel lanes may continue under their own valid scope. ASSIST ends after review without submitting.
+
+For mailbox duplicate/receipt checks, distinguish exact application evidence
+from related search suggestions. Prefer Most recent when offered, wait for the
+query to settle, and verify the actual message's account, recipients, role and
+date. Missing email evidence never authorizes resubmission. Read the mailbox
+search section in ../../../docs/execution.md; do not collect unrelated mail.
 
 For email applications, inspect the matching conversation for an immediate
 delivery rejection during the bounded verify pass. A Sent message does not

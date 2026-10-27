@@ -3,8 +3,10 @@
 BrowserBridge.perform must support independent per-job bindings and concurrent
 calls. It must not automatically retry mutations. Provider integration is separate.
 """
-from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
+from concurrent.futures import wait, FIRST_COMPLETED
 import json
+import math
+import time
 
 from .contracts import ContractError, Outcome, text
 from .execution import Executor
@@ -188,25 +190,41 @@ class ParallelExecutor(Executor):
         return self.parallel_status(run_id)
 
 
-def run_parallel_with_bridge(work, run_id, bridge):
+def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120):
     """Execute up to ten independent sessions, recording receipts out of order.
 
-    All ledger operations execute on this caller's thread. Only perform runs in
-    workers. Restart refuses outstanding actions: reconcile or explicitly stop
+    All receipt/state writes execute on this caller's thread. Bridges may read
+    current canonical guards in workers. Restart refuses outstanding actions: reconcile or explicitly stop
     each affected lane; a possible submit can only be verified afterward.
     """
+    if (type(action_timeout_seconds) not in {int, float} or
+            not math.isfinite(action_timeout_seconds) or not 0 < action_timeout_seconds <= 3600):
+        raise ContractError('Action timeout must be finite and in (0, 3600] seconds')
     status = work.parallel_status(run_id)
     if status.data['pending']:
         raise WorkflowError('needs_input','Outstanding actions require reconciliation before restarting workers')
     workers = status.data['workers']
-    errors = [];cleanup_issues=[];attempted_cleanup=set()
-    with ThreadPoolExecutor(max_workers=workers) as pool:
+    errors = [];cleanup_issues=[];attempted_cleanup=set();quarantined={}
+    from .bounded_workers import BoundedWorkers, bounded_call
+    from .manifests import now_utc, timestamp
+    class CleanupBridge:
+        def close_application_tab(self, item):
+            handler=getattr(bridge,'close_application_tab',None)
+            if not callable(handler):
+                raise RuntimeError('Bridge has no cleanup handler')
+            return bounded_call(handler,item,min(action_timeout_seconds,30))
+    cleanup_bridge=CleanupBridge() if callable(getattr(bridge,'close_application_tab',None)) else object()
+    pool=BoundedWorkers(workers)
+    def perform(request):
+        receipt=bridge.perform(request)
+        return receipt,time.monotonic()
+    try:
         pending = {}
         while True:
             status = work.parallel_status(run_id)
-            busy = {job for job,request_id in pending.values()}
+            busy = {job for job,request_id,deadline in pending.values()} | set(quarantined)
             for lane in status.data['lanes']:
-                if len(pending)>=workers:
+                if len(pending)+len(quarantined)>=workers:
                     break
                 job = lane['job_id']
                 if lane['state']!='active' or job in busy:
@@ -217,26 +235,50 @@ def run_parallel_with_bridge(work, run_id, bridge):
                     if request is None:
                         continue
                     work.check_parallel_action(run_id,request['request_id'])
-                    pending[pool.submit(bridge.perform,request)] = (job,request['request_id'])
+                    remaining=(action_timeout_seconds if request['action']=='verify' else
+                        (timestamp(request['deadline_utc'],'deadline')-now_utc()).total_seconds())
+                    if remaining<=0:
+                        raise WorkflowError('blocked','Run deadline reached before bridge dispatch')
+                    deadline=time.monotonic()+min(action_timeout_seconds,remaining)
+                    pending[pool.submit(perform,request)] = (job,request['request_id'],deadline)
                 except Exception:
                     work.stop_parallel_lane(run_id,job,'Coordinator validation failed; reconcile this lane')
                     errors.append({'job_id':job,'stage':'preflight'})
             if not pending:
                 result = work.parallel_status(run_id)
                 result.data['worker_errors'] = errors
+                result.data['quarantined_requests'] = list(quarantined.values())
+                if quarantined:
+                    result=Outcome('needs_input',result.data,result.issues)
+                    result.issues.append('Timed-out actions remain pending. Workers may still be running; '
+                        'confirm termination and reconcile before restarting. No cancellation or receipt is inferred.')
                 cleanup=work.parallel_cleanup(run_id)
                 from .cleanup import through_bridge
-                cleanup_issues.extend(through_bridge(work._cleanup_lane(run_id),run_id,bridge,
+                cleanup_issues.extend(through_bridge(work._cleanup_lane(run_id),run_id,cleanup_bridge,
                                                     cleanup.data['requests'],attempted_cleanup))
                 cleanup=work.parallel_cleanup(run_id)
                 result.data['cleanup']=cleanup.data
                 result.issues.extend(cleanup_issues+cleanup.issues)
                 return result
-            done,_ = wait(pending,return_when=FIRST_COMPLETED)
+            timeout=max(0,min(item[2] for item in pending.values())-time.monotonic())
+            done,_ = wait(pending,timeout=timeout,return_when=FIRST_COMPLETED)
+            for future in list(pending):
+                job,request_id,deadline=pending[future]
+                if future not in done and time.monotonic()>=deadline:
+                    pending.pop(future)
+                    future.cancel()  # Running callbacks are not killed or assumed stopped.
+                    quarantined[job]={'job_id':job,'request_id':request_id,'reason':'action_deadline',
+                                      'remote_termination_confirmed':False}
+                    errors.append({'job_id':job,'stage':'timeout'})
             for future in done:
-                job,request_id = pending.pop(future)
+                job,request_id,deadline = pending.pop(future)
                 try:
-                    receipt=future.result()
+                    receipt,finished=future.result()
+                    if finished>deadline:
+                        quarantined[job]={'job_id':job,'request_id':request_id,'reason':'action_deadline',
+                                          'remote_termination_confirmed':False}
+                        errors.append({'job_id':job,'stage':'timeout'})
+                        continue
                     if not isinstance(receipt,dict) or receipt.get('request_id')!=request_id:
                         raise WorkflowError('blocked','Worker returned another application request receipt')
                     work.record_parallel_action(run_id,receipt)
@@ -244,7 +286,9 @@ def run_parallel_with_bridge(work, run_id, bridge):
                         from .cleanup import through_bridge
                         lane_work=work._cleanup_lane(run_id)
                         requests=work.parallel_cleanup(run_id).data['requests']
-                        cleanup_issues.extend(through_bridge(lane_work,run_id,bridge,requests,attempted_cleanup))
+                        cleanup_issues.extend(through_bridge(lane_work,run_id,cleanup_bridge,requests,attempted_cleanup))
                 except Exception:
                     work.stop_parallel_lane(run_id,job,'Browser action or receipt failed; never automatically retry')
                     errors.append({'job_id':job,'stage':'perform_or_receipt'})
+    finally:
+        pool.close()

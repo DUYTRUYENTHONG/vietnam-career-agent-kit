@@ -1,5 +1,16 @@
 # Ten-lane applications and public research
 
+`run_parallel_with_bridge(..., action_timeout_seconds=120)` now enforces finite
+per-action deadlines, bounded by run expiry for writes. Stalled lanes remain
+canonical pending requests and retain capacity; other lanes can finish. The runner
+returns `needs_input` with quarantined request IDs and ignores late results.
+Restart requires reconciliation: daemon workers are not cancellation. Read-only
+verification remains possible after expiry. Confirmed-session cleanup waits at
+most 30 seconds per close.
+
+The [TinyFish Browser runtime](TINYFISH_BROWSER.md) is a separate experimental
+bridge; native/provider live compatibility is unverified.
+
 ## Scope and performance
 
 Ten browser sessions may progress independently; each session still performs inspect, fill, upload, review, submit and verify in order. A single coordinator writes SQLite. TinyFish Fetch supplies public research in batches of up to ten URLs. It never receives candidate documents or submits an application.
