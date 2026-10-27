@@ -43,8 +43,10 @@ class Executor(Campaign):
                 db.execute(f"CREATE TRIGGER IF NOT EXISTS manifest_authorizations_no_{operation.lower()} BEFORE {operation} ON manifest_authorizations BEGIN SELECT RAISE(ABORT,'immutable standing allocation'); END")
             db.execute("CREATE TRIGGER IF NOT EXISTS campaign_authorizations_no_rewrite BEFORE UPDATE ON campaign_authorizations WHEN NEW.fingerprint<>OLD.fingerprint OR NEW.payload<>OLD.payload OR NEW.created_utc<>OLD.created_utc BEGIN SELECT RAISE(ABORT,'immutable standing scope'); END")
             db.execute("CREATE TRIGGER IF NOT EXISTS campaign_authorizations_no_delete BEFORE DELETE ON campaign_authorizations BEGIN SELECT RAISE(ABORT,'append-only standing scopes'); END")
-            db.execute('PRAGMA user_version=4');db.commit()
-        return Outcome('ok',{'workspace':str(self.data_dir),'schema':4,'language':self.language()},[])
+            from .research_store import migrate
+            migrate(db)
+            db.commit()
+        return Outcome('ok',{'workspace':str(self.data_dir),'schema':5,'language':self.language()},[])
 
     def _run(self, db, run_id):
         row=db.execute('SELECT * FROM execution_runs WHERE id=?',(run_id,)).fetchone()

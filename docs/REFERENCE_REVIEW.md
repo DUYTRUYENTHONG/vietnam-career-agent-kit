@@ -79,3 +79,31 @@ Exact links and limitations are in DISCOVERY_ACCELERATION.md. This is a dated
 documentation review, not a pinned dependency adoption, connector implementation,
 employer test or permission certificate. No source code/examples were copied,
 installed or executed, so no new third-party runtime/license dependency is added.
+
+## Firecrawl v2 public research contract, 22 October 2026
+
+Official API documentation was reviewed for search, scrape and asynchronous batch
+start/status/errors/cancel. HTTP contract version: v2; no SDK dependency or copied
+server/SDK code. Official docs source revision:
+`7688a89978d354c8458ee2f77ce047a4f246797f` at
+https://github.com/firecrawl/firecrawl-docs/tree/7688a89978d354c8458ee2f77ce047a4f246797f .
+
+| Reviewed path | SHA-256 of exact retrieved bytes |
+|---|---|
+| api-reference/v2-openapi.json | 849076a3180d41c457e9d774ad773fef4f84d02b609f4e522adb36873860b3d5 |
+| features/batch-scrape.mdx | 73216998c1c1cda6ad1839e852be2c5e24150df197e9a5030c3a5dacc90a2e78 |
+
+Live official endpoint pages: [search](https://docs.firecrawl.dev/api-reference/endpoint/search),
+[scrape](https://docs.firecrawl.dev/api-reference/endpoint/scrape),
+[batch start](https://docs.firecrawl.dev/api-reference/endpoint/batch-scrape),
+[status](https://docs.firecrawl.dev/api-reference/endpoint/batch-scrape-get),
+[errors](https://docs.firecrawl.dev/api-reference/endpoint/batch-scrape-get-errors),
+[cancel](https://docs.firecrawl.dev/api-reference/endpoint/batch-scrape-delete).
+The batch guide documents asynchronous IDs, 24h result availability after
+completion and the full-account default unless maxConcurrency is explicitly set.
+Our adapter sets one per-domain batch worker and validates continuation origins.
+The repository license endpoint returned 404; no docs/server/SDK source is copied,
+redistributed, installed or relicensed. Hosted terms and account capability are
+not established by reading the spec. Tests use original fictional fake transport;
+live provider/account verification has not run. TinyFish APIs are not implemented
+or certified by this review.

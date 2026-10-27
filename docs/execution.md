@@ -1,5 +1,11 @@
 # Application execution contract
 
+The opt-in Firecrawl research adapter is read-only public retrieval, not a bridge
+for this executor. Schema 5 research tables do not grant application authority.
+Existing host-bound manifests cannot disclose candidate data to Firecrawl or
+TinyFish. A future direct cloud Browser bridge requires separately reviewed,
+versioned processor/session/data/recording/expiry scope and exact action evidence.
+
 The execution engine uses the existing private ledger and exact reviewed manifests.
 An agent host supplies the browser bridge; the Python CLI never acquires browser
 credentials, launches a debugging browser, or calls a second AI provider.

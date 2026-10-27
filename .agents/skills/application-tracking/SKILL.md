@@ -19,6 +19,12 @@ Local resume/report and SQLite schema 3. Execution records distinguish durable a
 
 ## Steps
 
+Use `research-report --fingerprint HASH` for saved provider tasks/evidence and
+`research-status` only for explicit remote reconciliation. Keep research pending,
+partial, failed and uncertain distinct from application states. A provider task,
+captured page or normalized JD never increases the submitted count. Both paths
+use one private workflow.sqlite3; never copy public-provider diagnostics to Git.
+
 Read resume before continuing. Check current source/profile/JD/artifact fingerprints and prior applications. Keep prepared/approved/confirmed/user-reported/unknown distinct. Report exceptions/coverage and next action. Preserve submitted snapshots and never infer submission from a draft/upload/click.
 
 For a campaign spanning batches, follow ../../../docs/campaign-continuity.md.

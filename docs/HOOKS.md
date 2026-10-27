@@ -1,5 +1,11 @@
 # Optional native hooks
 
+Fast Web research is an explicit CLI operation, never a hook side effect. This
+increment does not enable network tools in preparation-only hooks, install MCP
+servers or change global settings. Native arbitrary provider-tool enforcement
+is unverified; direct vendor MCP access is outside the kit's research contract.
+No PostToolUse duplicate search or Stop restart loop is installed.
+
 Examples are inactive under `hooks/codex.example.json` and `hooks/claude.example.json`. Cloning does not install or trust them. The helper is standard-library Python, reads at most 64 KiB of JSON, makes no network calls, does not read transcripts/credentials and never executes tool input as commands. Each example uses a five-second host timeout.
 
 | Event | Helper behavior |

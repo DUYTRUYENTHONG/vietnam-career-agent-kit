@@ -19,6 +19,14 @@ Host search/browser or user-provided JD; no network connector is assumed from a 
 
 ## Steps
 
+For optional public cloud retrieval read ../../../docs/FAST_WEB.md. Prefer fresh
+eligible evidence or an existing documented feed before constructing a finite
+Firecrawl plan. Preview with `discover --plan FILE --dry-run`; only an explicit
+reviewed public scope may use `--live --approve-plan HASH`. Use `research-status`
+to resume returned task IDs, never launch a replacement for an uncertain start.
+No CV, account, private contact or application answers enter research. TinyFish
+is unsupported in this increment; a source block never permits provider hopping.
+
 Read connectors/registry.json and per-action policy evidence. Manual versioned import-jd works now. Treat snippets as leads; verify full duties/status when permitted. Preserve retrieval/coverage, inaccessible sources and duplicate leads. Do not activate reference installers.
 
 For an ongoing campaign, read ../../../docs/campaign-continuity.md and the latest

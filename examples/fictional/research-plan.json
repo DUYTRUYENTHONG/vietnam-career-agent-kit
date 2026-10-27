@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "fictional-public-research",
+  "provider_account": "fictional-account",
+  "expires_utc": "2030-01-01T00:00:00Z",
+  "roles": [
+    "Analyst"
+  ],
+  "locations": [
+    "Example City"
+  ],
+  "sources": [
+    {
+      "source_id": "employer-careers",
+      "host": "jobs.example.test",
+      "permission_reference": "Fictional controlled transport only; replace after source review",
+      "expires_utc": "2030-01-01T00:00:00Z",
+      "public_read_allowed": true
+    }
+  ],
+  "urls": [
+    "https://jobs.example.test/EX-1"
+  ],
+  "limits": {
+    "requests": 20,
+    "pages": 10,
+    "workers": 1,
+    "domain_workers": 1,
+    "runtime_seconds": 120,
+    "credit_reservation": 20
+  },
+  "freshness": {
+    "search_seconds": 3600,
+    "page_seconds": 21600,
+    "provider_max_age_ms": 21600000
+  }
+}

@@ -35,6 +35,23 @@ def parser() -> Parser:
     discover.add_argument('--include-content',action='store_true',help='include full untrusted descriptions; default returns compact leads')
     doctor=commands.add_parser('doctor',help='read-only runtime diagnosis; no account/browser connection')
     doctor.add_argument('--runtime',choices=['generic','codex','claude','grok'],default='generic')
+    commands.add_parser('provider-doctor',help='offline provider configuration; never checks keys remotely')
+    web_bench=commands.add_parser('benchmark-web',help='fictional transport benchmark; never calls a provider')
+    web_bench.add_argument('--samples',type=int,default=7)
+    web_bench.add_argument('--latency-ms',type=int,default=30)
+    research=commands.add_parser('discover',help='opt-in bounded Firecrawl public research; dry-run by default')
+    research.add_argument('--plan',type=Path,required=True)
+    mode=research.add_mutually_exclusive_group()
+    mode.add_argument('--dry-run',action='store_true')
+    mode.add_argument('--live',action='store_true')
+    research.add_argument('--approve-plan',help='exact reviewed public-plan fingerprint; not application approval')
+    research.add_argument('--individual',action='store_true',help='individual scrape comparison instead of batch')
+    for name in ['research-status','cancel-research','research-report']:
+        research_cmd=commands.add_parser(name)
+        research_cmd.add_argument('--fingerprint',required=True)
+    research_import=commands.add_parser('import-research-jd',help='review normalized claims against captured private evidence')
+    research_import.add_argument('--evidence-id',required=True)
+    research_import.add_argument('--file',type=Path,required=True)
     route=commands.add_parser('route-task',help='deterministic model/tool plan; no model call or workspace access')
     route.add_argument('--packet',type=Path,required=True)
     init=commands.add_parser('init',help='additive local workspace initialization')
@@ -123,6 +140,19 @@ def execute(args) -> Outcome:
         data=discover(args.board,workers=args.workers,include_content=args.include_content)
         return Outcome('ok' if not data['failed_boards'] else 'manual_required',data,[])
     if command=='doctor':return diagnose(args.runtime)
+    if command=='benchmark-web':
+        from scripts.benchmark_web import benchmark
+        return Outcome('ok',benchmark(args.samples,args.latency_ms),[])
+    if command=='provider-doctor':
+        import os
+        from dataclasses import asdict
+        from adapters.providers.firecrawl import CAPABILITIES
+        return Outcome('ok',{'provider':'firecrawl-v2','credentials_configured':bool(os.environ.get('FIRECRAWL_API_KEY')),
+            'capabilities':asdict(CAPABILITIES),'network_calls':0,'account_capabilities_verified':False,
+            'tinyfish':'Unsupported in this increment','dependencies':'Python standard library; no SDK installed'},[])
+    if command=='discover' and not args.live:
+        from adapters.providers.research import Research
+        return Research(None).preview(load_input(args.plan))
     if command=='route-task':
         from core.routing import route_task
         return route_task(load_input(args.packet))
@@ -137,7 +167,7 @@ def execute(args) -> Outcome:
     if command not in legacy:
         with work._db() as db:
             schema=db.execute('PRAGMA user_version').fetchone()[0]
-            if schema not in {1,2,3,4}:
+            if schema not in {1,2,3,4,5}:
                 raise WorkflowError('needs_input','Run init to apply the compatible additive preparation schema')
             if command in {'render','review-documents','reject-documents','create-manifest','approve-manifest','check-manifest','revoke-manifest'} and schema<2:
                 raise WorkflowError('needs_input','Run init to apply additive document/manifest schema 2; existing data is preserved')
@@ -145,6 +175,20 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init to apply additive execution schema 3; existing data is preserved')
             if command in {'create-authorization','approve-authorization','check-authorization','revoke-authorization','authorize-manifest','launch-execution'} and schema<4:
                 raise WorkflowError('needs_input','Run init to apply additive standing authorization schema 4; existing data is preserved')
+            if command in {'discover','research-status','cancel-research','research-report','import-research-jd'} and schema<5:
+                raise WorkflowError('needs_input','Run init for additive public research schema 5')
+    if command in {'discover','research-status','cancel-research','research-report','import-research-jd'}:
+        from adapters.providers.research import Research
+        from adapters.providers.contracts import ProviderError
+        research=Research(work)
+        try:
+            if command=='discover':return research.discover(load_input(args.plan),args.approve_plan,individual=args.individual)
+            if command=='research-report':return research.summary(args.fingerprint)
+            if command=='import-research-jd':return research.import_jd(args.evidence_id,load_input(args.file))
+            return research.status(args.fingerprint,cancel=command=='cancel-research')
+        except ProviderError as error:
+            return Outcome('manual_required',{'provider_error':error.code,'possibly_accepted':error.possibly_accepted},
+                           ['Inspect persisted tasks; do not relaunch an uncertain request.'])
     if command=='import-cv':return work.import_cv(args.file,args.source_id)
     if command=='import-profile':return work.import_profile(load_input(args.file))
     if command=='profile':return work.inspect_profile()

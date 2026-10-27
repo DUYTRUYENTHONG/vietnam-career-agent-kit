@@ -133,7 +133,7 @@ class ExecutionTests(unittest.TestCase):
         with self.work._db() as db:self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0],2)
         self.work=Executor(self.root);self.work.init();self.work.init()
         manifest_fixtures.Campaign(self.root).init()
-        with self.work._db() as db:self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0],4)
+        with self.work._db() as db:self.assertEqual(db.execute('PRAGMA user_version').fetchone()[0],5)
         after=self.work.current_render(self.render['render_id'])
         self.assertEqual(before,after)
 

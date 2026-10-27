@@ -10,6 +10,8 @@ class PublicCheckTests(unittest.TestCase):
     def test_private_and_secret_patterns_are_rejected(self):
         self.assertTrue(checker.issues_for(Path('data/cv.txt'),'fictional'))
         self.assertTrue(checker.issues_for(Path('doc.md'),'ghp_'+'A'*40))
+        self.assertTrue(checker.issues_for(Path('doc.md'),'fc-'+'A'*40))
+        self.assertTrue(checker.issues_for(Path('doc.md'),'TINYFISH_API_KEY='+'A'*40))
         self.assertTrue(checker.issues_for(Path('doc.md'),'person@'+'company.test'))
         self.assertTrue(checker.issues_for(Path('doc.md'),'C:/'+ 'Users/Example/private'))
 

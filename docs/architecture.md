@@ -39,6 +39,12 @@ These core paths are shared by scripts/kit.py. core/execution.py adds a durable 
 
 ## Boundaries
 
+Optional public network research is isolated under `adapters/providers/` and
+explicit new CLI commands. Schema 5 adds private research tables to the same
+database; ordinary commands make no provider calls. See [ADR](ADR-FAST-WEB.md)
+and [setup/recovery/limits](FAST_WEB.md). Providers are separate from job sources;
+research tasks and captured pages never count as applications or approval.
+
 `core/dispatch.py` composes standing derivation/start/first request with explicit
 partial-commit and nonreplay results. `core/cleanup.py` derives closure requests
 only from saved confirmed bindings and verifies evidence before recording host
