@@ -58,6 +58,13 @@ for a table. Never describe the tracker as a background employer-response monito
 
 ## Failure behavior
 
+For model/workload optimization use the opt-in private `performance-record` and
+`performance-report` commands ([contract and setup](../../../docs/PERFORMANCE_TRACKER.md)).
+Record only observed per-call time/usage with a private source hash. Unknown
+tokens/cost remain null; cached/reasoning tokens are subsets. Compare equivalent
+accepted workloads, distinguish task durations from campaign wall time, and never
+infer subscription quota or savings. Telemetry never changes submission counts.
+
 Uncertain outcomes require reconciliation, not another final attempt. Changed/missing artifacts block handoff until reviewed.
 
 ## Side-effect limits

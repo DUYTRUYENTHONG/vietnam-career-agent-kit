@@ -9,12 +9,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from core.execution import Executor
 
 
-def generate(work, python):
+def generate(work, python, *, include_career=False):
     executable = Path(python).expanduser().resolve(strict=True)
     if not executable.is_file(): raise ValueError('Select a real Python interpreter')
     entry = str(work.repo_root / 'scripts/serve_plugin.py')
     servers, plugins = {}, []
-    for kind in ('email', 'browser'):
+    for kind in (('email', 'browser', 'career') if include_career else ('email', 'browser')):
         name = 'career-' + kind
         server = {'type': 'stdio', 'command': str(executable),
                   'args': [entry, kind, '--data-dir', str(work.data_dir), '--actor', work.actor]}
@@ -46,8 +46,9 @@ def main():
     parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument('--python', type=Path, required=True)
     parser.add_argument('--actor', default='local-user')
+    parser.add_argument('--include-career', action='store_true', help='include private evidence retrieval and observed performance tools')
     args = parser.parse_args()
-    print(json.dumps(generate(Executor(args.data_dir, actor=args.actor), args.python), indent=2))
+    print(json.dumps(generate(Executor(args.data_dir, actor=args.actor), args.python, include_career=args.include_career), indent=2))
 
 
 if __name__ == '__main__': main()

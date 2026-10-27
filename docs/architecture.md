@@ -19,6 +19,15 @@ New user? [Clone/fork walkthrough](START_HERE.md) · [System models and diagrams
 
 ## Optional local plugin transports
 
+`core/performance.py` adds opt-in immutable caller-reported observations in
+independently versioned tables of the existing workspace database. Application
+schema stays unchanged. `core/career_memory.py` retrieves current confirmed fact
+quotes through ephemeral local FTS5; `core/learning.py` exports exact independently
+reviewed wording with provenance and job/output-group evaluation splits.
+`adapters/career_mcp.py` exposes those same functions as an opt-in stdio server.
+There is no second model API, fact promotion, automatic training or new authority.
+See [career memory](CAREER_MEMORY.md) and [performance](PERFORMANCE_TRACKER.md).
+
 `adapters/plugin_server.py` exposes separate stdio MCP email and browser servers.
 `scripts/plugin_config.py` writes configured install packages only in an explicitly
 selected external workspace; no global configuration or hook is installed.
