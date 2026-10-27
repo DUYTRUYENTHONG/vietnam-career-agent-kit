@@ -76,3 +76,11 @@ On Windows with Python 3.12.14:
 
 GitHub matrix/document/plugin checks are reported on the linked release commit
 and PR. Local results alone do not establish those remote checks.
+
+Distribution acceptance also passed from a clean extraction of the committed
+248-file ZIP: every per-file/archive SHA256 matched; license/authorship/notices
+were present and Git metadata absent. Generic `doctor`, the disposable fictional
+demo and a fresh default-100 `start-campaign` succeeded from the extracted source.
+The starter retained `execution_authorized:false`. Relative links and Markdown
+fences passed for all 18 changed guides. The final release is rebuilt from its
+published commit; the attached digest manifest identifies those exact bytes.
