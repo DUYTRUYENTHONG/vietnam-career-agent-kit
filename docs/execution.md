@@ -192,6 +192,82 @@ another origin requires a manual handoff; do not falsify its URL to pass the che
 See [execution.schema.json](../schemas/execution.schema.json) for editor shapes;
 the core enforces phase-specific and cross-record constraints.
 
+## Form and email interaction runbook
+
+This is host guidance, not a new browser adapter or permission. Use only the
+current host's documented APIs and fresh visible page evidence. Native behavior
+must still be verified for the selected host, site and operating system.
+See [preliminary screens and late consent](PRE_SUBMISSION_GATES.md) for the
+decision table, redacted field readback and bounded receipt waits. Distinguish a
+clearly preliminary transition from an already issued submit request; the latter
+always preserves its durable attempt and permits only read-only recovery.
+
+### Preserve the reviewed message
+
+Some accessibility value setters flatten line breaks in rich-text email editors.
+For a multiline approved message, prefer the host's supported semantic text
+`fill` or text-paste operation when available. Verify the rendered editor text
+against the approved source before sending, including paragraph breaks. Do not
+collapse all whitespace during that comparison: it can hide this defect.
+Repair formatting from the same approved source; never improvise new wording.
+
+Email compose controls may be replaced after opening or after a recipient is
+committed. Refresh the page observation before using numeric element indexes.
+For stable labelled controls, prefer grounded semantic locators when the host
+supports them. Expand the recipient area to verify To and CC separately; a
+collapsed summary listing both addresses does not establish which is which.
+Leave BCC absent unless it is explicitly in the approved package.
+
+### Distinguish a picker failure from a submission attempt
+
+Register the supported file-chooser listener before clicking the observed file
+input, then select only the approved absolute path. If a chooser wait times out,
+inspect the current page before deciding what happened. A fresh visible native
+file-input locator may resolve an accessibility-click failure; do not blindly
+repeat clicks, inject file paths into the DOM or switch browser backends.
+Verify the selected filename and completed upload using the actual UI. A local
+file hash alone does not prove that the browser attached that file.
+
+Continue only under the existing approved action scope and outstanding engine
+request. Reconcile or stop a failed issued upload request rather than replaying
+it through `next-action`. A picker failure before any final action is distinct
+from an uncertain final submission; after a final submit/send click, recovery is
+read-only and the final action must never be repeated to obtain a better receipt.
+
+### Verify email sending before cleanup
+
+An intermediate "sending" indicator is not confirmation. Observe the completed
+send, then inspect the matching Sent message and verify sender, To, CC, subject,
+message and attachment. Save the private evidence before closing the owned tab.
+A Sent receipt establishes sending, not independent delivery to the employer.
+This runbook changes no schema, approval requirement or measured throughput.
+
+### Check immediate delivery failures before confirming email
+
+During the existing bounded verification pass, inspect the matching conversation
+for an immediately returned delivery-status message. Do not add an indefinite
+inbox monitor or inspect unrelated mail. A Sent message and an explicit rejection
+can coexist; the rejection prevents a qualifying application confirmation.
+
+For example, an observed `550 5.1.1` mailbox-not-found response is a delivery
+failure. Save the exact recipient, original Sent message, rejection text and
+private screenshot. Return a non-ok verify receipt (`status: "failed"` with an
+accurate `reason`); never set `confirmed: true` or invent a `delivery_failed`
+protocol field. With a reserved attempt, the current engine records
+`submission_unknown` / `submission_uncertain` and excludes it from confirmations.
+Describe the known delivery failure precisely in the handoff even though the
+portable state is broader. Preserve the consumed attempt and stop that run.
+
+Do not resend, guess a different address, forward the same CV to support, or
+create a replacement run to recover a failed delivery. A new recipient requires
+independent recruitment-route evidence and current disclosure authority.
+
+A later bounce after an already committed confirmation needs separate canonical
+reconciliation. Preserve the original append-only snapshot and save the newer
+evidence; protocol 1.0 has no automatic late-bounce reclassification command.
+Do not claim that the original confirmation proves delivery, rewrite its receipt,
+or report a corrected count before the canonical record has been reconciled.
+
 ## Interruptions and limits
 
 ```sh

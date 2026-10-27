@@ -39,6 +39,10 @@ receipt, close the exact agent-created tab, verify absence and update the tracke
 
 **Execution engine:** an exact approved host-browser loop now supports sequential fill/upload/review/submit/verify, durable attempts, finite budgets and read-only recovery. See [execution setup and protocol](docs/execution.md). The agent supplies supported browser tools; the CLI does not acquire a browser.
 
+For preliminary Apply screens, late consent, redacted field values and receipt
+waits, follow the [host decision guide](docs/PRE_SUBMISSION_GATES.md). It documents
+existing contracts; it does not add a browser driver or certify live throughput.
+
 **Faster local pipeline:** selected-job validation avoids all-job scans;
 `advance-execution` combines receipt and successor; `tracker` exports a fast
 catch-up table. [Measurements and architecture](docs/PERFORMANCE.md) distinguish
