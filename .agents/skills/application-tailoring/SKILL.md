@@ -56,6 +56,11 @@ manifest or standing-scope review before execution. See ../../../prompts/TAILOR_
 
 ## Outputs
 
+For older source-packet workspaces without the portable database, use the
+explicit read-only bridge in ../../../docs/SOURCE_MEMORY.md. Never initialize a
+competing tracker to unlock retrieval. Treat its cited hash-bound subset as
+evidence for separate review, not a confirmed profile or disclosure permission.
+
 For a structured CV/email draft, use `career-writing-brief` (or MCP
 `career_writing_brief`), then draft with the current fact IDs and call
 `career-check-draft` / `career_check_draft`. A successful citation check leaves
