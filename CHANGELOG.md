@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add an opt-in read-only source-memory CLI/MCP bridge for older fact packets.
+  Revalidate reviewed fact source hashes, exclude pending/conflicting/unhashed
+  evidence, and retrieve whole citations without initializing or opening an
+  application database. No approval import, submission tool or model API.
+  See docs/SOURCE_MEMORY.md for the bounded input contract and QA limits.
+
 - Separate host agent-turn timing/usage from individual model calls in performance
   records and JSON/Markdown/CSV groups. Preserve legacy event fingerprints and
   missing-data coverage; mark scoped turn history as performance feature2 so old

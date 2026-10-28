@@ -1,5 +1,10 @@
 # Local career memory, evaluation and reviewed exports
 
+Older campaign with `data/source-facts.json` but no portable `workflow.sqlite3`?
+Use the explicit [read-only source-memory bridge](SOURCE_MEMORY.md); do not
+initialize a competing tracker. It reads a hash-bound reviewed subset only and
+does not replace normal profile/job-bound writing validation.
+
 For fingerprinted CV/email briefs, current draft-citation checks and optional
 LCEL orchestration using your own AI host, see [LangChain RAG](LANGCHAIN_RAG.md).
 
