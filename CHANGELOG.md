@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Validate checked-in CI YAML in the optional QA suite; use a literal run block
+  for the addon pip command so colon-bearing options cannot break scheduling.
+
 - Add fingerprinted CV/email writing briefs and current-evidence draft citation
   checks to CLI/MCP, plus an opt-in LangChain Core LCEL host-callback workflow.
   Keep semantic review pending, timing measured and usage unknown. Separate

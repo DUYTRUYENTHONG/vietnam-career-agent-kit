@@ -159,6 +159,8 @@ Windows, Python 3.12, LangChain Core 1.7.0, LangSmith 0.14.14 and MCP 1.30.0:
   the returned email contract, invalid citations and stale evidence.
 - Five actual LCEL tests passed after the locked dependency installation finished.
   Host callback tests use fictional data; no live model endpoint was called.
+- A workflow YAML parse regression also passed after correcting the addon install
+  command's scalar syntax; the optional QA suite has six tests in total.
 - The real MCP stdio smoke passed with the two additive writing tools.
 - `pip check`, generated-wrapper synchronization and public-source hygiene passed.
 - Bounded independent code review found an email example/validator mismatch;
