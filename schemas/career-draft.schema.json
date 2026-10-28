@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private source-bound writing check v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["request", "draft"],
+  "properties": {
+    "request": {
+      "type": "object", "additionalProperties": false,
+      "required": ["job_id", "kind", "language", "limit"],
+      "properties": {
+        "job_id": {"type": "integer", "minimum": 1},
+        "kind": {"enum": ["email", "cv"]},
+        "language": {"enum": ["en", "vi"]},
+        "limit": {"type": "integer", "minimum": 1, "maximum": 10}
+      }
+    },
+    "draft": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "brief_fingerprint", "blocks"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "brief_fingerprint": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "blocks": {
+          "type": "array", "minItems": 1, "maxItems": 30,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["kind", "text", "fact_ids"],
+            "properties": {
+              "kind": {"enum": ["cv_bullet", "subject", "greeting", "body", "signature"]},
+              "text": {"type": "string", "minLength": 1, "maxLength": 4000},
+              "fact_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    }
+  },
+  "$comment": "Runtime additionally validates whole current source evidence/fingerprints, nonblank text, document-kind blocks, subject/body cardinality and current retrieved citation IDs. A successful check is never semantic approval."
+}

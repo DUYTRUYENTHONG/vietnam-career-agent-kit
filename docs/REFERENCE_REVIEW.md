@@ -239,3 +239,25 @@ The repository is MIT (2026 BrowserAct). [Pinned CLI1.4.5 metadata](https://pypi
 Adopted through original code: deterministic owned session names, compact-state planning and the existing exact-action/standing authorization checks. Confirmation gates in the upstream agent-design guide are conversation-level guidance, not CLI hard-blocks. Service authentication is separate from candidate/host authority. Same-browser sessions share cookies; upstream non-correlation, local-only and speed claims are not certified. Runtime instruction updates, profile/cookie import, network captures, remote-access links, proxies, CAPTCHA services and diagnostic log uploads are not adopted.
 
 Acceptance: offline planner and fictional authorization/receipt-recovery tests only; fill/upload/submit returns manual_required. CLI installation, native browser driving, real-employer throughput and binary/transitive security remain unverified. See [integration review](BROWSERACT.md).
+
+## LangChain Core local drafting review, 28 October 2026
+
+Optional original LCEL orchestration uses **langchain-core 1.7.0**, MIT,
+Python >=3.10,<4 (the kit still requires >=3.11). Reviewed official
+[Runnable composition](https://reference.langchain.com/python/langchain-core/runnables/base),
+[tracing context](https://reference.langchain.com/python/langsmith/run_helpers/tracing_context),
+and [versioned PyPI metadata](https://pypi.org/pypi/langchain-core/1.7.0/json).
+Exact metadata dependencies and artifact hashes are in
+[the source record](../adapters/langchain.source.json); wheel SHA256 is
+`e82b24d7ac51fc74874baa29d6b3c0b8234880d4f3d897f8ff57fb80dfd9b07d`.
+The separate requirements-rag.lock records the resolved installation closure;
+shared packages are constrained by the existing plugin lock.
+
+No upstream skill/code, installer, model provider, embeddings or vector database
+is copied. Installation downloads dependencies including LangSmith. The adapter
+rejects environment tracing flags and disables tracing around its sequence;
+the explicitly supplied trusted host callback retains responsibility for any
+network/model activity, deadlines and disclosure. No global settings are changed.
+Fictional core, CLI, MCP and real LCEL tests bound the acceptance scope; production
+hybrid retrieval, generation quality, native model dispatch and employer throughput
+remain unverified. See [setup and QA scope](LANGCHAIN_RAG.md).

@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "source": "https://pypi.org/pypi/langchain-core/1.7.0/json",
+  "package": "langchain-core",
+  "version": "1.7.0",
+  "license": "MIT",
+  "requires_python": "<4.0.0,>=3.10.0",
+  "dependencies": [
+    "httpx<1.0.0,>=0.23.0",
+    "jsonpatch<2.0.0,>=1.33.0",
+    "langchain-protocol>=0.0.20",
+    "langsmith<1.0.0,>=0.14.9",
+    "packaging>=23.2.0",
+    "pydantic<3.0.0,>=2.7.4",
+    "pyyaml<7.0.0,>=5.3.0",
+    "tenacity!=8.4.0,<10.0.0,>=8.1.0",
+    "typing-extensions<5.0.0,>=4.7.0",
+    "uuid-utils<1.0,>=0.12.0"
+  ],
+  "files": [
+    {
+      "filename": "langchain_core-1.7.0-py3-none-any.whl",
+      "sha256": "e82b24d7ac51fc74874baa29d6b3c0b8234880d4f3d897f8ff57fb80dfd9b07d"
+    },
+    {
+      "filename": "langchain_core-1.7.0.tar.gz",
+      "sha256": "c34e53358b103cd73f43c63f5f46f9b5c6c3467efdffcdf134892b89020494e4"
+    }
+  ],
+  "copied_upstream_code": false,
+  "network_effects": "Installation downloads the locked Python packages; the kit does not configure a provider or enable tracing. The caller-supplied host callback controls any inference/network activity.",
+  "acceptance_scope": "Optional LCEL adapter using fictional callbacks, not native host or employer verification.",
+  "resolved_dependencies": [
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1",
+      "license": "MIT"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "license": "MIT"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0",
+      "license": "Apache License, Version 2.0"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license": "MIT"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.16.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.16.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "jsonpatch",
+      "version": "1.38",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "jsonpointer",
+      "version": "3.6",
+      "license": "Modified BSD License"
+    },
+    {
+      "name": "langchain-core",
+      "version": "1.7.0",
+      "license": "MIT"
+    },
+    {
+      "name": "langchain-protocol",
+      "version": "0.0.20",
+      "license": "MIT"
+    },
+    {
+      "name": "langsmith",
+      "version": "0.14.14",
+      "license": "MIT"
+    },
+    {
+      "name": "orjson",
+      "version": "3.13.0",
+      "license": "MPL-2.0 AND (Apache-2.0 OR MIT)"
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "license": "Apache-2.0 OR BSD-2-Clause"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1",
+      "license": "MIT"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.50.1",
+      "license": "MIT"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "license": "MIT"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "requests-toolbelt",
+      "version": "1.0.0",
+      "license": "Apache 2.0"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1",
+      "license": "MIT OR Apache-2.0"
+    },
+    {
+      "name": "tenacity",
+      "version": "9.2.1",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.5",
+      "license": "MIT"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "license": "MIT"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "license": "MIT"
+    },
+    {
+      "name": "uuid-utils",
+      "version": "0.19.0",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "websockets",
+      "version": "17.3",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "xxhash",
+      "version": "4.0.2",
+      "license": "BSD-2-Clause"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0",
+      "license": "BSD-3-Clause"
+    }
+  ]
+}

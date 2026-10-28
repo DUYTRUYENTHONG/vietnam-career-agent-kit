@@ -37,6 +37,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 | Your next step | Open this |
 |---|---|
+| Automate cited CV/email drafts with your own AI host | [Local RAG and optional LangChain workflow](docs/LANGCHAIN_RAG.md) |
 | Retrieve cited CV facts and export reviewed examples without another model API | [Career memory and local MCP](docs/CAREER_MEMORY.md) |
 | Compare observed model time, tokens and acceptance | [Private performance tracker](docs/PERFORMANCE_TRACKER.md) |
 | Keep skills small, current and efficient | [Canonical owners and progressive skill loading](docs/SKILL_MANAGEMENT.md) |

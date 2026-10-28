@@ -1,5 +1,13 @@
 # Portable core architecture
 
+`core/career_drafting.py` extends current confirmed-fact retrieval with reproducible
+job/profile-bound writing briefs and structural citation checks. CLI and the
+career MCP adapter expose the same functions. Optional
+`adapters/langchain_career.py` composes retrieval, one explicit host callback and
+fresh validation through LCEL; it adds no provider calls to the standard-library
+core. No shared corpus, persistent vector index or application authority is added.
+See [the workflow and limits](LANGCHAIN_RAG.md).
+
 ## Community starter and source distribution
 
 `core/starter.py`, exposed as `start-campaign`, records a private CV path/hash,

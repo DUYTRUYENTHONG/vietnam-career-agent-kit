@@ -1,5 +1,8 @@
 # Local career memory, evaluation and reviewed exports
 
+For fingerprinted CV/email briefs, current draft-citation checks and optional
+LCEL orchestration using your own AI host, see [LangChain RAG](LANGCHAIN_RAG.md).
+
 Use your existing agent to write. The optional career MCP server provides cited
 context and measured feedback without adding a second model API. It runs locally
 over stdio against one explicitly selected private workspace. Nothing here sends
@@ -67,6 +70,8 @@ Grokbot/Muse need an identified compatible tool runtime.
 |---|---|
 | `career_context` | Read confirmed facts with source IDs, locators, hashes and profile fingerprint |
 | `career_email_context` | Read cited job context and an English/Vietnamese professional writing brief |
+| `career_writing_brief` | Read a fingerprinted CV/email brief and draft output contract |
+| `career_check_draft` | Recheck evidence freshness and citations; semantic truth remains unverified |
 | `career_evaluate` | Read labelled retrieval results, BM25 and simple token-overlap baseline metrics |
 | `learning_export` | Create a new private dataset directory from current independently reviewed CV wording |
 | `learning_check` | Recheck exported bytes, reviews, profile, job and deterministic split |

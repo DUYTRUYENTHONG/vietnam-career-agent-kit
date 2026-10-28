@@ -14,6 +14,14 @@ own references; keep the packet in the selected private workspace.
 > qualifiers, dates, tool experience, amounts and metric bases. Do not infer a
 > campaign result from an advertising budget or turn exposure into proficiency.
 >
+> When the local career tools are available, request a `career_writing_brief`
+> for the recorded job and draft with its current fact IDs/fingerprint. Run
+> `career_check_draft` against the same request after drafting. This checks
+> evidence freshness and citation references, not whether each sentence follows
+> from them; independently review semantic accuracy before importing wording.
+> For an explicit Python host callback, see docs/LANGCHAIN_RAG.md. Do not require
+> Docker, tracing, a vector service or a second paid model API to draft.
+>
 > Draft a concise application email for the verified employer recipient
 > [RECIPIENT_SOURCE] from my verified sending account [SENDER_REFERENCE]. Follow
 > the employer's required subject/language/file format. Use one or two real

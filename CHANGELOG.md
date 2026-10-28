@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add fingerprinted CV/email writing briefs and current-evidence draft citation
+  checks to CLI/MCP, plus an opt-in LangChain Core LCEL host-callback workflow.
+  Keep semantic review pending, timing measured and usage unknown. Separate
+  hash-locked dependencies; no default provider, Docker, tracing, submission or
+  model training. See docs/LANGCHAIN_RAG.md for setup and compatibility limits.
+
 - Clarify browser preflight ordering: verify controlled fields retain approved
   values before a human verification handoff, treat redacted values as unavailable,
   and keep post-handoff work to fresh action checks and the permitted next step.

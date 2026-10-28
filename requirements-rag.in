@@ -1,0 +1,4 @@
+# Optional local LangChain orchestration; no provider/model integration.
+# Keep shared dependency versions compatible with the existing MCP profile.
+-c requirements-plugins.lock
+langchain-core==1.7.0

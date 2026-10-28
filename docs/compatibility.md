@@ -1,5 +1,14 @@
 # Runtime compatibility evidence
 
+## Optional LangChain drafting
+
+The additive CLI/MCP brief/check contract and optional LangChain Core 1.7.0 LCEL
+adapter are **Experimental**. The adapter requires an explicit trusted Python
+host callback; no native Codex/Claude model dispatch is claimed. Docker packaging,
+semantic/vector retrieval and generation quality are unverified. The default
+standard-library core and existing MCP dependency profile remain compatible.
+See [setup, test commands and limitations](LANGCHAIN_RAG.md).
+
 ## Local performance and career memory
 
 The CLI has fictional behavioral tests for source-bound timing/token observations,
