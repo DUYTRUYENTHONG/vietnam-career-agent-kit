@@ -20,6 +20,7 @@ from .workflow import WorkflowError
 TOKENS = ('input_tokens', 'output_tokens', 'cached_input_tokens', 'reasoning_tokens')
 STATUSES = {'success', 'failed', 'cancelled', 'unknown'}
 MAX_REPORT_RECORDS = 10_000
+MEASUREMENT_UNITS = {'model_call': 'per_call', 'agent_turn': 'per_turn'}
 
 
 def identifier(value, label, nullable=False):
@@ -32,8 +33,9 @@ def identifier(value, label, nullable=False):
 def validate(work, event):
     object_fields(event, {'schema_version', 'event_id', 'task_id', 'workload_id', 'phase',
         'provider_id', 'model_id', 'effort', 'status', 'accepted', 'observed_utc',
-        'duration_ms', 'usage', 'cost', 'source'}, set(), 'performance observation')
+        'duration_ms', 'usage', 'cost', 'source'}, {'measurement_scope'}, 'performance observation')
     version(event, 'performance observation')
+    scope = choice(event.get('measurement_scope', 'model_call'), set(MEASUREMENT_UNITS), 'measurement_scope')
     for key in ('event_id', 'task_id', 'workload_id', 'phase', 'provider_id'):
         identifier(event[key], key)
     identifier(event['model_id'], 'model_id', True)
@@ -49,8 +51,8 @@ def validate(work, event):
             not math.isfinite(duration) or not 0 <= duration <= 86_400_000):
         raise ContractError('duration_ms: finite measured milliseconds, 0..86400000, or null')
     usage = object_fields(event['usage'], {'kind', *TOKENS}, set(), 'usage')
-    if usage['kind'] != 'per_call':
-        raise ContractError('Normalize explicitly observed per-call usage; cumulative counters are not individual calls')
+    if usage['kind'] != MEASUREMENT_UNITS[scope]:
+        raise ContractError('Usage kind must match the measurement scope; cumulative counters are not observations')
     for key in TOKENS:
         if usage[key] is not None and (type(usage[key]) is not int or not 0 <= usage[key] <= 10**12):
             raise ContractError(key+': nonnegative integer tokens or null; never characters/estimates')
@@ -106,7 +108,7 @@ def _feature(db, create=False):
             db.execute('CREATE TRIGGER performance_no_'+operation.lower()+' BEFORE '+operation+
                        " ON performance_observations BEGIN SELECT RAISE(ABORT,'performance observations are append-only'); END")
     row = db.execute('SELECT version FROM performance_meta WHERE id=1').fetchone()
-    if row is None or row[0] != 1:
+    if row is None or row[0] not in {1, 2}:
         raise WorkflowError('blocked', 'Unsupported performance feature version; preserve existing observations')
     return True
 
@@ -125,6 +127,10 @@ def record(work, event) -> Outcome:
                 raise WorkflowError('blocked', 'Observation ID already names different bytes; never overwrite historical usage')
             reused = True
         else:
+            if event.get('measurement_scope') == 'agent_turn':
+                # Older readers accept only feature1 and would combine turn/call
+                # totals. Make them stop instead; application schema is unchanged.
+                db.execute('UPDATE performance_meta SET version=2 WHERE id=1')
             db.execute('INSERT INTO performance_observations VALUES(?,?,?,?,?,?,?)',
                 (event['event_id'], fingerprint, event['model_id'], event['phase'], event['workload_id'],
                  json.dumps(event, ensure_ascii=False, sort_keys=True), utc_now()))
@@ -154,7 +160,8 @@ def report(work, *, model_id=None, phase=None, workload_id=None) -> Outcome:
         event = json.loads(row['payload'])
         if canonical_hash(event) != row['fingerprint']:
             raise WorkflowError('blocked', 'Historical observation changed; inspect without overwriting it')
-        grouped[(event['provider_id'], event['model_id'], event['effort'], event['phase'], event['workload_id'])].append(event)
+        grouped[(event['provider_id'], event['model_id'], event['effort'], event['phase'],
+                 event['workload_id'], event.get('measurement_scope', 'model_call'))].append(event)
     groups = []
     for key, events in sorted(grouped.items(), key=lambda item: tuple(v or '' for v in item[0])):
         durations = sorted(e['duration_ms'] for e in events if e['duration_ms'] is not None)
@@ -166,7 +173,7 @@ def report(work, *, model_id=None, phase=None, workload_id=None) -> Outcome:
         for event in events:
             if event['cost'] is not None:
                 charges[event['cost']['currency']] += Decimal(event['cost']['amount'])
-        groups.append({**dict(zip(('provider_id', 'model_id', 'effort', 'phase', 'workload_id'), key)),
+        groups.append({**dict(zip(('provider_id', 'model_id', 'effort', 'phase', 'workload_id', 'measurement_scope'), key)),
             'observations': len(events), 'accepted_observations': sum(e['accepted'] for e in events),
             'statuses': {status: sum(e['status'] == status for e in events) for status in sorted(STATUSES)},
             'duration_ms': {'known': len(durations), 'missing': len(events)-len(durations),
@@ -179,7 +186,9 @@ def report(work, *, model_id=None, phase=None, workload_id=None) -> Outcome:
     return Outcome('ok', {'schema_version': '1.0', 'record_count': len(rows), 'groups': groups,
         'filters': filters, 'source_revalidated_at_import': True, 'source_revalidated_at_report': False,
         'scope': 'Caller-reported, source-hash-bound observations only. Null is unavailable, not zero. '
-                 'Cache/reasoning are subsets. Parallel durations are not campaign wall time. '
+                 'Cache/reasoning are subsets. Model calls and whole agent turns are separate groups; '
+                 'never add their overlapping tokens or charges. Agent turns include tool/wait time. '
+                 'Parallel durations are not campaign wall time. '
                  'Acceptance is reported, not an independent quality audit. Compare equivalent workloads; '
                  'no inferred provider usage, token prices, subscription quota or savings.'}, [])
 
@@ -188,14 +197,14 @@ def render(data, format='md') -> str:
     choice(format, {'json', 'md', 'csv'}, 'performance report format')
     if format == 'json':
         return json.dumps(data, ensure_ascii=False, indent=2)+'\n'
-    columns = ['provider', 'model', 'effort', 'phase', 'workload', 'observations', 'accepted',
+    columns = ['provider', 'model', 'effort', 'phase', 'workload', 'measurement_scope', 'observations', 'accepted',
                'input_tokens_known', 'input_missing', 'output_tokens_known', 'output_missing',
                'cached_input_known', 'reasoning_known', 'duration_p50_ms', 'duration_p95_ms',
                'duration_missing', 'observed_charges', 'charge_missing']
     rows = []
     for group in data['groups']:
         rows.append([group['provider_id'], group['model_id'], group['effort'], group['phase'],
-            group['workload_id'], group['observations'], group['accepted_observations'],
+            group['workload_id'], group.get('measurement_scope', 'model_call'), group['observations'], group['accepted_observations'],
             group['known_tokens']['input_tokens'], group['token_coverage']['input_tokens']['missing'],
             group['known_tokens']['output_tokens'], group['token_coverage']['output_tokens']['missing'],
             group['known_tokens']['cached_input_tokens'], group['known_tokens']['reasoning_tokens'],
@@ -207,14 +216,15 @@ def render(data, format='md') -> str:
         writer = csv.writer(stream)
         writer.writerow(columns); writer.writerows(rows)
         return stream.getvalue()
-    columns = ['provider / model / effort', 'phase / workload', 'calls / accepted',
-               'input / output tokens (missing calls)', 'p50 / p95 ms (missing calls)',
-               'observed charges (missing calls)']
+    columns = ['provider / model / effort', 'phase / workload / scope', 'observations / accepted',
+               'input / output tokens (missing observations)', 'p50 / p95 ms (missing observations)',
+               'observed charges (missing observations)']
     rows = []
     for g in data['groups']:
         value = lambda v: 'unavailable' if v is None else str(v)
         rows.append([' / '.join(value(g[k]) for k in ('provider_id', 'model_id', 'effort')),
-            g['phase']+' / '+g['workload_id'], str(g['observations'])+' / '+str(g['accepted_observations']),
+            g['phase']+' / '+g['workload_id']+' / '+g.get('measurement_scope', 'model_call'),
+            str(g['observations'])+' / '+str(g['accepted_observations']),
             ' / '.join(value(g['known_tokens'][k])+' ('+str(g['token_coverage'][k]['missing'])+')'
                        for k in ('input_tokens', 'output_tokens')),
             value(g['duration_ms']['p50'])+' / '+value(g['duration_ms']['p95'])+' ('+str(g['duration_ms']['missing'])+')',

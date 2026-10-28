@@ -11,6 +11,16 @@ See [setup, test commands and limitations](LANGCHAIN_RAG.md).
 
 ## Local performance and career memory
 
+Scoped performance inputs retain the v1.0 observation envelope with an optional
+`measurement_scope`; omitted means `model_call`/`per_call`. Whole `agent_turn`
+records require `per_turn` usage, with unknown tokens/cost left null. Fictional
+unit and real CLI regressions verify separate groups and exports, unchanged
+legacy reimports, invalid-unit rejection before storage, and feature-marker2
+on first turn import. The application schema remains unchanged. Old performance
+readers reject marker2; new readers retain call-only marker1 compatibility.
+This verifies the local contract, not automatic telemetry capture, model identity
+authentication, cross-chat browser isolation or live application throughput.
+
 The CLI has fictional behavioral tests for source-bound timing/token observations,
 current confirmed-fact retrieval, multilingual BM25 evaluation and independently
 reviewed JSONL exports. The optional career server uses the existing MCP 1.30.0

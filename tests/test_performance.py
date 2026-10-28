@@ -10,7 +10,7 @@ import unittest
 
 from core.execution import Executor
 from core.ledger import utc_now
-from core.performance import record, report, export
+from core.performance import record, report, export, render
 from core.workflow import WorkflowError
 
 
@@ -54,6 +54,53 @@ class PerformanceTests(unittest.TestCase):
         self.assertEqual({'USD': '0.01'}, a['known_charges'])
         self.assertEqual(1, a['missing_charge_observations'])
         self.assertEqual({'EUR': '0.05'}, b['known_charges'])
+
+    def test_agent_turns_never_mix_with_model_calls_for_the_same_workload(self):
+        legacy = self.event()
+        record(self.work, legacy)
+        with self.work._db() as db:
+            self.assertEqual(1, db.execute('select version from performance_meta').fetchone()[0])
+        turn = self.event('turn-1', measurement_scope='agent_turn', duration_ms=60000,
+            accepted=False, usage={'kind': 'per_turn', 'input_tokens': None,
+                'output_tokens': None, 'cached_input_tokens': None, 'reasoning_tokens': None},
+            cost=None)
+        record(self.work, turn)
+        result = report(self.work).data
+        groups = {g['measurement_scope']: g for g in result['groups']}
+        self.assertEqual({'model_call', 'agent_turn'}, set(groups))
+        self.assertEqual(10, groups['model_call']['duration_ms']['p50'])
+        self.assertEqual(60000, groups['agent_turn']['duration_ms']['p50'])
+        self.assertIsNone(groups['agent_turn']['known_tokens']['input_tokens'])
+        self.assertEqual(0, groups['agent_turn']['accepted_observations'])
+        self.assertTrue(record(self.work, legacy).data['reused'])
+        with self.work._db() as db:
+            self.assertEqual(2, db.execute('select version from performance_meta').fetchone()[0])
+        self.assertIn('agent_turn', render(result, 'md'))
+        self.assertIn('measurement_scope', render(result, 'csv').splitlines()[0])
+        self.assertNotIn('missing calls', render(result, 'md'))
+
+    def test_invalid_scope_or_mismatched_usage_unit_is_rejected_before_storage(self):
+        for scope, kind in [('agent_turn', 'per_call'), ('model_call', 'per_turn'),
+                            ('campaign', 'per_turn'), (None, 'per_call')]:
+            event = self.event(measurement_scope=scope)
+            event['usage']['kind'] = kind
+            with self.assertRaises(ValueError): record(self.work, event)
+        with self.work._db() as db:
+            self.assertIsNone(db.execute("select name from sqlite_master where name='performance_observations'").fetchone())
+
+    def test_real_cli_imports_host_turn_with_unknown_tokens(self):
+        event = self.event('host-turn', measurement_scope='agent_turn', accepted=False,
+            duration_ms=12500, usage={'kind': 'per_turn', 'input_tokens': None,
+                'output_tokens': None, 'cached_input_tokens': None, 'reasoning_tokens': None}, cost=None)
+        event_path = self.work.data_dir / 'turn.json'
+        event_path.write_text(json.dumps(event), encoding='utf8')
+        cli = Path(__file__).resolve().parents[1] / 'scripts/kit.py'
+        args = [sys.executable, str(cli), '--data-dir', str(self.work.data_dir)]
+        imported = subprocess.run(args+['performance-record', '--file', str(event_path)], capture_output=True, encoding='utf8', timeout=15)
+        self.assertEqual(0, imported.returncode, imported.stdout+imported.stderr)
+        group = report(self.work).data['groups'][0]
+        self.assertEqual('agent_turn', group['measurement_scope'])
+        self.assertEqual({'known': 0, 'missing': 1}, group['token_coverage']['output_tokens'])
 
     def test_reimport_is_idempotent_and_a_changed_event_or_source_is_blocked(self):
         event = self.event()
