@@ -1,11 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Caller-reported per-call performance observation v1",
+  "title": "Caller-reported scoped performance observation v1",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "event_id", "task_id", "workload_id", "phase", "provider_id", "model_id", "effort", "status", "accepted", "observed_utc", "duration_ms", "usage", "cost", "source"],
   "properties": {
     "schema_version": {"const": "1.0"},
+    "measurement_scope": {"enum": ["model_call", "agent_turn"], "default": "model_call"},
     "event_id": {"$ref": "#/$defs/id"},
     "task_id": {"$ref": "#/$defs/id"},
     "workload_id": {"$ref": "#/$defs/id"},
@@ -21,7 +22,7 @@
       "type": "object", "additionalProperties": false,
       "required": ["kind", "input_tokens", "output_tokens", "cached_input_tokens", "reasoning_tokens"],
       "properties": {
-        "kind": {"const": "per_call"},
+        "kind": {"enum": ["per_call", "per_turn"]},
         "input_tokens": {"$ref": "#/$defs/tokens"},
         "output_tokens": {"$ref": "#/$defs/tokens"},
         "cached_input_tokens": {"$ref": "#/$defs/tokens"},
@@ -45,6 +46,9 @@
     }
   },
   "allOf": [
+    {"if": {"required": ["measurement_scope"], "properties": {"measurement_scope": {"const": "agent_turn"}}},
+     "then": {"properties": {"usage": {"properties": {"kind": {"const": "per_turn"}}}}},
+     "else": {"properties": {"usage": {"properties": {"kind": {"const": "per_call"}}}}}},
     {"if": {"properties": {"accepted": {"const": true}}}, "then": {"properties": {"status": {"const": "success"}}}},
     {"if": {"properties": {"model_id": {"type": "null"}}}, "then": {"properties": {"effort": {"type": "null"}}}}
   ],

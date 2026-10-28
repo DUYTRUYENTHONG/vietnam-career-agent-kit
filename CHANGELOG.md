@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Separate host agent-turn timing/usage from individual model calls in performance
+  records and JSON/Markdown/CSV groups. Preserve legacy event fingerprints and
+  missing-data coverage; mark scoped turn history as performance feature2 so old
+  readers stop instead of mixing measurements. No automatic telemetry capture,
+  inferred tokens/cost or submission-speed claim.
+
 - Validate checked-in CI YAML in the optional QA suite; use a literal run block
   for the addon pip command so colon-bearing options cannot break scheduling.
 
