@@ -27,7 +27,8 @@ class CareerMCPTests(unittest.TestCase):
                         tools = {tool.name: tool for tool in (await session.list_tools()).tools}
                         self.assertEqual({'performance_record', 'performance_report', 'career_context',
                                           'career_email_context', 'campaign_tracker', 'career_evaluate',
-                                          'learning_export', 'learning_check'}, set(tools))
+                                          'learning_export', 'learning_check', 'career_writing_brief',
+                                          'career_check_draft'}, set(tools))
                         self.assertTrue(tools['career_context'].annotations.readOnlyHint)
                         self.assertFalse(tools['performance_record'].annotations.openWorldHint)
                         result = await session.call_tool('career_context', {'query': 'SQL', 'limit': 1})
@@ -35,6 +36,16 @@ class CareerMCPTests(unittest.TestCase):
                         packet = json.loads(result.content[0].text)
                         self.assertEqual('ok', packet['outcome'])
                         self.assertEqual(1, len(packet['data']['facts']))
+                        brief = await session.call_tool('career_writing_brief', {'job_id': 1, 'kind': 'cv'})
+                        data = json.loads(brief.content[0].text)['data']
+                        fact = data['context']['facts'][0]
+                        checked = await session.call_tool('career_check_draft', {
+                            'request': {'job_id': 1, 'kind': 'cv', 'language': 'en', 'limit': 5},
+                            'draft': {'schema_version': '1.0', 'brief_fingerprint': data['brief_fingerprint'],
+                                      'blocks': [{'kind': 'cv_bullet', 'text': fact['quote'], 'fact_ids': [fact['id']]}]}})
+                        checked_data = json.loads(checked.content[0].text)['data']
+                        self.assertTrue(checked_data['review_required'])
+                        self.assertFalse(checked_data['semantic_truth_verified'])
                         gold = {'schema_version': '1.0', 'limit': 1, 'cases': [{'id': 'sql', 'query': 'SQL',
                                 'expected_fact_ids': [packet['data']['facts'][0]['id']]}]}
                         evaluated = await session.call_tool('career_evaluate', {'evaluation': gold})

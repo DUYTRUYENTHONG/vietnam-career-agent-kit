@@ -81,6 +81,13 @@ def parser() -> Parser:
     context.add_argument('--job-id',type=int,required=True)
     context.add_argument('--language',choices=['en','vi'],default='en')
     context.add_argument('--limit',type=int,default=5)
+    context=commands.add_parser('career-writing-brief',help='prepare a cited CV/email writing contract without inference')
+    context.add_argument('--job-id',type=int,required=True)
+    context.add_argument('--kind',choices=['email','cv'],default='email')
+    context.add_argument('--language',choices=['en','vi'],default='en')
+    context.add_argument('--limit',type=int,default=5)
+    context=commands.add_parser('career-check-draft',help='check current draft citations, not semantic truth or approval')
+    context.add_argument('--file',type=Path,required=True,help='private JSON with request and draft')
     context=commands.add_parser('career-evaluate',help='evaluate labelled queries and a token-overlap baseline locally')
     context.add_argument('--file',type=Path,required=True)
     learning=commands.add_parser('learning-export',help='export only independently reviewed current CV wording; no training/upload')
@@ -248,6 +255,14 @@ def execute(args) -> Outcome:
                 raise WorkflowError('needs_input','Run init for additive public research schema 5')
             if command=='tinyfish-browser' and schema<6:
                 raise WorkflowError('needs_input','Run init for additive parallel execution schema 6')
+    if command in {'career-writing-brief','career-check-draft'}:
+        from core.career_drafting import writing_brief, check_draft
+        from core.contracts import object_fields
+        if command=='career-writing-brief':
+            return writing_brief(work,args.job_id,kind=args.kind,language=args.language,limit=args.limit)
+        packet=work.private_json(args.file)
+        object_fields(packet,{'request','draft'},set(),'draft check packet')
+        return check_draft(work,packet['request'],packet['draft'])
     if command in {'career-context','career-email-context','career-evaluate'}:
         from core.career_memory import retrieve, email_context, evaluate
         if command=='career-context':return retrieve(work,args.query,limit=args.limit,max_chars=args.max_chars)

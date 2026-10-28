@@ -1,5 +1,10 @@
 # Vertical-slice roadmap
 
+Optional [LangChain orchestration](LANGCHAIN_RAG.md) adds source-bound CV/email
+briefs and post-generation citation checks around an explicit host callback.
+It retains lexical retrieval; embedding comparisons, production hybrid retrieval,
+native model dispatch and generation-quality evaluation remain separate gates.
+
 Experimental local [career memory](CAREER_MEMORY.md) adds source-cited lexical
 retrieval, labelled evaluation, professional email briefs and independently
 reviewed CV training-data export without a second model API. The optional stdio

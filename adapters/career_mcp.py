@@ -2,7 +2,7 @@
 from pathlib import Path
 import threading
 
-from core import career_memory, performance, learning
+from core import career_memory, career_drafting, performance, learning
 from core.workflow import WorkflowError
 
 
@@ -48,6 +48,16 @@ def make_career_server(work):
     def career_email_context(job_id: int, language: str = 'en', limit: int = 5) -> dict:
         """Prepare cited context and a professional email brief for the recorded job; never send it."""
         return safe(career_memory.email_context, work, job_id, language=language, limit=limit)
+
+    @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})
+    def career_writing_brief(job_id: int, kind: str = 'email', language: str = 'en', limit: int = 5) -> dict:
+        """Prepare a fingerprinted cited CV/email brief and bounded draft contract; no inference."""
+        return safe(career_drafting.writing_brief, work, job_id, kind=kind, language=language, limit=limit)
+
+    @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})
+    def career_check_draft(request: dict, draft: dict) -> dict:
+        """Revalidate current evidence and draft citations. Does NOT verify semantic truth or approve wording."""
+        return safe(career_drafting.check_draft, work, request, draft)
 
     @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})
     def campaign_tracker() -> dict:
