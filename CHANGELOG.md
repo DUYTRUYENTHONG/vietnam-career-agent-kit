@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add an instruction-only CV enrichment workflow: investigate authorized public
+  project evidence, preserve contribution qualifiers, record requested review
+  before new disclosure, and resume the same campaign after exact-version review.
+  Route existing tailoring/evidence/review/approval skills to one guide; no new
+  CLI gate, model API or automatic approval. Record corrected-CV updates to
+  existing applications separately from new submission counts.
+
 - Document the 100-application milestone and 29 October aggregate snapshot: 120
   confirmed submissions, three interview invitations and one assessment request.
   Preserve the dated 100-row archive, explain incremental response checks and

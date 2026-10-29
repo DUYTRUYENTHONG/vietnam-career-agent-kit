@@ -8,8 +8,13 @@ own references; keep the packet in the selected private workspace.
 > selected private workspace [WORKSPACE], current job [JOB_ID], confirmed fact
 > references [FACT_IDS], requested language [LANGUAGE] and existing fit matrix.
 >
-> Inspect the complete JD and employer's application instructions. Select the
-> strongest supported matches, identify gaps, and draft CV wording through the
+> Inspect the complete JD and employer's application instructions. If I have
+> requested more detail or review before sending, follow docs/CV_ENRICHMENT.md: hold
+> new CV disclosures, investigate my authorized public projects, and show an
+> enriched draft with evidence links, attribution limits and a change log before
+> resuming applications. Internet examples are not my experience.
+>
+> Select the strongest supported matches, identify gaps, and draft CV wording through the
 > current v1 or v2 contract. Preserve historical titles, assistance/prototype
 > qualifiers, dates, tool experience, amounts and metric bases. Do not infer a
 > campaign result from an advertising budget or turn exposure into proficiency.

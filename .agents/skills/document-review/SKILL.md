@@ -19,6 +19,11 @@ Local render, review-documents and reject-documents commands; optional locked Py
 
 ## Steps
 
+If CV enrichment/review was requested, inspect the new claim-to-source map and
+change log under ../../../docs/CV_ENRICHMENT.md. Preserve the candidate-review
+hold through final rendering; factual/page review does not satisfy a requested
+candidate review or authorize sending. Reuse unchanged valid reviews.
+
 Run render on the current source-bound draft. Check every claim against evidence and exact scope. Distinguish prototype/production, evaluation/business impact and overlapping dates. Inspect content.json and EVERY current page image from the exact DOCX-to-PDF conversion. Record the fingerprint, all ordered page numbers and actual checks with review-documents using a private JSON file. Text extraction alone is not visual QA. Reject a bad set with reject-documents so dependent approval checks fail. See docs/documents-and-approval.md.
 
 V2 wording requires a separately prompted review before rendering. Read the

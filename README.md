@@ -37,6 +37,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 | Your next step | Open this |
 |---|---|
+| Add concrete project details before sending a revised CV | [CV enrichment and candidate review](docs/CV_ENRICHMENT.md) |
 | Automate cited CV/email drafts with your own AI host | [Local RAG and optional LangChain workflow](docs/LANGCHAIN_RAG.md) |
 | Retrieve cited CV facts and export reviewed examples without another model API | [Career memory and local MCP](docs/CAREER_MEMORY.md) |
 | Retrieve reviewed source facts from an older workspace without creating a second tracker | [Read-only source-memory bridge](docs/SOURCE_MEMORY.md) |
