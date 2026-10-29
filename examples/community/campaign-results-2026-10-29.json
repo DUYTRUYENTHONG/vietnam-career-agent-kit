@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-10-29",
+  "kind": "real_host_assisted_campaign_anonymized_snapshot",
+  "author": "DUYTRUYENTHONG",
+  "confirmed_new_submissions": 120,
+  "milestone_submissions": 100,
+  "response_counts": {
+    "no_response_found": 67,
+    "acknowledged": 39,
+    "assessment_invited": 1,
+    "interview_invited": 3,
+    "rejected": 3,
+    "sent_awaiting_response": 7
+  },
+  "offers_observed": 0,
+  "uncertain_attempts_excluded": 4,
+  "prior_user_reported_excluded": 1,
+  "frozen_strong_or_plausible_fit_count": null,
+  "privacy": "Aggregate counts only. No candidate or recruiter contacts, employer identities, private URLs, messages, CVs or receipt paths.",
+  "count_scope": "Observed unique submission confirmations or verified email sending under the historically approved original, adjacent and stretch scope. Sending does not establish delivery.",
+  "provenance": "Maintainer reconciliation of the private canonical ledger and immutable snapshots; incremental mailbox reviews retain their individual check dates. Raw evidence remains private.",
+  "measurement_limits": [
+    "Not a fresh comprehensive inbox audit of all 120 applications",
+    "Interview invitations are not completed interviews or offers",
+    "Host-assisted campaign, not an autonomous kit replay",
+    "No measured 100/hour or 100x speedup",
+    "No matching reply is not rejection"
+  ]
+}
