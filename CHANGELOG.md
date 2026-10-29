@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Document the 100-application milestone and 29 October aggregate snapshot: 120
+  confirmed submissions, three interview invitations and one assessment request.
+  Preserve the dated 100-row archive, explain incremental response checks and
+  recruiter next steps, and keep candidate/recruiter evidence private. No offer
+  or autonomous submission-speed claim.
+
 - Add an opt-in read-only source-memory CLI/MCP bridge for older fact packets.
   Revalidate reviewed fact source hashes, exclude pending/conflicting/unhashed
   evidence, and retrieve whole citations without initializing or opening an
