@@ -19,6 +19,12 @@ Local create-manifest, approve-manifest, check-manifest and revoke-manifest. Rev
 
 ## Steps
 
+Honor a candidate-requested CV enrichment/review hold before preparing any new
+disclosure action; see ../../../docs/CV_ENRICHMENT.md. Do not derive authority
+for a superseded attachment while its replacement review is pending. Keep prior
+submission records immutable and use existing exact-version checks after review.
+This is an agent instruction, not an additional CLI enforcement mechanism.
+
 Identify recipient/requisition and every disclosure. Build a finite plan from actually reviewed files, confirmed ordinary answers, explicit consents, per-host permission evidence, operations, UTC expiry and limits. For execution, bind the exact available bridge_id and runtime_minutes (1..60) before creating the manifest. Show its exact exported scope, then record actual explicit approval of that fingerprint. Plans without execution scope remain disabled. Never manufacture a proof file in place of the user's approval. Check intent hashes/destination/action before disclosure; the execution loop also uses check-action immediately before each browser action. Changed overlapping scopes revoke old approvals. Local records cannot authenticate a human or grant platform permission. See docs/documents-and-approval.md and docs/execution.md.
 
 ## Standing authorization

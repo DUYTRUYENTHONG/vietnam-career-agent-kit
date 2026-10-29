@@ -19,6 +19,12 @@ Local CLI; Slice 1 imports UTF-8 TXT/Markdown only.
 
 ## Steps
 
+For candidate-requested CV enrichment, use ../../../docs/CV_ENRICHMENT.md.
+Candidate-owned public code establishes implementation, not personal authorship,
+paid tenure or measured business impact. Keep proposed additions separate from
+confirmed facts until their actual review. Never borrow internet examples as
+candidate accomplishments.
+
 Run import-cv, then import-profile. Map exact claim/quote/source/locator/status and conflict keys. Inspect profile, ask only unresolved facts, then record confirm-profile only after actual review of its exact fingerprint. Never create user confirmation on behalf of a real person.
 
 For opt-in v2 grouped history, retain exact context facts and use reviewed

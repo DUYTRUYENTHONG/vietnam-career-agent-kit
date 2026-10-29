@@ -28,6 +28,11 @@ Only an explicit job-seeker request activates the campaign; cloning or maintaini
 the product does not. Do not relax fit or import the public case-study rows to
 inflate a new user's progress.
 
+When the candidate requests a more detailed CV before sending, make the
+[source-backed enrichment and exact-version review](docs/CV_ENRICHMENT.md) the
+next campaign prerequisite. Preserve the target and confirmed progress; continue
+independent research while new CV disclosures wait for that requested review.
+
 The [agent setup guide](docs/AGENT_SETUP.md) and [setup-and-goal prompt](prompts/SETUP_AND_GOAL.md)
 let users supply their own runtime, private evidence, role scope, target and
 limits. This product goal stays public; personal goals and receipts stay private.

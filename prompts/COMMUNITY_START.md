@@ -36,7 +36,10 @@ Use my preferences, not the maintainer's. Rank current full JDs as Strong fit or
 Plausible fit; exclude stretches unless I explicitly change scope. Do not lower
 fit, locations or truthfulness to reach 100. Deduplicate against my actual ledger.
 
-Tailor, render and inspect every final page. Before external disclosure, establish
+Tailor, render and inspect every final page. If I request CV enrichment or
+review before sending, follow docs/CV_ENRICHMENT.md and complete that exact-version
+review first. Keep the same campaign goal and continue independent research.
+Before external disclosure, establish
 current finite authority and respect host/source confirmations. Login, this goal
 and a starter file are not blanket authority. Use available permitted browser or
 email tools; if absent, prepare packages and return an accurate handoff.

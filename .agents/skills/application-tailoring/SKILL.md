@@ -20,6 +20,12 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+When the candidate requests more detail or CV review before sending, follow
+../../../docs/CV_ENRICHMENT.md. Record the requested disclosure hold privately,
+research authorized public work, propose source-mapped additions and preserve
+AI/team/prototype qualifiers. Do not reuse the superseded CV while review is
+pending. This instruction does not add an engine-level gate.
+
 Prepare/render only selected assessed jobs after source and duplicate checks.
 Reuse unchanged current evidence/documents only under existing fingerprints and
 byte checks. Public extraction is not a reason to send CVs to a cloud parser or
