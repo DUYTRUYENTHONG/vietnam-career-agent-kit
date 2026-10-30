@@ -291,3 +291,10 @@ The qa-check-agent and code-review-and-quality workflows found and fixed two iss
 The QA preflight found no conflict markers or suspicious bypass patterns. This Python CLI uses the repository-native test, source-hygiene, wrapper-sync and fictional-demo gates; Node package scripts and a web viewport matrix are not applicable. Original c730fdc CI passed the Linux/Windows Python 3.11/3.12 matrices and real fictional document integration. Live provider and employer sessions remain outside this local QA scope.
 
 Final follow-up gate: `python -m unittest discover -s tests -v` passed all 226 tests in 283.160s. Source hygiene passed 186 UTF-8 files; wrapper synchronization, fictional preparation demo and staged diff checks passed. QA decision: PASS for the tested local CLI/core; live-provider/native-browser support remains Experimental.
+## Optional local fine-tuning interface
+
+`python -m adapters.local_finetuning` is Experimental: the standard-library tests
+verify preparation boundaries only. Heavy runtime compatibility and model-quality
+claims require an actual named-version/model run. CPU/CUDA selection is explicit;
+Intel XPU, distributed training, QLoRA, native-host model switching and automatic
+promotion are Unsupported in this runner. See [local fine-tuning](LOCAL_FINETUNING.md).

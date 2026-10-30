@@ -90,6 +90,13 @@ After independent factual/editorial review, `learning-export` can collect exact
 current CV wording privately. Evaluate retrieval and recheck exported evidence
 before using it; dataset export does not train a model or promote claims.
 
+If the user explicitly requests local model training, follow
+../../../docs/LOCAL_FINETUNING.md and use the separate optional LoRA runner over
+a current independently reviewed export. Keep held-out groups, private artifacts
+and base-model comparison. A completed run is not evidence of improved tailoring:
+evaluate unseen-JD factuality and specificity before explicit host integration.
+Never learn from unreviewed drafts, invent training results or bypass review.
+
 Markdown CV draft, private source map, hashes and review_required state.
 
 V2 additionally returns the actual wording fingerprint and optional compact

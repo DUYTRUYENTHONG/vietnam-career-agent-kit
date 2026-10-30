@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Optional local CV LoRA experiments
+
+- Add a separate offline LoRA runner for current independently reviewed CV exports,
+  assistant-only loss, disjoint held-out base/adapter evaluation and private run
+  records. Refuse stale evidence, truncation and existing output directories.
+- Add explicit public Qwen3-0.6B download setup with revision and file hashes;
+  no bundled model, core SDK dependency, cloud training, automatic promotion or
+  new application authority. See local fine-tuning documentation for QA scope.
+
 ## Unreleased - JD-specific detail contract
 
 - Require a complete private JD-to-evidence map, relevant implementation detail,

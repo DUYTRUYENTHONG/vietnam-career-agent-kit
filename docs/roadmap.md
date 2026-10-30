@@ -1,5 +1,10 @@
 # Vertical-slice roadmap
 
+Experimental optional local LoRA training is separate from reviewed dataset export.
+The runner compares held-out assistant-token loss against the base model; semantic
+CV quality, production inference and automatic host integration are still pending.
+See [setup and acceptance scope](LOCAL_FINETUNING.md).
+
 Optional [LangChain orchestration](LANGCHAIN_RAG.md) adds source-bound CV/email
 briefs and post-generation citation checks around an explicit host callback.
 It retains lexical retrieval; embedding comparisons, production hybrid retrieval,
