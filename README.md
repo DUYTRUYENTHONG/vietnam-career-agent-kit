@@ -37,6 +37,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 | Your next step | Open this |
 |---|---|
+| Tailor specific evidence-backed details to every job description | [Required JD-specific tailoring contract](docs/JD_SPECIFIC_TAILORING.md) |
 | Add concrete project details before sending a revised CV | [CV enrichment and candidate review](docs/CV_ENRICHMENT.md) |
 | Automate cited CV/email drafts with your own AI host | [Local RAG and optional LangChain workflow](docs/LANGCHAIN_RAG.md) |
 | Retrieve cited CV facts and export reviewed examples without another model API | [Career memory and local MCP](docs/CAREER_MEMORY.md) |

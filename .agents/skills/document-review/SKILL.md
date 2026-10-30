@@ -19,6 +19,12 @@ Local render, review-documents and reject-documents commands; optional locked Py
 
 ## Steps
 
+Apply ../../../docs/JD_SPECIFIC_TAILORING.md to job-specific documents. Check the
+complete requirement map, exact source scope and statement-level specificity.
+Flag generic wording that omits available relevant implementation detail and
+unmet must-haves hidden by a keyword list. Use the existing rubric and one
+focused repair; do not invent review fields, results or candidate experience.
+
 If CV enrichment/review was requested, inspect the new claim-to-source map and
 change log under ../../../docs/CV_ENRICHMENT.md. Preserve the candidate-review
 hold through final rendering; factual/page review does not satisfy a requested
