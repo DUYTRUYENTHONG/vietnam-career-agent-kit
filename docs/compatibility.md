@@ -298,3 +298,6 @@ verify preparation boundaries only. Heavy runtime compatibility and model-qualit
 claims require an actual named-version/model run. CPU/CUDA selection is explicit;
 Intel XPU, distributed training, QLoRA, native-host model switching and automatic
 promotion are Unsupported in this runner. See [local fine-tuning](LOCAL_FINETUNING.md).
+The [Qwen3-0.6B CPU smoke](LOCAL_FINETUNING_QA.md) verified one named local runtime;
+its generated output failed factuality/strict-JSON acceptance. This does not
+certify a production tailoring model or native host integration.

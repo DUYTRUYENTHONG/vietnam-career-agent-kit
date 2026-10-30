@@ -5,6 +5,10 @@ existing independently reviewed `learning-export` dataset. It does not modify
 the standard-library core, confirmation rules, candidate facts or application
 ledger. A trained model proposes wording; it is never an authority on experience.
 
+[Actual CPU smoke evidence](LOCAL_FINETUNING_QA.md): training/inference ran, but
+the generated fictional bullet added an unsupported claim and failed strict JSON.
+The local model is **not accepted as a default tailoring model**.
+
 ```mermaid
 flowchart LR
   A[Confirmed facts + JD] --> B[Reviewed CV wording]
