@@ -193,5 +193,17 @@
     "native_plugin_install_verified": false,
     "mcp_protocol": "Local stdio; no remote HTTP endpoint",
     "dependency_count": 48
+  },
+  "optional_finetuning": {
+    "status": "Experimental direct pins only; not a resolved hash lock",
+    "requirements": "requirements-finetuning.in",
+    "dependencies": {
+      "torch": "2.10.0",
+      "transformers": "4.57.6",
+      "peft": "0.18.1"
+    },
+    "auto_install": false,
+    "core_dependencies": false,
+    "runtime_evidence": "docs/LOCAL_FINETUNING.md"
   }
 }

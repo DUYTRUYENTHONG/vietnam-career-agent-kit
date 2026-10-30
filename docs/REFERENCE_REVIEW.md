@@ -261,3 +261,17 @@ network/model activity, deadlines and disclosure. No global settings are changed
 Fictional core, CLI, MCP and real LCEL tests bound the acceptance scope; production
 hybrid retrieval, generation quality, native model dispatch and employer throughput
 remain unverified. See [setup and QA scope](LANGCHAIN_RAG.md).
+## Local fine-tuning dependency/API review, 30 October 2026
+
+Original optional runner uses PyTorch autograd/AdamW and Hugging Face PEFT LoRA,
+with Transformers local safetensors/chat templates. Direct experimental pins:
+torch2.10.0 (BSD-style license), transformers4.57.6 and peft0.18.1 (Apache-2.0).
+Versioned upstream metadata: [torch](https://pypi.org/pypi/torch/2.10.0/json),
+[Transformers](https://pypi.org/pypi/transformers/4.57.6/json),
+[PEFT](https://pypi.org/pypi/peft/0.18.1/json).
+Official API/reference links and actual QA scope are in LOCAL_FINETUNING.md.
+No upstream skill/code copied; no installer/hook run from reference repositories.
+Optional package installation downloads transitive binary/Python dependencies;
+the experimental direct pins are not a hash-locked distribution. Model provisioning
+is a separate explicit public download with resolved revision and file digests.
+No weights, candidate examples or model artifacts are redistributed with the kit.

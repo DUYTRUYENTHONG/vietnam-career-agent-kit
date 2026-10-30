@@ -1,0 +1,5 @@
+# Optional experiment profile, NOT a resolved dependency lock.
+# Provision a trusted CPU/CUDA torch wheel separately for the target machine.
+torch==2.10.0
+transformers==4.57.6
+peft==0.18.1

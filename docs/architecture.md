@@ -1,5 +1,11 @@
 # Portable core architecture
 
+Optional `adapters/local_finetuning.py` consumes an existing current independently
+reviewed learning export and trains a local LoRA adapter in a new private run
+directory. Heavy model dependencies stay outside the core; no DB changes,
+provider calls, fact promotion or execution authority. Public-model provisioning
+is a separate explicit command. See [local fine-tuning](LOCAL_FINETUNING.md).
+
 `core/source_memory.py` and `scripts/source_memory.py` supply a separate opt-in
 read-only bridge for older hash-bound fact arrays. They never initialize/open a
 campaign database. This is source retrieval only, not a ledger migration or
