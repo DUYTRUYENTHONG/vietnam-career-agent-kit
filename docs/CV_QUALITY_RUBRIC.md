@@ -14,11 +14,15 @@ for this vacancy and evidence. Scores are transparent reviewer judgments.
 | Dimension | Evidence to inspect |
 |---|---|
 | Relevance | Selected experience maps to actual role priorities |
-| Specificity | Concrete supported actions, scope/method/outcomes where known |
+| Specificity | Concrete supported actions, named systems/deliverables, implementation methods and validation/outcomes where known; reject generic wording that omits relevant available evidence |
 | Coverage | Supported requirements represented; mandatory gaps remain visible |
 | Clarity | Clear role grouping, chronology, understandable language |
 | Concision | No duplicate bullets, keyword stuffing or adjective-heavy filler |
 | Readability | Natural EN/VI, readable one-column layout and final page evidence |
+
+For job-specific preparation, use the required private map/detail/change/gap
+outputs in [JD-specific tailoring](JD_SPECIFIC_TAILORING.md). These are host
+instructions and reviewer judgments, not a new CLI or semantic scoring engine.
 
 The wording packet reports represented assessed requirement IDs over **all JD
 requirements**, including missing/unknown ones in the denominator. A direct or

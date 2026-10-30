@@ -1,5 +1,14 @@
 # Runtime compatibility evidence
 
+## JD-specific detail contract
+
+[JD-specific tailoring](JD_SPECIFIC_TAILORING.md) is **Instruction-only** across
+hosts. Canonical tailoring/review skills require complete requirement mapping,
+supported implementation detail, change/gap reporting and specificity review.
+Repository/skill checks verify source packaging and existing compatibility, not
+model obedience, semantic truth or improved hiring outcomes. No CLI/schema,
+dependency, native-dispatch or submission-authority change.
+
 ## Optional LangChain drafting
 
 The additive CLI/MCP brief/check contract and optional LangChain Core 1.7.0 LCEL

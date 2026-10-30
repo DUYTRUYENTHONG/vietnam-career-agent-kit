@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - JD-specific detail contract
+
+- Require a complete private JD-to-evidence map, relevant implementation detail,
+  tailored wording/change summary, coverage gaps and specificity review in the
+  existing tailoring/document-review skills and copyable prompt.
+- Keep v2 one-fact statements, truthful qualifiers and rendering/disclosure gates;
+  label this instruction-only rather than claiming automatic semantic enforcement.
+  Add an original fictional review exercise; no runtime/schema/dependency change.
+
 ## Unreleased
 
 - Add an instruction-only CV enrichment workflow: investigate authorized public

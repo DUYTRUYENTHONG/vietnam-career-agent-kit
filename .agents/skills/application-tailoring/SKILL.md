@@ -20,6 +20,14 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+For every job-specific CV, follow ../../../docs/JD_SPECIFIC_TAILORING.md.
+Read the complete JD and reuse its assessed requirement IDs. Before calling the
+CV ready, produce the complete private JD-to-evidence map, concrete detail
+selection, tailored statements/change summary, gaps and specificity review.
+Reject generic wording when relevant source detail is available. Maximize
+relevant supported detail; never pad, invent metrics or copy the JD as experience.
+This is a required host instruction, not a new automatic semantic validator.
+
 When the candidate requests more detail or CV review before sending, follow
 ../../../docs/CV_ENRICHMENT.md. Record the requested disclosure hold privately,
 research authorized public work, propose source-mapped additions and preserve

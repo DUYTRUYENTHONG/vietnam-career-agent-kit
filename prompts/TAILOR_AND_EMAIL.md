@@ -14,6 +14,20 @@ own references; keep the packet in the selected private workspace.
 > enriched draft with evidence links, attribution limits and a change log before
 > resuming applications. Internet examples are not my experience.
 >
+> Follow docs/JD_SPECIFIC_TAILORING.md as a required preparation contract. Read
+> every JD duty, must-have, preference and application instruction. Reuse the
+> existing complete requirement matrix. For each requirement, map exact JD text
+> to confirmed fact/source IDs, proposed statement IDs and full/partial/missing
+> evidence. Extract the relevant system, action, tools, input/output, contribution,
+> validation and observed result; leave unknown details explicit.
+>
+> Produce concrete role-specific bullets, not a generic master CV or repeated JD
+> keywords. Use all relevant supported detail that fits a readable document;
+> retain extra detail privately. Preserve one-fact-per-statement v2 constraints.
+> Include a private change summary, coverage/gap table and specificity review.
+> A reviewer must flag omitted available technical detail and repair it once.
+> Never invent metrics, production tenure, vector RAG or completed fine-tuning.
+>
 > Select the strongest supported matches, identify gaps, and draft CV wording through the
 > current v1 or v2 contract. Preserve historical titles, assistance/prototype
 > qualifiers, dates, tool experience, amounts and metric bases. Do not infer a
