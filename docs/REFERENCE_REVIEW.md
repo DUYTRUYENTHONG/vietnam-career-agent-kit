@@ -1,5 +1,17 @@
 # Community references and attribution
 
+## Ashby public Job Postings API, 31 October 2026
+
+Reviewed the official [API contract](https://developers.ashbyhq.com/docs/public-job-posting-api)
+and [listing integration guidance](https://docs.ashbyhq.com/using-the-lightweight-job-posting-api-to-list-openings-on-your-site)
+as source data. Adopted the documented fixed public GET, listed visibility,
+job URL identity and raw workplace/employment fields in original stdlib code;
+no source code, SDK, installer or dependency copied. Optional missing metadata
+stays unknown. `isRemote` includes hybrid and is not country eligibility.
+Fictional normalization/transport/CLI tests and one public six-post Windows
+observation support Experimental discovery only, not application automation.
+See [scope and measurements](ASHBY_DISCOVERY.md).
+
 ## Context Engineering collection, 27 October 2026
 
 Reviewed selected files at `9ff0c99108b36d3b886defd825d8ac1f47dba374` from

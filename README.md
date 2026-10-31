@@ -9,6 +9,10 @@ review an exact application package, and track what actually happened.
 
 ## Start here
 
+**Forking for your own search?** Use the [forker playbook](docs/FORKER_PLAYBOOK.md)
+for setup, role-specific tailoring, skills/browser options and reading results.
+Start with its [copyable role-aware prompt](prompts/ROLE_FAMILY_CAMPAIGN.md).
+
 **Latest kit:** clone `main` and follow [CV-first setup](docs/COMMUNITY_START.md).
 A [pinned preview source package](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
 is also available. Attach your CV, answer only
@@ -139,6 +143,8 @@ existing engine scope and host confirmations remain effective.
 
 Bulk public Greenhouse discovery is available through `discover-greenhouse`.
 See [the bounded reader, benchmark and performance limits](docs/BULK_DISCOVERY.md).
+`discover-ashby` adds [listed-only public Ashby reads](docs/ASHBY_DISCOVERY.md),
+with explicit hybrid/remote and employment metadata; it never submits.
 
 [Standing authorization](docs/STANDING_AUTHORIZATION.md) reuses one approved
 recipient/answer/consent scope across later reviewed CVs and finite batches.

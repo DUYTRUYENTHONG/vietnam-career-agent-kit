@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`discover-ashby` reuses `core/discovery.py` fixed-origin bounded GET transport
+and ordered worker merge, with a separate normalizer for the documented Ashby
+public posting API. It excludes unlisted roles and retains explicit employment
+and workplace metadata; no candidate workspace, model or submission action.
+See [public Ashby discovery](ASHBY_DISCOVERY.md).
+
 `adapters/local_pair_generation.py` reuses the local CPU generator and existing
 wording evaluator for an explicit matched base/LoRA experiment. It validates the
 current reviewed export and training/base identities, omits held-out assistant

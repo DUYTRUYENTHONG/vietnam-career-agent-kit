@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased - Forker setup and role-family tailoring
+
+- Add a linked setup-to-tracker walkthrough, GitHub workflow diagram and
+  copyable role-aware campaign prompt for users of their own forks.
+- Separate engineering, product and delivery evidence; research reports guide
+  role choices without becoming candidate facts or assumed qualifications.
+- Reuse existing skills, RAG, review and execution contracts. Instruction-only;
+  no new native adapter, automatic authority or hiring-outcome claim.
+
+## Unreleased - Public Ashby board discovery
+
+- Add `discover-ashby` with the documented public API, bounded GET transport
+  and at most three concurrent board reads.
+- Preserve listed-only visibility, stable IDs, full-description fingerprints,
+  explicit remote/hybrid and employment fields, and unknown location metadata.
+- Return partial failures without retries, candidate access or application writes.
+  One six-post public-board check is separate from fictional QA; no submission
+  speed or model-token saving is claimed.
+
 ## Unreleased - Relevant evidence and professional CV language
 
 - Tailoring and email prompts prioritize evidence selection and opening-page

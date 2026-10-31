@@ -20,6 +20,11 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+For candidates targeting several role families, use
+../../../docs/FORKER_PLAYBOOK.md and ../../../prompts/ROLE_FAMILY_CAMPAIGN.md.
+Separate engineering, product and delivery evidence against each actual JD.
+Research reports supply role context, never candidate facts or seniority proof.
+
 For every job-specific CV, follow ../../../docs/JD_SPECIFIC_TAILORING.md.
 Read the complete JD and reuse its assessed requirement IDs. Before calling the
 CV ready, produce the complete private JD-to-evidence map, concrete detail

@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+**Bạn muốn fork kit để tìm việc?** Xem [hướng dẫn cho người fork](docs/FORKER_PLAYBOOK.md)
+và [prompt theo nhóm vị trí](prompts/ROLE_FAMILY_CAMPAIGN.md): thiết lập riêng tư,
+chọn nhóm nghề, đối chiếu JD, chỉnh CV, kiểm tra và theo dõi kết quả.
+
 [Theo dõi phản hồi theo đúng phiên bản CV](docs/CV_OUTCOMES.md): lưu bằng chứng
 phản hồi tuyển dụng, tách thư xác nhận nhận hồ sơ khỏi mời phỏng vấn và báo cáo
 theo thời gian quan sát. Tỷ lệ mô tả không chứng minh RAG/LoRA làm tăng cơ hội
@@ -240,6 +244,7 @@ python scripts/check_repository.py
 [Thiết lập/nâng cấp/gỡ bỏ](docs/setup.md) · [Đóng góp](CONTRIBUTING.md) · [Bảo mật](SECURITY.md) · [Lộ trình](docs/roadmap.md) · [Nguồn tham khảo và giấy phép](THIRD_PARTY_NOTICES.md). Tác vụ phát triển chỉ dùng dữ liệu hư cấu, không gửi đơn thử đến doanh nghiệp thật. Sản phẩm không cam kết việc làm, phỏng vấn hay điểm ATS.
 
 Khám phá hàng loạt bảng việc làm Greenhouse: `discover-greenhouse`, chỉ đọc công khai, không nộp hồ sơ. [Giới hạn và đo hiệu năng](docs/BULK_DISCOVERY.md).
+`discover-ashby` [đọc các vị trí được niêm yết công khai trên Ashby](docs/ASHBY_DISCOVERY.md), giữ riêng thông tin hybrid/remote và loại hợp đồng. Lệnh không truy cập CV hoặc nộp hồ sơ.
 
 [Bảo vệ nhánh](docs/BRANCH_PROTECTION.md) mô tả mẫu cấu hình và việc xác minh
 riêng trên GitHub. Tệp cấu hình trong repo không tự chứng minh chính sách đã

@@ -1,5 +1,10 @@
 # Faster discovery with supported host tools
 
+Experimental public [Ashby discovery](ASHBY_DISCOVERY.md) is now available with
+the same bounded read-only transport as Greenhouse. It retains listed visibility
+and remote/hybrid/employment distinctions. Other unsupported reads below remain
+manual; no source listing grants candidate disclosure or submission authority.
+
 This is host guidance reviewed 22 October 2026, not a permission grant or measured
 live throughput improvement. The separate [experimental Greenhouse reader](BULK_DISCOVERY.md)
 now supports bounded public discovery. Other providers below remain research

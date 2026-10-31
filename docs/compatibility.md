@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+`discover-ashby` is **Experimental** stdlib CLI public discovery, sharing bounded
+transport with Greenhouse. Fictional tests cover normalization, visibility,
+remote/hybrid metadata, failures and no-workspace CLI use. One Windows public
+board returned six posts matching the browser; this does not certify every
+tenant, native runtime or application operation. [Contract](ASHBY_DISCOVERY.md).
+
 Tailoring now includes explicit professional-reframing guidance, JD-priority
 placement and professional-framing criteria within the existing review dimensions.
 This is Instruction-only:

@@ -29,10 +29,11 @@ def parser() -> Parser:
     root.add_argument('--data-dir',type=Path,help='explicit private directory outside the public clone')
     root.add_argument('--actor',default='local-user')
     commands=root.add_subparsers(dest='command',required=True)
-    discover=commands.add_parser('discover-greenhouse',help='bounded public board GETs; leads only, no candidate data or submission')
-    discover.add_argument('--board',action='append',required=True)
-    discover.add_argument('--workers',type=int,default=3)
-    discover.add_argument('--include-content',action='store_true',help='include full untrusted descriptions; default returns compact leads')
+    for name in ('discover-greenhouse','discover-ashby'):
+        discover=commands.add_parser(name,help='bounded public board GETs; leads only, no candidate data or submission')
+        discover.add_argument('--board',action='append',required=True)
+        discover.add_argument('--workers',type=int,default=3)
+        discover.add_argument('--include-content',action='store_true',help='include full untrusted descriptions; default returns compact leads')
     doctor=commands.add_parser('doctor',help='read-only runtime diagnosis; no account/browser connection')
     doctor.add_argument('--runtime',choices=['generic','codex','claude','grok'],default='generic')
     commands.add_parser('provider-doctor',help='offline provider configuration; never checks keys remotely')
@@ -229,9 +230,10 @@ def load_input(path: Path) -> dict:
 
 def execute(args) -> Outcome:
     command=args.command
-    if command=='discover-greenhouse':
+    if command in {'discover-greenhouse','discover-ashby'}:
         from core.discovery import discover
-        data=discover(args.board,workers=args.workers,include_content=args.include_content)
+        data=discover(args.board,workers=args.workers,include_content=args.include_content,
+                      provider='ashby' if command=='discover-ashby' else 'greenhouse')
         return Outcome('ok' if not data['failed_boards'] else 'manual_required',data,[])
     if command=='doctor':return diagnose(args.runtime)
     if command=='benchmark-web':
