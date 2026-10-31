@@ -1,6 +1,6 @@
 ---
 name: application-tailoring
-description: Draft job-specific CV wording and application emails from confirmed evidence, preserving factual qualifiers and the employer's language and format.
+description: Tailor CVs and application emails to job priorities with concrete evidence and professional wording, preserving contribution scope and factual qualifiers.
 ---
 
 Read ../../../docs/job-seeker-policy.md first. Root AGENTS.md governs maintainer work; this skill activates only for an explicit career request.
@@ -60,6 +60,14 @@ and fact comparison within the existing wording/review pass; do not add another
 model call solely to remove generic phrasing. Preserve language, qualifiers and
 metric units after editing or translation. New candidate facts require evidence,
 not a more persuasive rewrite.
+
+When the candidate asks for euphemism or stronger professional phrasing, use the
+professional reframing guidance in references/evidence-writing.md. Describe
+supported work positively and precisely; keep gap-analysis boilerplate in the
+private review. Preserve material assistance, prototype and contribution scope.
+Review evidence selection and first-page placement before adding more prose.
+A title/profile swap alone does not establish tailoring; document why selected
+examples and emphasis fit this JD, including when an existing version is reusable.
 
 Email drafting returns a private draft and evidence map, not a send command.
 Match the actual employer/requisition, published recipient, verified sending

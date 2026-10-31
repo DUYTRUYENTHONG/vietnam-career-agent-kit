@@ -13,16 +13,20 @@ for this vacancy and evidence. Scores are transparent reviewer judgments.
 
 | Dimension | Evidence to inspect |
 |---|---|
-| Relevance | Selected experience maps to actual role priorities |
+| Relevance | Selected experience and opening-page placement map to actual role priorities; explain retained detail and compressed unrelated duties |
 | Specificity | Concrete supported actions, named systems/deliverables, implementation methods and validation/outcomes where known; reject generic wording that omits relevant available evidence |
-| Coverage | Supported requirements represented; mandatory gaps remain visible |
-| Clarity | Clear role grouping, chronology, understandable language |
-| Concision | No duplicate bullets, keyword stuffing or adjective-heavy filler |
+| Coverage | Supported requirements represented; mandatory gaps remain visible in the private review and required screening answers stay accurate |
+| Clarity | Clear role grouping, chronology and professional descriptions of actual contributions; preserve material scope instead of using euphemisms that imply unsupported expertise |
+| Concision | No duplicate bullets, keyword stuffing, adjective-heavy filler or repetitive gap-analysis boilerplate |
 | Readability | Natural EN/VI, readable one-column layout and final page evidence |
 
 For job-specific preparation, use the required private map/detail/change/gap
 outputs in [JD-specific tailoring](JD_SPECIFIC_TAILORING.md). These are host
 instructions and reviewer judgments, not a new CLI or semantic scoring engine.
+An accurate but generic CV still needs revision when better relevant evidence is
+available. Check selection and emphasis before adding length. Reuse is acceptable
+when a current JD review justifies the same evidence; artificial differences do
+not improve the score. Professional phrasing never overrides a factual hard gate.
 
 The wording packet reports represented assessed requirement IDs over **all JD
 requirements**, including missing/unknown ones in the denominator. A direct or

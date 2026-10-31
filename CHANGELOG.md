@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased - Relevant evidence and professional CV language
+
+- Tailoring and email prompts prioritize evidence selection and opening-page
+  placement against the actual JD, rather than expanding every past duty.
+- Add tactful professional reframing and euphemism guidance: present supported
+  contributions clearly, keep gap-analysis boilerplate private and preserve
+  material attribution, prototype, date and experience scope.
+- Review professional framing explicitly; a title/profile swap cannot establish
+  relevance, while justified reuse remains valid. Instruction-only, with no new
+  model, automatic semantic validator or claim of better hiring outcomes.
+
 ## Unreleased - Parallel cleanup without application stalls
 
 - Run confirmed-tab cleanup in a separate bounded callback pool so a slow close

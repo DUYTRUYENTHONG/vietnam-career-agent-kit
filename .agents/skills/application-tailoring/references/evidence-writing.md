@@ -59,7 +59,64 @@ proper names, official titles, tool names, amounts and qualifiers. Check meaning
 side by side. Do not create extra languages or translations unless requested.
 Upstream post-card rules about Portuguese, HTML and 275 characters do not apply.
 
-## 4. Review the package, not just the prose
+## 4. Professional reframing and euphemism
+
+Use tactful professional language to make a supported contribution clear. Change
+the expression, emphasis and placement without changing the underlying fact.
+Replace self-criticism with the actual deliverable and contribution level.
+
+| Supported fact | Professional wording | Unsupported escalation |
+|---|---|---|
+| Built a keyword-indexed help prototype with an AI coding assistant | Built an AI-assisted help prototype using keyword retrieval and source-linked answers | Deployed production vector RAG |
+| Assisted a senior developer with responsive UI fixes | Contributed responsive UI fixes alongside a senior developer | Led front-end architecture |
+| Investigated service issues and escalated unresolved cases | Diagnosed service incidents, documented findings and coordinated engineering escalations | Resolved every incident or reduced downtime by an invented percentage |
+
+Keep statements such as "no production experience claimed", "unestablished
+expertise" and lists of missing tools in the private requirement map. The CV
+should name the actual project, method and scope. A required employer question
+still receives the accurate answer; do not conceal a missing mandatory fact or
+relabel exposure as proficiency. Do not invent results to complete a formula.
+
+Place material qualifiers where they are clear without repeating them in every
+bullet: for example, an "AI-assisted personal project" heading followed by
+accurate contributions. Distinguish the candidate's work from team/tool output.
+Do not remove the qualifier if the remaining wording implies independent work,
+professional tenure or production deployment that the evidence does not support.
+
+Avoid vague euphemisms such as "seasoned AI expert" or "advanced model training"
+when the source supports only a small prototype or training-data preparation.
+Tool-use duration is not engineering tenure or a measured product outcome. If a
+candidate explicitly wants a less relevant detail retained, use a compact
+additional-information section rather than letting it displace stronger evidence.
+
+## 5. Relevance before expansion
+
+Use the JD's main responsibilities to choose the evidence and its placement.
+For an engineering vacancy, put supported implementation and validation examples
+ahead of lengthy unrelated support/sales duties when those examples better
+demonstrate the work. Preserve official job titles and dates; selected projects
+can precede employment without being represented as paid roles.
+
+More detail means a more useful explanation of relevant work, not a longer list
+of every past responsibility. Keep the full history in the private inventory;
+compress less relevant duties in the application CV. Follow employer limits and
+candidate preferences when selecting the final length.
+
+Before review, explain privately which examples earned prominence, which duties
+were shortened and which important requirements remain partial or missing.
+Compare the previous and new versions: changing only a headline, company name,
+profile or project order is insufficient if the strongest evidence is still
+buried or generic. Reuse an existing version when a current JD review shows its
+priorities and evidence selection already match; do not manufacture differences.
+
+Fictional review exercise: for a knowledge-assistant vacancy, foreground the
+keyword-retrieval prototype and its source checks. For a responsive-frontend
+vacancy using the same candidate inventory, foreground UI implementation and
+debugging. Keep each fact unchanged. Neither version may claim production vector
+search or technical leadership. This exercise illustrates judgment; it is not
+an automated semantic validator or proof of better hiring outcomes.
+
+## 6. Review the package, not just the prose
 
 Return the CV wording through the existing factual-review/render/page-review flow.
 Keep the source map out of the employer-facing CV. For email, show the exact
@@ -73,7 +130,7 @@ needs actual candidate review under `candidate_confirmed`, not fabricated
 `profile_fact` IDs. Existing finite/standing authority and host requirements
 remain separate from stylistic review. Do not invoke a send tool while drafting.
 
-## 5. Stop the affected writing task when needed
+## 7. Stop the affected writing task when needed
 
 Missing source text → ask for authorized text or return an evidence gap.
 Unconfirmed metric → omit it or retain an explicitly supported weaker claim.

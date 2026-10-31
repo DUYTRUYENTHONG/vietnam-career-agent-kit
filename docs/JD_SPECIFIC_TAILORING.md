@@ -21,6 +21,9 @@ Before calling a CV ready, prepare these alongside the existing review packet:
    exact source quote/locator, must-have/preferred status, role priority, selected
    candidate fact IDs and source scope, evidence status, proposed statement IDs
    and remaining gap. Derive priorities from the JD; label inferred priorities.
+   Identify which requirement groups should dominate the opening page and the
+   statement IDs selected to demonstrate them. Section order is a relevance
+   decision, not a mandatory employment-first template.
    Reuse the existing matrix rather than create a competing assessment/ledger.
 2. **Detail selection.** For each relevant employment/project group, extract the
    supported system/problem, candidate action, implementation method/tools,
@@ -30,6 +33,9 @@ Before calling a CV ready, prepare these alongside the existing review packet:
 3. **Tailored wording and change summary.** Reorder and rewrite from those facts
    for this role, retaining official past titles and dates. Explain what changed
    from the previous version and why. Keep private citations out of the CV.
+   Explain evidence selection and space allocation, not just wording changes.
+   Reuse is valid when the same evidence and emphasis match the current JD;
+   a changed headline does not rescue an otherwise generic or misprioritized CV.
 4. **Coverage and gaps.** Show which requirements are fully, partly or not
    supported. A represented requirement is not proof of full qualification.
    Name unmet must-haves; never claim every requirement is covered if it is not.
@@ -81,6 +87,12 @@ A budget is not revenue/ROAS; tests are not production impact; AI-assisted work
 retains its qualifier. An employer's stack never becomes candidate experience.
 
 ## Review and email handoff
+
+For tactful professional reframing, use the canonical tailoring skill's
+[evidence-writing reference](../.agents/skills/application-tailoring/references/evidence-writing.md).
+Keep unmet requirements in the private matrix and accurate screening answers;
+the CV presents actual relevant contributions with material qualifiers. Avoid
+repeated self-disqualifying disclaimers and unsupported prestige language.
 
 The separately prompted wording reviewer checks the complete JD/matrix and exact
 source quotes, then every statement's relevance, specificity and entailment.
