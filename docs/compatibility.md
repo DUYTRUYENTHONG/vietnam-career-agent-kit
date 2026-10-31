@@ -1,5 +1,12 @@
 # Runtime compatibility evidence
 
+Parallel cleanup now uses a bounded callback pool and exclusive local close
+intents. The fictional event-based regression first reproduced a close holding
+an unrelated lane; tests also cover coordinator-only receipt writes, timeout/late
+reply handling, stale evidence, wrong bindings and restart reconciliation. This
+does not verify live provider concurrency, browser sessions, model usage or an
+applications-per-hour target. See [parallel execution](PARALLEL_APPLICATIONS.md).
+
 Source-memory exclusion diagnostics are an additive field in the existing local
 CLI/MCP context result. Eight fictional standard-library/CLI tests verify reason
 counts, unchanged source bytes and existing rejection boundaries. This is not

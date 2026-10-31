@@ -162,6 +162,11 @@ research tasks and captured pages never count as applications or approval.
 partial-commit and nonreplay results. `core/cleanup.py` derives closure requests
 only from saved confirmed bindings and verifies evidence before recording host
 cleanup receipts. It does not drive a browser, infer ownership or alter counts.
+`core/parallel_cleanup.py` dispatches eligible closes separately from application
+workers, persists exclusive close intents and returns uncertain cleanup IDs.
+The coordinator alone validates and writes all receipts. Unresolved intents block
+automatic close replay; observed host cleanup receipts reconcile them without a
+schema migration or another application attempt.
 
 Schema 4 adds opt-in standing delegation in `core/authorization.py`. An approved
 profile/recipient/answer/consent scope derives exact reviewed manifests;

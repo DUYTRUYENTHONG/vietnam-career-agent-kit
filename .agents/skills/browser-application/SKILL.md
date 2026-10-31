@@ -99,6 +99,14 @@ Bindings reused for later applications are ineligible. Recheck cleanup-execution
 before acting on earlier output. Track cleanup status separately from application
 blockers; a failed close never cancels the saved submission.
 
+In parallel bridge runs, cleanup callbacks run independently of application
+lanes, with coordinator-only validation/receipt writes. Preserve exclusive
+`execution/cleanup-intents` records. A timeout or interrupted close must not be
+replayed automatically, even on restart; inspect the actual owned binding and
+record only an observed closed/already_absent receipt. An unresolved cleanup
+intent grants no authority to close another tab or resend an application. See
+../../../docs/PARALLEL_APPLICATIONS.md.
+
 ## Outputs
 
 For rate targets, use small exact finite batches and record actual confirmation

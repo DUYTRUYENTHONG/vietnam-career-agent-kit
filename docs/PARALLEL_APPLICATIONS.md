@@ -5,8 +5,32 @@ per-action deadlines, bounded by run expiry for writes. Stalled lanes remain
 canonical pending requests and retain capacity; other lanes can finish. The runner
 returns `needs_input` with quarantined request IDs and ignores late results.
 Restart requires reconciliation: daemon workers are not cancellation. Read-only
-verification remains possible after expiry. Confirmed-session cleanup waits at
-most 30 seconds per close.
+verification remains possible after expiry.
+
+Confirmed-session cleanup runs in a separate bounded callback pool. A slow tab
+close does not hold the coordinator or unrelated application lanes. Each close
+has at most `min(action_timeout_seconds, 30)` seconds, with at most `workers`
+cleanup callbacks in flight; these do not allocate additional browser sessions.
+The Python runner defaults to `cleanup_workers=1`, preserving serialized close
+callbacks for existing bridges while keeping the coordinator unblocked. Set it
+explicitly to 2–10 only for a bridge verified to support concurrent closes of
+independent confirmed bindings; it cannot exceed application `workers`.
+All eligibility checks and receipt writes remain on the coordinator thread.
+
+Before dispatch, the coordinator creates an exclusive private intent under
+`execution/cleanup-intents/RUN/`. Cleanup never starts without a saved confirmation
+and current evidence/binding checks. Late or mismatched replies never acknowledge
+a close. Timeouts retain cleanup capacity and appear in
+`cleanup_quarantined_requests`, with `remote_termination_confirmed: false`.
+This is an unknown tab-close outcome, not an unknown application submission.
+
+An unresolved intent prevents automatic close replay, including after restart.
+Inspect the actual owned binding and reconcile a real `closed`/`already_absent`
+receipt through `record-parallel-cleanup` (or the host's corresponding method).
+Do not manufacture a receipt, delete intents to unlock retries or resubmit the
+application. A confirmed cleanup receipt makes its old intent inert; an unclosed
+or inaccessible binding remains a manual cleanup task. Callback errors or changed
+evidence keep the application confirmed and cleanup separately unresolved.
 
 The [TinyFish Browser runtime](TINYFISH_BROWSER.md) is a separate experimental
 bridge; native/provider live compatibility is unverified.
@@ -28,7 +52,9 @@ flowchart LR
   C --> B[Up to ten isolated browser lanes]
   B --> C
   C --> T[Verified receipts and tracker]
-  T --> X[Close confirmed owned tabs]
+  T --> I[Save close intent and recheck ownership]
+  I --> X[Independent bounded cleanup callbacks]
+  X --> C
 ```
 
 Research and tailoring can overlap across jobs. A browser lane retains its own inspect-to-verify sequence; dependencies within a job never run out of order.
@@ -75,6 +101,9 @@ Set TINYFISH_API_KEY privately in the environment. Reuse the versioned ResearchP
 ## Reusable agent prompt
 
 Use [the batch execution prompt](../prompts/ten-job-batch.md). Route deterministic checks, rendering, hashing and tracker updates directly to tools; use the least costly available model appropriate to the actual reasoning task. Do not invent model IDs or measured cost savings.
+
+See [cleanup regression QA](PARALLEL_CLEANUP_QA.md) for the event-based before/after
+failure, concurrency boundaries and restart recovery coverage.
 
 ## Local benchmark evidence
 
