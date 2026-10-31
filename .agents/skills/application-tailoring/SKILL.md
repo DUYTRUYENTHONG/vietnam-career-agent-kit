@@ -75,6 +75,12 @@ explicit read-only bridge in ../../../docs/SOURCE_MEMORY.md. Never initialize a
 competing tracker to unlock retrieval. Treat its cited hash-bound subset as
 evidence for separate review, not a confirmed profile or disclosure permission.
 
+If source-memory coverage is thin, inspect `exclusion_reasons` before drafting.
+Unapproved/conflicting facts stay excluded. Missing or invalid hashes require
+inspection of existing reviewed evidence, not invented proof or automatic
+approval. Counts diagnose coverage; they do not certify semantic truth or grant
+permission to import wording. See ../../../docs/SOURCE_MEMORY.md.
+
 For a structured CV/email draft, use `career-writing-brief` (or MCP
 `career_writing_brief`), then draft with the current fact IDs and call
 `career-check-draft` / `career_check_draft`. A successful citation check leaves

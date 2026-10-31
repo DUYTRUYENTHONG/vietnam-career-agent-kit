@@ -46,6 +46,7 @@ OAuth, các phiên trình duyệt và khôi phục khi chưa rõ kết quả.
 
 | Bạn muốn làm gì? | Tài liệu |
 |---|---|
+| Truy xuất dữ kiện đã duyệt từ thư mục cũ và xem vì sao bằng chứng bị loại | [Bộ nhớ nguồn chỉ đọc](docs/SOURCE_MEMORY.md) — không tạo tracker mới hay tự duyệt dữ kiện |
 | Quản lý skills gọn, đúng nguồn và tiết kiệm ngữ cảnh | [Mười skill chuẩn và cách nạp theo nhu cầu](docs/SKILL_MANAGEMENT.md) |
 | Đánh giá kỹ thuật quản lý ngữ cảnh | [Nguồn cố định và đánh giá Context Engineering](docs/CONTEXT_ENGINEERING_REVIEW.md) |
 | Đánh giá Awesome Copilot cho thao tác trình duyệt | [Nguồn cố định, agents, skills, plugins và cookbook](docs/AWESOME_COPILOT_REVIEW.md) |

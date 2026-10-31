@@ -25,6 +25,10 @@ class SourceMemoryMCPTests(unittest.TestCase):
                         result = await session.call_tool('career_source_context', {'query': 'API'})
                         data = json.loads(result.content[0].text)
                         self.assertEqual('F1', data['data']['facts'][0]['id'])
+                        self.assertEqual(1, data['data']['exclusion_reasons']['unapproved'])
+                        self.assertEqual(1, data['data']['exclusion_reasons']['missing_source_hash'])
+                        self.assertEqual(2, data['data']['excluded_fact_count'])
+                        self.assertFalse(data['data']['authority_granted'])
                         source.write_text('changed', encoding='utf8')
                         result = await session.call_tool('career_source_context', {'query': 'API'})
                         self.assertEqual('needs_input', json.loads(result.content[0].text)['outcome'])
@@ -34,6 +38,8 @@ class SourceMemoryMCPTests(unittest.TestCase):
             fact = {'fact_id': 'F1', 'exact_claim': 'Fictional AI-assisted API implementation',
                     'approval_state': 'approved', 'conflict': None, 'source_path': 'project.txt',
                     'locator': 'line1', 'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest()}
-            (root/'data/source-facts.json').write_text(json.dumps([fact]), encoding='utf8')
+            pending = dict(fact, fact_id='F2', approval_state='pending', source_sha256=None)
+            unhashed = dict(fact, fact_id='F3', source_sha256=None)
+            (root/'data/source-facts.json').write_text(json.dumps([fact, pending, unhashed]), encoding='utf8')
             asyncio.run(check(root, source))
             self.assertFalse(list(root.rglob('*.sqlite3')))

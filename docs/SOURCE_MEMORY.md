@@ -25,6 +25,25 @@ No initialization is required. Missing files or changed evidence return
 `needs_input`; missing SQLite FTS5 returns `manual_required`. No model API,
 training, persistent index, token inference or speed guarantee is involved.
 
+## Diagnose excluded evidence
+
+Successful CLI and MCP context results include `exclusion_reasons`, an additive
+version 1.0 output field. Counts use one primary reason per excluded record in
+this order: `unapproved`, `conflicting`, `missing_source_hash`, then
+`invalid_source_hash`. Their sum equals `excluded_fact_count`; zero categories
+remain visible. A pending record with no hash counts as unapproved, not twice.
+Here `unapproved` means the record lacks one of the two supported approval-state
+labels below; it does not assert that the candidate's underlying claim is false.
+
+This explains thin or empty retrieval without returning excluded claims, paths
+or IDs. It does not approve records or write hashes. For already reviewed facts,
+inspect their existing evidence and record its actual byte hash through your
+normal evidence-maintenance process. Do not hash a generated claim as its own
+proof, alter approval states to improve coverage, or ignore conflicts. A valid
+hash does not prove semantic truth or currency. Stale, escaping or malformed
+qualifying evidence still fails the entire request; diagnostic counts never
+turn that failure into a partial success. See [fictional QA](SOURCE_MEMORY_QA.md).
+
 ## Optional MCP
 
 Use an interpreter with the existing hash-locked `requirements-plugins.lock`

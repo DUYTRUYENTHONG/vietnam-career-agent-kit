@@ -33,6 +33,8 @@ is a separate explicit command. See [local fine-tuning](LOCAL_FINETUNING.md).
 read-only bridge for older hash-bound fact arrays. They never initialize/open a
 campaign database. This is source retrieval only, not a ledger migration or
 normal job/profile-bound writing validation. See [contract](SOURCE_MEMORY.md).
+Additive exclusion counts explain the first blocking eligibility reason for
+each omitted record without exposing its claim or repairing/promoting evidence.
 
 `core/career_drafting.py` extends current confirmed-fact retrieval with reproducible
 job/profile-bound writing briefs and structural citation checks. CLI and the
