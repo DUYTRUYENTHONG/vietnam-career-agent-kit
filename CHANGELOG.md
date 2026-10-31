@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Source-memory exclusion diagnostics
+
+- Explain omitted source records with bounded aggregate counts for unapproved,
+  conflicting, missing-hash and invalid-hash evidence. Each omitted record counts
+  once, and excluded claims stay out of retrieval output.
+- Preserve eligibility, stale-source failures, read-only boundaries and approval
+  rules. CLI and the existing MCP tool share the additive output field.
+
 ## Unreleased - Current-prompt Qwen evaluation findings
 
 - Give Windows fictional-test jobs a bounded 25-minute budget after a verified

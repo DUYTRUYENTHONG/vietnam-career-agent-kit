@@ -51,6 +51,45 @@ class SourceMemoryTests(unittest.TestCase):
         self.assertEqual(3, data['excluded_fact_count'])
         self.assertEqual(['F1'], [f['id'] for f in data['facts']])
 
+    def test_exclusion_diagnostics_count_each_record_once_without_exposing_claims(self):
+        hidden = 'Fictional excluded claim must never enter retrieved context.'
+        variants = [
+            dict(self.fact, fact_id='F2', approval_state='pending'),
+            dict(self.fact, fact_id='F3', conflict='unresolved'),
+            dict(self.fact, fact_id='F4', source_sha256=None),
+            dict(self.fact, fact_id='F5', source_sha256='NOT-A-HASH'),
+            dict(self.fact, fact_id='F6', approval_state='pending', conflict='unresolved', source_sha256=None),
+            dict(self.fact, fact_id='F7', conflict='unresolved', source_sha256=None),
+            dict(self.fact, fact_id='F8', source_sha256=''),
+            dict(self.fact, fact_id='F9', source_sha256=False),
+        ]
+        self.write([self.fact, *[dict(f, exact_claim=hidden) for f in variants]])
+        before = {p: p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
+        data = source_context(self.root, 'API').data
+        self.assertEqual({'unapproved': 2, 'conflicting': 2,
+                          'missing_source_hash': 2, 'invalid_source_hash': 2},
+                         data['exclusion_reasons'])
+        self.assertEqual(8, sum(data['exclusion_reasons'].values()))
+        self.assertEqual(8, data['excluded_fact_count'])
+        self.assertEqual(1, data['verified_fact_count'])
+        self.assertNotIn(hidden, json.dumps(data))
+        self.assertEqual(before, {p: p.read_bytes() for p in self.root.rglob('*') if p.is_file()})
+
+    def test_cli_explains_empty_retrieval_without_approving_or_hashing_records(self):
+        fact = dict(self.fact); fact.pop('source_sha256')
+        self.write([fact])
+        before = {p: p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
+        script = Path(__file__).resolve().parents[1]/'scripts/source_memory.py'
+        result = subprocess.run([sys.executable, str(script), '--data-dir', str(self.root),
+                                 '--query', 'API'], capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stderr)
+        output = json.loads(result.stdout)
+        self.assertEqual([], output['data']['facts'])
+        self.assertEqual(1, output['data']['exclusion_reasons']['missing_source_hash'])
+        self.assertTrue(output['issues'])
+        self.assertFalse(output['data']['authority_granted'])
+        self.assertEqual(before, {p: p.read_bytes() for p in self.root.rglob('*') if p.is_file()})
+
     def test_literal_query_whole_fact_budget_and_duplicate_identity(self):
         self.assertEqual([], source_context(self.root, 'API', max_chars=1).data['facts'])
         self.assertEqual('F1', source_context(self.root, 'API" OR * --').data['facts'][0]['id'])

@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+Source-memory exclusion diagnostics are an additive field in the existing local
+CLI/MCP context result. Eight fictional standard-library/CLI tests verify reason
+counts, unchanged source bytes and existing rejection boundaries. This is not
+native host-discovery, semantic-review or outcome-uplift evidence. See
+[contract](SOURCE_MEMORY.md) and [QA scope](SOURCE_MEMORY_QA.md).
+
 [Local paired generation](LOCAL_PAIR_GENERATION.md) is **Experimental**, an
 opt-in CPU adapter over existing reviewed CV exports and completed local LoRA
 runs. Standard-library tests patch generation; real runtime evidence must name
