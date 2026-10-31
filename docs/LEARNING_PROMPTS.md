@@ -6,6 +6,11 @@ and one-step LoRA models. A vague request for "language/sections" did not tell
 the generator the complete nested output shape. This change supplies that shape
 and the current assessed evidence; improved model output remains unproven.
 
+The subsequent [current-prompt CPU experiment](LOCAL_PAIR_QA.md#current-version-11-prompt-experiment)
+also failed strict output validation for both base and a matching one-step LoRA.
+Incorrect fact links/qualifiers remained visible despite lower held-out loss.
+No default model or workflow was changed.
+
 ## Version and compatibility
 
 | Export manifest | Generation prompt | Validation |

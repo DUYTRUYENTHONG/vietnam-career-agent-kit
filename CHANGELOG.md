@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Current-prompt Qwen evaluation findings
+
+- Document the actual version 1.1 prompt/one-step LoRA CPU comparison, observed
+  tokens and distinct generation/loading/training timings.
+- Record both strict-contract failures and observed fact-link/qualifier errors
+  despite lower held-out loss. Keep the working host flow; no model promotion,
+  dependency, code behavior, candidate-fact change or application authority.
+
 ## Unreleased - Matched local base/LoRA generation
 
 - Add an opt-in CPU runner over an existing current reviewed CV export and its

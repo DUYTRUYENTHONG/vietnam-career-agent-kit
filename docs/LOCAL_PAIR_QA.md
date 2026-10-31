@@ -68,3 +68,49 @@ The actual model process loaded the runner before the final raw-text/symlink
 guards were added; focused regressions cover those final guards separately.
 The exercised normal local path and model outputs were within those bounds.
 See [interface and limits](LOCAL_PAIR_GENERATION.md).
+
+## Current version 1.1 prompt experiment
+
+A second explicit experiment used the existing fictional
+`cv-wording-json-2` export and a newly trained matching one-step LoRA adapter.
+Same provisioned Qwen3-0.6B revision/environment, CPU and four OMP/MKL threads;
+one training example and one held-out job/output group with synthetic fixture
+reviews. No candidate data, new download or independent human-review claim.
+
+The complete assistant-masked examples were 1,556 train / 1,558 held-out tokens,
+within the unchanged 2,048-token training limit without truncation. Training plus
+epoch evaluation took 301,239 ms. Held-out assistant-token NLL fell from
+0.438964 to 0.318782 (perplexity 1.551100 to 1.375452); these are teacher-forced
+loss measurements, not faithful or useful free-generation evidence.
+
+Matched generation used only the same held-out system/user messages, greedy
+decoding and 1,024 maximum new tokens:
+
+| Measurement | Base | New LoRA |
+|---|---:|---:|
+| Input tokens | 1,133 | 1,133 |
+| Output tokens | 1,024 | 757 |
+| Generation time, excludes loading | 551,020 ms | 367,228 ms |
+| Whole call time, includes loading/imports | 580,714 ms | 398,454 ms |
+| Strict JSON contract validity | Failed | Failed |
+| Independent factuality/specificity score | Not recorded | Not recorded |
+
+Total runner wall time was 992,087 ms. Three final artifact hash bindings were
+rechecked. Raw model outputs remain unchanged; there was no repair, fact/CV
+import, positive review label or model promotion. Tests overlapped part of the
+CPU experiment; this is one observed workload, not a controlled speed comparison.
+
+Unblinded maintainer inspection found additional problems beyond fences: the
+base hit its output cap mid-object, used source IDs instead of fact IDs, and
+omitted the education statement's fictional qualifier. The adapter linked the
+SQL fact F1 to unrelated employment, education and language statements and used
+invalid locators; both supplied extra/wrong structural fields. This inspection
+is separate from strict validation and is not an independent semantic score.
+
+**Neither model is accepted for tailoring.** The lower loss and fuller prompt
+did not establish valid, source-faithful generation in this fixture. Preserve the
+working host-agent drafting/review flow. Before another quality experiment,
+prepare diverse genuinely independently reviewed data, held-out/absent-skill and
+qualifier cases, and an explicit hardware/latency plan. Do not repeat tiny-fixture
+training to manufacture a passing quality claim. Larger Qwen variants remain
+unbenchmarked candidates, not automatic upgrades or an approved default.
