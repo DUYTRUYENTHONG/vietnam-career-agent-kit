@@ -1,5 +1,9 @@
 # Bulk discovery performance increment
 
+The same bounded transport also supports [public Ashby discovery](ASHBY_DISCOVERY.md)
+through `discover-ashby`. The historical benchmark below measured the fictional
+Greenhouse workload; it is not a live Ashby performance comparison.
+
 ## Architecture review, 22 October 2026
 
 The CLI already combines launch and successor actions, while retaining durable

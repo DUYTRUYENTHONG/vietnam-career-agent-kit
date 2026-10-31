@@ -240,6 +240,7 @@ python scripts/check_repository.py
 [Thiết lập/nâng cấp/gỡ bỏ](docs/setup.md) · [Đóng góp](CONTRIBUTING.md) · [Bảo mật](SECURITY.md) · [Lộ trình](docs/roadmap.md) · [Nguồn tham khảo và giấy phép](THIRD_PARTY_NOTICES.md). Tác vụ phát triển chỉ dùng dữ liệu hư cấu, không gửi đơn thử đến doanh nghiệp thật. Sản phẩm không cam kết việc làm, phỏng vấn hay điểm ATS.
 
 Khám phá hàng loạt bảng việc làm Greenhouse: `discover-greenhouse`, chỉ đọc công khai, không nộp hồ sơ. [Giới hạn và đo hiệu năng](docs/BULK_DISCOVERY.md).
+`discover-ashby` [đọc các vị trí được niêm yết công khai trên Ashby](docs/ASHBY_DISCOVERY.md), giữ riêng thông tin hybrid/remote và loại hợp đồng. Lệnh không truy cập CV hoặc nộp hồ sơ.
 
 [Bảo vệ nhánh](docs/BRANCH_PROTECTION.md) mô tả mẫu cấu hình và việc xác minh
 riêng trên GitHub. Tệp cấu hình trong repo không tự chứng minh chính sách đã

@@ -54,6 +54,12 @@ remain manual; this command does not grant fill/upload/submission permission.
 
 Dated source coverage and candidate job inputs with verified or explicitly unverified status.
 
+For verified Ashby board names, use `discover-ashby` with the same board/worker
+bounds. See ../../../docs/ASHBY_DISCOVERY.md. It returns listed posts only and
+preserves raw workplace/employment metadata. Ashby's isRemote flag includes
+hybrid roles: never infer Vietnam eligibility from it, and never treat Intern
+as regular employment. Neither reader imports candidates or submits applications.
+
 ## Failure behavior
 
 Unknown source permission stays manual. Blocked/unreadable is unverified, not closed; no universal coverage claim.

@@ -139,6 +139,8 @@ existing engine scope and host confirmations remain effective.
 
 Bulk public Greenhouse discovery is available through `discover-greenhouse`.
 See [the bounded reader, benchmark and performance limits](docs/BULK_DISCOVERY.md).
+`discover-ashby` adds [listed-only public Ashby reads](docs/ASHBY_DISCOVERY.md),
+with explicit hybrid/remote and employment metadata; it never submits.
 
 [Standing authorization](docs/STANDING_AUTHORIZATION.md) reuses one approved
 recipient/answer/consent scope across later reviewed CVs and finite batches.
