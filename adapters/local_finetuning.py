@@ -1,4 +1,4 @@
-"""Opt-in offline LoRA experiment over an exact current reviewed CV export.
+"""Opt-in offline LoRA experiment over an exact current reviewed task export.
 
 No model downloads, provider calls, ledger mutations or automatic promotion.
 Heavy dependencies are imported only by the explicitly invoked training runner.
@@ -18,9 +18,21 @@ from core.documents import Documents
 from core.workflow import WorkflowError
 
 
-def prepare(work, directory, model_directory, output):
+def validate_dataset(work, directory, task='cv-wording'):
+    if task=='cv-wording':
+        manifest=work.inside(directory)/'manifest.json'
+        if manifest.is_file() and work.private_json(manifest).get('task') not in (None,'cv-wording'):
+            raise WorkflowError('blocked','Dataset task differs; select its explicit supported training task')
+        return check_export(work,directory)
+    if task=='career-growth':
+        from core.career_growth import check_export as check_growth_export
+        return check_growth_export(work,directory)
+    raise ValueError('task: cv-wording or career-growth')
+
+
+def prepare(work, directory, model_directory, output, *, task='cv-wording'):
     """Validate current reviews and load their exact immutable train/eval rows."""
-    checked = check_export(work, directory).data
+    checked = validate_dataset(work, directory, task).data
     if not checked['ready_for_split']:
         raise ValueError('Need at least two independent reviewed groups; export has no held-out split')
     model = Path(model_directory).resolve(strict=True)
@@ -36,7 +48,7 @@ def prepare(work, directory, model_directory, output):
         rows[split] = [json.loads(line)['messages'] for line in
                        (source/filename).read_text(encoding='utf8').splitlines()]
     # Recheck after reading so edited/stale bytes cannot silently enter training.
-    if check_export(work, directory).data['manifest_fingerprint'] != checked['manifest_fingerprint']:
+    if validate_dataset(work, directory, task).data['manifest_fingerprint'] != checked['manifest_fingerprint']:
         raise ValueError('Dataset changed during preparation')
     return model, target, rows, checked['manifest_fingerprint']
 
@@ -79,7 +91,7 @@ def model_hashes(directory):
 
 
 def train(work, directory, model_directory, output, *, target_modules,
-          epochs=2, learning_rate=0.0002, max_length=2048, device='cpu'):
+          epochs=2, learning_rate=0.0002, max_length=2048, device='cpu', task='cv-wording'):
     """Small batch-one LoRA baseline, assistant-token-weighted held-out NLL.
 
     This is not a production trainer, QLoRA implementation or quality approval.
@@ -91,7 +103,7 @@ def train(work, directory, model_directory, output, *, target_modules,
             device not in ('cpu', 'cuda') or not isinstance(target_modules, list) or
             not target_modules or any(not isinstance(x, str) or not x.strip() for x in target_modules)):
         raise ValueError('Invalid bounded training configuration')
-    model_path, target, rows, fingerprint = prepare(work, directory, model_directory, output)
+    model_path, target, rows, fingerprint = prepare(work, directory, model_directory, output, task=task)
     # Enforce offline library behavior before importing optional dependencies.
     os.environ['HF_HUB_OFFLINE'] = '1'
     os.environ['TRANSFORMERS_OFFLINE'] = '1'
@@ -110,7 +122,7 @@ def train(work, directory, model_directory, output, *, target_modules,
                                                 trust_remote_code=False, use_safetensors=True)
     model.to(device)
     model.config.use_cache = False
-    settings = {'schema_version': '1.0', 'dataset_fingerprint': fingerprint,
+    settings = {'schema_version': '1.0', 'task': task, 'dataset_fingerprint': fingerprint,
         'model_config_hash': canonical_hash(json.loads((model_path/'config.json').read_text(encoding='utf8'))),
         'base_model_directory': str(model_path), 'epochs': epochs, 'learning_rate': learning_rate,
         'base_model_files': identity,
@@ -121,7 +133,7 @@ def train(work, directory, model_directory, output, *, target_modules,
         'token_lengths': {split: histogram(values) for split, values in encoded.items()},
         'training_performed': False, 'promoted': False, 'provider_calls': 0}
     # Revalidate before reserving a run; failures leave no successful completion marker.
-    if check_export(work, directory).data['manifest_fingerprint'] != fingerprint:
+    if validate_dataset(work, directory, task).data['manifest_fingerprint'] != fingerprint:
         raise ValueError('Dataset changed before training')
     target.mkdir(parents=True, exist_ok=False)
     (target/'config.json').write_text(json.dumps(settings, indent=2), encoding='utf8')
@@ -172,7 +184,7 @@ def train(work, directory, model_directory, output, *, target_modules,
         losses.append({'epoch': epoch+1, 'evaluation': evaluate()})
     synchronize(); duration = (perf_counter()-started)*1000
     # Check for revoked/changed source reviews before labelling any saved run complete.
-    if check_export(work, directory).data['manifest_fingerprint'] != fingerprint:
+    if validate_dataset(work, directory, task).data['manifest_fingerprint'] != fingerprint:
         raise ValueError('Evidence changed during training; run remains incomplete')
     model.save_pretrained(str(target/'adapter'), safe_serialization=True)
     tokenizer.save_pretrained(str(target/'adapter'))
@@ -190,6 +202,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', required=True)
     parser.add_argument('--directory', required=True, help='Existing reviewed datasets/ export')
+    parser.add_argument('--task', choices=['cv-wording','career-growth'], default='cv-wording')
     parser.add_argument('--model-directory', required=True)
     parser.add_argument('--output', required=True, help='New training/ subdirectory')
     parser.add_argument('--target-module', action='append', required=True)
@@ -200,7 +213,7 @@ def main():
     try:
         train(Documents(args.data_dir), args.directory, args.model_directory, args.output,
               target_modules=args.target_module, epochs=args.epochs,
-              max_length=args.max_length, device=args.device)
+              max_length=args.max_length, device=args.device, task=args.task)
     except (ValueError, WorkflowError, ImportError, OSError) as exc:
         parser.exit(1, f'Training not completed: {exc}\n')
     print('Local run completed; inspect private result.json. Model is not promoted or approved.')

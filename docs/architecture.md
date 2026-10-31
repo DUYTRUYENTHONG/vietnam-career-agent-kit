@@ -1,5 +1,13 @@
 # Portable core architecture
 
+`core/career_growth.py` adds a separate private development loop over current
+assessment/profile/JD/source bindings. It reuses lexical fact retrieval, writes
+immutable plan/review/evidence sidecars and exports a distinct reviewed planning
+task. CLI and career MCP share the same functions; `assess --capture-growth` is
+an explicit post-assessment integration. No application schema changes, facts,
+model calls or new authority. The offline LoRA adapter selects a task-specific
+export validator; CV wording remains its default. See [career growth](CAREER_GROWTH.md).
+
 Optional `adapters/local_finetuning.py` consumes an existing current independently
 reviewed learning export and trains a local LoRA adapter in a new private run
 directory. Heavy model dependencies stay outside the core; no DB changes,

@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -39,9 +40,15 @@ class HookTests(unittest.TestCase):
     def test_session_and_stop_never_resume_or_access_transcript(self):
         with tempfile.TemporaryDirectory() as folder:
             for event in ['SessionStart','Stop']:
-                result=self.guard.handle({'hook_event_name':event,'transcript_path':'never-read-this'},'codex',Path(folder))
+                with patch.object(Path,'read_text',side_effect=AssertionError('No transcript access')):
+                    result=self.guard.handle({'hook_event_name':event,'transcript_path':'never-read-this'},'codex',Path(folder))
                 self.assertNotIn('continue',result)
                 self.assertIn('systemMessage',result)
+                self.assertIn('growth-context',result['systemMessage'])
+                self.assertIn('growth-capture',result['systemMessage'])
+                self.assertIn('--data-dir',result['systemMessage'])
+                self.assertIn('--job-id',result['systemMessage'])
+                self.assertEqual([],list(Path(folder).iterdir()))
 
     def test_invalid_input_has_no_allow_decision(self):
         with self.assertRaises(ValueError):self.guard.read_event(io.StringIO('not-json'))

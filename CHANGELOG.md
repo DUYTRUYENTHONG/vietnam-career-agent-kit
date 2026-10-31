@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Evidence-gap development loop
+
+- Collect partial/missing/unknown requirements across current assessments with
+  source/profile/JD/assessment bindings and local confirmed-fact RAG context.
+- Add explicit private plan capture, independent-review records and actual
+  project-artifact evidence proposals; preserve the boundary with CV facts.
+- Export a distinct reviewed career-growth training/evaluation task with grouped
+  splits, reconstruction checks and explicit offline LoRA task selection.
+- Expose CLI/MCP commands, an opt-in post-assessment capture, existing skill
+  owners, a coach prompt and reminder-only hooks. No new model API, migration,
+  native agent installation, automatic training/promotion or application authority.
+
 ## Unreleased - Explicit learning-output contract
 
 - Export version 1.1 with the canonical CV wording JSON schema, assessed fact

@@ -1,5 +1,11 @@
 # Vertical-slice roadmap
 
+Experimental [career growth](CAREER_GROWTH.md) implements current gap capture,
+retrieval-augmented planning context, reviewed private plans/evidence proposals
+and separate reviewed training exports with explicit offline task selection.
+Native coaching-agent/hook installation, autonomous course research, paired
+growth-model generation quality and automatic CV fact promotion are not implied.
+
 Experimental optional local LoRA training is separate from reviewed dataset export.
 The runner compares held-out assistant-token loss against the base model; semantic
 CV quality, production inference and automatic host integration are still pending.

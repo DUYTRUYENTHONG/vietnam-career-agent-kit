@@ -25,6 +25,13 @@ paid tenure or measured business impact. Keep proposed additions separate from
 confirmed facts until their actual review. Never borrow internet examples as
 candidate accomplishments.
 
+For development-plan artifacts, follow ../../../docs/CAREER_GROWTH.md.
+`growth-evidence` records an existing file hash and contribution note as submitted
+for candidate review; it does not establish completion, authorship, skill or
+paid tenure. Review actual work and assistance, import its authorized evidence,
+confirm the exact changed profile and reassess before any CV wording. Never
+promote a proposed learning task, tutorial, course or model output as a fact.
+
 Run import-cv, then import-profile. Map exact claim/quote/source/locator/status and conflict keys. Inspect profile, ask only unresolved facts, then record confirm-profile only after actual review of its exact fingerprint. Never create user confirmation on behalf of a real person.
 
 For opt-in v2 grouped history, retain exact context facts and use reviewed

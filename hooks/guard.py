@@ -45,9 +45,9 @@ def handle(event,host,data_dir):
         os.replace(temporary,target)
         return {'systemMessage':'File edit observed. Earlier local approvals are stale; check the exact current package before any disclosure.'}
     if name=='SessionStart':
-        return {'systemMessage':'Vietnam career kit: preparation-only. Use the approved private directory and check unfinished ledger state. No background browsing or submission is authorized by this hook.'}
+        return {'systemMessage':'Vietnam career kit: preparation-only. Use the approved private directory and check unfinished ledger state. After an assessment, explicitly run growth-context or growth-capture with --data-dir and --job-id to inspect learning gaps. No background browsing or submission is authorized by this hook.'}
     if name=='Stop':
-        return {'systemMessage':'Report actual artifacts, verified application states and blockers. Do not infer submission or restart work automatically.'}
+        return {'systemMessage':'Report actual artifacts, verified application states and blockers. After an assessment, mention explicit growth-context or growth-capture with --data-dir and --job-id for learning gaps. Do not infer submission or restart work automatically.'}
     return {}
 
 def main():

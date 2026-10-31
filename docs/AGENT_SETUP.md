@@ -121,6 +121,7 @@ flowchart TD
 | Coordinator | User scope, ledger and compact evidence references | Assignments, exact requests, saved receipts; sole ledger writer |
 | Research | Role filters and permitted public URLs | Sources and gaps; no CV, private contacts or account access |
 | Tailor/reviewer | Selected candidate evidence, JD and draft | Supported wording and review findings; cannot approve itself |
+| Gap/evidence coach | Current assessed gaps and related confirmed-fact context | Proposed learning/project tasks and proof to collect; no claimed completion or fact promotion; distinct plan reviewer |
 | Browser lane | One issued request and its job/session binding | Observed protocol receipt; no ledger writes or mutation retries |
 
 Start with one lane. Before using two or more, verify independent session

@@ -1,5 +1,11 @@
 # Local CV-wording LoRA experiments
 
+The default task remains `cv-wording`. Optional `--task career-growth` consumes
+the separate [reviewed development-plan export](CAREER_GROWTH.md); its validator
+reconstructs current plan/review/assessment bindings. The tasks cannot be silently
+interchanged. Growth tests cover preparation boundaries, not a trained coaching
+model's quality or automatic promotion.
+
 Experimental, opt-in `adapters/local_finetuning.py` trains an adapter over the
 existing independently reviewed `learning-export` dataset. It does not modify
 the standard-library core, confirmation rules, candidate facts or application

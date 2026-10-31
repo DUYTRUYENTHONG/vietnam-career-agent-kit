@@ -95,6 +95,26 @@ def parser() -> Parser:
     learning.add_argument('--output',required=True,help='new datasets/ subdirectory in the private workspace')
     learning=commands.add_parser('learning-check',help='recheck dataset bytes, evidence, reviews and split consistency')
     learning.add_argument('--directory',required=True)
+    for name in ['growth-context','growth-capture']:
+        growth=commands.add_parser(name,help='explicit local assessment-gap context or capture; no model call or fact promotion')
+        growth.add_argument('--job-id',type=int,action='append',required=True)
+    growth=commands.add_parser('growth-plan',help='import a private source-bound learning plan; never changes CV facts')
+    growth.add_argument('--file',type=Path,required=True)
+    growth=commands.add_parser('growth-review',help='record review of an exact learning plan; no application authority')
+    growth.add_argument('--fingerprint',required=True)
+    growth.add_argument('--file',type=Path,required=True)
+    growth=commands.add_parser('growth-check',help='revalidate a learning plan and current assessment evidence')
+    growth.add_argument('--fingerprint',required=True)
+    growth=commands.add_parser('growth-evidence',help='record a private learning artifact; never promotes candidate facts')
+    growth.add_argument('--fingerprint',required=True)
+    growth.add_argument('--action-id',required=True)
+    growth.add_argument('--artifact',required=True)
+    growth.add_argument('--note',required=True)
+    growth=commands.add_parser('growth-export',help='export reviewed learning plans privately; no training or upload')
+    growth.add_argument('--fingerprint',action='append',required=True)
+    growth.add_argument('--output',required=True)
+    growth=commands.add_parser('growth-check-export',help='revalidate a private reviewed learning-plan export')
+    growth.add_argument('--directory',required=True)
     init=commands.add_parser('init',help='additive local workspace initialization')
     init.add_argument('--language',choices=['en','vi'],default='en')
     starter=commands.add_parser('start-campaign',help='create private CV intake and a default 100-application goal; no extraction or submission')
@@ -112,6 +132,7 @@ def parser() -> Parser:
     for name,flag in [('assess','matrix'),('prepare','plan')]:
         cmd=commands.add_parser(name);cmd.add_argument('--job-id',type=int,required=True)
         cmd.add_argument('--'+flag,type=Path,required=True)
+        if name=='assess':cmd.add_argument('--capture-growth',action='store_true',help='capture local learning gaps only after a successful saved assessment')
     handoff=commands.add_parser('handoff');handoff.add_argument('--job-id',type=int,required=True)
     for name in ['import-wording','wording-packet','review-wording']:
         cmd=commands.add_parser(name,help='local opt-in source-bound v2 wording; no model call or disclosure')
@@ -272,6 +293,17 @@ def execute(args) -> Outcome:
         from core.learning import export_reviewed, check_export
         if command=='learning-export':return export_reviewed(work,args.job_id,args.output)
         return check_export(work,args.directory)
+    if command in {'growth-context','growth-capture','growth-plan','growth-review','growth-check',
+                   'growth-evidence','growth-export','growth-check-export'}:
+        from core import career_growth
+        if command=='growth-context':return career_growth.gap_context(work,args.job_id)
+        if command=='growth-capture':return career_growth.capture(work,args.job_id)
+        if command=='growth-plan':return career_growth.import_plan(work,work.private_json(args.file))
+        if command=='growth-review':return career_growth.review_plan(work,args.fingerprint,work.private_json(args.file))
+        if command=='growth-check':return career_growth.check_plan(work,args.fingerprint)
+        if command=='growth-evidence':return career_growth.record_evidence(work,args.fingerprint,args.action_id,args.artifact,args.note)
+        if command=='growth-export':return career_growth.export_reviewed(work,args.fingerprint,args.output)
+        return career_growth.check_export(work,args.directory)
     if command in {'performance-record','performance-report'}:
         from core.performance import record, report, export
         if command=='performance-record':return record(work,work.private_json(args.file))
@@ -328,7 +360,23 @@ def execute(args) -> Outcome:
     if command=='confirm-profile':return work.confirm_profile(args.fingerprint,args.confirmation)
     if command=='import-jd':return work.import_job(load_input(args.file))
     if command=='duplicate-candidates':return work.duplicate_candidates(args.job_id)
-    if command=='assess':return work.assess(args.job_id,load_input(args.matrix))
+    if command=='assess':
+        result=work.assess(args.job_id,load_input(args.matrix))
+        if not args.capture_growth or result.outcome!='ok':return result
+        try:
+            from core.career_growth import capture
+            captured=capture(work,[args.job_id])
+        except WorkflowError as error:
+            captured=Outcome(error.outcome,{},[str(error)])
+        except (ContractError,ValueError,TypeError,KeyError,OSError) as error:
+            captured=Outcome('needs_input',{},[str(error)])
+        except sqlite3.Error as error:
+            captured=Outcome('failed',{},['Growth capture SQLite operation failed: '+str(error)])
+        issues=list(result.issues)
+        if captured.outcome!='ok':
+            issues.append('Assessment was saved; growth capture did not complete. Inspect growth_capture and retry growth-capture explicitly.')
+        return Outcome(result.outcome,{**result.data,'growth_capture':captured.json()},issues,
+                       result.message,result.schema_version)
     if command=='prepare':return work.prepare(args.job_id,load_input(args.plan))
     if command=='import-wording':
         result=work.import_wording(args.job_id,work.private_json(args.file))

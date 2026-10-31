@@ -28,9 +28,22 @@ class CareerMCPTests(unittest.TestCase):
                         self.assertEqual({'performance_record', 'performance_report', 'career_context',
                                           'career_email_context', 'campaign_tracker', 'career_evaluate',
                                           'learning_export', 'learning_check', 'career_writing_brief',
-                                          'career_check_draft'}, set(tools))
+                                          'career_check_draft', 'career_gap_context', 'career_growth_capture',
+                                          'career_growth_plan', 'career_growth_review', 'career_growth_check',
+                                          'career_growth_evidence', 'career_growth_export',
+                                          'career_growth_check_export'}, set(tools))
                         self.assertTrue(tools['career_context'].annotations.readOnlyHint)
                         self.assertFalse(tools['performance_record'].annotations.openWorldHint)
+                        self.assertTrue(tools['career_gap_context'].annotations.readOnlyHint)
+                        self.assertFalse(tools['career_growth_capture'].annotations.readOnlyHint)
+                        gaps = await session.call_tool('career_gap_context', {'job_ids': [1]})
+                        gap_packet = json.loads(gaps.content[0].text)
+                        self.assertEqual('ok', gap_packet['outcome'])
+                        self.assertEqual([], gap_packet['data']['gaps'])
+                        self.assertFalse(gap_packet['data']['authority_granted'])
+                        captured = await session.call_tool('career_growth_capture', {'job_ids': [1]})
+                        self.assertEqual('ok', json.loads(captured.content[0].text)['outcome'])
+                        self.assertTrue((workspace/json.loads(captured.content[0].text)['data']['path']).is_file())
                         result = await session.call_tool('career_context', {'query': 'SQL', 'limit': 1})
                         self.assertFalse(result.isError)
                         packet = json.loads(result.content[0].text)

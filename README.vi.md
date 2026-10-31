@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+[Lộ trình bổ sung kiến thức và bằng chứng dự án](docs/CAREER_GROWTH.md): tổng hợp
+yêu cầu còn thiếu từ JD, truy xuất bằng chứng đã xác nhận bằng RAG cục bộ, lập
+kế hoạch học/thực hành và xuất dữ liệu kế hoạch đã duyệt cho LoRA. Kế hoạch hay
+kết quả AI tạo ra không tự trở thành kinh nghiệm trong CV.
+
 [Plugin email và trình duyệt cục bộ](docs/LOCAL_PLUGINS.md): đăng nhập Google
 qua OAuth, gửi CV theo phạm vi đã duyệt và mở các cửa sổ ứng tuyển độc lập.
 Công cụ MCP cục bộ; chưa phải dịch vụ công khai hoặc xác minh gửi email thật.
