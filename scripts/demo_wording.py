@@ -43,6 +43,9 @@ def seed(directory, candidate='data', language='en'):
     work.confirm_profile(fingerprint, work.atomic_text('inputs/confirmation.txt', 'CONFIRM PROFILE '+fingerprint))
     job = json.loads((ROOT/'examples/fictional/job.json').read_text(encoding='utf8'))
     job.update(title=title, document_language=language,
+        raw_jd=('FICTIONAL LOCAL DEMONSTRATION ONLY. '
+                f'{skill} project experience required; relevant certification preferred. '
+                'No real application destination exists.'),
         requirements=[{'id': 'R1', 'text': skill+' project experience', 'field': 'skill', 'value': skill,
                        'mandatory': True, 'hard': False},
                       {'id': 'R2', 'text': 'Relevant certification preferred', 'field': 'certification',

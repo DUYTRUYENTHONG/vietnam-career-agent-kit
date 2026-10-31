@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Consistent fictional fine-tuning job inputs
+
+- Align the wording demo's complete raw JD with its role-specific structured
+  skill requirement and certification preference for data, technical and
+  commercial fixtures, instead of inheriting contradictory SQL/documentation text.
+- Add a model-free regression and document dataset semantic review. Existing
+  exports, reviews and model runs stay unchanged; no automatic retraining,
+  candidate approval, model promotion or quality improvement is claimed.
+- Record a separately prompted blind agent review of the two existing fictional
+  outputs: both failed factuality/qualifier review. Keep its tiny workload,
+  fixture inconsistency and unauthenticated agent-review limits explicit.
+
 ## Unreleased - Private blinded wording review packets
 
 - Prepare shuffled raw base/adapter drafts with current JD/source evidence and

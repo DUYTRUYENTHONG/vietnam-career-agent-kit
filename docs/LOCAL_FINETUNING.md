@@ -88,6 +88,16 @@ Contact headers are omitted by the exporter, but facts can still identify people
 The split groups job revisions/exact output duplicates; semantic leakage is still
 possible and needs dataset review. Email training examples are not implemented.
 
+Check that the complete raw JD and its structured requirements describe the same
+job before dataset review. Structural/source-hash checks cannot prove semantic
+agreement. The fictional wording seed previously retained a SQL/documentation JD
+while replacing its structured requirements with role-specific skills and a
+certification preference. New seeds now align both representations for all three
+demo roles; a regression exercises them without loading a model. Keep historical
+exports and failed runs unchanged. A corrected fixture needs a new reviewed export
+and separately recorded run; it does not retroactively improve old results or
+establish candidate-model quality.
+
 The runner revalidates current source/review fingerprints, rejects stale exports,
 refuses existing run directories and reports token-length distributions. Prompt
 tokens are masked; assistant tokens supply the loss. Overlength examples or

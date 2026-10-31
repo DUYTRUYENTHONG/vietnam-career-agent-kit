@@ -122,3 +122,38 @@ prepare diverse genuinely independently reviewed data, held-out/absent-skill and
 qualifier cases, and an explicit hardware/latency plan. Do not repeat tiny-fixture
 training to manufacture a passing quality claim. Larger Qwen variants remain
 unbenchmarked candidates, not automatic upgrades or an approved default.
+
+### Subsequent variant-blinded agent review
+
+A separately prompted agent reviewed only the two opaque reviewer-packet cases
+from the version 1.1 experiment, with raw drafts, full JD and source facts. The
+operator key, original runs, variant identities and reference answers were
+withheld. The coordinator then bound the returned observations to the exact
+case/output hashes in a new runs copy and reran the existing offline evaluator.
+Original raw generations, exports and training records were not changed.
+
+| One held-out example per variant | Base | LoRA |
+|---|---:|---:|
+| Strict contract valid | No | No |
+| Agent-reviewed factuality | Failed | Failed |
+| Agent-reviewed qualifier preservation | Failed | Failed |
+| Agent-reviewed specificity, 1–5 | 2 | 1 |
+
+The review evaluates the complete artifact, including source and requirement
+bindings; failure does not mean every prose sentence is fabricated. It identified
+the missing fictional education qualifier in the base and unsupported SQL fact
+bindings/omitted SQL work in the adapter. Invalid and truncated raw JSON stayed
+invalid; no repair or unseen continuation received credit.
+
+It also found a fixture-design inconsistency: the raw JD preferred requirements
+documentation while structured R2 preferred certification. Technical/commercial
+seeds inherited the unrelated SQL text too. The wording demo now aligns the raw
+JD with each role's structured requirements, with a model-free regression for all
+three roles. Historical datasets/runs retain the defect; corrected seeds require
+new exports and separate review before another experiment.
+
+These are two actual agent assessments over one synthetic held-out fixture, not
+human verification, authenticated reviewer identity, candidate training labels,
+population statistics or a generalization/model-quality comparison. Host review
+tokens/model identity were unavailable and remain unknown. No new generation,
+training, candidate import, application or model promotion occurred.
