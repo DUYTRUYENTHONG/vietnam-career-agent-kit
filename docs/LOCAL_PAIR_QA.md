@@ -64,6 +64,14 @@ does not establish generalization, CV quality or an admission/interview uplift.
 - All six exact-head protected-branch CI checks remain required before merge.
   A completed local/model run does not establish remote CI success.
 
+PR37's first Windows/Python3.12 job was cancelled at the workflow's 10-minute
+limit while executing source-freshness tests; the runner annotation explicitly
+reported the deadline. No assertion failure was recorded. The Windows job budget
+is now bounded at 25 minutes, accommodating the observed 22-minute local suite
+and runner variance; Linux retains 10 minutes. Test commands, assertions,
+per-action deadlines and all six protected checks remain unchanged. The new head
+must pass the complete matrix; the cancelled run is not a passing QA result.
+
 The actual model process loaded the runner before the final raw-text/symlink
 guards were added; focused regressions cover those final guards separately.
 The exercised normal local path and model outputs were within those bounds.
