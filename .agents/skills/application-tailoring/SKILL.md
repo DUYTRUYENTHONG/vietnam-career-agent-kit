@@ -97,6 +97,11 @@ and base-model comparison. A completed run is not evidence of improved tailoring
 evaluate unseen-JD factuality and specificity before explicit host integration.
 Never learn from unreviewed drafts, invent training results or bypass review.
 
+For paired recorded base/adapter generations, follow
+../../../docs/WORDING_EVALUATION.md. Evaluate every current held-out example;
+keep exact-output-bound independent review separate from contract validity and
+reference matching. Missing measurements stay unknown; reports grant no promotion.
+
 Markdown CV draft, private source map, hashes and review_required state.
 
 V2 additionally returns the actual wording fingerprint and optional compact

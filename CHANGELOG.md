@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Held-out wording comparison
+
+- Add an offline paired base/adapter evaluation report for current reviewed
+  exports: strict JSON, existing source/qualifier contracts, complete held-out
+  coverage, exact-output review hashes and optional observed metrics.
+- Keep semantic scores caller-reported, missing usage unknown and all promotion,
+  CV import and disclosure decisions separate. No new SDK or model call.
+
 ## Unreleased - Optional local CV LoRA experiments
 
 - Add a separate offline LoRA runner for current independently reviewed CV exports,
