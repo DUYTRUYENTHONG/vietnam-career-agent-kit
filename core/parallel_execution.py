@@ -190,7 +190,7 @@ class ParallelExecutor(Executor):
         return self.parallel_status(run_id)
 
 
-def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120):
+def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120, cleanup_workers=1):
     """Execute up to ten independent sessions, recording receipts out of order.
 
     All receipt/state writes execute on this caller's thread. Bridges may read
@@ -200,20 +200,19 @@ def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120
     if (type(action_timeout_seconds) not in {int, float} or
             not math.isfinite(action_timeout_seconds) or not 0 < action_timeout_seconds <= 3600):
         raise ContractError('Action timeout must be finite and in (0, 3600] seconds')
+    if type(cleanup_workers) is not int or not 1 <= cleanup_workers <= 10:
+        raise ContractError('Cleanup workers must be an integer from 1 to 10')
     status = work.parallel_status(run_id)
     if status.data['pending']:
         raise WorkflowError('needs_input','Outstanding actions require reconciliation before restarting workers')
     workers = status.data['workers']
-    errors = [];cleanup_issues=[];attempted_cleanup=set();quarantined={}
-    from .bounded_workers import BoundedWorkers, bounded_call
+    if cleanup_workers > workers:
+        raise ContractError('Cleanup workers cannot exceed approved application worker capacity')
+    errors = [];quarantined={}
+    from .bounded_workers import BoundedWorkers
+    from .parallel_cleanup import ParallelCleanup
     from .manifests import now_utc, timestamp
-    class CleanupBridge:
-        def close_application_tab(self, item):
-            handler=getattr(bridge,'close_application_tab',None)
-            if not callable(handler):
-                raise RuntimeError('Bridge has no cleanup handler')
-            return bounded_call(handler,item,min(action_timeout_seconds,30))
-    cleanup_bridge=CleanupBridge() if callable(getattr(bridge,'close_application_tab',None)) else object()
+    cleanup = ParallelCleanup(work,run_id,bridge,cleanup_workers,action_timeout_seconds)
     pool=BoundedWorkers(workers)
     def perform(request):
         receipt=bridge.perform(request)
@@ -221,6 +220,7 @@ def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120
     try:
         pending = {}
         while True:
+            cleanup.collect()
             status = work.parallel_status(run_id)
             busy = {job for job,request_id,deadline in pending.values()} | set(quarantined)
             for lane in status.data['lanes']:
@@ -244,7 +244,8 @@ def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120
                 except Exception:
                     work.stop_parallel_lane(run_id,job,'Coordinator validation failed; reconcile this lane')
                     errors.append({'job_id':job,'stage':'preflight'})
-            if not pending:
+            cleanup.schedule()
+            if not pending and not cleanup.pending:
                 result = work.parallel_status(run_id)
                 result.data['worker_errors'] = errors
                 result.data['quarantined_requests'] = list(quarantined.values())
@@ -252,16 +253,15 @@ def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120
                     result=Outcome('needs_input',result.data,result.issues)
                     result.issues.append('Timed-out actions remain pending. Workers may still be running; '
                         'confirm termination and reconcile before restarting. No cancellation or receipt is inferred.')
-                cleanup=work.parallel_cleanup(run_id)
-                from .cleanup import through_bridge
-                cleanup_issues.extend(through_bridge(work._cleanup_lane(run_id),run_id,cleanup_bridge,
-                                                    cleanup.data['requests'],attempted_cleanup))
-                cleanup=work.parallel_cleanup(run_id)
-                result.data['cleanup']=cleanup.data
-                result.issues.extend(cleanup_issues+cleanup.issues)
+                cleanup_status=work.parallel_cleanup(run_id)
+                result.data['cleanup']=cleanup_status.data
+                result.data['cleanup_quarantined_requests']=cleanup.quarantined
+                result.issues.extend(cleanup.issues+cleanup_status.issues)
                 return result
-            timeout=max(0,min(item[2] for item in pending.values())-time.monotonic())
-            done,_ = wait(pending,timeout=timeout,return_when=FIRST_COMPLETED)
+            deadlines=[item[2] for item in pending.values()]+[item[1] for item in cleanup.pending.values()]
+            timeout=max(0,min(deadlines)-time.monotonic())
+            done,_ = wait(set(pending)|set(cleanup.pending),timeout=timeout,return_when=FIRST_COMPLETED)
+            cleanup.collect()
             for future in list(pending):
                 job,request_id,deadline=pending[future]
                 if future not in done and time.monotonic()>=deadline:
@@ -270,7 +270,7 @@ def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120
                     quarantined[job]={'job_id':job,'request_id':request_id,'reason':'action_deadline',
                                       'remote_termination_confirmed':False}
                     errors.append({'job_id':job,'stage':'timeout'})
-            for future in done:
+            for future in done & set(pending):
                 job,request_id,deadline = pending.pop(future)
                 try:
                     receipt,finished=future.result()
@@ -282,13 +282,9 @@ def run_parallel_with_bridge(work, run_id, bridge, *, action_timeout_seconds=120
                     if not isinstance(receipt,dict) or receipt.get('request_id')!=request_id:
                         raise WorkflowError('blocked','Worker returned another application request receipt')
                     work.record_parallel_action(run_id,receipt)
-                    if receipt.get('confirmed') is True:
-                        from .cleanup import through_bridge
-                        lane_work=work._cleanup_lane(run_id)
-                        requests=work.parallel_cleanup(run_id).data['requests']
-                        cleanup_issues.extend(through_bridge(lane_work,run_id,cleanup_bridge,requests,attempted_cleanup))
                 except Exception:
                     work.stop_parallel_lane(run_id,job,'Browser action or receipt failed; never automatically retry')
                     errors.append({'job_id':job,'stage':'perform_or_receipt'})
     finally:
         pool.close()
+        cleanup.close()

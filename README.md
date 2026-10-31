@@ -62,7 +62,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 | Try the tools without accounts or personal data | [Fictional quick start](#try-the-working-slice) |
 | Configure documents or a supported execution bridge | [Document setup](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
 | Connect your own Gmail and isolated employer windows | [Local email/browser MCP plugins](docs/LOCAL_PLUGINS.md) |
-| Understand ten-lane concurrency and TinyFish | [Parallel applications and measured limits](docs/PARALLEL_APPLICATIONS.md) |
+| Understand ten-lane concurrency, TinyFish and cleanup without holding other lanes | [Parallel applications and measured limits](docs/PARALLEL_APPLICATIONS.md) |
 
 ### Set up in four steps
 

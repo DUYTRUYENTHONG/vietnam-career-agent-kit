@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Parallel cleanup without application stalls
+
+- Run confirmed-tab cleanup in a separate bounded callback pool so a slow close
+  does not hold unrelated application lanes or coordinator receipt processing.
+- Persist exclusive close intents before dispatch; timeouts and interrupted
+  cleanup cannot automatically replay a tab close on restart. Real host receipts
+  reconcile cleanup through the existing API, without changing submission counts.
+- Preserve confirmation/evidence/ownership checks and coordinator-only writes;
+  live browser throughput and provider acceptance remain separate QA gates.
+
 ## Unreleased - Source-memory exclusion diagnostics
 
 - Explain omitted source records with bounded aggregate counts for unapproved,
