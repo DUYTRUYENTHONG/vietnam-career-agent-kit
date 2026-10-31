@@ -11,6 +11,7 @@ flowchart LR
   D --> E[Independent interpretation of comparable cohorts]
   E --> F[Separate reviewed wording experiment]
   G[Missing or changed proof] --> H[Unverified coverage; excluded from evidenced numerators]
+  H --> D
 ```
 
 The RAG/fine-tuning feedback loop needs actual recruitment observations, separate
@@ -49,6 +50,10 @@ portable-engine submissions. It never reads a mailbox or operates an employer si
   training export, consent, application action or automatic model promotion.
 
 ## CLI and local MCP
+
+`no_recorded_response` counts eligible applications with no active outcome
+supported by currently matching proof. Historical retracted or unverified events
+can still exist; the field never asserts that an employer has not replied.
 
 `outcome-record --file PRIVATE_JSON` and `outcome-report --min-age-days 14
 --as-of TIMESTAMP --job-id N` share their functions with two local career MCP

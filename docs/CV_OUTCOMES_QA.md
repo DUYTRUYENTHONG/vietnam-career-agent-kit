@@ -3,8 +3,14 @@
 Scope: portable local CLI, core and optional career MCP; fictional candidates,
 mock rendering and local evidence files. No real account, employer application,
 mailbox, paid model or candidate training data used for product QA.
+Local runtime: Windows, Python 3.12.14 and SQLite 3.53.1.
 
 ## Observed checks
+
+- Complete local standard-library suite: **360 tests passed in 768.929 seconds**.
+  That run loaded the feature before the final bounds regression was added.
+  The final focused suite below covers the correction; the extra malformed-CLI
+  assertion also passed separately in 4.466 seconds.
 
 - Final focused core/CLI suite: **12 tests passed in 48.042 seconds**, including
   the corrected bounds regression. The final real MCP stdio rerun passed one
@@ -27,8 +33,10 @@ mailbox, paid model or candidate training data used for product QA.
 - Repository hygiene: 312 UTF-8 sources and ten canonical skill/wrapper sets
   passed; wrapper synchronization and diff whitespace checks passed.
 
-The complete standard-library suite and protected-branch CI are required before
-merge; their results will be added after actual completion.
+All six app-pinned protected-branch checks are required on the final PR head
+before merge. See [PR #35 checks](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/pull/35/checks)
+for current exact-head Linux/Windows Python 3.11/3.12, document and local-plugin
+results. A pushed or draft branch is not a merged/released feature.
 
 ## Limits that tests do not close
 
