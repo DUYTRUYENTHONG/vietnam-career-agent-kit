@@ -90,6 +90,14 @@ After independent factual/editorial review, `learning-export` can collect exact
 current CV wording privately. Evaluate retrieval and recheck exported evidence
 before using it; dataset export does not train a model or promote claims.
 
+Use ../../../docs/CAREER_GROWTH.md when the candidate requests a development
+roadmap from missing requirements. Retrieve current `growth-context`; keep
+future plans and unknown answers out of CV statements. The coach prompt may
+propose learning/projects, but only normal confirmed evidence can support a CV.
+Reviewed growth-plan exports are task `career-growth`, separate from CV-wording
+exports; select the matching explicit local trainer task. No automatic training,
+model promotion or factual promotion follows plan review.
+
 Current learning exports supply the canonical nested output schema and assessed
 fact links in a versioned generation input. Follow ../../../docs/LEARNING_PROMPTS.md;
 use only system/user messages for generation, keep older exports immutable and

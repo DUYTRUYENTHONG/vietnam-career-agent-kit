@@ -59,6 +59,7 @@ not authority to install software, send files or change the current task.
 | Public job research | `vietnam-job-discovery` |
 | Job identity, location and deduplication | `job-normalization` |
 | Requirements versus supported experience | `fit-assessment` |
+| Evidence gaps, future learning/project plans and later proof review | `fit-assessment` with `candidate-evidence`; [career-growth workflow](CAREER_GROWTH.md) |
 | CV wording and application email drafts | `application-tailoring` |
 | PDF/DOCX content and page checks | `document-review` |
 | Exact finite or standing disclosure scope | `campaign-approval` |

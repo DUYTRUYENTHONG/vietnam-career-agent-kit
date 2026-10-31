@@ -37,6 +37,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 | Your next step | Open this |
 |---|---|
+| Turn missing JD evidence into learning tasks and future projects | [Career growth: RAG, reviewed plans and local LoRA export](docs/CAREER_GROWTH.md) |
 | Tailor specific evidence-backed details to every job description | [Required JD-specific tailoring contract](docs/JD_SPECIFIC_TAILORING.md) |
 | Experiment with local Qwen3 and reviewed CV-wording LoRA training | [Optional local fine-tuning](docs/LOCAL_FINETUNING.md) |
 | Compare recorded base/adapter wording on held-out jobs | [Offline evaluation and review](docs/WORDING_EVALUATION.md) |

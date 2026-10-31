@@ -1,5 +1,14 @@
 # Runtime compatibility evidence
 
+[Career growth](CAREER_GROWTH.md) is **Experimental** local CLI/MCP planning and
+reviewed training-data preparation. Its role prompt and reminder-only hooks are
+**Instruction-only** in native hosts; no installed coaching agent or callback
+enforcement is claimed. The optional offline runner now accepts explicit task
+`career-growth` with distinct validation; existing CV exports keep their default.
+Actual growth-model training, generation quality and autonomous skill acquisition
+are not verified by these fictional source/transport tests. No schema migration,
+extra provider, fact promotion or application authority is added.
+
 [Learning prompt version 2](LEARNING_PROMPTS.md) is an **Experimental** local
 export contract: new manifests use 1.1, while unchanged 1.0 exports retain legacy
 byte/review validation. No database migration, model dispatch or automatic

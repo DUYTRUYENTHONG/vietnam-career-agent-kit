@@ -1,6 +1,6 @@
 ---
 name: fit-assessment
-description: Validate a complete requirement-to-confirmed-evidence matrix and classify fit without invented ATS scores, seniority or unsupported qualifications.
+description: Validate requirement-to-evidence fit and collect source-bound gaps for reviewed learning and project plans without invented qualifications.
 ---
 
 Read ../../../docs/job-seeker-policy.md first. Root AGENTS.md governs maintainer work; this skill activates only for an explicit career request.
@@ -25,6 +25,15 @@ clearly ineligible leads before document work. Public research cache does not
 establish current vacancy status or Vietnam remote eligibility. See ../../../docs/FAST_WEB.md.
 
 Use direct/partial/missing/unknown evidence treatment. Direct field/value links require exact reviewed equality; partial needs a limitation. Apply explicit exclusions/conditions first. Keep missing mandatory, unknown eligibility and unsupported facts visible. Store current profile/JD fingerprints.
+
+For a requested learning/development loop, follow ../../../docs/CAREER_GROWTH.md
+and ../../../prompts/GROWTH_COACH.md. Use `assess --capture-growth` or explicit
+`growth-context`/`growth-capture` for selected current matrices. The existing
+fit-assessment owner collects gaps; a bounded coach drafts future tasks and a
+distinct reviewer checks the exact plan. Unknown answers and condition fields
+need clarification, not a course or invented accomplishment. Preserve actual
+limitations, source IDs and assessment-content hashes. This does not change fit,
+candidate facts, campaign scope or submission authority.
 
 ## Outputs
 
