@@ -90,6 +90,11 @@ After independent factual/editorial review, `learning-export` can collect exact
 current CV wording privately. Evaluate retrieval and recheck exported evidence
 before using it; dataset export does not train a model or promote claims.
 
+Current learning exports supply the canonical nested output schema and assessed
+fact links in a versioned generation input. Follow ../../../docs/LEARNING_PROMPTS.md;
+use only system/user messages for generation, keep older exports immutable and
+never copy the reference assistant answer into a held-out inference prompt.
+
 If the user explicitly requests local model training, follow
 ../../../docs/LOCAL_FINETUNING.md and use the separate optional LoRA runner over
 a current independently reviewed export. Keep held-out groups, private artifacts

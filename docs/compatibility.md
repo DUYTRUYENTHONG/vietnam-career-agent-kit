@@ -1,5 +1,10 @@
 # Runtime compatibility evidence
 
+[Learning prompt version 2](LEARNING_PROMPTS.md) is an **Experimental** local
+export contract: new manifests use 1.1, while unchanged 1.0 exports retain legacy
+byte/review validation. No database migration, model dispatch or automatic
+quality acceptance is added. Larger prompts require fresh token-length checks.
+
 The [held-out wording report](WORDING_EVALUATION.md) is **Experimental** offline
 Python/CLI behavior. It consumes recorded outputs and caller-provided reviews;
 it does not verify model identity, reviewer independence or generation quality.
