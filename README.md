@@ -40,6 +40,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 | Tailor specific evidence-backed details to every job description | [Required JD-specific tailoring contract](docs/JD_SPECIFIC_TAILORING.md) |
 | Experiment with local Qwen3 and reviewed CV-wording LoRA training | [Optional local fine-tuning](docs/LOCAL_FINETUNING.md) |
 | Compare recorded base/adapter wording on held-out jobs | [Offline evaluation and review](docs/WORDING_EVALUATION.md) |
+| Understand versioned training/generation inputs and legacy exports | [Explicit output contract](docs/LEARNING_PROMPTS.md) |
 | Add concrete project details before sending a revised CV | [CV enrichment and candidate review](docs/CV_ENRICHMENT.md) |
 | Automate cited CV/email drafts with your own AI host | [Local RAG and optional LangChain workflow](docs/LANGCHAIN_RAG.md) |
 | Retrieve cited CV facts and export reviewed examples without another model API | [Career memory and local MCP](docs/CAREER_MEMORY.md) |

@@ -9,6 +9,11 @@ ledger. A trained model proposes wording; it is never an authority on experience
 the generated fictional bullet added an unsupported claim and failed strict JSON.
 The local model is **not accepted as a default tailoring model**.
 
+New exports use the [explicit versioned generation contract](LEARNING_PROMPTS.md).
+The additional schema and assessed links increase prompt tokens. Recheck actual
+sequence lengths; the runner rejects rather than truncates oversized examples.
+An unchanged legacy export remains valid under its original prompt.
+
 ```mermaid
 flowchart LR
   A[Confirmed facts + JD] --> B[Reviewed CV wording]

@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Explicit learning-output contract
+
+- Export version 1.1 with the canonical CV wording JSON schema, assessed fact
+  links and prompt version cv-wording-json-2 in source-bound generation context.
+- Retain read-only validation of unchanged version 1.0 exports with their legacy
+  prompt. Reject unsupported prompt versions or rehashed context alterations.
+- Document measured base/LoRA format failures and the larger prompt's limits;
+  no model promotion, added provider call or claim of improved CV quality.
+
 ## Unreleased - Held-out wording comparison
 
 - Add an offline paired base/adapter evaluation report for current reviewed

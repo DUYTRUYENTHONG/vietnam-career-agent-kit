@@ -153,8 +153,13 @@ detect changes, not authentic human identity. Same-candidate facts and semantic
 near-duplicates may still overlap: this is not cross-candidate generalization.
 Email briefs are not reviewed email training examples in this version.
 
-Actual fine-tuning, provider upload, model selection and compute remain separate
-future work. This version performs **zero training/provider calls**.
+New version 1.1 exports include a versioned explicit output schema and current
+assessed requirement-to-fact links. Unchanged version 1.0 exports retain legacy
+validation. See [generation input and compatibility](LEARNING_PROMPTS.md).
+
+Actual fine-tuning uses the separate opt-in [local runner](LOCAL_FINETUNING.md).
+This exporter performs **zero training/provider calls**; dataset collection does
+not select, train or promote a model.
 
 Primary implementation references: [SQLite FTS5](https://www.sqlite.org/fts5.html)
 and the [official MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk),
