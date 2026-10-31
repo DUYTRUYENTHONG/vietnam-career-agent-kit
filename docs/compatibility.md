@@ -1,5 +1,10 @@
 # Runtime compatibility evidence
 
+The [held-out wording report](WORDING_EVALUATION.md) is **Experimental** offline
+Python/CLI behavior. It consumes recorded outputs and caller-provided reviews;
+it does not verify model identity, reviewer independence or generation quality.
+No host-specific model dispatch, training, MCP or application authority is added.
+
 ## JD-specific detail contract
 
 [JD-specific tailoring](JD_SPECIFIC_TAILORING.md) is **Instruction-only** across

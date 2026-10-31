@@ -87,6 +87,10 @@ settings requiring tuning, not an optimal recipe or large-model memory guarantee
 
 ## Results and acceptance
 
+Use the [offline held-out wording comparison](WORDING_EVALUATION.md) to compare
+recorded base/adapter generations with strict output checks and hash-bound
+independent reviews. This supplements loss metrics; it does not promote a model.
+
 Reusable agent prompt:
 
 > Use the application-tailoring skill and JD-specific detail contract. Inspect my
