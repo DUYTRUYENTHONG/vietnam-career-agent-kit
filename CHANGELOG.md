@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased - Accurate optional browser diagnostics
+
+- Correct the stale TinyFish application-browser description in `doctor`.
+- Distinguish public Fetch from the experimental mapped guest-form adapter,
+  its explicit prerequisites and unverified live acceptance. Diagnosis still
+  acquires no browser/session and enables no network or application actions.
+
 ## Unreleased - Forker setup and role-family tailoring
 
 - Add a linked setup-to-tracker walkthrough, GitHub workflow diagram and
