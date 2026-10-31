@@ -1,5 +1,12 @@
 # Runtime compatibility evidence
 
+Tailoring now includes explicit professional-reframing guidance, JD-priority
+placement and professional-framing criteria within the existing review dimensions.
+This is Instruction-only:
+it changes host writing/review guidance, not runtime schemas, automatic scoring,
+model weights or disclosure permission. Fictional examples illustrate preserved
+facts; actual semantic quality and hiring outcomes require separate review.
+
 Parallel cleanup now uses a bounded callback pool and exclusive local close
 intents. The fictional event-based regression first reproduced a close holding
 an unrelated lane; tests also cover coordinator-only receipt writes, timeout/late

@@ -28,6 +28,20 @@ own references; keep the packet in the selected private workspace.
 > A reviewer must flag omitted available technical detail and repair it once.
 > Never invent metrics, production tenure, vector RAG or completed fine-tuning.
 >
+> Prioritize the opening page around the JD's actual work. Lead with supported
+> engineering projects when they demonstrate the role better than lengthy
+> unrelated employment duties. Explain privately why examples were selected and
+> other detail compressed. Reuse a prior version only when its evidence and
+> emphasis already fit; changing a headline alone is not sufficient tailoring.
+>
+> Apply professional reframing (including requested euphemism): describe actual
+> contributions positively and precisely. Keep missing-tool inventories and
+> "unestablished expertise" disclaimers in the private review, while preserving
+> truthful screening answers and material assistance/prototype/team scope.
+> A clear project heading can carry a shared qualifier without repeating it in
+> every bullet. Do not convert prototype work or tool-use hours into independent
+> production expertise, paid tenure or invented results.
+>
 > Select the strongest supported matches, identify gaps, and draft CV wording through the
 > current v1 or v2 contract. Preserve historical titles, assistance/prototype
 > qualifiers, dates, tool experience, amounts and metric bases. Do not infer a
