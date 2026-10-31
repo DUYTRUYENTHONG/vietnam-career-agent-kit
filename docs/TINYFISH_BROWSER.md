@@ -1,5 +1,11 @@
 # TinyFish Browser runtime (experimental)
 
+`python scripts/kit.py doctor --runtime codex` distinguishes public Fetch from
+the optional guest-form adapter in `optional_browser_runtime`. This is a
+description of implemented scope, not a live readiness probe: browser/network
+execution remain false, dependencies and credentials are not inspected, and no
+session is acquired. Use the explicit setup and preview below before any run.
+
 The new adapter connects isolated cloud sessions to the existing six-stage
 application protocol. TinyFish Fetch remains public research only. This original
 implementation follows the [official REST API](https://docs.tinyfish.ai/browser-api/reference)

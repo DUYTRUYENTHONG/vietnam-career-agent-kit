@@ -358,3 +358,11 @@ promotion are Unsupported in this runner. See [local fine-tuning](LOCAL_FINETUNI
 The [Qwen3-0.6B CPU smoke](LOCAL_FINETUNING_QA.md) verified one named local runtime;
 its generated output failed factuality/strict-JSON acceptance. This does not
 certify a production tailoring model or native host integration.
+
+## Read-only runtime diagnostics
+
+`doctor` reports optional TinyFish Browser guest-form support separately from
+public Fetch. Its additive `optional_browser_runtime` data describes repository
+capabilities, not installed dependencies, credentials, connected host sessions or
+live acceptance. Default browser/network execution stays false. No native host
+or cloud readiness claim follows from a successful diagnostic.
