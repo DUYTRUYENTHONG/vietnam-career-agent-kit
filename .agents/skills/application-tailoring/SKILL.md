@@ -115,6 +115,14 @@ For paired recorded base/adapter generations, follow
 keep exact-output-bound independent review separate from contract validity and
 reference matching. Missing measurements stay unknown; reports grant no promotion.
 
+For an explicitly requested local matched experiment, use
+../../../docs/LOCAL_PAIR_GENERATION.md with the existing reviewed CV export,
+matching completed training record and local base weights. Generate only from
+held-out system/user messages, never the reference assistant answer. Keep raw
+outputs and separate generation/load-inclusive timing, preserve incomplete runs,
+and use a new run name after failure. Do not generate factuality review labels,
+promote a model, import wording or send a CV from runtime completion.
+
 Markdown CV draft, private source map, hashes and review_required state.
 
 V2 additionally returns the actual wording fingerprint and optional compact

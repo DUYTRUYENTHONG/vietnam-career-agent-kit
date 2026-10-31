@@ -61,6 +61,11 @@ public-directory acceptance gates.
 
 ## Current implementation sequence
 
+Matched local base/LoRA generation reuses existing reviewed CV exports, local CPU
+inference and strict comparison. Runtime completion is separate from accepted
+factual/JD-specific wording; see [scope](LOCAL_PAIR_GENERATION.md). Native host
+integration, semantic review and model promotion remain independent gates.
+
 CV-version outcome feedback adds private source-bound response observations and
 age/as-of reports over existing portable-engine confirmations. CLI/MCP transport
 does not imply a mailbox connector or a higher interview rate. Offline model

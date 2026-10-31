@@ -3,6 +3,11 @@
 Status: **Experimental offline report**, standard-library only. This evaluates
 recorded outputs; it does not generate, train, import, approve or send a CV.
 
+An explicit optional [local paired-generation runner](LOCAL_PAIR_GENERATION.md)
+can produce these records from an existing matching base/LoRA training run.
+The evaluator remains standard-library-only and accepts recorded outputs from
+other explicitly authorized generators. Generation does not create reviews.
+
 The local Qwen smoke demonstrated why lower loss is insufficient: generated text
 added an unsupported result and fenced its JSON. This report separates strict
 output-contract/linkage checks from independently reviewed factuality and useful
