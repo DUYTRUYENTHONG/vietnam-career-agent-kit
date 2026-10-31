@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Current-prompt Qwen evaluation findings
+
+- Give Windows fictional-test jobs a bounded 25-minute budget after a verified
+  10-minute cancellation during source-freshness checks. Linux keeps 10 minutes;
+  all test commands, assertions, runtime guards and six required checks remain.
+
+- Document the actual version 1.1 prompt/one-step LoRA CPU comparison, observed
+  tokens and distinct generation/loading/training timings.
+- Record both strict-contract failures and observed fact-link/qualifier errors
+  despite lower held-out loss. Keep the working host flow; no model promotion,
+  dependency, code behavior, candidate-fact change or application authority.
+
 ## Unreleased - Matched local base/LoRA generation
 
 - Add an opt-in CPU runner over an existing current reviewed CV export and its
