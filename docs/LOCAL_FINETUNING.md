@@ -98,6 +98,12 @@ settings requiring tuning, not an optimal recipe or large-model memory guarantee
 
 ## Results and acceptance
 
+After offline quality acceptance, [source-bound CV outcome feedback](CV_OUTCOMES.md)
+can describe actual recruitment observations by the frozen submitted PDF hash.
+It is a separate measurement stream, not training data, a model leaderboard or
+evidence of causal improvement. Preserve observation windows and comparable job
+cohorts; never optimize on acknowledgments as if they were positive screening.
+
 Use the [offline held-out wording comparison](WORDING_EVALUATION.md) to compare
 recorded base/adapter generations with strict output checks and hash-bound
 independent reviews. This supplements loss metrics; it does not promote a model.

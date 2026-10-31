@@ -26,6 +26,7 @@ class CareerMCPTests(unittest.TestCase):
                         await session.initialize()
                         tools = {tool.name: tool for tool in (await session.list_tools()).tools}
                         self.assertEqual({'performance_record', 'performance_report', 'career_context',
+                                          'career_outcome_record', 'career_outcome_report',
                                           'career_email_context', 'campaign_tracker', 'career_evaluate',
                                           'learning_export', 'learning_check', 'career_writing_brief',
                                           'career_check_draft', 'career_gap_context', 'career_growth_capture',
@@ -69,11 +70,18 @@ class CareerMCPTests(unittest.TestCase):
                         self.assertEqual('needs_input', json.loads(invalid.content[0].text)['outcome'])
                         usage = await session.call_tool('performance_report', {})
                         self.assertEqual(0, json.loads(usage.content[0].text)['data']['record_count'])
+                        self.assertTrue(tools['career_outcome_report'].annotations.readOnlyHint)
+                        self.assertFalse(tools['career_outcome_record'].annotations.readOnlyHint)
+                        outcomes = await session.call_tool('career_outcome_report', {'min_age_days': 0})
+                        self.assertEqual(0, json.loads(outcomes.content[0].text)['data']['confirmed_submissions'])
+                        invalid_outcome = await session.call_tool('career_outcome_record', {'observation': {'unexpected': True}})
+                        self.assertEqual('needs_input', json.loads(invalid_outcome.content[0].text)['outcome'])
                         resources = (await session.list_resources()).resources
                         self.assertIn('career-kit://writing-policy', [str(resource.uri) for resource in resources])
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)/'private'; demo(workspace)
             work = Executor(workspace)
+            work.init()
             configured = generate(work, sys.executable, include_career=True)
             self.assertEqual(3, len(configured['packages']))
             self.assertFalse(configured['host_settings_changed'])

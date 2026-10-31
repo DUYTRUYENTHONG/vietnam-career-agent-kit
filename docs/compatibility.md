@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+[CV outcome feedback](CV_OUTCOMES.md) is **Experimental** local CLI/MCP
+measurement over portable execution schema 3–6. Source-bound caller labels do
+not authenticate employers or prove complete inbox coverage. It does not support
+the earlier legacy campaign database, migrate a tracker, read mail, promote a
+model or establish causal improvement in screening/interview rates.
+
 [Career growth](CAREER_GROWTH.md) is **Experimental** local CLI/MCP planning and
 reviewed training-data preparation. Its role prompt and reminder-only hooks are
 **Instruction-only** in native hosts; no installed coaching agent or callback

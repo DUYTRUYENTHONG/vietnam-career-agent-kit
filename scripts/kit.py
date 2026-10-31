@@ -73,6 +73,12 @@ def parser() -> Parser:
     performance.add_argument('--workload-id')
     performance.add_argument('--format',choices=['json','md','csv'],default='json')
     performance.add_argument('--output',help='new snapshot path inside reports/performance/')
+    outcome=commands.add_parser('outcome-record',help='record one private recruiter observation bound to a frozen confirmed CV')
+    outcome.add_argument('--file',type=Path,required=True)
+    outcome=commands.add_parser('outcome-report',help='age-scoped descriptive recruitment outcomes by exact submitted CV; no causal ranking')
+    outcome.add_argument('--min-age-days',type=int,default=14)
+    outcome.add_argument('--as-of')
+    outcome.add_argument('--job-id',type=int,action='append')
     context=commands.add_parser('career-context',help='retrieve cited current confirmed facts; experimental local BM25')
     context.add_argument('--query',required=True)
     context.add_argument('--limit',type=int,default=5)
@@ -304,6 +310,10 @@ def execute(args) -> Outcome:
         if command=='growth-evidence':return career_growth.record_evidence(work,args.fingerprint,args.action_id,args.artifact,args.note)
         if command=='growth-export':return career_growth.export_reviewed(work,args.fingerprint,args.output)
         return career_growth.check_export(work,args.directory)
+    if command in {'outcome-record','outcome-report'}:
+        from core import cv_outcomes
+        if command=='outcome-record':return cv_outcomes.record(work,work.private_json(args.file))
+        return cv_outcomes.report(work,min_age_days=args.min_age_days,as_of=args.as_of,job_ids=args.job_id)
     if command in {'performance-record','performance-report'}:
         from core.performance import record, report, export
         if command=='performance-record':return record(work,work.private_json(args.file))

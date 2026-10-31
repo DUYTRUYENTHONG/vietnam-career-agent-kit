@@ -1,5 +1,13 @@
 # Portable core architecture
 
+`core/cv_outcomes.py` stores optional append-only recruiter observations in
+independently versioned tables in the existing portable workspace. It binds
+confirmed execution snapshots and frozen CV hashes, verifies private proof files,
+and reports age-scoped descriptive outcomes with explicit corrections/coverage.
+CLI and career MCP share the implementation; no mailbox/network/model access,
+application migration, candidate-fact update or automatic learning is introduced.
+See [CV outcome feedback](CV_OUTCOMES.md).
+
 `core/career_growth.py` adds a separate private development loop over current
 assessment/profile/JD/source bindings. It reuses lexical fact retrieval, writes
 immutable plan/review/evidence sidecars and exports a distinct reviewed planning

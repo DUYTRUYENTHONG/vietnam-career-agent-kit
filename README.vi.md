@@ -1,5 +1,10 @@
 # Vietnam Career Agent Kit
 
+[Theo dõi phản hồi theo đúng phiên bản CV](docs/CV_OUTCOMES.md): lưu bằng chứng
+phản hồi tuyển dụng, tách thư xác nhận nhận hồ sơ khỏi mời phỏng vấn và báo cáo
+theo thời gian quan sát. Tỷ lệ mô tả không chứng minh RAG/LoRA làm tăng cơ hội
+trúng tuyển và không tự kích hoạt huấn luyện hay thay đổi CV.
+
 [Lộ trình bổ sung kiến thức và bằng chứng dự án](docs/CAREER_GROWTH.md): tổng hợp
 yêu cầu còn thiếu từ JD, truy xuất bằng chứng đã xác nhận bằng RAG cục bộ, lập
 kế hoạch học/thực hành và xuất dữ liệu kế hoạch đã duyệt cho LoRA. Kế hoạch hay
