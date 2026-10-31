@@ -107,6 +107,9 @@ cohorts; never optimize on acknowledgments as if they were positive screening.
 Use the [offline held-out wording comparison](WORDING_EVALUATION.md) to compare
 recorded base/adapter generations with strict output checks and hash-bound
 independent reviews. This supplements loss metrics; it does not promote a model.
+The optional [paired CPU runner](LOCAL_PAIR_GENERATION.md) generates both variants
+on every held-out system/user prompt from the matching export, with observed
+tokens, generation-only time and separate load-inclusive wall time.
 
 Reusable agent prompt:
 

@@ -57,6 +57,7 @@ OAuth, các phiên trình duyệt và khôi phục khi chưa rõ kết quả.
 | Hiểu quy trình và giới hạn | [Hướng dẫn trực quan với bốn sơ đồ](docs/USER_GUIDE.md) |
 | Giao agent chạy chiến dịch theo dữ kiện và giới hạn của bạn | [Prompt chi tiết, có mẫu tiếng Việt](prompts/GUIDED_CAMPAIGN.md) |
 | Thử Qwen3/LoRA cục bộ với dữ liệu CV đã duyệt | [Thiết lập](docs/LOCAL_FINETUNING.md) · [Định dạng prompt và tương thích bản xuất cũ](docs/LEARNING_PROMPTS.md) · [Đánh giá mô hình gốc/adapter](docs/WORDING_EVALUATION.md) |
+| Tạo cặp kết quả mô hình gốc/LoRA, đo token và thời gian thực tế | [Bộ chạy CPU tùy chọn](docs/LOCAL_PAIR_GENERATION.md) — không tự duyệt nội dung hay chọn mô hình |
 | Thử công cụ không cần tài khoản hay CV thật | [Demo hư cấu bên dưới](#chạy-thử-bằng-dữ-liệu-hư-cấu) |
 | Cấu hình tài liệu và kết nối host | [Dựng tài liệu](docs/documents-and-approval.md) · [Execution](docs/execution.md) |
 | Hiểu mười luồng ứng tuyển và TinyFish | [Kiến trúc và số đo](docs/PARALLEL_APPLICATIONS.md) |

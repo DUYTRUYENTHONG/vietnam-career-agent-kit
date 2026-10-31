@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Matched local base/LoRA generation
+
+- Add an opt-in CPU runner over an existing current reviewed CV export and its
+  exact matching base/training run; all held-out prompts exclude reference answers.
+- Record raw paired outputs, observed token/generation measurements, separate
+  load-inclusive wall time, byte identities and the existing strict comparison.
+- Preserve incomplete evidence without automatic retry/resume or overwrite.
+  No new provider/dependency, automatic review, training, promotion or authority.
+
 ## Unreleased - CV-version recruitment feedback
 
 - Add opt-in append-only source-bound recruiter observations tied to exact

@@ -1,5 +1,12 @@
 # Portable core architecture
 
+`adapters/local_pair_generation.py` reuses the local CPU generator and existing
+wording evaluator for an explicit matched base/LoRA experiment. It validates the
+current reviewed export and training/base identities, omits held-out assistant
+targets, preserves raw outputs/usage and incomplete evidence, and writes a private
+comparison. It never creates reviews, promotes wording or changes the ledger.
+See [local paired generation](LOCAL_PAIR_GENERATION.md).
+
 `core/cv_outcomes.py` stores optional append-only recruiter observations in
 independently versioned tables in the existing portable workspace. It binds
 confirmed execution snapshots and frozen CV hashes, verifies private proof files,

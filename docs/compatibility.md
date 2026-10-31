@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+[Local paired generation](LOCAL_PAIR_GENERATION.md) is **Experimental**, an
+opt-in CPU adapter over existing reviewed CV exports and completed local LoRA
+runs. Standard-library tests patch generation; real runtime evidence must name
+the model/environment and actual outputs. No native host dispatch, independent
+semantic review, automatic promotion or improved admission rate is implied.
+
 [CV outcome feedback](CV_OUTCOMES.md) is **Experimental** local CLI/MCP
 measurement over portable execution schema 3–6. Source-bound caller labels do
 not authenticate employers or prove complete inbox coverage. It does not support
