@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Private source-bound recruitment outcome",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "event_id", "job_id", "submission_id", "submission_sha256", "document_sha256", "kind", "received_utc", "observed_utc", "retracts_event_id", "source"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "event_id": {"$ref": "#/$defs/identifier"},
+    "job_id": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807},
+    "submission_id": {"$ref": "#/$defs/identifier"},
+    "submission_sha256": {"$ref": "#/$defs/sha256"},
+    "document_sha256": {"$ref": "#/$defs/sha256"},
+    "kind": {"enum": ["acknowledged", "screening_passed", "shortlisted", "assessment_invited", "interview_invited", "rejected", "offer_received", "withdrawn", "retract"]},
+    "received_utc": {"type": "string", "format": "date-time", "maxLength": 64},
+    "observed_utc": {"type": "string", "format": "date-time", "maxLength": 64},
+    "retracts_event_id": {"anyOf": [{"$ref": "#/$defs/identifier"}, {"type": "null"}]},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": {"enum": ["employer_message", "portal_observation", "manual_record"]},
+        "path": {"type": "string", "minLength": 1, "maxLength": 4096},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "allOf": [{"if": {"properties": {"kind": {"const": "retract"}}}, "then": {"properties": {"retracts_event_id": {"$ref": "#/$defs/identifier"}}}, "else": {"properties": {"retracts_event_id": {"type": "null"}}}}],
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

@@ -1,13 +1,14 @@
 ---
 name: application-tracking
-description: Report and resume canonical private job/application state with current hashes, explicit unknown outcomes and duplicate protection.
+description: Report and resume private applications and source-bound recruiter outcomes by submitted CV version, with explicit unknowns and duplicate protection.
 ---
 
 Read ../../../docs/job-seeker-policy.md first. Root AGENTS.md governs maintainer work; this skill activates only for an explicit career request.
 
 ## Purpose and invocation
 
-Report and resume canonical private job/application state with current hashes, explicit unknown outcomes and duplicate protection.
+Report and resume canonical private application state and source-bound recruiter
+outcomes by submitted CV version, preserving unknowns and duplicate protection.
 
 ## Inputs
 
@@ -64,6 +65,15 @@ Record only observed per-call time/usage with a private source hash. Unknown
 tokens/cost remain null; cached/reasoning tokens are subsets. Compare equivalent
 accepted workloads, distinguish task durations from campaign wall time, and never
 infer subscription quota or savings. Telemetry never changes submission counts.
+
+Use ../../../docs/CV_OUTCOMES.md for explicit source-bound recruiter observations
+after a portable-engine confirmed submission. Record the exact frozen submission
+and CV hashes; classify acknowledgment, screening, assessment, interview and
+rejection separately. Retractions correct a recorded classification without
+rewriting history. Use age-scoped reports and explicit comparable job cohorts;
+no response is not rejection, and a per-CV rate is not causal model uplift.
+Missing/changed proof stays visible and outside evidenced numerators. These
+records never train or promote a model automatically. Honor source-use restrictions.
 
 Uncertain outcomes require reconciliation, not another final attempt. Changed/missing artifacts block handoff until reviewed.
 

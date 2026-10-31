@@ -2,7 +2,7 @@
 from pathlib import Path
 import threading
 
-from core import career_memory, career_drafting, career_growth, performance, learning
+from core import career_memory, career_drafting, career_growth, performance, learning, cv_outcomes
 from core.workflow import WorkflowError
 
 
@@ -32,6 +32,17 @@ def make_career_server(work):
     def performance_record(observation: dict) -> dict:
         """Import one versioned per-call observation with private source/hash. No model or provider request."""
         return safe(performance.record, work, observation)
+
+    @server.tool(annotations={'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': False})
+    def career_outcome_record(observation: dict) -> dict:
+        """Record a source-bound caller-classified recruiter outcome for a frozen confirmed CV; never submit/train."""
+        return safe(cv_outcomes.record, work, observation)
+
+    @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})
+    def career_outcome_report(min_age_days: int = 14, as_of: str | None = None,
+                              job_ids: list[int] | None = None) -> dict:
+        """Read age-scoped exact-CV outcome counts/rates; not causal uplift, an inbox audit or model promotion."""
+        return safe(cv_outcomes.report, work, min_age_days=min_age_days, as_of=as_of, job_ids=job_ids)
 
     @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})
     def performance_report(model_id: str | None = None, phase: str | None = None,

@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased - CV-version recruitment feedback
+
+- Add opt-in append-only source-bound recruiter observations tied to exact
+  portable-engine confirmation snapshots and submitted CV hashes.
+- Report distinct acknowledgment/screening/assessment/interview/rejection events
+  over explicit age windows and job cohorts, with corrections and missing-proof
+  coverage. Duplicate messages never multiply applications or stage numerators.
+- Expose shared CLI/MCP functions and tracking-skill guidance. No mailbox access,
+  legacy migration, extra model call, automatic training/promotion or causal
+  admission-rate claim.
+
 ## Unreleased - Evidence-gap development loop
 
 - Collect partial/missing/unknown requirements across current assessments with

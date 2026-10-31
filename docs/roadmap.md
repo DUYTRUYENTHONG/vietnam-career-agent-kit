@@ -61,6 +61,11 @@ public-directory acceptance gates.
 
 ## Current implementation sequence
 
+CV-version outcome feedback adds private source-bound response observations and
+age/as-of reports over existing portable-engine confirmations. CLI/MCP transport
+does not imply a mailbox connector or a higher interview rate. Offline model
+acceptance and any promotion remain separate; see [scope and QA](CV_OUTCOMES.md).
+
 BrowserAct integration currently provides an offline authorized-request session
 planner and reviewed skill guidance. Native browser acquisition, form-write
 translation and live latency/isolation acceptance remain pending; see
