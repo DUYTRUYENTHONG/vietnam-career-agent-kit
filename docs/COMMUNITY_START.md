@@ -6,6 +6,10 @@ Your AI subscription and optional browser/provider services may have their own c
 
 ## 1. Clone the latest main
 
+For a fork-oriented walkthrough and choosing separate engineering, product or
+delivery tracks, use the [forker playbook](FORKER_PLAYBOOK.md) and its
+[role-aware prompt](../prompts/ROLE_FAMILY_CAMPAIGN.md).
+
 The default `main` branch includes the merged community kit, so a normal clone
 gets the latest CV-first starter, skills and optional transports. Clone and
 verify the local tools:

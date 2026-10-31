@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+**Bạn muốn fork kit để tìm việc?** Xem [hướng dẫn cho người fork](docs/FORKER_PLAYBOOK.md)
+và [prompt theo nhóm vị trí](prompts/ROLE_FAMILY_CAMPAIGN.md): thiết lập riêng tư,
+chọn nhóm nghề, đối chiếu JD, chỉnh CV, kiểm tra và theo dõi kết quả.
+
 [Theo dõi phản hồi theo đúng phiên bản CV](docs/CV_OUTCOMES.md): lưu bằng chứng
 phản hồi tuyển dụng, tách thư xác nhận nhận hồ sơ khỏi mời phỏng vấn và báo cáo
 theo thời gian quan sát. Tỷ lệ mô tả không chứng minh RAG/LoRA làm tăng cơ hội

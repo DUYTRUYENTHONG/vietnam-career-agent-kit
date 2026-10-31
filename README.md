@@ -9,6 +9,10 @@ review an exact application package, and track what actually happened.
 
 ## Start here
 
+**Forking for your own search?** Use the [forker playbook](docs/FORKER_PLAYBOOK.md)
+for setup, role-specific tailoring, skills/browser options and reading results.
+Start with its [copyable role-aware prompt](prompts/ROLE_FAMILY_CAMPAIGN.md).
+
 **Latest kit:** clone `main` and follow [CV-first setup](docs/COMMUNITY_START.md).
 A [pinned preview source package](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/community-v0.2.0)
 is also available. Attach your CV, answer only
