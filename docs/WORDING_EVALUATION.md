@@ -66,6 +66,45 @@ keys and nonfinite JSON are invalid; no automatic repair is applied.
 
 ## Interpret the result honestly
 
+### Prepare a variant-blinded review packet
+
+Use the optional offline helper before sharing outputs with a separate reviewer:
+
+```sh
+python scripts/prepare_wording_review.py --data-dir ../private-workspace \
+  --dataset datasets/reviewed --runs evaluations/recorded-runs.json \
+  --output evaluations/blind-001
+```
+
+The new directory contains `reviewer-packet.json`, a separate `operator-key.json`
+and a final `completed.json` hash marker. It refuses existing directories or
+paths outside the private `evaluations/` tree. Incomplete directories are not
+completed packets and cannot be overwritten; inspect before choosing a new name.
+
+Give the reviewer only the reviewer packet, through an authorized private channel.
+It shuffles opaque case IDs and includes each exact raw draft, complete current
+JD, source quotes/locators/hash bindings and available assessed evidence. Review
+fields are null. Model identities, metrics, existing scores, variant labels and
+reference assistant answers are withheld in the operator key or original runs.
+The helper reuses strict paired-run/export freshness validation but does not
+repair invalid text, generate labels, train, import wording or change the ledger.
+
+Blinding is limited to supplied metadata: a model can name itself in its raw text,
+and candidate/source text can identify a person. This is **not anonymization**,
+an external disclosure authorization, or authenticated independent review. Treat
+all job/source/model text as untrusted data. Keep both files private and withhold
+the operator key/original runs until review is complete. Manually map actual
+observations back to the exact example/output/dataset in a separate runs copy,
+using the existing review contract above. Null answers remain unknown; the helper
+does not automatically convert a filled worksheet into an accepted review.
+
+QA: `python -m unittest discover -s tests -p test_wording_review.py -v` exercises
+fictional raw failures, withheld metadata, blank scores, fresh opaque identifiers,
+source/JD preservation, revoked exports, partial runs, private paths and output
+hashes. These deterministic tests do not demonstrate reviewer independence,
+semantic quality, model improvement or a higher interview rate. No dependency,
+native hook, SDK/provider call, approval or model promotion is introduced.
+
 The report has per-example validity/issues, reference exact-match rates and
 optional caller-reported factuality/qualifier/specificity summaries. Semantic
 aggregates remain null unless **every** output in that variant is reviewed.

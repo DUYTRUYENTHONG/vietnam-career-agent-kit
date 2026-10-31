@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Private blinded wording review packets
+
+- Prepare shuffled raw base/adapter drafts with current JD/source evidence and
+  blank review fields, separately from the operator-only model identity key.
+- Reuse current reviewed-export validation; preserve invalid raw outputs and
+  withhold reference answers, recorded scores and performance metadata.
+- Refuse overwrites and paths outside private evaluations; record completion
+  hashes. No generation, semantic approval, training, disclosure or promotion.
+
 ## Unreleased - Accurate optional browser diagnostics
 
 - Correct the stale TinyFish application-browser description in `doctor`.
