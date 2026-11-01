@@ -51,6 +51,16 @@ They are **not** a general semantic proof, entity recognizer, chronology parser
 or machine translation evaluator. Independent review must examine scope,
 chronology, omissions, language equivalence and wording beyond these alarms.
 
+The entity alarm permits a small fixed set of ordinary English/Vietnamese
+opening words only as the first word of a statement: `In`, `Within`, `During`,
+`For`, `With`, `Trong`, `Với`, `Theo`, `Qua`, `Trước`, `Sau`. For example,
+"In a fictional sales dataset, used SQL for queries" can retain the same cited
+fact without treating `In` as a new employer or title. These words are still
+checked elsewhere in the statement. New names, technologies, numbers and
+credentials, lost qualifiers and all current evidence/review bindings remain
+checked. Passing import still requires independent review before rendering;
+it grants no disclosure authority. No schema, migration or model call is added.
+
 The fingerprint binds input model, candidate/profile/evidence fingerprint, exact
 JD, current evidence matrix and review policy. Pending wording is stored in the
 existing canonical `drafts` table and hashes private Markdown/model/source-map

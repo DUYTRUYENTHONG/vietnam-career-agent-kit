@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Ordinary openings in source-bound rewrites
+
+- Avoid false new-entity alarms for a fixed set of ordinary English/Vietnamese
+  opening words, only at the start of a statement.
+- Keep unsupported names/tools, numbers, ownership, credentials and qualifier
+  checks, current evidence bindings and independent review. Add fictional
+  import/review and negative regressions; no automatic approval or model call.
+
 ## Unreleased - Consistent fictional fine-tuning job inputs
 
 - Align the wording demo's complete raw JD with its role-specific structured

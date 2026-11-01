@@ -12,6 +12,7 @@ from core.contracts import ContractError
 from core.ledger import canonical_hash
 from core.manifests import Campaign
 from core.rendering import paragraphs
+from core.tailoring import alarms
 from core.workflow import WorkflowError
 from scripts.demo_wording import fictional_review, seed
 from test_documents import fake_render
@@ -28,6 +29,37 @@ class WordingTests(unittest.TestCase):
     def reviewed(self):
         self.imported()
         return self.work.review_wording(1, fictional_review(self.work.wording_packet(1).data))
+
+    def test_ordinary_opening_preserves_review_and_source_guards(self):
+        statement = self.model['sections'][1]['groups'][0]['statements'][0]
+        statement.update(text='In a fictional sales dataset, used SQL for queries.',
+                         transformation='faithful_paraphrase')
+        self.imported()
+        packet = self.work.wording_packet(1).data
+        self.assertFalse(packet['reviewed'])
+        with self.assertRaises(WorkflowError):
+            self.work.content_model(1)
+        self.work.review_wording(1, fictional_review(packet))
+        self.assertIn(statement['text'], ' '.join(paragraphs(self.work.content_model(1))))
+        for target in ['In a fictional sales dataset, used Python for queries.',
+                       'In a fictional sales dataset, led SQL analysis.',
+                       'In 100 fictional sales datasets, used SQL for queries.',
+                       'In a sales dataset, used SQL for queries.',
+                       'In a fictional Acme dataset, used SQL for queries.']:
+            with self.subTest(target=target):
+                changed = deepcopy(self.model)
+                changed['sections'][1]['groups'][0]['statements'][0]['text'] = target
+                with self.assertRaises(WorkflowError):
+                    self.work.import_wording(1, changed)
+
+    def test_opening_exception_is_positional_and_bilingual(self):
+        self.assertEqual([], alarms(
+            'Dùng Python trong dự án giả lập, có AI hỗ trợ.',
+            'Trong dự án giả lập, dùng Python có AI hỗ trợ.'))
+        self.assertTrue(alarms('Used a fictional dataset with SQL.',
+                               'Used a fictional In dataset with SQL.'))
+        self.assertTrue(alarms('Dùng Python trong dự án giả lập.',
+                               'Trong dự án giả lập, dùng Python và Azure.'))
 
     def test_review_required_and_shared_wording_reaches_render_not_legacy_quotes(self):
         statement = self.model['sections'][1]['groups'][0]['statements'][0]
