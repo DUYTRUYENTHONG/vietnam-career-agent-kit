@@ -68,6 +68,75 @@ retained text; country-prefix-only phone; redacted values; expired verification;
 and an already pending submit. In each case, visible state and existing execution
 authority determine the next action.
 
+## Verify native and custom dropdown selections
+
+A successful text fill is not a selected option. Some custom controls retain
+their previous option or highlight the first item even after a search term was
+filled. Do not press Enter assuming it will select the intended label.
+
+Use the host's documented selection method for the observed control. A native
+`selectOption({label: approvedLabel})` is appropriate only when that API and the
+native select are actually available. For a custom menu, open it, observe the
+current options and choose the exact approved visible option. Verify both the
+selected value and the displayed label; resolve contradictions before uploading
+or submitting. Never set a framework's internal store through page evaluation.
+
+Grouping independent edits remains useful, but a partially failed group may
+already have changed earlier fields. Inspect the retained values and continue
+from the first unresolved field. Do not replay the whole group or trust a native
+selection while a stale custom label still shows a different role or level.
+
+## Handle file-chooser failures without losing the filled form
+
+Start the documented chooser wait before clicking the observed upload control.
+Attach a rejection handler immediately: an unattended chooser timeout can become
+an unhandled rejection while the click is still waiting. Prefer the visible
+associated control when the host cannot click the actual file input. Observe the
+page before changing targets; do not guess another input or use hidden endpoints.
+
+The following JavaScript recipe requires an existing supported tab, an observed
+upload locator, the current exact file approval and completed execution preflight.
+Its return objects are local recovery hints, not canonical action receipts:
+
+```javascript
+async function chooseApprovedFile(tab, uploadControl, approvedPath) {
+  const pending = tab.playwright.waitForEvent('filechooser', {timeoutMs: 10000})
+    .then(chooser => ({ok: true, chooser}), error => ({ok: false, error}));
+  try {
+    await uploadControl.click({timeoutMs: 10000});
+  } catch (error) {
+    await pending; // Drain the bounded wait; its rejection is already handled.
+    return {next: 'observe', stage: 'control', error: String(error)};
+  }
+  const result = await pending;
+  if (!result.ok) {
+    return {next: 'observe', stage: 'chooser', error: String(result.error)};
+  }
+  try {
+    await result.chooser.setFiles([approvedPath]);
+  } catch (error) {
+    return {next: 'observe', stage: 'attachment', error: String(error)};
+  }
+  return {next: 'verify-visible-attachment'};
+}
+```
+
+On any failure, reconcile the same tab and selected-file state first. If browser
+control resets, restore its documentation and recover the existing owned binding;
+do not create another application merely because a handle was lost. Never repeat
+`setFiles` until supported observation proves the earlier selection did not occur
+and the existing authority still permits the action. A selected filename proves
+selection, not upload completion, employer receipt or submission. The local frozen
+file hash, current form review and durable pre-submit attempt remain required.
+
+These are instruction-only host procedures. A bounded Codex in-app-browser session
+on Windows exposed stale custom labels and a chooser timeout; the host version was
+not identified. This does not verify another runtime, portal, SDK bridge or automatic
+recovery, and supplies no measured throughput gain. Review cases: wrong highlighted
+option, native/custom disagreement, partial edit failure, click failure, chooser
+timeout, interrupted attachment and a previously pending submit. All must preserve
+the existing approval, current form evidence and no-automatic-retry boundary.
+
 ## Choose the correct execution surface
 
 | Surface | Appropriate use | Evidence still needed |
