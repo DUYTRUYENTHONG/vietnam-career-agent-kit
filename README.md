@@ -41,6 +41,7 @@ OAuth sending, concurrent browser lanes and recovery. They render directly on Gi
 
 | Your next step | Open this |
 |---|---|
+| Fork, train and evaluate your own CV-wording adapter | [Training walkthrough](docs/FINE_TUNING_START.md) · [Experimental models](models/README.md) |
 | Turn missing JD evidence into learning tasks and future projects | [Career growth: RAG, reviewed plans and local LoRA export](docs/CAREER_GROWTH.md) |
 | Measure recruiter outcomes by the exact submitted CV | [Private CV-version feedback and observation windows](docs/CV_OUTCOMES.md) |
 | Tailor specific evidence-backed details to every job description | [Required JD-specific tailoring contract](docs/JD_SPECIFIC_TAILORING.md) |

@@ -26,3 +26,9 @@ node_modules/
 .claude/settings.json
 *.approval.json
 *.confirmation.txt
+# Model artifacts belong in reviewed releases or external private workspaces.
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.zip

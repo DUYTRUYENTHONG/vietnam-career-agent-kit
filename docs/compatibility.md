@@ -369,6 +369,12 @@ The QA preflight found no conflict markers or suspicious bypass patterns. This P
 Final follow-up gate: `python -m unittest discover -s tests -v` passed all 226 tests in 283.160s. Source hygiene passed 186 UTF-8 files; wrapper synchronization, fictional preparation demo and staged diff checks passed. QA decision: PASS for the tested local CLI/core; live-provider/native-browser support remains Experimental.
 ## Optional local fine-tuning interface
 
+The [fork-ready guide](FINE_TUNING_START.md) and [model catalog](../models/README.md)
+document existing interfaces; they add no runtime support. Three fictional 0.6B
+adapter release copies have explicit pinned-base publication metadata and retain
+quality-failed status. The 8B Colab pilot is report-only and does not establish
+supported cloud QLoRA or private-CV training. No default model is promoted.
+
 `python -m adapters.local_finetuning` is Experimental: the standard-library tests
 verify preparation boundaries only. Heavy runtime compatibility and model-quality
 claims require an actual named-version/model run. CPU/CUDA selection is explicit;
