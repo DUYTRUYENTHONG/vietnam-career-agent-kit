@@ -1,5 +1,12 @@
 # Portable core architecture
 
+`core/codex_usage.py` and `scripts/normalize_codex_usage.py` prepare sanitized
+source/observation pairs from an explicit bounded fresh-thread Codex CLI JSONL
+export. They reuse the performance contract without opening any database or
+copying chat/tool payloads. Recording remains a separate existing command;
+unknown model/duration/charge and unreviewed quality are not inferred.
+See [export scope](CODEX_USAGE_EXPORT.md).
+
 `discover-ashby` reuses `core/discovery.py` fixed-origin bounded GET transport
 and ordered worker merge, with a separate normalizer for the documented Ashby
 public posting API. It excludes unlisted roles and retains explicit employment

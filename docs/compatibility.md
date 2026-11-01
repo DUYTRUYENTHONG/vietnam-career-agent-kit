@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+[Codex usage normalization](CODEX_USAGE_EXPORT.md) is **Experimental offline
+Python/CLI preparation** over a documented fresh-thread JSONL export shape.
+Fictional round trips cover the existing performance importer; they do not
+verify a live Codex version, desktop telemetry, host authentication, timing,
+billing or model routing. No application/performance schema migration.
+
 `discover-ashby` is **Experimental** stdlib CLI public discovery, sharing bounded
 transport with Greenhouse. Fictional tests cover normalization, visibility,
 remote/hybrid metadata, failures and no-workspace CLI use. One Windows public

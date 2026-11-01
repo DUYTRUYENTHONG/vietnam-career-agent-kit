@@ -5,6 +5,11 @@ not see Codex/Claude subscription usage automatically, call a second model,
 estimate tokens from characters, infer a model ID or calculate a price from a
 model name. Unknown values stay `null`, distinct from an observed zero.
 
+The opt-in [Codex CLI export normalizer](CODEX_USAGE_EXPORT.md) prepares sanitized
+per-turn observations from an explicitly selected `codex exec --json` export.
+It does not invoke a model, extract desktop telemetry or record observations
+automatically. Unreported duration, model metadata and charges remain unknown.
+
 ## Record and report
 
 1. Initialize/select your existing external private workspace.
