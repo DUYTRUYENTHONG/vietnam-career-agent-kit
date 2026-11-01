@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Measured local rewrite-pilot limitations
+
+- Record the separate eight-group fictional Qwen3 LoRA pilot and matched held-out
+  generation with observed token counts and distinct timing boundaries.
+- Document reduced held-out loss alongside zero contract-valid raw outputs;
+  retain independent semantic review and no automatic model promotion.
+- Publish aggregate evidence only; no private source packets, raw drafts, model
+  weights, candidate data, dependency or runtime behavior changes.
+
 ## Unreleased - Reject overflowing usage observations
 
 - Reject oversized integer durations through the existing bounded performance

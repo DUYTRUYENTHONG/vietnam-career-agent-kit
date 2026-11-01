@@ -61,3 +61,75 @@ Do not fabricate candidate experiences or synthetic reviews to increase dataset 
 The experimental dependency profile pins direct packages only, not the full
 transitive binary closure. CPU runtime evidence above does not certify other
 hardware, Intel acceleration, CUDA, QLoRA, model sizes or deployment readiness.
+
+## Reviewed rewrite pilot — 1 November 2026
+
+**Runtime completed; all four generated outputs failed the strict contract.
+The adapter remains unpromoted.** This is a separate run, not a repair of the
+30 October smoke or a claim that local fine-tuning improves admission rates.
+
+The external fictional workspace contained eight job/project groups sharing one
+candidate/source packet: six training groups and two held-out groups. Its 32
+reviewed statements included 15 changed paraphrases and 17 exact selections.
+The annotation review was a separately prompted agent pass, not human review.
+This small, shared-source corpus is not adequate evidence of generalization to
+new candidates or unseen kinds of jobs. Twelve separately reserved cases were
+not used in this training or generation run.
+
+The same Windows CPU environment, local Qwen3-0.6B files and package versions
+listed above were used. Configuration: one epoch, six optimizer steps, batch
+size 1, maximum length 2,048, learning rate 0.0002, warmup fraction 0.1, seed 42;
+LoRA rank 8 / alpha 16 / dropout 0.05 on q_proj/v_proj. The adapter had 1,146,880
+trainable parameters. No model provider API was called.
+
+| Training observation | Base | Adapter after one epoch |
+|---|---:|---:|
+| Held-out assistant-token NLL | 0.519127 | 0.300560 |
+| Held-out perplexity | 1.680560 | 1.350615 |
+| Evaluated assistant tokens | 863 | 863 |
+
+Training plus epoch evaluation took 1,707,944 ms. Supervisor wall time, including
+startup and the initial baseline evaluation, was 1,946,401 ms. These are different
+measurement boundaries, not two estimates of the same interval.
+
+Matched generation used every held-out example with system/user messages only,
+greedy decoding, thinking disabled and a maximum of 768 new tokens per call.
+Reference assistant answers were excluded. Calls ran serially with the same
+decoding limits; raw outputs were neither repaired nor retried.
+
+| Generation observation, two calls each | Base | Adapter |
+|---|---:|---:|
+| Input tokens | 2,324 | 2,324 |
+| Output tokens | 423 | 1,229 |
+| Generation time excluding loading, ms | 296,176 | 694,739 |
+| Call wall time including loading, ms | 412,618 | 727,139 |
+| Strict contract-valid outputs | 0 / 2 | 0 / 2 |
+
+The paired supervisor completed with exit 0 in 1,193,803 ms. Its runtime completion
+does not make an output acceptable. Both base responses used Markdown fences and
+omitted the required top-level structure. Both adapter responses contained
+duplicate JSON keys. Different output lengths, loading costs and this tiny
+workload prevent a general inference-speed or cost-saving claim. Host reasoning
+tokens and subscription cost were unavailable; they are not recorded as zero.
+
+A separately prompted agent reviewed four shuffled, opaque cases against their
+complete JD/source packets without the operator key, model labels, timings or
+reference assistant answers. All four output-hash bindings were verified before
+mapping the returned judgments into a separate runs copy. Original runs remained
+unchanged. The agent's actual model identity and usage were unavailable; this is
+not authenticated or human review.
+
+The review found source-entailed task prose in both variants. Both base drafts
+preserved project scope; both adapter drafts placed classroom projects under
+employment, introducing unsupported context despite retaining the original task
+sentences. The reviewer therefore failed whole-draft factuality and qualifier
+preservation for both adapter outputs. Each draft received an editorial
+specificity score of 3/5. These four judgments are descriptive observations,
+not a statistically established model ranking or approved training labels.
+
+See the [blinded review procedure](WORDING_EVALUATION.md) for separate factuality,
+qualifier and JD-specificity judgments. Favorable prose judgments cannot
+override raw contract failures. Keep the existing reviewed writing workflow;
+do not install this adapter as a default, import its wording into a CV, or infer
+an interview-rate improvement. Private raw outputs, source packets, review keys,
+model weights and runtime paths are excluded from the source distribution.
