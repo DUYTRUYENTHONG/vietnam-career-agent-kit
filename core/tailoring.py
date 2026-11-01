@@ -33,6 +33,7 @@ SENSITIVE = re.compile(r'\b(?:led|owned|managed|architected|fluent|certified|exp
 ACTION_WORDS = set('Used Built Developed Documented Supported Assisted Queried Created Tested '
                    'Completed Translated Maintained Configured Analyzed Analysed Wrote '
                    'Đã Sử Xây Phát Ghi Hỗ Hoàn Kiểm Dùng Tham'.split())
+SENTENCE_OPENERS = frozenset('In Within During For With Trong Với Theo Qua Trước Sau'.split())
 
 
 def normalized(value):
@@ -44,8 +45,9 @@ def alarms(source, target):
     if set(re.findall(r'\d[\w./:%+-]*', target)) - set(re.findall(r'\d[\w./:%+-]*', source)):
         findings.append('Changed number/date')
     source_words = set(re.findall(r'\w+', source))
-    entities = {word for word in re.findall(r'\b\w+\b', target)
-                if any(letter.isupper() for letter in word)}
+    entities = {word for index, word in enumerate(re.findall(r'\b\w+\b', target))
+                if any(letter.isupper() for letter in word)
+                and not (index == 0 and word in SENTENCE_OPENERS)}
     if entities - source_words - ACTION_WORDS:
         findings.append('New capitalized entity/title; use exact wording or clarify evidence')
     if {m.group().casefold() for m in SENSITIVE.finditer(target)} - {
