@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Preserve Ashby posts with unspecified metadata
+
+- Normalize null workplace and top-level address metadata to existing unknown
+  values so one unspecified post does not discard an otherwise valid public board.
+- Preserve remote flags without inferring workplace or country eligibility;
+  retain strict listed-status, URL, label and other field validation.
+- Add fictional mixed-board and malformed-field regressions; no dependency,
+  output-schema, account, candidate-workspace or application changes.
+
 ## Unreleased - Measured local rewrite-pilot limitations
 
 - Record the separate eight-group fictional Qwen3 LoRA pilot and matched held-out

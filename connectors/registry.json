@@ -351,7 +351,7 @@
         "verify": "manual_or_unimplemented"
       },
       "permission_evidence": "Official public Job Postings API documents fixed board GETs for career listings; employer-specific operations still require separate review",
-      "checked_utc": "2026-10-31",
+      "checked_utc": "2026-11-01",
       "authentication": "none; no cookies or credentials",
       "rate_limits": {
         "max_boards": 12,
@@ -384,7 +384,7 @@
       ],
       "default_write_mode": "manual",
       "policy_source": "https://developers.ashbyhq.com/docs/public-job-posting-api",
-      "limitation": "Listed public leads only; isRemote may include Hybrid. No automatic country eligibility, fit, liveness or application verification. No credentials, candidate access or application POST."
+      "limitation": "Listed public leads only; isRemote may include Hybrid. Missing/null workplace or address retains unknown metadata; no inferred country eligibility, fit, liveness or application verification. No credentials, candidate access or application POST."
     }
   ],
   "coverage_claim": "Only declared executed searches count; this registry does not represent all Vietnam jobs."

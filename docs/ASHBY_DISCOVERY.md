@@ -22,7 +22,7 @@ include the response SHA-256 and received record count. Leads contain:
 
 - `ashby:BOARD:POST_ID` identity from the same-board hosted job URL;
 - title, primary/secondary locations and available country metadata;
-- raw workplace/remote and employment labels, department and team;
+- normalized workplace label, raw remote/employment labels, department and team;
 - published date, job URL and full normalized content fingerprint.
 
 Descriptions are omitted by default. `--include-content` returns plain text, or
@@ -35,6 +35,18 @@ Only explicit `isListed: true` posts appear. Unlisted direct-link-only roles are
 excluded. Missing listed status, unsupported API version, invalid field types
 or unsafe/off-board URLs fail the affected board. Missing optional values stay
 empty or unknown instead of receiving inferred defaults.
+
+Explicitly null `workplaceType` and top-level `address` also retain unknown
+metadata: workplace and country use the existing empty-string value. One
+employer-linked public board returned both nulls on a listed post on
+1 November 2026; previously that post caused the whole board to fail. The replay
+then retained all 20 listed posts without inferring a country or workplace.
+This narrow compatibility treatment follows the observed response, not a fourth
+documented workplace enum. Ashby's [public API documentation](https://developers.ashbyhq.com/docs/public-job-posting-api)
+names three string labels and describes missing data. The raw response hash
+still identifies the original input. Unknown non-null labels, malformed address
+objects and invalid other fields still fail the board. An unknown workplace
+does not become onsite, remote or Vietnam-eligible from `isRemote`.
 
 Ashby's `isRemote` may be true for **Hybrid** jobs. Preserve `workplaceType` and
 location/country metadata; neither flag proves Vietnam remote eligibility.

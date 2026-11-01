@@ -120,7 +120,10 @@ def normalize_ashby(board: str, raw: bytes) -> dict:
         if (not title.strip() or parsed.scheme != 'https' or parsed.netloc != 'jobs.ashbyhq.com'
                 or len(parts) != 2 or parts[0] != board or not TOKEN.fullmatch(parts[1])):
             raise ValueError('Expected a title and same-board public Ashby job URL')
-        workplace, employment = field(item, 'workplaceType'), field(item, 'employmentType')
+        # Some public boards return null for an unspecified workplace. Keep it
+        # unknown, just like an absent value; never infer it from isRemote.
+        workplace = '' if item.get('workplaceType') is None else field(item, 'workplaceType')
+        employment = field(item, 'employmentType')
         if workplace not in {'', 'OnSite', 'Remote', 'Hybrid'}:
             raise ValueError('Unsupported workplace type')
         if employment not in {'', 'FullTime', 'PartTime', 'Intern', 'Contract', 'Temporary'}:
@@ -129,6 +132,8 @@ def normalize_ashby(board: str, raw: bytes) -> dict:
         if remote is not None and type(remote) is not bool:
             raise ValueError('Invalid remote flag')
         address = item.get('address', {})
+        if address is None:
+            address = {}  # Explicitly unspecified address; country stays unknown.
         if not isinstance(address, dict) or not isinstance(address.get('postalAddress', {}), dict):
             raise ValueError('Invalid address')
         secondary = item.get('secondaryLocations', [])
