@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Normalize selected Codex CLI usage exports
+
+- Prepare sanitized per-turn performance observations from one explicit bounded
+  fresh-thread `codex exec --json` export, without invoking Codex or copying chat,
+  reasoning, command, tool or error payloads.
+- Preserve missing versus zero usage; leave unreported model, duration and
+  charges unknown and quality acceptance false. Recording remains explicit.
+- Reject malformed/incomplete streams, cumulative/unknown shapes and existing
+  output directories; bind thread/ordinal identities to prevent fresh replay IDs.
+- No database migration, desktop session reader, provider authentication or
+  application authority. Live CLI compatibility remains unverified.
+
 ## Unreleased - Diagnose intermittent Windows QA failures
 
 - Give the CLI walkthrough a finite 60-second Windows subprocess budget while
