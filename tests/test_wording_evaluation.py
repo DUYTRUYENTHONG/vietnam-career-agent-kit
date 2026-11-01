@@ -103,6 +103,19 @@ class WordingEvaluationTests(unittest.TestCase):
             runs['base']['outputs'][0]['metrics'][key] = value
             with self.assertRaises(ValueError): compare(self.work, 'datasets/test', runs)
 
+    def test_overflowing_recorded_metrics_are_validation_errors_without_draft_changes(self):
+        before = self.work.wording_packet(1).data['fingerprint']
+        for key in ('input_tokens', 'output_tokens', 'generation_ms'):
+            with self.subTest(metric=key):
+                runs = deepcopy(self.runs)
+                runs['base']['outputs'][0]['metrics'] = {
+                    'input_tokens': None, 'output_tokens': None,
+                    'generation_ms': None, 'load_time_included': False}
+                runs['base']['outputs'][0]['metrics'][key] = 10**400
+                with self.assertRaisesRegex(ValueError, 'Metrics'):
+                    compare(self.work, 'datasets/test', runs)
+        self.assertEqual(before, self.work.wording_packet(1).data['fingerprint'])
+
     def test_cli_writes_only_new_private_report_and_does_not_change_draft(self):
         before = self.work.wording_packet(1).data['fingerprint']
         self.work.inside('runs.json').write_text(json.dumps(self.runs), encoding='utf8')
