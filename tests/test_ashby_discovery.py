@@ -56,6 +56,54 @@ class AshbyDiscoveryTests(unittest.TestCase):
         self.assertNotEqual(one['fingerprint'],d.normalize_ashby('fictional',feed(b))['leads'][0]['fingerprint'])
         with self.assertRaises(ValueError):d.normalize_ashby('fictional',feed(a,b))
 
+    def test_null_workplace_keeps_other_listed_posts_without_inference(self):
+        known=posting()
+        unknown=dict(known, title='Unspecified workplace',
+                     jobUrl='https://jobs.ashbyhq.com/fictional/post-2',
+                     workplaceType=None, isRemote=False)
+        result=d.discover(['fictional'], provider='ashby', include_content=True,
+                          reader=lambda _:feed(known,unknown))
+        self.assertEqual(result['failed_boards'],0)
+        self.assertEqual(result['leads_count'],2)
+        first,second=result['boards'][0]['leads']
+        self.assertEqual(first,d.normalize_ashby('fictional',feed(known))['leads'][0])
+        self.assertEqual(second['workplace_type'],'')
+        self.assertIs(second['is_remote'],False)
+        self.assertNotIn('vietnam_eligible',second)
+        absent=dict(unknown)
+        absent.pop('workplaceType')
+        self.assertEqual(second,d.normalize_ashby('fictional',feed(absent))['leads'][0])
+
+    def test_null_address_preserves_unknown_country_and_remote_flag(self):
+        known=posting()
+        unknown=dict(known, title='Unspecified metadata',
+                     jobUrl='https://jobs.ashbyhq.com/fictional/post-2',
+                     workplaceType=None, address=None, isRemote=None)
+        result=d.discover(['fictional'], provider='ashby', include_content=True,
+                          reader=lambda _:feed(known,unknown))
+        self.assertEqual(result['failed_boards'],0)
+        self.assertEqual(result['leads_count'],2)
+        first,second=result['boards'][0]['leads']
+        self.assertEqual(first,d.normalize_ashby('fictional',feed(known))['leads'][0])
+        self.assertEqual(second['country'],'')
+        self.assertEqual(second['workplace_type'],'')
+        self.assertIsNone(second['is_remote'])
+        self.assertNotIn('vietnam_eligible',second)
+
+    def test_null_metadata_does_not_relax_other_invalid_fields(self):
+        for field,value in [('workplaceType',True),('workplaceType',0),
+                            ('workplaceType',[]),('workplaceType',{}),
+                            ('workplaceType','Unspecified'),('title',None),
+                            ('jobUrl',None),('employmentType',None),
+                            ('location',None),('descriptionPlain',None),
+                            ('address',False),('address',[]),('address',''),
+                            ('address',1),('address',{'postalAddress':None})]:
+            row=posting()
+            row[field]=value
+            with self.subTest(field=field,value=value):
+                with self.assertRaises(ValueError):
+                    d.normalize_ashby('fictional',feed(row))
+
     def test_untrusted_html_fallback_is_not_executed(self):
         a=posting();a.pop('descriptionPlain');a['descriptionHtml']='<script>untrusted()</script>'
         lead=d.normalize_ashby('fictional',feed(a))['leads'][0]
