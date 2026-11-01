@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Recover browser form controls without duplicate actions
+
+- Extend the shared browser skill with native/custom dropdown verification and
+  handled file-chooser waits that preserve partially completed forms.
+- Require observation after click, picker or attachment failures, retaining the
+  same approved binding and existing pre-submit attempt rather than replaying work.
+- Keep this instruction-only: no new adapter, automatic recovery, disclosure
+  authority, cross-runtime compatibility or measured speed improvement is claimed.
+
 ## Unreleased - Preserve Ashby posts with unspecified metadata
 
 - Normalize null workplace and top-level address metadata to existing unknown
