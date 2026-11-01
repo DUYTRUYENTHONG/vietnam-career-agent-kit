@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+Local inference adapter preflight is **Experimental standard-library validation**.
+Fictional tests cover declared local/pinned-manifest base identity and failure
+before optional SDK import. This does not prove actual tensor compatibility,
+Colab GPU support, improved CV quality or accepted model deployment. See
+[identity boundaries](LOCAL_FINETUNING.md#check-an-adapter-before-loading-weights).
+
 [Codex usage normalization](CODEX_USAGE_EXPORT.md) is **Experimental offline
 Python/CLI preparation** over a documented fresh-thread JSONL export shape.
 Fictional round trips cover the existing performance importer; they do not

@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 from time import perf_counter
 
+from adapters.local_model_preflight import preflight_adapter
+
 
 def generate(model_directory, messages, *, adapter_directory=None, max_new_tokens=512):
     """CPU baseline with bounded prompt/generation and no model download/upload.
@@ -20,6 +22,8 @@ def generate(model_directory, messages, *, adapter_directory=None, max_new_token
     model_path = Path(model_directory).resolve(strict=True)
     if not model_path.is_dir():
         raise ValueError('Use a local model directory')
+    adapter_path = (preflight_adapter(model_path, adapter_directory)
+                    if adapter_directory is not None else None)
     os.environ['HF_HUB_OFFLINE'] = '1'
     os.environ['TRANSFORMERS_OFFLINE'] = '1'
     os.environ['HF_HUB_DISABLE_TELEMETRY'] = '1'
@@ -28,10 +32,7 @@ def generate(model_directory, messages, *, adapter_directory=None, max_new_token
     tokenizer = AutoTokenizer.from_pretrained(str(model_path), local_files_only=True, trust_remote_code=False)
     model = AutoModelForCausalLM.from_pretrained(str(model_path), local_files_only=True,
                                                 trust_remote_code=False, use_safetensors=True)
-    if adapter_directory is not None:
-        adapter_path = Path(adapter_directory).resolve(strict=True)
-        if not (adapter_path/'adapter_model.safetensors').is_file():
-            raise ValueError('Use a local safetensors LoRA adapter; pickle fallback is not accepted')
+    if adapter_path is not None:
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, str(adapter_path), local_files_only=True)
     prompt = tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True,

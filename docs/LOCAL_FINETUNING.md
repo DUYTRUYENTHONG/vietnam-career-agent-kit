@@ -1,5 +1,36 @@
 # Local CV-wording LoRA experiments
 
+## Check an adapter before loading weights
+
+`adapters.local_qwen.generate` performs a standard-library metadata preflight
+before importing Torch, Transformers or PEFT. A causal LoRA adapter needs both
+`adapter_config.json` and `adapter_model.safetensors`. Its declared base must be
+the exact selected absolute local directory, or a model ID matching that local
+base's `download-manifest.json`. Hub-ID matching also requires the pinned revision
+and every manifest-listed file hash to match, including config and base weights.
+The selected monolithic checkpoint or shard index and every referenced shard
+must be bound. Unlisted loader-relevant metadata/weights are rejected so an
+extra checkpoint cannot take precedence over verified shards. Supported manifest
+layouts use top-level `model.safetensors` or `model.safetensors.index.json`.
+Unknown identity, malformed/oversized metadata, unsafe paths and changed bytes
+fail before model loading. No model or adapter is downloaded by this check.
+
+A Qwen2.5 adapter cannot use a Qwen3 download manifest. A moved base directory is
+not silently aliased to the original path in a locally trained adapter. Select
+its original verified base location or perform a separate explicit provenance
+review; do not edit metadata merely to bypass a mismatch. The matched pair runner
+still verifies its completed training record and exact base hashes.
+
+This is a declared-identity check, not a tensor-shape validator, authentication of
+the metadata publisher, an atomic filesystem snapshot or model-quality acceptance.
+PEFT retains responsibility for actual adapter loading. Local-path identity alone
+does not prove unchanged base bytes; use the matched runner's training hashes for
+that stronger check. No candidate evidence, authority or application state changes.
+
+Fictional standard-library tests exercise early SDK rejection, matching local and
+manifest identities, changed weights, revision mismatch, malformed metadata and
+unsafe paths. They do not establish live QLoRA/Colab or new-model compatibility.
+
 The default task remains `cv-wording`. Optional `--task career-growth` consumes
 the separate [reviewed development-plan export](CAREER_GROWTH.md); its validator
 reconstructs current plan/review/assessment bindings. The tasks cannot be silently
