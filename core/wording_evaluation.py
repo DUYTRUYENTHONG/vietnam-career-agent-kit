@@ -84,7 +84,11 @@ def compare(work, directory, runs):
                 for key in ('input_tokens', 'output_tokens', 'generation_ms'):
                     value = metrics[key]
                     valid = (type(value) is int if key != 'generation_ms' else type(value) in (int, float))
-                    if value is not None and (not valid or value < 0 or not math.isfinite(value)):
+                    try:
+                        invalid = value is not None and (not valid or value < 0 or not math.isfinite(value))
+                    except OverflowError:
+                        invalid = True
+                    if invalid:
                         raise ValueError('Metrics must be finite nonnegative observations or null')
                 if type(metrics['load_time_included']) is not bool:
                     raise ValueError('State whether generation timing includes loading')

@@ -51,6 +51,8 @@ python scripts/evaluate_wording.py --data-dir ../private-workspace \
   (nonnegative observed values or null), and boolean `load_time_included`.
   Missing metrics remain unknown; zero is never inferred. Times including model
   loading are not directly comparable with generation-only measurements.
+  Numeric observations too large for the finite-number check are rejected as
+  validation errors, without changing drafts or promoting generated wording.
 - Each output may have `review`: the exact `example_id` and `dataset_fingerprint`,
   `raw_output_sha256` (SHA256 of exact UTF-8 text),
   nonblank `reviewer`, boolean `factuality`, boolean `qualifiers_preserved`, integer

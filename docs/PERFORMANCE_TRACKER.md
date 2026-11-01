@@ -86,6 +86,11 @@ recording telemetry. Source artifacts must be inside the selected workspace,
 nonempty and at most 1 MB. Reports are bounded to 10,000 observations; use filters
 for a larger history. Keep measurements and exports out of public Git.
 
+Duration must be a finite observation from 0 through 86,400,000 milliseconds,
+or `null`. Oversized integers are rejected by that existing bound before float
+conversion and before creating performance tables; they are never stored as
+zero or treated as a successful import.
+
 ## Local QA
 
 ```sh

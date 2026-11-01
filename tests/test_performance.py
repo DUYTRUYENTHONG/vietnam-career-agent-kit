@@ -88,6 +88,12 @@ class PerformanceTests(unittest.TestCase):
         with self.work._db() as db:
             self.assertIsNone(db.execute("select name from sqlite_master where name='performance_observations'").fetchone())
 
+    def test_oversized_integer_duration_is_rejected_without_creating_storage(self):
+        with self.assertRaisesRegex(ValueError, 'duration_ms'):
+            record(self.work, self.event(duration_ms=10**400))
+        with self.work._db() as db:
+            self.assertIsNone(db.execute("select name from sqlite_master where name='performance_observations'").fetchone())
+
     def test_real_cli_imports_host_turn_with_unknown_tokens(self):
         event = self.event('host-turn', measurement_scope='agent_turn', accepted=False,
             duration_ms=12500, usage={'kind': 'per_turn', 'input_tokens': None,

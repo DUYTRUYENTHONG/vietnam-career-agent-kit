@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Reject overflowing usage observations
+
+- Reject oversized integer durations through the existing bounded performance
+  contract before float conversion or feature-table creation.
+- Return validation errors for overflowing paired-evaluation metrics rather than
+  leaking an arithmetic exception. Keep unknown measurements unknown and leave
+  CV drafts, authority and model-promotion state unchanged.
+- Add fictional regressions for both boundaries; no model/API calls, dependencies
+  or schema changes.
+
 ## Unreleased - Ordinary openings in source-bound rewrites
 
 - Avoid false new-entity alarms for a fixed set of ordinary English/Vietnamese

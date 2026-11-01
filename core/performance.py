@@ -48,7 +48,7 @@ def validate(work, event):
     timestamp(event['observed_utc'], 'observed_utc')
     duration = event['duration_ms']
     if duration is not None and (type(duration) not in (int, float) or
-            not math.isfinite(duration) or not 0 <= duration <= 86_400_000):
+            not 0 <= duration <= 86_400_000 or not math.isfinite(duration)):
         raise ContractError('duration_ms: finite measured milliseconds, 0..86400000, or null')
     usage = object_fields(event['usage'], {'kind', *TOKENS}, set(), 'usage')
     if usage['kind'] != MEASUREMENT_UNITS[scope]:
