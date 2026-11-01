@@ -1,4 +1,5 @@
 import copy
+import traceback
 import unittest
 from unittest.mock import patch
 
@@ -38,8 +39,23 @@ class LocalBrowserTests(unittest.TestCase):
         run, plans, bridge = self.setup_bridge()
         for job in (1,2): bridge.open(job)
         self.assertEqual(len({s['binding_id'] for s in bridge.sessions.values()}), 2)
-        result = run_parallel_with_bridge(self.work, run, bridge)
-        self.assertEqual(result.data['state'], 'completed', result.json())
+        failures = []
+        def diagnose(callback):
+            def call(*args, **kwargs):
+                try:
+                    return callback(*args, **kwargs)
+                except Exception:
+                    # Fictional test data only; production errors stay redacted.
+                    failures.append(traceback.format_exc())
+                    raise
+            return call
+        with patch.object(bridge, 'perform', side_effect=diagnose(bridge.perform)), \
+             patch.object(self.work, 'record_parallel_action',
+                          side_effect=diagnose(self.work.record_parallel_action)):
+            result = run_parallel_with_bridge(self.work, run, bridge)
+        self.assertEqual(result.data['state'], 'completed',
+                         {'result': result.json(), 'fictional_test_failures': failures})
+        self.assertEqual(result.data['worker_errors'], [])
         self.assertEqual(self.work.tracker().data['observed_submissions'], 2)
         self.assertTrue(all(s['closed'] for s in bridge.sessions.values()))
 
