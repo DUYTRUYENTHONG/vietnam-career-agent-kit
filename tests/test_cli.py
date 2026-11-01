@@ -17,7 +17,8 @@ class CLITests(unittest.TestCase):
 
     def run_cli(self,*args,code=0):
         result=subprocess.run([sys.executable,str(ROOT/'scripts/kit.py'),'--data-dir',str(self.data),*args],
-            cwd=self.tmp.name,capture_output=True,encoding='utf8',timeout=15)
+            cwd=self.tmp.name,capture_output=True,encoding='utf8',
+            timeout=60 if sys.platform=='win32' else 15)
         self.assertEqual(code,result.returncode,result.stderr+result.stdout)
         payload=json.loads(result.stdout)
         self.assertEqual('1.0',payload['schema_version'])

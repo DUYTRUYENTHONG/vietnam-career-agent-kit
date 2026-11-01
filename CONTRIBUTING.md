@@ -17,6 +17,14 @@ python scripts/check_repository.py
 python scripts/demo_slice1.py
 ```
 
+The CLI walkthrough retains a finite subprocess guard: 60 seconds per command on
+Windows and 15 seconds elsewhere. This accommodates shared-runner startup and
+filesystem delays; it is not a CLI latency benchmark or a change to execution
+deadlines. Every command must still complete with its expected result. The local
+browser protocol test includes fictional worker/receipt tracebacks on failure;
+production error redaction and no-retry behavior are unchanged. A passing rerun
+does not establish the root cause of an intermittent failure.
+
 Use a short `codex/` branch and focused commits. Add behavioral tests for changed invariants, especially provenance, isolation, stale approvals and interruption recovery. Do not write tests that merely assert your implementation's wording. Use failing regressions for discovered defects; do not remove or skip failing checks to publish. Native compatibility needs a named interface/version/OS and actual test evidence; mocked local success cannot certify a real portal.
 
 core/contracts.py and the document/manifest operation validators are the runtime input authority; schemas/contracts.schema.json and schemas/documents-approval.schema.json supply editor shapes. Update code/schema/docs together when changing a contract and version any incompatible change. SQLite is canonical; JSON/Markdown exports are derived. Keep migrations additive and test existing data preservation. Stop on newer unsupported schema versions rather than overwriting state.

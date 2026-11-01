@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Diagnose intermittent Windows QA failures
+
+- Give the CLI walkthrough a finite 60-second Windows subprocess budget while
+  retaining the 15-second limit elsewhere and every functional assertion.
+- Include fictional worker/receipt tracebacks when the local browser protocol
+  test fails, without changing production error redaction, deadlines or retries.
+- Preserve the intermittent failure evidence; diagnostic coverage is not proof
+  that an unreproduced browser-lane failure has been fixed.
+
 ## Unreleased - Recover browser form controls without duplicate actions
 
 - Extend the shared browser skill with native/custom dropdown verification and
