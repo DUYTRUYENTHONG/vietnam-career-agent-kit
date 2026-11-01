@@ -1,5 +1,12 @@
 # Runtime compatibility evidence
 
+Local paired CPU evaluation now uses one model load per variant pass through
+`local_qwen.generate_many`. This remains **Experimental**; fictional SDK and
+orchestration tests check load reuse, independent inputs, early preflight,
+closure and unchanged evidence/quality boundaries. It is not GPU batching,
+concurrent user serving, automatic CV approval or a hiring-outcome claim.
+See [runtime scope](LOCAL_PAIR_GENERATION.md) and [observations](LOCAL_PAIR_QA.md).
+
 Local inference adapter preflight is **Experimental standard-library validation**.
 Fictional tests cover declared local/pinned-manifest base identity and failure
 before optional SDK import. This does not prove actual tensor compatibility,

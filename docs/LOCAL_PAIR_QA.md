@@ -1,5 +1,34 @@
 # Local paired-generation evidence — 31 October 2026
 
+## Model reuse observation — 1 November 2026
+
+A separate adapter-level CPU microbenchmark used the same Qwen3-0.6B revision,
+Windows Python 3.12.14, torch 2.10.0+cpu, transformers 4.57.6 and peft 0.18.1,
+four OMP/MKL threads, two short fictional prompts and eight maximum output tokens.
+Both the clean base and the existing fictional smoke adapter were tested.
+
+| Observed scope | Reusable iterator | One-shot calls |
+|---|---:|---:|
+| Actual base-model loader calls | 2 | 4 |
+| Whole phase wall time, reusable first | 49,278 ms | 32,126 ms |
+| Whole phase wall time, one-shot first | 17,662 ms | 38,705 ms |
+| Total input / output tokens | 120 / 32 | 120 / 32 |
+
+All four raw outputs were identical between modes in both orderings, and
+model/adapter file hashes were unchanged. This proves load reuse for that
+workload, **not a stable wall-time speedup**: reversing the order changed the
+timings substantially, with cold SDK/OS caches and concurrent QA. The reused
+pass was slower in the first ordering and faster in the reverse ordering.
+No isolated latency advantage, CV
+quality, GPU behavior or applications-per-hour improvement is established.
+No candidate data, training, provider calls or model promotion occurred.
+
+This measured the shared inference adapter, not a new end-to-end run of the
+reviewed-export CLI. Raw records and its script remain in external QA storage;
+result SHA-256 `14e5a520d414b7a475d2a4d10877ba5d6e4142302aac58b820eda6052328ac88`
+and reverse-order SHA-256 `7ec5d4691990e5b7b88762bfb9719d5a1a497a6d32cb5ca24e468e150c476d83`.
+The historical legacy-prompt observations below retain their original scope.
+
 **Runtime completed; both generated outputs failed the strict JSON contract.**
 No model was promoted, wording imported, independent factual review fabricated,
 candidate trained on, provider contacted or application submitted by this QA.
