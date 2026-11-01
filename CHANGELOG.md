@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Reject mismatched adapters before local inference loading
+
+- Check causal LoRA metadata and safetensors before importing optional model SDKs.
+- Require the selected absolute local base or matching pinned download metadata;
+  hash-check every listed base file for a Hub-ID declaration.
+- Reject unknown identities, changed weights, mismatched revisions and unsafe or
+  malformed metadata without training, downloads, ledger changes or CV promotion.
+- Retain the paired runner's stronger training/export checks; metadata identity
+  does not authenticate a publisher or establish tensor/model quality.
+
 ## Unreleased - Normalize selected Codex CLI usage exports
 
 - Prepare sanitized per-turn performance observations from one explicit bounded

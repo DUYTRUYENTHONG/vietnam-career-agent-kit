@@ -1,5 +1,17 @@
 # Community references and attribution
 
+## PEFT adapter declared-base preflight, 1 November 2026
+
+The original standard-library preflight uses the documented `PeftConfig` fields
+`base_model_name_or_path`, `revision`, `peft_type` and `task_type` from the official
+[PEFT configuration reference](https://huggingface.co/docs/peft/main/en/package_reference/config).
+The optional dependency pin remains unchanged; no upstream code, installer,
+weights or training data is copied. The kit's existing model download manifest
+supplies pinned revision and byte hashes for a Hub-ID declaration. This metadata
+does not authenticate authorship, guarantee tensor compatibility or approve a
+model's wording. Fictional checks and limitations are documented in
+[local fine-tuning](LOCAL_FINETUNING.md#check-an-adapter-before-loading-weights).
+
 ## Ashby public Job Postings API, 31 October 2026
 
 Reviewed the official [API contract](https://developers.ashbyhq.com/docs/public-job-posting-api)
