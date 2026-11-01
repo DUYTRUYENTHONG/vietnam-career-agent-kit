@@ -4,6 +4,7 @@ Uses the provisioned base and its selected training run. Never trains, downloads
 repairs model output, invents reviews, imports wording or promotes a model.
 """
 import argparse
+from contextlib import closing
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
@@ -12,7 +13,7 @@ from pathlib import Path
 from time import perf_counter
 
 from adapters.local_finetuning import model_hashes
-from adapters.local_qwen import generate
+from adapters.local_qwen import generate_many
 from core.documents import Documents
 from core.learning import check_export
 from core.ledger import canonical_hash
@@ -31,7 +32,7 @@ def run(work, directory, model_directory, training_directory, output, *,
 
     Hashes bind local bytes, not training authenticity or semantic correctness.
     Filesystem checks are not an atomic snapshot or a sandbox for model libraries.
-    Existing inference is CPU/greedy; each call loads its model independently.
+    CPU/greedy inference loads the clean base and adapted base in separate passes.
     """
     started = perf_counter()
     if (type(max_examples) is not int or not 1 <= max_examples <= 50 or
@@ -97,7 +98,7 @@ def run(work, directory, model_directory, training_directory, output, *,
         'device': 'cpu', 'decoding': 'greedy', 'thinking': False,
         'reference_answers_sent_to_model': False,
         'prompts': [{'example_id': eid, 'messages_sha256': canonical_hash(messages)} for eid, messages in prompts],
-        'model_loads_per_example': 2, 'provider_calls': 0,
+        'model_loads_planned': 2, 'generation_order': 'all-base-then-all-adapter', 'provider_calls': 0,
         'independent_review_performed': False, 'promotion_performed': False, 'sent': False}
     target.mkdir(parents=True, exist_ok=False)
     _save(target/'provenance.json', provenance)
@@ -107,23 +108,29 @@ def run(work, directory, model_directory, training_directory, output, *,
         'dataset_fingerprint': fingerprint, 'outputs': []} for name in ('base', 'adapter')}
     timings = []
     try:
-        for eid, messages in prompts:
-            for variant in ('base', 'adapter'):
-                current()
-                call_started = perf_counter()
-                generated = generate(model, deepcopy(messages),
+        for variant in ('base', 'adapter'):
+            current()
+            with closing(generate_many(model, [deepcopy(messages) for _, messages in prompts],
                     adapter_directory=adapter if variant == 'adapter' else None,
-                    max_new_tokens=max_new_tokens)
-                timings.append({'variant': variant, 'example_id': eid,
-                    'call_wall_ms_including_load': (perf_counter()-call_started)*1000})
-                if (not isinstance(generated.get('text'), str) or
-                        len(generated['text'].encode('utf8')) > 200_000):
-                    raise ValueError('Generated text exceeds the existing bounded evaluation contract')
-                metrics = {key: generated[key] for key in
-                    ('input_tokens', 'output_tokens', 'generation_ms', 'load_time_included')}
-                runs[variant]['outputs'].append({'example_id': eid, 'text': generated['text'], 'metrics': metrics})
-                # Private crash evidence only; no resume/retry and no completed marker.
-                (target/'partial.json').write_text(json.dumps(runs, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf8')
+                    max_new_tokens=max_new_tokens)) as generations:
+                for index, (eid, _) in enumerate(prompts):
+                    current()
+                    call_started = perf_counter()
+                    generated = next(generations)
+                    timings.append({'variant': variant, 'example_id': eid,
+                        'call_wall_ms': (perf_counter()-call_started)*1000,
+                        'includes_model_load': index == 0,
+                        'model_load_ms': generated.get('model_load_ms')})
+                    if (not isinstance(generated.get('text'), str) or
+                            len(generated['text'].encode('utf8')) > 200_000):
+                        raise ValueError('Generated text exceeds the existing bounded evaluation contract')
+                    metrics = {key: generated[key] for key in
+                        ('input_tokens', 'output_tokens', 'generation_ms', 'load_time_included')}
+                    runs[variant]['outputs'].append({'example_id': eid, 'text': generated['text'], 'metrics': metrics})
+                    # Private crash evidence only; no resume/retry and no completed marker.
+                    (target/'partial.json').write_text(json.dumps(runs, ensure_ascii=False, indent=2, allow_nan=False), encoding='utf8')
+                if next(generations, None) is not None:
+                    raise ValueError('Generator returned more outputs than held-out prompts')
         current()
         if (model_hashes(model) != base_files or model_hashes(adapter) != adapter_files or
                 hashlib.sha256(result_path.read_bytes()).hexdigest() != result_hash):
@@ -133,7 +140,8 @@ def run(work, directory, model_directory, training_directory, output, *,
         _save(target/'comparison.json', report)
         completion = {'schema_version': '1.0', 'heldout_examples': len(prompts),
             'dataset_fingerprint': fingerprint, 'total_wall_ms': (perf_counter()-started)*1000,
-            'calls': timings, 'runtime_completed': True, 'semantic_truth_verified': False,
+            'calls': timings, 'model_loads_completed': 2,
+            'runtime_completed': True, 'semantic_truth_verified': False,
             'independent_review_performed': False, 'promotion_performed': False,
             'authority_granted': False, 'provider_calls': 0, 'sent': False,
             'artifacts_sha256': {name: hashlib.sha256((target/name).read_bytes()).hexdigest()

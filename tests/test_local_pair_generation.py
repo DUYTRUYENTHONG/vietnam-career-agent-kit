@@ -50,6 +50,8 @@ class LocalPairGenerationTests(unittest.TestCase):
                   'dataset_fingerprint': export['manifest_fingerprint'], 'base_model_files': model_hashes(self.model)}
         (self.training/'result.json').write_text(json.dumps(result), encoding='utf8')
         self.calls = []
+        self.loads = []
+        self.closed = []
 
     def generate(self, model, messages, **options):
         self.calls.append((deepcopy(messages), options))
@@ -57,12 +59,27 @@ class LocalPairGenerationTests(unittest.TestCase):
                 'output_tokens': 80, 'generation_ms': 3.5, 'load_time_included': False}
 
     def invoke(self, **kwargs):
-        with patch('adapters.local_pair_generation.generate', side_effect=self.generate):
+        return self.invoke_fixture(**kwargs)
+
+    def generate_many(self, model, batches, **options):
+        self.loads.append(options['adapter_directory'])
+        try:
+            for index, messages in enumerate(batches):
+                yield {**self.generate(model, messages, **options),
+                       'model_load_ms': 2.0 if index == 0 else None}
+        finally:
+            self.closed.append(options['adapter_directory'])
+
+    def invoke_fixture(self, **kwargs):
+        with patch('adapters.local_pair_generation.generate_many', side_effect=self.generate_many):
             return run(self.work, 'datasets/test', self.model, 'training/fixture', 'evaluations/pair', **kwargs)
 
     def test_only_heldout_system_user_messages_reach_both_variants(self):
         result = self.invoke(max_new_tokens=128)
         self.assertEqual(2, len(self.calls))
+        self.assertEqual([None, self.adapter], self.loads)
+        self.assertEqual(self.loads, self.closed)
+        self.assertEqual(2, result['model_loads_completed'])
         self.assertEqual(self.example['messages'][:-1], self.calls[0][0])
         self.assertEqual(self.calls[0][0], self.calls[1][0])
         self.assertIsNone(self.calls[0][1]['adapter_directory'])
@@ -83,14 +100,11 @@ class LocalPairGenerationTests(unittest.TestCase):
         original = self.generate
         def invalid(*args, **kwargs):
             return {**original(*args, **kwargs), 'text': '```json\n{}\n```'}
-        with patch('adapters.local_pair_generation.generate', side_effect=invalid):
-            self.invoke_unpatched()
+        with patch.object(self, 'generate', side_effect=invalid):
+            self.invoke_fixture()
         root = self.work.inside('evaluations/pair')
         self.assertEqual('```json\n{}\n```', self.work.private_json(root/'runs.json')['base']['outputs'][0]['text'])
         self.assertEqual(0, self.work.private_json(root/'comparison.json')['runs']['base']['contract_valid_rate'])
-
-    def invoke_unpatched(self):
-        return run(self.work, 'datasets/test', self.model, 'training/fixture', 'evaluations/pair')
 
     def test_wrong_training_task_dataset_or_base_weights_fail_before_generation(self):
         path = self.training/'result.json'
@@ -113,16 +127,18 @@ class LocalPairGenerationTests(unittest.TestCase):
         self.assertEqual([], self.calls)
 
     def test_failure_retains_partial_evidence_and_cannot_resume_or_retry(self):
+        original = self.generate
         def broken(*args, **kwargs):
             if self.calls: raise RuntimeError('fictional local inference failure')
-            return self.generate(*args, **kwargs)
-        with patch('adapters.local_pair_generation.generate', side_effect=broken):
-            with self.assertRaises(RuntimeError): self.invoke_unpatched()
+            return original(*args, **kwargs)
+        with patch.object(self, 'generate', side_effect=broken):
+            with self.assertRaises(RuntimeError): self.invoke_fixture()
         root = self.work.inside('evaluations/pair')
         self.assertTrue((root/'failure.json').is_file())
         self.assertTrue((root/'partial.json').is_file())
         self.assertFalse((root/'completed.json').exists())
         self.assertFalse((root/'runs.json').exists())
+        self.assertEqual(self.loads, self.closed)
         with self.assertRaises(ValueError): self.invoke()
         self.assertEqual(1, len(self.calls))
 
@@ -132,8 +148,8 @@ class LocalPairGenerationTests(unittest.TestCase):
             value = original(*args, **kwargs)
             (self.adapter/'adapter_model.safetensors').write_bytes(b'changed-fixture')
             return value
-        with patch('adapters.local_pair_generation.generate', side_effect=changed):
-            with self.assertRaisesRegex(ValueError, 'changed'): self.invoke_unpatched()
+        with patch.object(self, 'generate', side_effect=changed):
+            with self.assertRaisesRegex(ValueError, 'changed'): self.invoke_fixture()
         self.assertFalse(self.work.inside('evaluations/pair/completed.json').exists())
 
     def test_stale_review_is_rejected_before_generation(self):
@@ -148,14 +164,14 @@ class LocalPairGenerationTests(unittest.TestCase):
             value = original(*args, **kwargs)
             self.work.reject_wording(1, 'Fictional mid-run revocation')
             return value
-        with patch('adapters.local_pair_generation.generate', side_effect=revoked):
-            with self.assertRaises((ValueError, WorkflowError)): self.invoke_unpatched()
+        with patch.object(self, 'generate', side_effect=revoked):
+            with self.assertRaises((ValueError, WorkflowError)): self.invoke_fixture()
         self.assertEqual(1, len(self.calls))
         self.assertTrue(self.work.inside('evaluations/pair/failure.json').is_file())
         self.assertFalse(self.work.inside('evaluations/pair/completed.json').exists())
 
     def test_private_path_escape_never_reaches_generation(self):
-        with patch('adapters.local_pair_generation.generate') as generate:
+        with patch('adapters.local_pair_generation.generate_many') as generate:
             for training, output in [('../outside', 'evaluations/new'), ('training/fixture', '../outside')]:
                 with self.assertRaises(WorkflowError):
                     run(self.work, 'datasets/test', self.model, training, output)
@@ -178,8 +194,31 @@ class LocalPairGenerationTests(unittest.TestCase):
         self.assertFalse(self.work.inside('evaluations/pair').exists())
 
     def test_oversized_raw_output_never_creates_completed_or_partial_success(self):
-        with patch('adapters.local_pair_generation.generate', return_value={'text': 'x'*200001}):
-            with self.assertRaisesRegex(ValueError, 'bounded evaluation'): self.invoke_unpatched()
+        with patch.object(self, 'generate', return_value={'text': 'x'*200001}):
+            with self.assertRaisesRegex(ValueError, 'bounded evaluation'): self.invoke_fixture()
         self.assertTrue(self.work.inside('evaluations/pair/failure.json').exists())
         self.assertFalse(self.work.inside('evaluations/pair/partial.json').exists())
         self.assertFalse(self.work.inside('evaluations/pair/completed.json').exists())
+
+    def test_multiple_heldout_prompts_load_two_variants_with_separate_timing(self):
+        checked = check_export(self.work, 'datasets/test')
+        manifest_path = self.work.inside('datasets/test/manifest.json')
+        manifest = self.work.private_json(manifest_path)
+        extra = deepcopy(self.example); extra['example_id'] = 'fictional-extra-id'
+        manifest['evaluation_example_ids'].append(extra['example_id'])
+        manifest_path.write_text(json.dumps(manifest), encoding='utf8')
+        with self.work.inside('datasets/test/examples.jsonl').open('a', encoding='utf8') as stream:
+            stream.write(json.dumps(extra)+'\n')
+        # Isolate batch orchestration; other tests reconstruct real export/comparison.
+        with patch('adapters.local_pair_generation.check_export', return_value=checked), \
+                patch('adapters.local_pair_generation.compare', return_value={'fixture': True}):
+            result = self.invoke()
+        self.assertEqual([None, self.adapter], self.loads)
+        self.assertEqual(self.loads, self.closed)
+        self.assertEqual(4, len(self.calls))
+        self.assertEqual([None, None, self.adapter, self.adapter],
+                         [options['adapter_directory'] for _, options in self.calls])
+        self.assertEqual([True, False, True, False],
+                         [row['includes_model_load'] for row in result['calls']])
+        self.assertEqual([2.0, None, 2.0, None],
+                         [row['model_load_ms'] for row in result['calls']])

@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased - Reuse local models during held-out evaluation
+
+- Load the clean CPU base once per pass and a separate adapted base once, rather
+  than reloading both for every held-out example. One-shot inference remains available.
+- Preserve per-prompt evidence checks, bounded independent inputs, raw output,
+  partial failures and explicit iterator closure; never share prior chat/KV input.
+- Separate first-call load/setup time from later generation calls. No model
+  promotion, private-data export, ledger change or application authority is added.
+- Add fictional batch/lifecycle regressions; real timings and limitations belong
+  to the named workload, not an inferred applications-per-hour or cost claim.
+
 ## Unreleased - Reject mismatched adapters before local inference loading
 
 - Check causal LoRA metadata and safetensors before importing optional model SDKs.

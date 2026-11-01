@@ -1,5 +1,15 @@
 # Community references and attribution
 
+## Reusable local generation iterator, 1 November 2026
+
+Reviewed the official versioned [Transformers generation reference](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/text_generation)
+and [PEFT model reference](https://huggingface.co/docs/peft/v0.18.0/en/package_reference/peft_model).
+Original adapter orchestration reuses the existing pinned SDK calls and greedy
+generation, loading clean and adapted models in separate passes. No upstream
+code, installer, model, dataset or additional dependency is copied. Iteration
+passes fresh prompts without supplying a previous generation cache. Runtime
+and quality acceptance remain separate; see [scope](LOCAL_PAIR_GENERATION.md).
+
 ## PEFT adapter declared-base preflight, 1 November 2026
 
 The original standard-library preflight uses the documented `PeftConfig` fields
