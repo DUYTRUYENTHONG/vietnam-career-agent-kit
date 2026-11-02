@@ -141,7 +141,7 @@ Build order follows the vertical slices in roadmap.md. This is one system, not a
 
 SQLite is authoritative for candidate/profile confirmation, imported source metadata, job documents, assessments and drafts. Imported CV bytes live in content-addressed private evidence files; Markdown and reports are derived artifacts, not competing editable trackers. Every assessment/draft binds current profile, source and JD fingerprints. Resume reports staleness explicitly. Each workspace selects one candidate. No global candidate configuration exists.
 
-`duplicate-candidates` is a read-only, same-employer ledger preflight before
+`duplicate-candidates` is a read-only, identical-URL or same-employer ledger preflight before
 tailoring. It exposes alternate-ID URL/title/city hints and recorded prior
 attempt states without reading artifacts, merging records or granting clearance.
 It uses existing schema 1–4 tables. See [contract and limits](DUPLICATE_CANDIDATES.md).

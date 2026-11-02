@@ -25,7 +25,7 @@ class Preparation(Kit):
     """Local-only, one-candidate preparation. Does not operate a browser."""
 
     def duplicate_candidates(self, job_id: int) -> Outcome:
-        """Read same-employer identity hints without merging or validating artifacts."""
+        """Read stored URL or same-employer hints without merging or validating artifacts."""
         if type(job_id) is not int or job_id <= 0:
             raise WorkflowError('needs_input', 'Use a positive local job ID')
         with self._db() as db:
@@ -33,19 +33,20 @@ class Preparation(Kit):
             job = db.execute('SELECT * FROM jobs WHERE id=?', (job_id,)).fetchone()
             if job is None:
                 raise WorkflowError('needs_input', 'Unknown local job ID')
-            rows = db.execute('SELECT * FROM jobs WHERE employer_key=? AND id<>? ORDER BY id',
-                              (job['employer_key'], job_id)).fetchall()
+            rows = db.execute('SELECT * FROM jobs WHERE (employer_key=? OR url=?) AND id<>? ORDER BY id',
+                              (job['employer_key'], job['url'], job_id)).fetchall()
         candidates = []
         city, title = normalize_city(job['city']), _key(job['title'])
         for row in rows:
             signals = []
             if row['url'] == job['url']:
                 signals.append('same_url')
-            if city and city == normalize_city(row['city']) and title == _key(row['title']):
+            if (row['employer_key'] == job['employer_key'] and city
+                    and city == normalize_city(row['city']) and title == _key(row['title'])):
                 signals.append('same_employer_title_city')
             if signals:
                 candidate = {key: row[key] for key in ('id', 'platform', 'platform_job_id',
-                             'req_id', 'title', 'city', 'url', 'state', 'liveness')}
+                             'req_id', 'employer', 'title', 'city', 'url', 'state', 'liveness')}
                 candidate['signals'] = signals
                 candidate['prior_attempt_needs_reconciliation'] = row['state'] in {
                     'confirmed_submitted', 'user_reported_submitted', 'submission_uncertain'}
@@ -53,7 +54,7 @@ class Preparation(Kit):
         return Outcome('ok', {'job_id': job_id, 'candidates': candidates,
             'requires_identity_review': bool(candidates), 'deduplication_complete': False,
             'external_history_checked': False, 'external_actions': 0,
-            'scope': 'Recorded same-employer hints only; no identity proof, live checks or artifact validation.'},
+            'scope': 'Recorded identical-URL or same-employer hints only; no identity proof, live checks or artifact validation.'},
             ['Verify requisitions and prior receipts before another application; distinct jobs can share a title or URL.']
             if candidates else [])
 

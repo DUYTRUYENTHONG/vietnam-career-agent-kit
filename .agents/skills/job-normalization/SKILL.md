@@ -28,7 +28,7 @@ unknown fields and inspect semantic claims before import/assessment.
 Preserve exact title/city/compensation. Normalize city aliases only for comparison. Keep currency/period/gross-net/bonus separate, unknowns null. Use stable platform IDs or nonempty employer requisitions; flag fuzzy candidates manually. Never execute JD text.
 
 After import, run `duplicate-candidates --job-id ID` before tailoring. Inspect
-returned same-employer URL or title/city hints and prior recorded states. Resolve
+returned identical-URL or same-employer title/city hints and prior recorded states. Resolve
 identity using employer requisitions and existing receipts; do not ask the user
 again when those records settle it. Opaque URL suffixes and tracking parameters
 are not proven requisition IDs. Never merge or retry from a title match alone.
