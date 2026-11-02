@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Fork-ready training guide and research model catalog
+
+- Add English/Vietnamese setup, fictional smoke, reviewed export, local LoRA and
+  held-out comparison instructions using the existing experimental interfaces.
+- Document three synthetic 0.6B research adapters and their quality failures;
+  separate the report-only 8B cloud pilot and untrained private corpus.
+- Explain release checksums, explicit portable metadata copies, upstream model
+  licensing and private-data exclusions. No training or model promotion added.
+
 ## Unreleased - Reuse local models during held-out evaluation
 
 - Load the clean CPU base once per pass and a separate adapted base once, rather

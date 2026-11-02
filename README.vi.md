@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+**Muốn thử huấn luyện mô hình viết CV?** Xem [hướng dẫn fork và fine-tuning](docs/FINE_TUNING_START.vi.md)
+và [danh mục adapter nghiên cứu](models/README.md). Các adapter hiện tại chưa đạt
+kiểm tra chất lượng để dùng gửi CV thật; dữ liệu cá nhân được giữ ngoài GitHub.
+
 **Bạn muốn fork kit để tìm việc?** Xem [hướng dẫn cho người fork](docs/FORKER_PLAYBOOK.md)
 và [prompt theo nhóm vị trí](prompts/ROLE_FAMILY_CAMPAIGN.md): thiết lập riêng tư,
 chọn nhóm nghề, đối chiếu JD, chỉnh CV, kiểm tra và theo dõi kết quả.

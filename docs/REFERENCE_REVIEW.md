@@ -309,3 +309,22 @@ Optional package installation downloads transitive binary/Python dependencies;
 the experimental direct pins are not a hash-locked distribution. Model provisioning
 is a separate explicit public download with resolved revision and file digests.
 No weights, candidate examples or model artifacts are redistributed with the kit.
+
+### Separate fictional research adapter distribution, 1 November 2026
+
+The source checkout still contains no model weights. A separate pre-release
+distributes three explicitly fictional Qwen3-0.6B LoRA experiments with known
+quality failures, source tensor checksums and sanitized allowlisted provenance.
+Publication config copies explicitly replace workstation-local base paths with
+the upstream model ID and revision; original private artifacts remain unchanged.
+No third-party implementation code is copied or dependency added.
+
+Base revision: `c1899de289a04d12100db370d81485cdf75e47ca`.
+The matching downloaded upstream LICENSE is included in each archive and its
+content hash recorded in PUBLICATION.json. The
+[official license](https://huggingface.co/Qwen/Qwen3-0.6B/blob/main/LICENSE)
+and [Qwen3-8B model card](https://huggingface.co/Qwen/Qwen3-8B) were checked on
+1 November 2026; both identify Apache-2.0. Kit source remains MIT. Adapter
+distribution does not relicense the base model, grant candidate-data rights or
+certify model quality. The 8B pilot is report-only, not a distributed checkpoint.
+See [catalog and actual assets](../models/README.md).

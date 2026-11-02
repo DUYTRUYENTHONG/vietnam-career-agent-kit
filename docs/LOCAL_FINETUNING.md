@@ -1,5 +1,9 @@
 # Local CV-wording LoRA experiments
 
+New to the kit? Start with the [fork-and-train walkthrough](FINE_TUNING_START.md)
+and [research adapter catalog](../models/README.md). Published fictional adapters
+are failure-reproduction assets, not accepted default CV models.
+
 ## Check an adapter before loading weights
 
 `adapters.local_qwen.generate` performs a standard-library metadata preflight
