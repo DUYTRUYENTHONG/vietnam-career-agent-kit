@@ -5,6 +5,10 @@ Docker, Gmail and a second model API are not required. Current experimental
 adapters failed writing-quality acceptance: read the [model catalog](../models/README.md).
 [Tiếng Việt](FINE_TUNING_START.vi.md).
 
+The [private-data 8B pilot report](REAL_DATA_PILOT_QA.md) shows why a completed
+training run and lower loss still require separate wording acceptance. Only
+aggregate observations are published; its data and weights remain private.
+
 ```mermaid
 flowchart TD
   A[Fork and fictional QA] --> B[Private confirmed facts and JDs]

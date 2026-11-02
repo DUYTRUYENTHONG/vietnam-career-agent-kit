@@ -4,6 +4,11 @@
 Mã nguồn kit dùng MIT; Qwen và bản phái sinh có điều khoản riêng.
 Xem [hướng dẫn lệnh đầy đủ](FINE_TUNING_START.md) và [danh mục mô hình](../models/README.md).
 
+[Báo cáo thí nghiệm 8B với dữ liệu thật](REAL_DATA_PILOT_QA.md) chỉ công bố số
+liệu tổng hợp. Huấn luyện đã hoàn thành nhưng chất lượng nội dung chưa đạt;
+dữ liệu, câu trả lời gốc và trọng số vẫn được giữ riêng tư. Loss giảm không
+chứng minh CV chính xác hơn hay tăng tỷ lệ được tuyển.
+
 1. Fork trên GitHub, clone fork và chạy kiểm tra mã nguồn cùng toàn bộ unit test.
    Không cần Docker, Gmail hoặc trình duyệt để huấn luyện local.
 2. Tạo môi trường Python riêng, cài đúng phiên bản trong hướng dẫn, tải mô hình
