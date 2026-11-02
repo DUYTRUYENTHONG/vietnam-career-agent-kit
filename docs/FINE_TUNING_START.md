@@ -102,6 +102,11 @@ entailment, assistance/timeframe qualifiers, employment/project context and usef
 JD detail. Lower loss cannot substitute for these checks. Training does not
 change candidate facts, promote the model, send email or apply for a job.
 
+When new facts, requirements or corrections arrive, follow the
+[versioned real-data refresh workflow](TRAINING_DATA_REFRESH.md) and its
+[agent prompt](../prompts/REFRESH_TRAINING_DATA.md). Keep changing facts in source
+retrieval; preserve old datasets and reserve untouched acceptance examples.
+
 ## 5. Share your experiment
 
 Commit reusable source/docs and fictional fixtures through a QA-checked PR.

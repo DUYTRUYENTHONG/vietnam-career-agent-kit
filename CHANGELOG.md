@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Refresh reviewed personal training data
+
+- Add a source-reconciliation, new-export and untouched-evaluation workflow,
+  with a copyable agent prompt and English/Vietnamese entry points.
+- Explain single-fact matching, project/near-duplicate leakage, current retrieval,
+  separate outcome feedback and polling interrupted observers without restarting
+  unknown runs. Keep historical datasets and private model artifacts unchanged.
+- Reuse existing commands; no watcher, automatic training, cloud upload, model
+  promotion, application authority or measured hiring improvement is added.
+
 ## Unreleased - Fork-ready training guide and research model catalog
 
 - Add English/Vietnamese setup, fictional smoke, reviewed export, local LoRA and
