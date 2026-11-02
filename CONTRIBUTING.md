@@ -25,6 +25,14 @@ browser protocol test includes fictional worker/receipt tracebacks on failure;
 production error redaction and no-retry behavior are unchanged. A passing rerun
 does not establish the root cause of an intermittent failure.
 
+Timing-sensitive fixtures use explicit clocks for provider backoff boundaries.
+Parallel cleanup still must permit the other lane to verify before its blocking
+close callback is released; its finite test guard matches the 20-second action
+guard. The ten-party inspect/submit barriers remain mandatory, with a 120-second
+Windows guard (the existing default action bound) and 30 seconds elsewhere.
+These are scheduling guards, not throughput benchmarks; production deadlines,
+exactly-once checks and all coordinator-only receipt assertions are unchanged.
+
 Use a short `codex/` branch and focused commits. Add behavioral tests for changed invariants, especially provenance, isolation, stale approvals and interruption recovery. Do not write tests that merely assert your implementation's wording. Use failing regressions for discovered defects; do not remove or skip failing checks to publish. Native compatibility needs a named interface/version/OS and actual test evidence; mocked local success cannot certify a real portal.
 
 core/contracts.py and the document/manifest operation validators are the runtime input authority; schemas/contracts.schema.json and schemas/documents-approval.schema.json supply editor shapes. Update code/schema/docs together when changing a contract and version any incompatible change. SQLite is canonical; JSON/Markdown exports are derived. Keep migrations additive and test existing data preservation. Stop on newer unsupported schema versions rather than overwriting state.
