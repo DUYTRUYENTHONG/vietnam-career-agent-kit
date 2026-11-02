@@ -6,7 +6,7 @@ adapters failed writing-quality acceptance: read the [model catalog](../models/R
 [Tiếng Việt](FINE_TUNING_START.vi.md).
 
 ```mermaid
-flowchart LR
+flowchart TD
   A[Fork and fictional QA] --> B[Private confirmed facts and JDs]
   B --> C[Independent wording review]
   C --> D[Export and disjoint holdout groups]
