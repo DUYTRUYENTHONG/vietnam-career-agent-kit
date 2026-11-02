@@ -30,6 +30,11 @@ QUALIFIERS = [('prototype', 'nguyên mẫu'), ('classroom', 'lớp học'), ('fi
               ('supervised', 'giám sát'), ('synthetic', 'tổng hợp')]
 SENSITIVE = re.compile(r'\b(?:led|owned|managed|architected|fluent|certified|expert|production|'
                        r'python|sql|salesforce|hubspot|ga4|aws|azure|bachelor|master|phd)\b', re.I)
+# Preserve an explicit AI contribution qualifier, not merely the word "assisted".
+# This bounded phrase alarm does not determine who performed a task or prove truth.
+AI_ASSISTANCE = re.compile(
+    r'(?<!\w)(?:ai[\s\-\u2010\u2011\u2013\u2014]+(?:assisted|assistance|supported|hỗ trợ)'
+    r'|(?:assisted|supported)\s+by\s+ai|hỗ trợ\s+(?:của|bởi)\s+ai)(?!\w)')
 ACTION_WORDS = set('Used Built Developed Documented Supported Assisted Queried Created Tested '
                    'Completed Translated Maintained Configured Analyzed Analysed Wrote '
                    'Đã Sử Xây Phát Ghi Hỗ Hoàn Kiểm Dùng Tham'.split())
@@ -42,6 +47,8 @@ def normalized(value):
 
 def alarms(source, target):
     findings = []
+    if AI_ASSISTANCE.search(normalized(source)) and not AI_ASSISTANCE.search(normalized(target)):
+        findings.append('AI-assistance qualifier omitted')
     if set(re.findall(r'\d[\w./:%+-]*', target)) - set(re.findall(r'\d[\w./:%+-]*', source)):
         findings.append('Changed number/date')
     source_words = set(re.findall(r'\w+', source))

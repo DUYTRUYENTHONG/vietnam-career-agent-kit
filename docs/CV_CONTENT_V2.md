@@ -51,6 +51,16 @@ They are **not** a general semantic proof, entity recognizer, chronology parser
 or machine translation evaluator. Independent review must examine scope,
 chronology, omissions, language equivalence and wording beyond these alarms.
 
+The AI-assistance phrase alarm rejects replacing a recognized explicit qualifier
+with generic "assisted" or "hỗ trợ" wording. It recognizes AI-assisted,
+AI-supported, AI assistance, assisted/supported by AI, AI hỗ trợ and hỗ trợ
+của/bởi AI, including common hyphen variants. This is a bounded phrase list,
+not proof of contribution or language equivalence; other wording may need exact
+source phrasing and review. All existing qualifier and entity checks still run.
+Existing v2 drafts are validated again at use time and can now be blocked for
+this omission even with an earlier review. No schema or historical submission
+snapshot is rewritten; repair/reimport and review affected current drafts.
+
 The entity alarm permits a small fixed set of ordinary English/Vietnamese
 opening words only as the first word of a statement: `In`, `Within`, `During`,
 `For`, `With`, `Trong`, `Với`, `Theo`, `Qua`, `Trước`, `Sau`. For example,

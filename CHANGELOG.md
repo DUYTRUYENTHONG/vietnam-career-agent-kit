@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Preserve explicit AI-assistance wording
+
+- Block a recognized AI-assistance qualifier from being reduced to generic
+  assistance in v2 wording. Cover bounded English/Vietnamese phrases and common
+  hyphens; retain independent factual review and all other wording alarms.
+- Recheck existing drafts at use time without modifying historical submissions.
+  Affected current drafts need repair/reimport and review; schemas are unchanged.
+
 ## Unreleased - Correct private-data training status
 
 - Replace the outdated claim that no personal-data training completed with a
