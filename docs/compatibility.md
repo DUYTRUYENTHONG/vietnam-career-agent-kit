@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+[Downloaded checkpoint verification](MODEL_CHECKPOINTS.md) is **Experimental**
+standard-library Python/CLI validation, with fictional ZIP tests targeting the required
+CI platforms. It verifies selected bytes without extraction or SDK loading; no
+live cloud transport, tensor compatibility, training quality or promotion is
+implied.
+
 Local paired CPU evaluation now uses one model load per variant pass through
 `local_qwen.generate_many`. This remains **Experimental**; fictional SDK and
 orchestration tests check load reuse, independent inputs, early preflight,
