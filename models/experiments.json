@@ -69,6 +69,11 @@
   "personal_corpus": {
     "public": false,
     "training_ready": false,
-    "training_performed": false
+    "training_ready_scope": "No public core learning-export supplied; private notebook examples use a different schema.",
+    "training_performed": true,
+    "quality_accepted": false,
+    "weights_published": false,
+    "format": "separate private source-bound Colab pilot; not a public learning-export",
+    "report": "docs/REAL_DATA_PILOT_QA.md"
   }
 }

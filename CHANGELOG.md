@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Correct private-data training status
+
+- Replace the outdated claim that no personal-data training completed with a
+  report-only Qwen3-8B pilot entry. Publish bounded aggregate loss, token/timing
+  scopes and failed wording-acceptance results; keep private data/weights out.
+- Distinguish completed cloud training, unverified host checkpoint recovery and
+  a later GPU-blocked run. No model promotion or local-runner capability change.
+
 ## Unreleased - Surface identical job URLs across employer labels
 
 - Extend the read-only duplicate preflight to include identical stored URLs

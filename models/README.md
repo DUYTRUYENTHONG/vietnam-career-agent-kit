@@ -14,7 +14,12 @@ Start with the [fork-and-train guide](../docs/FINE_TUNING_START.md).
 | Qwen3-0.6B contract-v2, 31 Oct 2026 | Fictional; 1 train / 1 held-out example; Windows CPU | Invalid JSON/links; historical raw JD and structured requirements inconsistent | Experimental research adapter; preserve defect for inspection |
 | Qwen3-0.6B rewrite pilot, 1 Nov 2026 | Fictional; 6 train / 2 held-out groups; Windows CPU | Both adapter outputs invalid JSON; project context incorrectly changed to employment | Experimental research adapter |
 | Qwen3-8B QLoRA pilot, 1 Nov 2026 | 5 synthetic examples; Colab T4; 8 epochs / 16 steps | No independent held-out quality acceptance; original examples contain unsupported expansions | Report only; host archive recovery unverified, weights excluded |
-| Personal-CV corpus | Private source/reconciliation staging | No training-ready export or completed personal-model training | Not distributed |
+| Source-bound private-data Qwen3-8B pilot, 2 Nov 2026 | 94 train / 7 held-out examples; Colab T4; 2 epochs / 48 steps | Lower reference loss, but only 1/7 content checks passed for each variant; not accepted | Aggregate report only; private data/weights excluded |
+
+The [private-data pilot report](../docs/REAL_DATA_PILOT_QA.md) separates observed
+training from wording acceptance and durable checkpoint recovery. Its narrow,
+non-blinded review establishes neither generalization nor improved recruitment
+outcomes. It is not a supported QLoRA recipe for the local runner.
 
 The [research pre-release](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/releases/tag/training-pilots-v0.1.0)
 contains the three available adapters for inspection and failure reproduction.
@@ -45,8 +50,8 @@ its manifest and stop on mismatch. Never edit identities merely to pass checks.
 Redistribution copies do not supply the private source/review bindings required
 by the matched runner. Reproduce your own export/training to use that runner.
 
-The 8B pilot needed notebook-specific compatibility repairs. Exact package
-versions and its resolved base commit were not captured; its temporary runtime
+The five-example synthetic 8B pilot needed notebook-specific compatibility
+repairs. Exact package versions and its resolved base commit were not captured; its temporary runtime
 later disconnected. This is not a reproducible supported Colab recipe. The
 local runner remains CPU/CUDA LoRA; this publication does not implement QLoRA.
 
