@@ -61,6 +61,60 @@ class WordingTests(unittest.TestCase):
         self.assertTrue(alarms('Dùng Python trong dự án giả lập.',
                                'Trong dự án giả lập, dùng Python và Azure.'))
 
+    def test_ai_assistance_cannot_be_replaced_by_generic_assistance(self):
+        cases = [
+            ('Built an AI-assisted prototype.', 'Built an assisted prototype.'),
+            ('Built an AI assisted prototype.', 'Built a prototype with assistance.'),
+            ('Built a prototype with AI assistance.', 'Built an assisted prototype.'),
+            ('Built an AI\u2011assisted prototype.', 'Built an assisted prototype.'),
+            ('Built an AI-assisted prototype.', 'Built a mail-assisted prototype.'),
+            ('Built an AI-assisted prototype.', 'Built an AI-assistedly prototype.'),
+            ('Xây nguyên mẫu có AI hỗ trợ.', 'Xây nguyên mẫu có hỗ trợ.'),
+            ('Xây nguyên mẫu với sự hỗ trợ của AI.', 'Xây nguyên mẫu có hỗ trợ.'),
+        ]
+        for source, target in cases:
+            with self.subTest(source=source):
+                self.assertIn('AI-assistance qualifier omitted', alarms(source, target))
+        for source, target in [
+            ('Built an AI-assisted prototype.', 'Built a prototype with AI assistance.'),
+            ('Built an AI-assisted prototype.', 'Built an AI\u2011assisted prototype.'),
+            ('Built an assisted prototype.', 'Built an assisted prototype.'),
+            ('Xây nguyên mẫu có AI hỗ trợ.', 'Xây nguyên mẫu với sự hỗ trợ của AI.'),
+        ]:
+            with self.subTest(target=target):
+                self.assertNotIn('AI-assistance qualifier omitted', alarms(source, target))
+
+    def test_import_and_existing_review_recheck_ai_assistance(self):
+        profile = self.work.inspect_profile().data['profile']
+        for item in profile['facts']:
+            item['source_id'] = 'CV2'
+        fact = next(f for f in profile['facts'] if f['id'] == 'F1')
+        fact['claim'] = fact['quote'] = 'Queried an AI-assisted fictional sales dataset using SQL.'
+        source = self.work.atomic_text('inputs/ai-assisted-fictional-cv.md',
+                                      '\n'.join(f['quote'] for f in profile['facts']))
+        self.work.import_cv(source, 'CV2')
+        fp = self.work.import_profile(profile).data['fingerprint']
+        self.work.confirm_profile(fp, self.work.atomic_text('inputs/ai-confirmation.txt', 'CONFIRM PROFILE '+fp))
+        self.work.assess(1, {'schema_version':'1.0', 'rows':[
+            {'requirement_id':'R1', 'match':'direct', 'fact_ids':['F1'], 'reason':'Fictional AI-assisted SQL work.'},
+            {'requirement_id':'R2', 'match':'missing', 'fact_ids':[], 'reason':'No certification.'}]})
+        for section in self.model['sections']:
+            for group in section['groups']:
+                for statement in group['statements']:
+                    statement['source_locators'] = [v.replace('CV1#', 'CV2#', 1)
+                                                  for v in statement['source_locators']]
+        s = self.model['sections'][1]['groups'][0]['statements'][0]
+        s.update(text='Queried an assisted fictional sales dataset using SQL.',
+                 retained_qualifiers=['assisted', 'fictional'], transformation='faithful_paraphrase')
+        with self.assertRaisesRegex(WorkflowError, 'AI-assistance qualifier omitted'):
+            self.imported()
+        # Simulate a draft/review stored before the new alarm, with valid bindings.
+        # Current use must rerun validation instead of trusting that prior review.
+        with patch('core.tailoring.alarms', return_value=[]):
+            self.reviewed()
+        with self.assertRaisesRegex(WorkflowError, 'AI-assistance qualifier omitted'):
+            self.work.content_model(1)
+
     def test_review_required_and_shared_wording_reaches_render_not_legacy_quotes(self):
         statement = self.model['sections'][1]['groups'][0]['statements'][0]
         statement.update(text='Used SQL to query a fictional sales dataset.', transformation='faithful_paraphrase')
