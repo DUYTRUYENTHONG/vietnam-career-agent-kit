@@ -8,6 +8,10 @@
 - Preserve jobs, attempts, counts and approvals; no URL parsing, automatic merge,
   employer-alias inference or new submission clearance is introduced.
 
+- Pin document integration to its verified Ubuntu 24.04 renderer environment.
+  The ubuntu-latest move to 26.04/LibreOffice 26.2 failed the existing embedded
+  DejaVu font gate; retain that gate and all seven render integration tests.
+
 ## Unreleased - Make QA timing boundaries explicit
 
 - Reproduce the cancellation test's implicit one-second wall-clock assumption;

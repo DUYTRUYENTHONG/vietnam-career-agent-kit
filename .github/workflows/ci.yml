@@ -38,7 +38,9 @@ jobs:
       - name: Disposable fictional preparation demo
         run: python scripts/demo_slice1.py
   document-integration:
-    runs-on: ubuntu-latest
+    # Render acceptance is verified on LibreOffice 24.2 from Ubuntu 24.04.
+    # Ubuntu 26.04/LibreOffice 26.2 currently fails the unchanged font gate.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       CAREER_KIT_SOFFICE: /usr/bin/soffice

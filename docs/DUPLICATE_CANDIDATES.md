@@ -38,3 +38,4 @@ Compatibility: additive CLI command on existing preparation schemas 1–4; no
 migration or dependency. Seven fictional behavioral tests in
 `tests/test_duplicates.py` cover alternate IDs, employer-label differences, uncertain/closed records,
 workspace isolation, unchanged data/events, no artifact hashing and the real CLI.
+

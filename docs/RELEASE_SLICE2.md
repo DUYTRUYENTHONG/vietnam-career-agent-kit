@@ -33,6 +33,14 @@ The consolidated review checked correctness, boundaries, readability, data reten
 
 ## Reproduce and remaining limits
 
+The document-integration runner is pinned to Ubuntu 24.04, matching the
+[passing LibreOffice 24.2 environment](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/actions/runs/41391496266/job/125103685965).
+On 2 November 2026, ubuntu-latest selected Ubuntu 26.04/LibreOffice 26.2 and
+[failed the unchanged DejaVu font-substitution gate](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/actions/runs/41403984831/job/125141767766).
+That environment is not accepted rendering compatibility evidence. The pin keeps
+all seven current integration tests, font embedding, text/glyph checks and visual
+review requirements; the OS packages are still not hermetically locked.
+
 ```sh
 python -m unittest discover -s tests -v
 python scripts/generate_adapters.py --check
