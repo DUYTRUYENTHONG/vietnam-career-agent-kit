@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Record the completed 100/7 private training pilot
+
+- Replace the later run's GPU-blocked status with observed completion and scoped
+  base/adapter loss, token and latency measurements. Preserve the earlier run's
+  separate results and the still-unrun supplementary evaluation status.
+- Record failed wording acceptance despite lower reference loss, and distinguish
+  a checked cloud archive from unverified host recovery. Aggregate report only;
+  no private data, model promotion or runtime capability change.
+
 ## Unreleased - Preserve explicit AI-assistance wording
 
 - Block a recognized AI-assistance qualifier from being reduced to generic

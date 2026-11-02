@@ -66,10 +66,59 @@ The completed training and observed cloud archive do not establish a verified
 host checkpoint. A later runtime no longer contained those temporary artifacts;
 host recovery was not verified. No private adapter is included in the release.
 
-A separate next-run pack was prepared but had not started when free Colab GPU
-allocation reported usage limits. It is not a running job or a completed result.
+A separate next-run pack initially stopped at the free-GPU guard. That pack later
+completed on a newly available free T4; its distinct observations are below.
 A supplementary two-job evaluation set is preparation only; it has no model
 outputs or quality score. Do not combine its case count with this run's seven.
+
+## Subsequent 100/7 run: completed, still not accepted
+
+The separately authorized fresh-base run completed on 2 November 2026. It used
+100 reviewed training rows, seven held-out rows, two epochs and 50 optimizer
+steps. Its pinned base revision and package versions match the table above.
+The 48-source-fact corpus contains related examples, not 107 independent career
+achievements. Evaluation still covers three facts and one held-out employer
+group; this is not the supplementary two-job evaluation.
+
+QLoRA settings were rank 8, alpha 16, dropout 0.05, learning rate 0.00005,
+two warmup steps and gradient accumulation of four with microbatch size one.
+The base used 4-bit NF4 double quantization and FP16 compute, with FP32 trainable
+adapter parameters. Generation was greedy, non-thinking, one example at a time,
+with a 384-new-token cap. No held-out generation reached that cap.
+
+| Observation | Clean base | Final adapter |
+|---|---:|---:|
+| Held-out assistant-token NLL | 2.072818 | 0.724377 |
+| Held-out perplexity | 7.947186 | 2.063446 |
+| Strict JSON and exact source/requirement IDs | 7/7 | 7/7 |
+| Correct evidence-relation label | 6/7 | 5/7 |
+| Content passes in bounded maintainer review | 1/7 | 1/7 |
+| Standalone rewrites retaining AI-assisted personal-project scope | 0/3 | 0/3 |
+| Generation input tokens, seven cases | 1,928 | 1,928 |
+| Generated output tokens, seven cases | 439 | 532 |
+| Median generation latency, excluding loading/tokenization | 6,503.589 ms | 13,098.751 ms |
+
+The training sequence contained 58,550 input tokens and 16,630 assistant
+supervision tokens across its optimizer windows. Loading took 485,057.349 ms;
+the training-loop measurement was 426,883.012 ms, including epoch evaluation
+and checkpoint saves. Optimizer windows alone totaled 416,001.220 ms. These
+boundaries are separate; do not add teacher-forced targets to generated-token
+counts or present this as end-to-end application throughput.
+
+The adapter generated more tokens and had higher median generation latency in
+this small workload. It also produced a gap explanation denying data-quality
+control evidence while describing the supplied validation checks. Both variants
+dropped material assistance/personal-project scope from standalone rewrite
+bullets. Lower reference loss therefore did not establish useful CV acceptance.
+This was a non-blinded maintainer review of all seven outputs per variant, not
+an independent benchmark, a causal comparison against the earlier training run,
+or evidence of improved recruiter responses.
+
+The completed cloud ZIP passed its source-side hash and archive checks. A host
+download was initiated, but matching host bytes have not been verified. Keep
+the runtime artifacts until that separate recovery gate passes. No private
+corpus, prompts, raw outputs or weights are published here; no generated wording
+or adapter has been promoted into application documents.
 
 Before any promotion, retain a verified local checkpoint, generate matched raw
 base/adapter outputs on broader held-out job groups, and review factuality,
