@@ -3,6 +3,7 @@ import copy
 import json
 from pathlib import Path
 import sqlite3
+import sys
 import threading
 import unittest
 from unittest.mock import patch
@@ -66,7 +67,11 @@ class ParallelExecutionTests(unittest.TestCase):
 
     def test_ten_actual_concurrent_submissions_one_ledger_writer(self):
         run=self.start(10)
-        barriers={action:threading.Barrier(10,timeout=30) for action in ['inspect','submit']}
+        # Windows provenance/file checks can delay the final arrival without
+        # violating concurrency. Keep all ten-party barriers; use the existing
+        # action bound rather than treating 30s as a throughput requirement.
+        barrier_timeout = 120 if sys.platform == 'win32' else 30
+        barriers={action:threading.Barrier(10,timeout=barrier_timeout) for action in ['inspect','submit']}
         lock=threading.Lock();active=0;peak=0;seen=[];writer_threads=[]
         test=self;original_db=Kit._db
         def db(work):

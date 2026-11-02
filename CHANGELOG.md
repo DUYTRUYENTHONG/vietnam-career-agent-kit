@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Make QA timing boundaries explicit
+
+- Reproduce the cancellation test's implicit one-second wall-clock assumption;
+  freeze its provider clock and explicitly test blocked and eligible GET polling,
+  preserving the assertion that uncertain cancellation sends DELETE only once.
+- Retain ten-party inspect/submit barriers and cleanup event-order assertions,
+  with finite test scheduling guards aligned to existing action bounds on slow
+  Windows filesystems. No production timeout or submission rule is changed.
+
 ## Unreleased - Verify downloaded adapter bytes before discarding a runtime
 
 - Add an offline ZIP verifier and versioned private receipt for expected archive

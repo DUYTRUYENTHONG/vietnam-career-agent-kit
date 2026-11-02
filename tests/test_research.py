@@ -10,6 +10,7 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 
 from adapters.providers.contracts import ContractError, ProviderError
 from adapters.providers.firecrawl import BASE, Firecrawl
@@ -237,19 +238,28 @@ class ResearchTests(unittest.TestCase):
         self.assertEqual(result.outcome, 'manual_required'); self.assertEqual(result.data['evidence'], [])
 
     def test_cancel_is_reconciled_and_uncertain_cancel_retains_run(self):
-        result = self.start(); self.fake.cancel_uncertain = True
-        result = self.research.status(result.data['fingerprint'], cancel=True)
-        self.assertEqual(result.data['tasks'][0]['state'], 'cancel_requested')
-        before = len(self.fake.calls)
-        self.research.status(result.data['fingerprint'], cancel=True)
-        self.assertEqual(len(self.fake.calls), before)
-        with self.work._db() as db:
-            db.execute('UPDATE provider_tasks SET not_before_utc=NULL')
-        self.fake.cancel_uncertain = False
-        self.fake.cancelled = True  # The remote accepted cancellation; response was lost.
-        result = self.research.status(result.data['fingerprint'], cancel=True)
-        self.assertEqual(result.data['tasks'][0]['state'], 'cancelled')
-        self.assertEqual(sum(c[0] == 'DELETE' for c in self.fake.calls), 1)
+        # Slow filesystem/CI execution must not implicitly advance this test's
+        # one-second backoff. Exercise before/after boundaries explicitly.
+        fixed = datetime.now(timezone.utc)
+        with patch('adapters.providers.research.datetime', wraps=datetime) as clock:
+            clock.now.return_value = fixed
+            result = self.start(); self.fake.cancel_uncertain = True
+            result = self.research.status(result.data['fingerprint'], cancel=True)
+            self.assertEqual(result.data['tasks'][0]['state'], 'cancel_requested')
+            before = len(self.fake.calls)
+            self.research.status(result.data['fingerprint'], cancel=True)
+            self.assertEqual(len(self.fake.calls), before)
+            clock.now.return_value = fixed + timedelta(seconds=2)
+            result = self.research.status(result.data['fingerprint'], cancel=True)
+            self.assertEqual(result.data['tasks'][0]['state'], 'cancel_requested')
+            self.assertEqual(len(self.fake.calls), before + 1)
+            self.assertEqual(self.fake.calls[-1][0], 'GET')
+            self.assertEqual(sum(c[0] == 'DELETE' for c in self.fake.calls), 1)
+            self.fake.cancel_uncertain = False
+            self.fake.cancelled = True  # Remote accepted cancellation; response was lost.
+            result = self.research.status(result.data['fingerprint'], cancel=True)
+            self.assertEqual(result.data['tasks'][0]['state'], 'cancelled')
+            self.assertEqual(sum(c[0] == 'DELETE' for c in self.fake.calls), 1)
 
     def test_request_budget_and_source_expiry_block_before_network(self):
         raw = plan(); raw['limits']['requests'] = 1

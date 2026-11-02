@@ -44,7 +44,11 @@ class ParallelCleanupProgressTests(unittest.TestCase):
                 closes.append(request['job_id'])
                 if request['job_id'] == 1:
                     cleanup_started.set()
-                    progressed.append(other_verified.wait(3))
+                    # This proves progress before cleanup is released, not a
+                    # three-second filesystem/CLI performance target. Bound it
+                    # by the action guard used below; synchronous cleanup still
+                    # fails this event-order assertion.
+                    progressed.append(other_verified.wait(20))
                 return test.ack(request)
 
         result = run_parallel_with_bridge(self.work, run, Bridge(), action_timeout_seconds=20)
