@@ -8,13 +8,15 @@ python scripts/kit.py --data-dir ../my-private-career duplicate-candidates --job
 ```
 
 The command reads one consistent SQLite snapshot, selecting other jobs with the
-same normalized employer key. It returns candidates with an identical stored URL
-or an equal normalized title and comparison city. City aliases use the existing
+same normalized employer key or an identical stored URL. It returns candidates
+with an identical stored URL even if the employer label, title or city differs,
+or with the same employer and an equal normalized title and comparison city. City aliases use the existing
 normalizer; title comparison ignores case, spacing and accents. It is not fuzzy
-matching. Different employers, different titles/cities and other workspaces are
-outside the search unless the same-employer URL is identical.
+matching. Different employers are outside the search unless the stored URL is
+identical. Other workspaces are always outside the search. URL matching is exact:
+no redirect resolution, tracking-parameter removal or ATS-ID parsing is performed.
 
-Each candidate includes its local ID, source IDs, requisition, URL, recorded state,
+Each candidate includes its local ID, source IDs, employer label, requisition, URL, recorded state,
 liveness and matching signals. Submitted, user-reported and uncertain records
 remain visible even after closure, with `prior_attempt_needs_reconciliation`.
 These are recorded states, not freshly validated receipts or vacancy status.
@@ -33,6 +35,6 @@ browser is accessed. This reduces redundant preparation, not employer form time;
 no live applications-per-hour gain is measured.
 
 Compatibility: additive CLI command on existing preparation schemas 1–4; no
-migration or dependency. Five fictional behavioral tests in
-`tests/test_duplicates.py` cover alternate IDs, uncertain/closed records,
+migration or dependency. Seven fictional behavioral tests in
+`tests/test_duplicates.py` cover alternate IDs, employer-label differences, uncertain/closed records,
 workspace isolation, unchanged data/events, no artifact hashing and the real CLI.

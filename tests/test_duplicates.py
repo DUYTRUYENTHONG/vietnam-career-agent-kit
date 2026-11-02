@@ -56,6 +56,23 @@ class DuplicateCandidateTests(unittest.TestCase):
         self.assertEqual(['same_url'], result['candidates'][0]['signals'])
         self.assertFalse(result['candidates'][0]['prior_attempt_needs_reconciliation'])
 
+    def test_identical_url_surfaces_different_employer_label_without_merging(self):
+        first = self.add('post-a')
+        second = self.add('post-b', employer='Example Parent Group',
+                          title='Renamed Engineering Role', city='Hanoi', url=first['url'])
+        before = [self.work.get_job(row['id']) for row in (first, second)]
+        result = self.work.duplicate_candidates(second['id']).data
+        self.assertEqual([first['id']], [row['id'] for row in result['candidates']])
+        self.assertEqual(['same_url'], result['candidates'][0]['signals'])
+        self.assertEqual('Example Software', result['candidates'][0]['employer'])
+        self.assertFalse(result['deduplication_complete'])
+        self.assertEqual(before, [self.work.get_job(row['id']) for row in (first, second)])
+
+    def test_title_city_match_does_not_cross_employer_boundary(self):
+        first = self.add('post-a')
+        self.add('post-b', employer='Example Parent Group')
+        self.assertEqual([], self.work.duplicate_candidates(first['id']).data['candidates'])
+
     def test_distinct_employer_title_or_city_and_other_workspaces_are_not_included(self):
         first = self.add('post-a')
         self.add('post-b', employer='Different Employer')
