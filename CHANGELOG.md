@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Verify downloaded adapter bytes before discarding a runtime
+
+- Add an offline ZIP verifier and versioned private receipt for expected archive
+  and selected LoRA tensor hashes, without extraction or model loading.
+- Reject unsafe paths, collisions, special entries, invalid metadata and changed
+  source bytes; bound input sizes and refuse receipt overwrites.
+- Document ephemeral notebook outputs versus durable host checkpoints. Byte
+  verification does not certify training, compatibility, CV quality or promotion.
+
+
 ## Unreleased - Refresh reviewed personal training data
 
 - Add a source-reconciliation, new-export and untouched-evaluation workflow,

@@ -4,6 +4,9 @@ New to the kit? Start with the [fork-and-train walkthrough](FINE_TUNING_START.md
 and [research adapter catalog](../models/README.md). Published fictional adapters
 are failure-reproduction assets, not accepted default CV models.
 
+Download a cloud checkpoint first? Follow [host archive verification](MODEL_CHECKPOINTS.md)
+before treating temporary outputs as a durable local model.
+
 ## Check an adapter before loading weights
 
 `adapters.local_qwen.generate` performs a standard-library metadata preflight

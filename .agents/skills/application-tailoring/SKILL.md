@@ -128,6 +128,9 @@ a current independently reviewed export. Keep held-out groups, private artifacts
 and base-model comparison. A completed run is not evidence of improved tailoring:
 evaluate unseen-JD factuality and specificity before explicit host integration.
 Never learn from unreviewed drafts, invent training results or bypass review.
+For cloud experiments, follow ../../../docs/MODEL_CHECKPOINTS.md: preserve
+source hashes and verify downloaded host bytes before discarding the runtime.
+Notebook logs are not a durable checkpoint; byte verification grants no promotion.
 
 For paired recorded base/adapter generations, follow
 ../../../docs/WORDING_EVALUATION.md. Evaluate every current held-out example;
