@@ -16,6 +16,44 @@ For a CV statement, retain the existing v2 one-fact-per-statement rule and the
 reviewed employment/project grouping. Do not silently combine facts into a new
 causal claim. Target titles can express a direction; historical titles remain exact.
 
+### Match the stated clause at its stated level
+
+Read the complete JD for eligibility, then assess each selected clause against
+its linked evidence. Keep clause-level support separate from whole-job fit.
+Do not add production deployment, independent ownership, years of tenure,
+measured gains or framework mastery when the clause does not require them.
+Preserve those boundaries in the evidence context without making them invented
+hiring prerequisites.
+
+Interpret conjunctions and examples in context. "Such as", "like" and "or"
+usually introduce alternatives or examples; they do not automatically require
+every named language or tool. Conversely, a compound duty may genuinely require
+building, operating and monitoring: evidence of building alone supports only
+that part. Translate the level accurately across languages; "basic knowledge"
+must not become advanced proficiency. If wording is ambiguous, retain the
+ambiguity for review rather than awarding or withholding credit automatically.
+
+For a reviewed training reference, use `direct` only when the supplied fact
+supports the selected clause at its stated level, `partial` for a supported
+subset, and `not_demonstrated` when that fact does not establish the requested
+activity. A `remaining_gap` should identify an actual missing part of the clause;
+separate scope cautions from missing qualifications. Debugging alone does not
+prove testing participation, and preparing training data does not prove that a
+model was trained. These are editorial review rules, not an automatic semantic
+validator or a substitute for the export's actual schema.
+
+Fictional review exercise: a confirmed JavaScript feature can directly support
+"basic programming knowledge, such as JavaScript or Ruby" without proving Ruby
+experience. The same feature does not establish "operate and monitor backend
+services". Retain any AI-assistance or prototype context in both judgments.
+
+When correcting reviewed labels, write a new dataset version with source hashes
+and exact field deltas. Keep inputs, fact IDs and held-out group assignments
+unchanged unless a separately reviewed split change is intended. Apply relation
+corrections consistently to paired assessment/tailoring references. Preserve
+historical measurements against their original reference version; corrected
+labels do not retroactively improve a model's recorded score or authorize a run.
+
 For an email, also capture the requisition/title, published recipient evidence,
 verified sender, requested language, employer's subject/attachment instructions,
 known availability and compensation basis only when relevant. Unknown required
