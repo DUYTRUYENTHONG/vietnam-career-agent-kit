@@ -189,6 +189,14 @@ It measures full retrieval including source/profile validation and rebuilding an
 in-memory index, and evaluates four authored queries. See [QA evidence](PERFORMANCE_MEMORY_QA.md).
 This cannot establish a job-submission rate or quality on real CVs.
 
+The JSON also reports `stage_samples` for profile/source validation, index
+construction, lexical query and context assembly. Each named stage includes its
+observed count, minimum, median, maximum and total milliseconds from the measured
+retrieval calls. Setup and the four separate evaluation queries are excluded.
+Stage times are rounded and do not account for all wall time. Use them to locate
+local bottlenecks before caching or replacing retrieval; keep current source
+checks intact. This does not measure browser waits, model inference or tokens.
+
 ## Reviewed dataset contract
 
 Export accepts 1–100 distinct existing local job IDs. Each must have current

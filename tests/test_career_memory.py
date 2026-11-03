@@ -125,6 +125,17 @@ class CareerMemoryTests(unittest.TestCase):
         self.assertIsNone(result['model_tokens'])
         self.assertEqual(1, result['evaluation']['positive_metrics']['recall_at_k'])
         self.assertLess(result['evaluation']['baseline']['positive_metrics']['recall_at_k'], 1)
+        stages = result['stage_samples']
+        self.assertEqual({'profile_and_source_validation', 'ephemeral_index',
+                          'lexical_query', 'bounded_context'}, set(stages))
+        for stage in stages.values():
+            self.assertEqual(2, stage['observations'])
+            self.assertGreaterEqual(stage['min_ms'], 0)
+            self.assertLessEqual(stage['min_ms'], stage['p50_ms'])
+            self.assertLessEqual(stage['p50_ms'], stage['max_ms'])
+        # Evaluation queries have separate traces and must not inflate samples.
+        self.assertLessEqual(sum(s['sum_ms'] for s in stages.values()),
+                             result['wall_duration_ms']['sum'] + 0.01)
 
     def test_cli_context_and_evaluation_use_selected_private_workspace(self):
         cli = Path(__file__).resolve().parents[1]/'scripts/kit.py'

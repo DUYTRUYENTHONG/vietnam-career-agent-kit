@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Expose measured retrieval stages in the local benchmark
+
+- Report observed validation, indexing, query and context-assembly timings from
+  the existing retrieval traces, with counts and minimum/median/maximum/totals.
+- Keep setup and evaluation queries outside the timing samples. No model calls,
+  private input, caching, runtime behavior or application-ledger changes; these
+  diagnostics establish a baseline rather than claim a speed improvement.
+
 ## Unreleased - Retrieve writing evidence from requirements before introductions
 
 - CV/email briefs now prioritize recorded mandatory/hard requirement clauses
