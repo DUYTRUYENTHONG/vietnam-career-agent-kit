@@ -19,13 +19,22 @@ Host search/browser or user-provided JD; no network connector is assumed from a 
 
 ## Steps
 
-For optional public cloud retrieval read ../../../docs/FAST_WEB.md. Prefer fresh
-eligible evidence or an existing documented feed before constructing a finite
-Firecrawl plan. Preview with `discover --plan FILE --dry-run`; only an explicit
-reviewed public scope may use `--live --approve-plan HASH`. Use `research-status`
-to resume returned task IDs, never launch a replacement for an uncertain start.
-No CV, account, private contact or application answers enter research. TinyFish
-is unsupported in this increment; a source block never permits provider hopping.
+Prefer fresh eligible evidence or an existing documented feed before optional
+cloud retrieval. For experimental Firecrawl research read ../../../docs/FAST_WEB.md
+and preview with `discover --plan FILE --dry-run`. For experimental TinyFish
+Fetch read ../../../docs/TINYFISH_SETUP.md and preview with
+`tinyfish-fetch --plan FILE`; it accepts 1-10 selected public URLs, not search
+or natural-language Agent goals. Live dispatch requires the exact finite reviewed
+public plan with `--live --approve-plan HASH` and separately permitted sources.
+No CV, account session, private contact or application answers enter research.
+Reconcile existing uncertain tasks through their documented status/report path;
+do not launch a replacement. A source block never permits provider hopping.
+
+TinyFish Browser is a separate experimental guest-form execution adapter; Fetch
+does not create application sessions. Route that work to ../browser-application/SKILL.md
+and ../../../docs/TINYFISH_BROWSER.md with its additional provider disclosure and
+execution scope. This discovery skill does not start browser/application runs or
+establish live provider, billing or throughput compatibility.
 
 Read connectors/registry.json and per-action policy evidence. Manual versioned import-jd works now. Treat snippets as leads; verify full duties/status when permitted. Preserve retrieval/coverage, inaccessible sources and duplicate leads. Do not activate reference installers.
 

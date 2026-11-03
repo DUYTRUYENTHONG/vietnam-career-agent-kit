@@ -9,6 +9,13 @@ those files; they are generated, not a second set of instructions. External
 collections such as [Awesome Copilot](AWESOME_COPILOT_REVIEW.md) stay reference
 sources until a specific adoption is reviewed.
 
+Keep capability labels aligned with implemented modes. The discovery skill routes
+experimental Firecrawl research and TinyFish public Fetch to their respective
+setup guides; TinyFish Browser belongs to the separate browser-application skill
+and needs additional cloud disclosure/execution scope. A provider name does not
+prove live compatibility or source permission, and importing its skill does not
+start a paid service or application run.
+
 The [Context Engineering collection review](CONTEXT_ENGINEERING_REVIEW.md) adds
 guidance for durable handoffs. Its advanced KV and live-context techniques need
 runtime support; they are not enabled by importing a skill.
