@@ -7,7 +7,7 @@ import unittest
 import subprocess
 import sys
 
-from core.learning import export_reviewed, check_export, _split
+from core.learning import export_reviewed, check_export, _split, _split_overlap
 from core.ledger import canonical_hash
 from core.workflow import WorkflowError
 from scripts.demo_wording import seed, fictional_review
@@ -65,6 +65,25 @@ class LearningTests(unittest.TestCase):
         self.assertFalse({e['output_hash'] for e in train} & {e['output_hash'] for e in evaluation})
         self.assertEqual((train, evaluation, groups), _split(deepcopy(rows)))
 
+    def test_overlap_reports_shared_input_evidence_without_claiming_independence(self):
+        def row(quote, source_hash, locator='experience:1'):
+            fact = {'id': 'F1', 'field': 'experience', 'quote': quote,
+                    'source_id': 'S1', 'locator': locator}
+            return {'provenance': {'source_hashes': {'S1': source_hash}},
+                    'messages': [{'role': 'system', 'content': 'fixture'},
+                                 {'role': 'user', 'content': json.dumps({'facts': [fact]})}]}
+        shared = row('Queried sales data using SQL.', 'source-a')
+        related = row('Checked reporting data.', 'source-a', 'experience:2')
+        other = row('Built a fictional form.', 'source-b')
+        audit = _split_overlap([shared, shared, other], [shared, related])
+        self.assertEqual(2, audit['training_unique_fact_count'])
+        self.assertEqual(2, audit['evaluation_unique_fact_count'])
+        self.assertEqual(1, audit['shared_fact_count'])
+        self.assertEqual(1, audit['shared_source_count'])
+        self.assertEqual(1, audit['evaluation_fact_count_not_exactly_in_training'])
+        self.assertFalse(audit['semantic_independence_verified'])
+        self.assertEqual(0, _split_overlap([], [])['shared_fact_count'])
+
     def test_cli_export_check_and_boolean_manifest_counts_are_rejected(self):
         self.reviewed()
         cli = Path(__file__).resolve().parents[1]/'scripts/kit.py'
@@ -99,7 +118,10 @@ class LearningTests(unittest.TestCase):
         self.work.review_wording(2, fictional_review(self.work.wording_packet(2).data))
         result = export_reviewed(self.work, [1, 2], 'datasets/two-jobs').data
         self.assertTrue(result['ready_for_split'])
-        self.assertTrue(check_export(self.work, 'datasets/two-jobs').data['current_evidence_checked'])
+        checked = check_export(self.work, 'datasets/two-jobs').data
+        self.assertTrue(checked['current_evidence_checked'])
+        self.assertGreater(result['split_overlap']['shared_fact_count'], 0)
+        self.assertEqual(result['split_overlap'], checked['split_overlap'])
         for name in ('train.jsonl', 'evaluation.jsonl'):
             rows = self.work.inside('datasets/two-jobs/'+name).read_text(encoding='utf8').splitlines()
             self.assertEqual(1, len(rows))

@@ -153,6 +153,24 @@ detect changes, not authentic human identity. Same-candidate facts and semantic
 near-duplicates may still overlap: this is not cross-candidate generalization.
 Email briefs are not reviewed email training examples in this version.
 
+`learning-export` and `learning-check` also return a computed `split_overlap`
+report. It counts unique input facts in each partition, facts shared by both,
+source-content hashes shared by both, and evaluation facts not exactly present
+in training. Exact fact identity combines the source-content hash, field, quote
+and locator; local fact/source IDs alone do not determine identity. Counts cover
+all facts supplied to the model, including facts not used in its target output.
+No raw quotes, source hashes or IDs are added to this report.
+
+This is an overlap audit, not a new split policy. A held-out job may reuse the
+same candidate evidence; `ready_for_split` therefore does not mean unseen facts.
+Different locators, changed source bytes and semantic paraphrases may conceal
+related evidence. `semantic_independence_verified` stays false even when exact
+overlap is zero. Source-hash overlap does not infer which facts are related.
+With fewer than two groups, no partitions exist and the report counts are zero;
+that does not mean the collection has been evaluated. Reports are recomputed
+after existing export checks, without changing JSONL/manifest versions or old
+export files. No training, model promotion or candidate fact changes occur.
+
 New version 1.1 exports include a versioned explicit output schema and current
 assessed requirement-to-fact links. Unchanged version 1.0 exports retain legacy
 validation. See [generation input and compatibility](LEARNING_PROMPTS.md).
