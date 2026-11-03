@@ -42,7 +42,7 @@ nhận việc hoặc cam kết 100 đơn/giờ. PDF/DOCX cần công cụ trích
 python scripts/kit.py --data-dir ../my-career-private start-campaign --cv /path/to/my-cv.pdf --language vi
 ```
 
-[Tracker 100 đơn thực tế đã ẩn danh và kết quả phản hồi](docs/CAMPAIGN_RESULTS.md).
+[Mốc 100 đơn, 140 đơn đã xác nhận và kết quả phản hồi theo ngày đã ẩn danh](docs/CAMPAIGN_RESULTS.md).
 CV, email riêng, tin nhắn tuyển dụng và biên nhận không được đưa lên GitHub.
 
 **Mới clone hoặc fork?** Đọc [hướng dẫn chạy lần đầu](docs/START_HERE.md)
