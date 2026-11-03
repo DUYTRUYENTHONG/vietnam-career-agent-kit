@@ -103,6 +103,24 @@ model promotion, account-connection or application-submission tool is exposed.
 Real stdio protocol checks do not prove that every Codex/Claude/Muse/Grok host
 has installed or can invoke the server; test the chosen host explicitly.
 
+### Job requirements drive writing-context retrieval
+
+Email context and CV/email writing briefs build their lexical query from the
+recorded structured requirements: mandatory clauses first, hard clauses first
+within each priority, followed by optional clauses and the role title. Input
+order breaks ties. They select up to 20 distinct literal words in first-seen
+order within a 1,000-character query bound, skipping words that cannot fit whole.
+Repeated words do not consume additional slots. Company introductions in `raw_jd` no longer consume
+that budget. Direct `retrieve` queries are unchanged.
+
+This is bounded lexical selection, not complete requirement coverage, semantic
+matching or qualification certification. Later clauses can still fall outside
+the query budget; use the full JD/evidence map for final tailoring. All profile
+and source checks remain fresh. The writing brief still binds the complete
+current job fingerprint, including `raw_jd`: changing even the preamble makes an
+old draft stale. Existing briefs may require regeneration after this change;
+no stored evidence, approvals or historical application snapshots are rewritten.
+
 Use the interpreter where the locked MCP dependency is installed. The first command
 starts a protocol server; it is not a terminal chat. The second writes example
 configurations under the private workspace's `configured-plugins/`; it does not

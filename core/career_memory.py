@@ -81,7 +81,19 @@ def email_context(work, job_id: int, *, language: str = 'en', limit: int = 5) ->
     if language not in {'en', 'vi'}:
         raise ContractError('language: en or vi')
     job, fingerprint = work.job_document(job_id)
-    context = retrieve(work, job['title']+' '+job['raw_jd'][:700], limit=limit)
+    # Structured clauses are the job evidence; company preambles are not queries.
+    requirements = sorted(job['requirements'], key=lambda r: (not r['mandatory'], not r['hard']))
+    query_text = ' '.join([r['text'] for r in requirements]+[job['title']])
+    words, characters = [], 0
+    for word in dict.fromkeys(re.findall(r'\w+', query_text, re.UNICODE)):
+        size = len(word)+bool(words)
+        if characters+size > 1000:
+            continue
+        words.append(word); characters += size
+        if len(words) == 20:
+            break
+    query = ' '.join(words)
+    context = retrieve(work, query, limit=limit)
     if context.outcome != 'ok':
         return context
     guide = (

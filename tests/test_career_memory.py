@@ -58,6 +58,39 @@ class CareerMemoryTests(unittest.TestCase):
         self.assertIn('Vietnamese', result.data['instructions'])
         with self.assertRaises(ValueError): email_context(self.work, 1, language='unknown')
 
+    def test_writing_context_uses_required_clauses_before_company_preamble(self):
+        job, _ = self.work.job_document(1)
+        job['title'] = 'Application Developer'
+        job['raw_jd'] = ' '.join('companyintro'+str(i) for i in range(60))
+        job['requirements'] = [
+            {'id': 'optional', 'text': ' '.join('optionalterm'+str(i) for i in range(30)),
+             'field': 'capability', 'value': 'optional', 'mandatory': False, 'hard': False},
+            {'id': 'sql', 'text': 'SQL', 'field': 'capability', 'value': 'sql',
+             'mandatory': True, 'hard': False}]
+        self.work.import_job(job)
+        result = email_context(self.work, 1, limit=1)
+        self.assertEqual('ok', result.outcome)
+        self.assertEqual(1, len(result.data['context']['facts']))
+        self.assertIn('SQL', result.data['context']['facts'][0]['quote'])
+        self.assertNotIn('companyintro', result.data['context']['query'])
+        self.assertFalse(result.data['authority_granted'])
+
+    def test_repeated_and_oversized_words_do_not_crowd_out_later_requirements(self):
+        job, _ = self.work.job_document(1)
+        job['requirements'] = [
+            {'id': 'repeated', 'text': 'experience with SQL '*30,
+             'field': 'capability', 'value': 'sql', 'mandatory': True, 'hard': True},
+            {'id': 'later', 'text': 'Python '+('x'*1100)+' reporting',
+             'field': 'capability', 'value': 'python', 'mandatory': True, 'hard': True}]
+        self.work.import_job(job)
+        query = email_context(self.work, 1).data['context']['query']
+        self.assertIn('Python', query.split())
+        self.assertIn('reporting', query.split())
+        self.assertEqual(1, query.split().count('SQL'))
+        self.assertFalse(any(set(word) == {'x'} for word in query.split()))
+        self.assertLessEqual(len(query), 1000)
+        self.assertLessEqual(len(query.split()), 20)
+
     def test_gold_retrieval_metrics_separate_negatives_and_reject_unknown_ids(self):
         fact_id = retrieve(self.work, 'SQL', limit=1).data['facts'][0]['id']
         packet = {'schema_version': '1.0', 'limit': 1, 'cases': [

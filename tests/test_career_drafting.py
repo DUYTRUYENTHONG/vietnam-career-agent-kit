@@ -62,6 +62,18 @@ class DraftingTests(unittest.TestCase):
         self.work.inside(source['path']).write_text('Altered fictional source', encoding='utf8')
         with self.assertRaises(WorkflowError): check_draft(self.work, self.request, draft)
 
+    def test_unchanged_requirement_query_does_not_hide_a_changed_full_job(self):
+        before = writing_brief(self.work, **self.request).data
+        draft = self.draft(before)
+        job, _ = self.work.job_document(1)
+        job['raw_jd'] += '\nA changed fictional company introduction.'
+        self.work.import_job(job)
+        after = writing_brief(self.work, **self.request).data
+        self.assertEqual(before['context']['query'], after['context']['query'])
+        self.assertNotEqual(before['job_fingerprint'], after['job_fingerprint'])
+        self.assertNotEqual(before['brief_fingerprint'], after['brief_fingerprint'])
+        with self.assertRaises(WorkflowError): check_draft(self.work, self.request, draft)
+
     def test_cv_bullets_and_limits_and_no_matching_evidence(self):
         request = dict(self.request, kind='cv')
         brief = writing_brief(self.work, **request).data
