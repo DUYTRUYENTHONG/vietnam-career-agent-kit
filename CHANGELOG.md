@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Bind fact quotes to the verified source bytes
+
+- Hash and decode each evidence source from one operation-local byte snapshot.
+  Quote validation cannot accept text introduced by a later filesystem read.
+- Preserve source/profile fingerprints and workspace contracts; no persistent
+  source cache or schema migration. A fictional file-swap regression covers the
+  validation boundary. This does not authenticate the original candidate claims.
+
 ## Unreleased - Align discovery instructions with implemented provider modes
 
 - Replace the stale TinyFish-unsupported statement with the existing experimental

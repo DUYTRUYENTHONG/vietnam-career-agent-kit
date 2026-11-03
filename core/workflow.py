@@ -220,6 +220,7 @@ class Preparation(Kit):
     def _sources(self, payload: dict) -> list[dict]:
         ids=sorted({fact['source_id'] for fact in payload['facts']})
         sources=[]
+        source_text={}
         with self._db() as db:
             for source_id in ids:
                 row=db.execute('SELECT * FROM evidence_sources WHERE id=?',(source_id,)).fetchone()
@@ -227,10 +228,17 @@ class Preparation(Kit):
                     raise WorkflowError('needs_input','Import the referenced CV/evidence source first: '+source_id)
                 source=dict(row)
                 path=self.inside(source['path'])
-                if not path.is_file() or self.hash_file(path)!=source['sha256']:
+                try:
+                    verified_bytes=path.read_bytes()
+                except OSError as exc:
+                    raise WorkflowError('blocked','Imported source bytes changed or disappeared: '+source_id) from exc
+                if hashlib.sha256(verified_bytes).hexdigest()!=source['sha256']:
                     raise WorkflowError('blocked','Imported source bytes changed or disappeared: '+source_id)
+                try:
+                    source_text[source_id]=verified_bytes.decode('utf8')
+                except UnicodeDecodeError as exc:
+                    raise WorkflowError('blocked','Imported source is not UTF-8 text: '+source_id) from exc
                 sources.append(source)
-        source_text={s['id']:self.inside(s['path']).read_text(encoding='utf8') for s in sources}
         for fact in payload['facts']:
             if fact['quote'] not in source_text[fact['source_id']]:
                 raise WorkflowError('blocked','Fact quote is absent from imported source: '+fact['id'])
