@@ -36,6 +36,12 @@ to compare dated coverage before repeating expensive review. The command itself
 does not persist a cache or consult applications, so it cannot skip already-applied
 jobs without the host checking the canonical tracker.
 
+Before importing selected leads, the host can batch known identities through
+[`check-lead-identities`](LEAD_IDENTITY_CHECK.md). It returns local recorded
+matches without importing jobs, scanning artifacts or clearing any application.
+Discovery results need explicit identity mapping; neither command proves live
+availability, suitability or complete deduplication.
+
 Input bounds: 1–12 explicit board tokens, 1–3 workers, 4 MB/board, 5,000 records/board,
 10-second socket timeout. The socket timeout is not an overall elapsed deadline.
 Only the fixed HTTPS Greenhouse origin is contacted, with GET and no candidate

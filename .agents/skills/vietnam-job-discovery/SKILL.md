@@ -43,6 +43,13 @@ other unsupported reads stay manual.
 
 ## Outputs
 
+Before importing selected leads, use `check-lead-identities --file FILE` against
+the explicitly selected private workspace. Supply 1–50 known identity records
+under ../../../schemas/lead-identities.schema.json; unknown identity strings may
+stay empty. Follow ../../../docs/LEAD_IDENTITY_CHECK.md. Recorded matches need
+identity/receipt review; unmatched results do not prove a job is new or suitable.
+No import, CV scan, account access or execution authority follows this read.
+
 For verified Greenhouse board tokens, use `python scripts/kit.py discover-greenhouse
 --board TOKEN` to read up to twelve boards with at most three workers. See
 ../../../docs/BULK_DISCOVERY.md. This experimental read-only connector returns

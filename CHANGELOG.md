@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased - Check recorded lead identities before job import
+
+- Add a bounded read-only CLI check for 1–50 lead identities against the selected
+  existing tracker, returning matching records and prior-attempt warnings.
+- Validate the entire input before one metadata snapshot; keep unmatched leads
+  unverified and preserve all jobs, counts, artifacts and execution authority.
+
 ## Unreleased - Report evidence overlap in reviewed CV datasets
 
 - Return exact input-fact/source overlap counts from learning export and check,

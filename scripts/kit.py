@@ -150,6 +150,8 @@ def parser() -> Parser:
     reject_wording.add_argument('--job-id',type=int,required=True);reject_wording.add_argument('--reason',required=True)
     duplicates=commands.add_parser('duplicate-candidates',help='read-only same-employer identity hints; never merges or clears a job')
     duplicates.add_argument('--job-id',type=int,required=True)
+    leads=commands.add_parser('check-lead-identities',help='read-only identity hints for 1-50 leads before import; no clearance or ledger writes')
+    leads.add_argument('--file',type=Path,required=True)
     render=commands.add_parser('render',help='local DOCX/PDF conversion and page previews; no external disclosure')
     render.add_argument('--job-id',type=int,required=True);render.add_argument('--soffice',type=Path)
     review=commands.add_parser('review-documents');review.add_argument('--render-id',required=True)
@@ -372,6 +374,7 @@ def execute(args) -> Outcome:
     if command=='confirm-profile':return work.confirm_profile(args.fingerprint,args.confirmation)
     if command=='import-jd':return work.import_job(load_input(args.file))
     if command=='duplicate-candidates':return work.duplicate_candidates(args.job_id)
+    if command=='check-lead-identities':return work.check_lead_identities(load_input(args.file))
     if command=='assess':
         result=work.assess(args.job_id,load_input(args.matrix))
         if not args.capture_growth or result.outcome!='ok':return result

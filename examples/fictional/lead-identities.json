@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "leads": [
+    {
+      "id": "fictional-lead-1",
+      "platform": "fictional",
+      "platform_job_id": "example-ai-1",
+      "employer": "Example Software",
+      "req_id": "example-ai-1",
+      "title": "AI Developer",
+      "city": "HCMC",
+      "url": "https://jobs.example.test/example-ai-1"
+    }
+  ]
+}

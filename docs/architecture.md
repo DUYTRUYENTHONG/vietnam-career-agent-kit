@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`check-lead-identities` adds bounded pre-import identity matching to the existing
+preparation layer. It reads recorded job metadata from one read-only SQLite
+snapshot, without importing jobs or opening candidate artifacts. The new input
+contract does not change existing ledger/discovery contracts or execution
+authority. See [scope and usage](LEAD_IDENTITY_CHECK.md).
+
 `core/codex_usage.py` and `scripts/normalize_codex_usage.py` prepare sanitized
 source/observation pairs from an explicit bounded fresh-thread Codex CLI JSONL
 export. They reuse the performance contract without opening any database or

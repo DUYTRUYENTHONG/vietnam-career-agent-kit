@@ -232,6 +232,7 @@ Keep CVs, evidence, salary, answers, trackers and screenshots in the selected di
 | `init`, `import-cv`, `import-profile`, `confirm-profile` | Private local evidence/profile state |
 | `import-jd`, `assess`, `prepare` | Private local job/matrix/draft state; no website operation |
 | `duplicate-candidates --job-id ID` | Read-only same-employer URL/title/city hints and prior recorded states; no auto-merge or clearance. [Limits](docs/DUPLICATE_CANDIDATES.md) |
+| `check-lead-identities --file FILE` | Before import, compare 1–50 lead identities against one read-only tracker snapshot. [Contract and limits](docs/LEAD_IDENTITY_CHECK.md) |
 | `render`, `review-documents`, `reject-documents` | Optional local DOCX/PDF/page generation and explicit review; no disclosure |
 | `create-manifest`, `approve-manifest`, `check-manifest`, `revoke-manifest` | Exact finite authorization records and expiry/hash checks; execution requires an explicitly reviewed bridge/runtime scope |
 | `create-authorization`, `approve-authorization`, `check-authorization`, `revoke-authorization`, `authorize-manifest` | Opt-in bounded standing delegation across reviewed batches; shared allocations and revocation, with host confirmations separate |
