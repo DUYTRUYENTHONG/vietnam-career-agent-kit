@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Assess tailoring evidence at the stated requirement level
+
+- Clarify illustrative tool lists, compound duties and clause-level support in
+  the existing evidence-writing guidance, with a fictional review exercise.
+- Keep scope qualifiers distinct from invented hiring prerequisites. Version
+  corrected training references without changing historical model measurements.
+- Instruction-only guidance; no schema, runtime validator, model promotion or
+  application authority changes.
+
 ## Unreleased - Check older canonical ledgers without migration
 
 - Add `check-legacy-lead-identities --ledger FILE --file FILE` using the same
