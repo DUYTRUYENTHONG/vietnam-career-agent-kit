@@ -1,8 +1,10 @@
 import copy
+from contextlib import contextmanager
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from core.workflow import Preparation, WorkflowError
 from core.contracts import ContractError
@@ -87,6 +89,33 @@ class PreparationTests(unittest.TestCase):
         source=self.work.inspect_profile().data['sources'][0]
         (self.work.data_dir/source['path']).write_text('tampered',encoding='utf8')
         with self.assertRaises(WorkflowError):self.work.inspect_profile()
+
+    def test_quote_is_checked_against_same_bytes_as_verified_source_hash(self):
+        payload=profile()
+        marker='Fictional quote added after verification.'
+        payload['facts'][0]['quote']=payload['facts'][0]['claim']=marker
+        with self.work._db() as db:
+            source=db.execute('SELECT path FROM evidence_sources WHERE id=?',('CV1',)).fetchone()
+        path=self.work.inside(source['path'])
+        original=path.read_bytes()
+        real_open=Path.open
+        swapped=[]
+
+        @contextmanager
+        def swap_after_read(target, mode='r', *args, **kwargs):
+            with real_open(target,mode,*args,**kwargs) as stream:
+                yield stream
+            if target==path and mode=='rb' and not swapped:
+                swapped.append(True)
+                with real_open(path,'wb') as output:
+                    output.write(original+b'\n'+marker.encode('utf8'))
+
+        with patch.object(Path,'open',swap_after_read):
+            with self.assertRaisesRegex(WorkflowError,'Fact quote is absent'):
+                self.work._sources(payload)
+        self.assertTrue(swapped)
+        with self.work._db() as db:
+            self.assertEqual(0,db.execute('SELECT COUNT(*) FROM candidate_profile').fetchone()[0])
 
     def test_conflicting_values_cannot_be_confirmed_and_modified_profile_is_stale(self):
         p=profile();first=p['facts'][0];first['conflict_key']='employment:end'
