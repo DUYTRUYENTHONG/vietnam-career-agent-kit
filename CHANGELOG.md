@@ -1,5 +1,31 @@
 # Changelog
 
+## Unreleased - Distinguish software and AI tailoring evidence
+
+- Extend the role-family prompt with separate software/AI evidence priorities,
+  historical-title boundaries and private, reviewed requirement-to-fact refresh
+  instructions. Preserve grouped holdouts; preferences and submission receipts
+  do not become experience or CV-quality labels. This is host guidance, not
+  automatic training or additional submission authority.
+
+## Unreleased - Opt in to a standalone career MCP configuration
+
+- Add `plugin_config.py --career-only` to generate the existing local career
+  stdio server without registering email/browser plugins. Keep both existing
+  configuration modes unchanged and reject conflicting flags before writing.
+- Document private-workspace setup, the retrieval/drafting/review flow and
+  separate experimental Qwen training. No Docker, host-settings changes,
+  account access, automatic training or model promotion is introduced.
+
+## Unreleased - Pair observed call output with its measured duration
+
+- Add output tokens per measured call-second to JSON/Markdown/CSV performance
+  reports using only same-call output/duration pairs, with explicit coverage.
+- Keep agent turns, missing or zero-duration measurements and unrepresentable
+  rates unavailable; retain actual zero output. No decoder-only throughput,
+  quality gain, model usage, prices or subscription savings are inferred.
+- Preserve existing observations, storage versions, scopes and ledger behavior.
+
 ## Unreleased - Dated 140-submission community checkpoint
 
 - Refresh the anonymized public submission checkpoint and EN/VI entry links to

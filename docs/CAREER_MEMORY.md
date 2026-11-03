@@ -61,6 +61,48 @@ python scripts/serve_plugin.py career --data-dir ../my-private
 python scripts/plugin_config.py --data-dir ../my-private --python /absolute/path/to/plugin-python --include-career
 ```
 
+### Opt in to the career MCP server only
+
+Users who want retrieval and CV/email preparation without email/browser tool
+registration can generate just the existing career stdio server:
+
+```sh
+python scripts/plugin_config.py --data-dir ../my-private --python /absolute/path/to/plugin-python --career-only
+```
+
+Use the locked optional plugin environment described in
+[local plugin setup](LOCAL_PLUGINS.md). Review the resulting
+`configured-plugins/mcp-servers.example.json` or `codex.example.toml` in that
+private workspace, then add its single `career-career` server entry through your
+MCP host's normal setup. No Docker or public HTTP endpoint is required. The host
+starts `scripts/serve_plugin.py career --data-dir ...` over stdio. Initialize
+your own private workspace and confirm your source-backed profile first; the
+server refuses to create a campaign or import a CV at startup.
+
+`--career-only` and `--include-career` are mutually exclusive. The default still
+generates email/browser entries; `--include-career` still generates all three.
+Changing modes replaces the generated example configurations and marketplace,
+but leaves old package folders and host settings untouched. It does not revoke
+or disable a server you previously installed in a host. Preview generation does
+not install software, connect Gmail, open browsers or register tools globally.
+
+```mermaid
+flowchart LR
+  H[Your MCP host and chosen AI model] --> M[Local career MCP over stdio]
+  M --> R[Confirmed source quotes and lexical retrieval]
+  R --> B[Source-bound CV or email brief]
+  B --> H
+  H --> C[Current-evidence draft checks]
+  C --> V[Human and factual review]
+```
+
+The host owns drafting; this server does not silently select a model or load
+Qwen weights. Optional [local fine-tuning](LOCAL_FINETUNING.md) stays a separate
+reviewed experiment. Failed/unreviewed adapters are not defaults, and no training,
+model promotion, account-connection or application-submission tool is exposed.
+Real stdio protocol checks do not prove that every Codex/Claude/Muse/Grok host
+has installed or can invoke the server; test the chosen host explicitly.
+
 Use the interpreter where the locked MCP dependency is installed. The first command
 starts a protocol server; it is not a terminal chat. The second writes example
 configurations under the private workspace's `configured-plugins/`; it does not
