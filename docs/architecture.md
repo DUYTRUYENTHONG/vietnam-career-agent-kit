@@ -5,6 +5,9 @@ preparation layer. It reads recorded job metadata from one read-only SQLite
 snapshot, without importing jobs or opening candidate artifacts. The new input
 contract does not change existing ledger/discovery contracts or execution
 authority. See [scope and usage](LEAD_IDENTITY_CHECK.md).
+`check-legacy-lead-identities` reuses that matcher with an explicit older SQLite
+file and fixed `city_raw AS city` projection. It bypasses portable initialization,
+not approval or execution checks; no other legacy operations or migration follow.
 
 `core/codex_usage.py` and `scripts/normalize_codex_usage.py` prepare sanitized
 source/observation pairs from an explicit bounded fresh-thread Codex CLI JSONL

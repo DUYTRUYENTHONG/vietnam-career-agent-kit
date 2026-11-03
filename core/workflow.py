@@ -28,6 +28,24 @@ class Preparation(Kit):
 
     def check_lead_identities(self, payload: dict) -> Outcome:
         """Match bounded pre-import identities in one read-only tracker snapshot."""
+        return self._lead_identity_snapshot(payload, self.db_path, legacy=False)
+
+    @staticmethod
+    def check_legacy_lead_identities(payload: dict, ledger: str | Path) -> Outcome:
+        """Read one explicitly selected older jobs ledger; never initialize it."""
+        if not isinstance(ledger, (str, Path)):
+            raise ContractError('ledger: select an explicit local SQLite file')
+        value = str(ledger)
+        if (not value.strip() or len(value) > 4096 or '\x00' in value
+                or value.startswith(('//', '\\\\', 'file:')) or '://' in value):
+            raise ContractError('ledger: select a local path, not a network path or URI')
+        database = Path(value).resolve()
+        if str(database).startswith(('//', '\\\\')):
+            raise ContractError('ledger: resolved network paths are not supported')
+        return Preparation._lead_identity_snapshot(payload, database, legacy=True)
+
+    @staticmethod
+    def _lead_identity_snapshot(payload: dict, database: Path, *, legacy: bool) -> Outcome:
         object_fields(payload, {'schema_version', 'leads'}, set(), 'lead identities')
         version(payload, 'lead identities')
         leads = payload['leads']
@@ -45,14 +63,17 @@ class Preparation(Kit):
             if lead['id'] in seen:
                 raise ContractError('lead.id: duplicate value')
             seen.add(lead['id'])
-        if not self.db_path.is_file():
-            raise WorkflowError('needs_input', 'Initialize the selected private workspace first')
+        if not database.is_file():
+            raise WorkflowError('needs_input', 'Select an existing legacy ledger file' if legacy
+                                else 'Initialize the selected private workspace first')
         # mode=ro also prevents a disappearing database from being recreated.
-        with closing(sqlite3.connect(self.db_path.as_uri()+'?mode=ro', uri=True)) as db:
+        with closing(sqlite3.connect(database.as_uri()+'?mode=ro', uri=True)) as db:
             db.row_factory = sqlite3.Row
             db.execute('BEGIN')
+            # Fixed projections only; no schema probing or caller-supplied SQL identifiers.
+            city_column = 'city_raw AS city' if legacy else 'city'
             rows = db.execute('SELECT id,platform,platform_job_id,employer,employer_key,req_id,'
-                              'title,city,url,state,liveness FROM jobs ORDER BY id').fetchall()
+                              f'title,{city_column},url,state,liveness FROM jobs ORDER BY id').fetchall()
         rows = [(row, _key(row['title']), normalize_city(row['city'])) for row in rows]
         results = []
         for lead in leads:

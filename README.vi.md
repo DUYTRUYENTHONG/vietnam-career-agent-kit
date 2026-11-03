@@ -157,6 +157,9 @@ Xem [kiến trúc và số đo](docs/PERFORMANCE.md); chưa đo tốc độ ứn
 Trước khi nhập JD, có thể chạy `check-lead-identities --file FILE` cho 1–50 đầu
 mối để đối chiếu dữ liệu đã ghi trong tracker. Lệnh chỉ đọc, không tự kết luận
 trùng hay cấp quyền nộp hồ sơ. [Hợp đồng và giới hạn](docs/LEAD_IDENTITY_CHECK.md).
+Với ledger cũ, dùng `check-legacy-lead-identities --ledger FILE --file FILE`,
+không kèm `--data-dir`. Lệnh đọc đúng tệp được chọn, không khởi tạo, chuyển đổi
+hay tạo tracker thứ hai; định dạng không hỗ trợ phải báo lỗi.
 
 Trước khi chỉnh CV, chạy `duplicate-candidates --job-id ID` để xem việc cùng nhà
 tuyển dụng có URL hoặc tên/địa điểm trùng và trạng thái nộp đã ghi. Lệnh chỉ đọc,

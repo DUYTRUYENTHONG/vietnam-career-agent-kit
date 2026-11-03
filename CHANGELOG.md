@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Check older canonical ledgers without migration
+
+- Add `check-legacy-lead-identities --ledger FILE --file FILE` using the same
+  bounded identity packet and matching rules without portable initialization.
+- Read only the explicit older jobs metadata, mapping `city_raw` for comparison;
+  retain uncertainty and no-clearance limits. Reject ambiguous workspace
+  selection, missing/incompatible files and network/URI ledger paths.
+- Keep existing histories, counts, schemas, artifacts and execution unchanged.
+
 ## Unreleased - Check recorded lead identities before job import
 
 - Add a bounded read-only CLI check for 1–50 lead identities against the selected

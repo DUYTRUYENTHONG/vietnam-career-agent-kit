@@ -152,6 +152,9 @@ def parser() -> Parser:
     duplicates.add_argument('--job-id',type=int,required=True)
     leads=commands.add_parser('check-lead-identities',help='read-only identity hints for 1-50 leads before import; no clearance or ledger writes')
     leads.add_argument('--file',type=Path,required=True)
+    legacy_leads=commands.add_parser('check-legacy-lead-identities',help='read-only identity hints from one explicit older jobs ledger; no init or migration')
+    legacy_leads.add_argument('--ledger',type=Path,required=True)
+    legacy_leads.add_argument('--file',type=Path,required=True)
     render=commands.add_parser('render',help='local DOCX/PDF conversion and page previews; no external disclosure')
     render.add_argument('--job-id',type=int,required=True);render.add_argument('--soffice',type=Path)
     review=commands.add_parser('review-documents');review.add_argument('--render-id',required=True)
@@ -261,6 +264,10 @@ def execute(args) -> Outcome:
         from core.routing import route_task
         return route_task(load_input(args.packet))
     if command=='source-registry':return Outcome('ok',load_input(ROOT/'connectors/registry.json'),[])
+    if command=='check-legacy-lead-identities':
+        if args.data_dir is not None:
+            raise ContractError('Use --ledger only for legacy identity lookup; do not also select --data-dir')
+        return Preparation.check_legacy_lead_identities(load_input(args.file), args.ledger)
     if args.data_dir is None:
         raise WorkflowError('needs_input','--data-dir is required; choose an explicit external private workspace')
     work=Executor(args.data_dir,actor=args.actor)

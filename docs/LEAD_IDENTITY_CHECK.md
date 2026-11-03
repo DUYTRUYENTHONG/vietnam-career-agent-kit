@@ -61,8 +61,40 @@ boundaries, prior uncertainty, missing and separate workspaces, invalid inputs,
 unchanged records, CLI outcomes and one read-only SELECT for 50 leads. This is
 not semantic deduplication, a discovery cache, live employer acceptance, a native
 browser integration or a measured application/token speedup. Legacy private
-campaigns require their existing owner/API; do not initialize or migrate a
-second tracker to use this portable command.
+campaigns can use the explicit read-only bridge below; all writes and execution
+still belong to their existing owner/API.
+
+## Older canonical ledgers
+
+Use the same lead packet with one explicitly selected local SQLite file:
+
+```console
+python scripts/kit.py check-legacy-lead-identities --ledger ../older-private/data/applications.sqlite3 --file ../older-private/leads.json
+```
+
+Do not pass `--data-dir` as well. No portable workspace is needed or initialized;
+there is no default path, adjacent-file search, schema detection or migration.
+The selected older `jobs` table must expose `id`, `platform`, `platform_job_id`,
+`employer`, `employer_key`, `req_id`, `title`, `city_raw`, `url`, `state` and
+`liveness`. Other columns/tables are neither required nor read. The bridge uses
+`city_raw` as the returned `city`, applying the same current comparison rules
+as the portable command rather than trusting an older normalized city key.
+
+Whole-packet validation and the same four identity signals, ordering, uncertainty
+flags and no-clearance warning apply. One read-only metadata SELECT serves the
+batch. Missing files return `needs_input` without creating their directories;
+incompatible/malformed/locked databases return `failed`, never empty success.
+Network paths and SQLite/HTTP URI inputs are rejected. Relative filesystem paths
+resolve against the command's working directory; quote paths containing spaces.
+SQLite `mode=ro` retains normal WAL visibility; this is not a snapshot export or
+evidence that another writer cannot change the ledger after the read completes.
+
+Fictional regressions verify byte-identical legacy history, prohibited writes,
+one read-only SELECT for 50 partial leads, explicit-file isolation, missing and
+incompatible files, malformed packets, URI/network rejection and CLI operation
+without portable initialization. This does not add legacy preparation, approval,
+receipt validation, automatic retry or execution support. Confirmed/uncertain
+matches still require the existing campaign owner to reconcile their receipts.
 
 ## Observed local lookup workload
 
