@@ -1,5 +1,16 @@
 # Community references and attribution
 
+## Local training preflight, 3 November 2026
+
+Reviewed the official [PyTorch CUDA availability contract](https://docs.pytorch.org/docs/stable/generated/torch.cuda.is_available)
+and [CUDA API reference](https://docs.pytorch.org/docs/stable/cuda.html).
+The opt-in adapter reuses the existing local tokenizer/template APIs and bounded
+configuration/export validators. It loads no weights and treats CUDA availability
+as a narrow observation, not proof of memory fit or successful kernels. No
+upstream code, installer, dependency, model or dataset was copied. Existing pins
+and core schemas are unchanged. Fictional regressions and one actual local
+CPU/tokenizer smoke support only the scope in [the guide](LOCAL_FINETUNING.md).
+
 ## Reusable local generation iterator, 1 November 2026
 
 Reviewed the official versioned [Transformers generation reference](https://huggingface.co/docs/transformers/v4.57.1/en/main_classes/text_generation)

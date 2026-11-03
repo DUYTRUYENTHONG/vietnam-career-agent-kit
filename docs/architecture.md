@@ -50,6 +50,10 @@ reviewed learning export and trains a local LoRA adapter in a new private run
 directory. Heavy model dependencies stay outside the core; no DB changes,
 provider calls, fact promotion or execution authority. Public-model provisioning
 is a separate explicit command. See [local fine-tuning](LOCAL_FINETUNING.md).
+Its optional `--preflight` reuses current export/configuration validation and
+tokenizes both splits without loading weights or reserving a run. Explicit CUDA
+availability is required without fallback; memory, kernels, weight compatibility
+and model quality remain unchecked. No core/ledger contract or dependency changes.
 
 `core/source_memory.py` and `scripts/source_memory.py` supply a separate opt-in
 read-only bridge for older hash-bound fact arrays. They never initialize/open a

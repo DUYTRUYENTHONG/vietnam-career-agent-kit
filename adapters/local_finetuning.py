@@ -90,6 +90,52 @@ def model_hashes(directory):
     return hashes
 
 
+def _configuration(target_modules, epochs, learning_rate, max_length, device):
+    if (type(epochs) is not int or not 1 <= epochs <= 10 or
+            type(max_length) is not int or not 128 <= max_length <= 8192 or
+            type(learning_rate) not in (int, float) or not 0 < learning_rate <= .01 or
+            device not in ('cpu', 'cuda') or not isinstance(target_modules, list) or
+            not target_modules or any(not isinstance(x, str) or not x.strip() for x in target_modules)):
+        raise ValueError('Invalid bounded training configuration')
+
+
+def _offline():
+    os.environ['HF_HUB_OFFLINE'] = '1'
+    os.environ['TRANSFORMERS_OFFLINE'] = '1'
+    os.environ['HF_HUB_DISABLE_TELEMETRY'] = '1'
+
+
+def preflight(work, directory, model_directory, output, *, target_modules,
+              epochs=2, learning_rate=0.0002, max_length=2048, device='cpu', task='cv-wording'):
+    """Check current data/tokenizer/device without loading weights or reserving a run.
+
+    This does not test tensor compatibility, memory fit, kernels or CV quality.
+    Optional libraries are trusted local code, not an OS-level network sandbox.
+    """
+    _configuration(target_modules, epochs, learning_rate, max_length, device)
+    model_path, _, rows, fingerprint = prepare(work, directory, model_directory, output, task=task)
+    _offline()
+    import torch
+    from transformers import AutoTokenizer
+    if device == 'cuda' and not torch.cuda.is_available():
+        raise ValueError('CUDA selected but unavailable')
+    tokenizer = AutoTokenizer.from_pretrained(str(model_path), local_files_only=True, trust_remote_code=False)
+    encoded = {split: [encode(tokenizer, row, max_length) for row in values]
+               for split, values in rows.items()}
+    if validate_dataset(work, directory, task).data['manifest_fingerprint'] != fingerprint:
+        raise ValueError('Dataset changed during preflight')
+    return {'schema_version': '1.0', 'task': task, 'dataset_fingerprint': fingerprint,
+        'device': device, 'device_name': torch.cuda.get_device_name() if device == 'cuda' else 'cpu',
+        'max_length': max_length,
+        'token_lengths': {split: histogram(values) for split, values in encoded.items()},
+        'assistant_tokens': {split: sum(sum(t != -100 for t in row['labels'][1:]) for row in values)
+                             for split, values in encoded.items()},
+        'training_performed': False, 'model_weights_loaded': False,
+        'weight_compatibility_verified': False, 'memory_fit_verified': False,
+        'training_kernels_verified': False, 'model_quality_verified': False,
+        'run_directory_created': False, 'provider_calls': 0, 'promoted': False}
+
+
 def train(work, directory, model_directory, output, *, target_modules,
           epochs=2, learning_rate=0.0002, max_length=2048, device='cpu', task='cv-wording'):
     """Small batch-one LoRA baseline, assistant-token-weighted held-out NLL.
@@ -97,17 +143,10 @@ def train(work, directory, model_directory, output, *, target_modules,
     This is not a production trainer, QLoRA implementation or quality approval.
     Device is explicit CPU/CUDA only; no claim of Intel accelerator support.
     """
-    if (type(epochs) is not int or not 1 <= epochs <= 10 or
-            type(max_length) is not int or not 128 <= max_length <= 8192 or
-            type(learning_rate) not in (int, float) or not 0 < learning_rate <= .01 or
-            device not in ('cpu', 'cuda') or not isinstance(target_modules, list) or
-            not target_modules or any(not isinstance(x, str) or not x.strip() for x in target_modules)):
-        raise ValueError('Invalid bounded training configuration')
+    _configuration(target_modules, epochs, learning_rate, max_length, device)
     model_path, target, rows, fingerprint = prepare(work, directory, model_directory, output, task=task)
     # Enforce offline library behavior before importing optional dependencies.
-    os.environ['HF_HUB_OFFLINE'] = '1'
-    os.environ['TRANSFORMERS_OFFLINE'] = '1'
-    os.environ['HF_HUB_DISABLE_TELEMETRY'] = '1'
+    _offline()
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     from peft import LoraConfig, get_peft_model
@@ -209,14 +248,21 @@ def main():
     parser.add_argument('--epochs', type=int, default=2)
     parser.add_argument('--max-length', type=int, default=2048)
     parser.add_argument('--device', choices=['cpu', 'cuda'], default='cpu')
+    parser.add_argument('--preflight', action='store_true',
+                        help='Check reviewed data/tokenizer/device; no weights loaded or run created')
     args = parser.parse_args()
     try:
-        train(Documents(args.data_dir), args.directory, args.model_directory, args.output,
+        operation = preflight if args.preflight else train
+        result = operation(Documents(args.data_dir), args.directory, args.model_directory, args.output,
               target_modules=args.target_module, epochs=args.epochs,
               max_length=args.max_length, device=args.device, task=args.task)
     except (ValueError, WorkflowError, ImportError, OSError) as exc:
-        parser.exit(1, f'Training not completed: {exc}\n')
-    print('Local run completed; inspect private result.json. Model is not promoted or approved.')
+        label = 'Preflight failed' if args.preflight else 'Training not completed'
+        parser.exit(1, f'{label}: {exc}\n')
+    if args.preflight:
+        print(json.dumps(result, allow_nan=False))
+    else:
+        print('Local run completed; inspect private result.json. Model is not promoted or approved.')
 
 
 if __name__ == '__main__':
