@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Inspect local training inputs without starting a run
+
+- Add opt-in `adapters.local_finetuning --preflight` for current reviewed splits,
+  full tokenizer/masking checks and explicit CPU/CUDA availability.
+- Report actual reference-token counts without loading model weights, creating a
+  run directory, changing application state or silently falling back from CUDA.
+- Keep weight compatibility, memory fit, kernels and wording quality unverified;
+  this does not acquire Colab compute or promote a model.
+
 ## Unreleased - Assess tailoring evidence at the stated requirement level
 
 - Clarify illustrative tool lists, compound duties and clause-level support in

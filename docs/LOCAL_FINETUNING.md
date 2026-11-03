@@ -81,6 +81,58 @@ downloaded by training, or selected automatically. Respect the model's license.
 
 ## Setup and run
 
+### Read-only data, tokenizer and device preflight
+
+Before reserving a training run, use the same arguments with `--preflight`:
+
+```sh
+python -m adapters.local_finetuning --data-dir ../my-private \
+  --directory datasets/reviewed-v1 --model-directory ../models/qwen3-local \
+  --output training/qwen3-trial-001 --target-module q_proj --target-module v_proj \
+  --epochs 2 --max-length 2048 --device cuda --preflight
+```
+
+This opt-in adapter command validates the current independently reviewed split,
+new output path and bounded configuration, then imports the installed optional
+Torch/Transformers libraries and loads only the local tokenizer. It tokenizes
+both complete splits with assistant masking, rejects oversized or incompatible
+templates without truncation, and revalidates the evidence afterward. CUDA must
+be available when explicitly selected; it never switches to CPU automatically.
+CPU is supported only when explicitly selected (or retained as the CLI default).
+
+The single JSON stdout report contains the current dataset fingerprint, selected
+device/name, actual token-length summaries and assistant reference-token counts
+for each split. These are tokenization observations, **not generated tokens,
+inference latency or training throughput**. The command creates no training
+directory, saves no adapter, loads no model weights and changes no application
+state. Keep reports in your own private workspace.
+
+A passing preflight does **not** verify that base weights exist or load correctly,
+LoRA target modules match, GPU kernels work, memory is sufficient, or model wording
+is accurate. These remain actual training/evaluation gates; the report marks
+weight compatibility, memory fit, training kernels and quality unverified.
+It does not inspect Google Colab quota, acquire a GPU, install dependencies,
+download files or authorize a cloud upload. Offline library flags are not a
+network sandbox for installed third-party code. Removing `--preflight` starts the
+existing explicitly requested trainer, which revalidates inputs again.
+
+Fictional standard-library regressions cover CLI separation, both-split masking,
+unchanged workspace bytes, stale evidence, token overflow and unavailable CUDA
+without fallback. SDKs are test doubles: this is experimental interface coverage,
+not a newly verified GPU run. PyTorch's
+[CUDA availability API](https://docs.pytorch.org/docs/stable/generated/torch.cuda.is_available)
+reports availability only, not usable memory or successful training kernels.
+
+Local smoke, 3 November 2026: Windows/Python 3.12, Torch 2.10.0+cpu and
+Transformers 4.57.6 with a locally provisioned Qwen3 tokenizer. Two fictional
+reviewed job groups produced one train and one held-out example: 1,556/1,558
+complete tokens, including 423/425 assistant reference tokens. Preflight wall
+time was 39,714.885 ms, including optional-library import/tokenization and
+evidence revalidation. All existing workspace file hashes were unchanged; no
+training directory was created. This single CPU observation is not a speedup,
+CUDA acceptance, model inference or semantic-quality benchmark. Test reviews are
+synthetic inputs, not candidate or independent editorial acceptance.
+
 Use an isolated Python environment. Optional dependencies are PyTorch, Transformers
 and PEFT, with their transitive dependencies. Installation and a separate explicit
 public-model download require network access; the training entry point uses
