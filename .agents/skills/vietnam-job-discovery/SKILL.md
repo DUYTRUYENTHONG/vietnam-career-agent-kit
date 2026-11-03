@@ -49,6 +49,10 @@ under ../../../schemas/lead-identities.schema.json; unknown identity strings may
 stay empty. Follow ../../../docs/LEAD_IDENTITY_CHECK.md. Recorded matches need
 identity/receipt review; unmatched results do not prove a job is new or suitable.
 No import, CV scan, account access or execution authority follows this read.
+For an older canonical ledger, use `check-legacy-lead-identities --ledger FILE
+--file FILE` instead, without `--data-dir`. This explicitly reads the older jobs
+metadata projection only; missing/incompatible ledgers stay errors. Never run
+init, migrate a campaign or create a second tracker to enable identity lookup.
 
 For verified Greenhouse board tokens, use `python scripts/kit.py discover-greenhouse
 --board TOKEN` to read up to twelve boards with at most three workers. See
