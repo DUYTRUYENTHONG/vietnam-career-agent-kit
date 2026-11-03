@@ -55,6 +55,39 @@ class PerformanceTests(unittest.TestCase):
         self.assertEqual(1, a['missing_charge_observations'])
         self.assertEqual({'EUR': '0.05'}, b['known_charges'])
 
+    def test_output_rate_pairs_only_same_call_observations(self):
+        for name, duration, tokens in [('a', 100, 10), ('b', 900, 180),
+                                       ('no-time', None, 9000), ('no-tokens', 9000, None),
+                                       ('zero-time', 0, 50), ('zero-output', 1000, 0)]:
+            event = self.event(name, duration_ms=duration)
+            event['usage'].update(output_tokens=tokens, reasoning_tokens=None)
+            record(self.work, event)
+        result = report(self.work).data
+        rate = result['groups'][0]['output_rate']
+        self.assertEqual(95, rate['tokens_per_call_second'])
+        self.assertEqual(3, rate['paired_observations'])
+        self.assertEqual(190, rate['paired_output_tokens'])
+        self.assertEqual(2000, rate['paired_duration_ms'])
+        self.assertEqual({'missing_duration': 1, 'missing_output_tokens': 1,
+                          'zero_duration': 1}, rate['excluded_observations'])
+        self.assertIn('output_tokens_per_call_second', render(result, 'csv').splitlines()[0])
+        self.assertIn('call-second', render(result, 'md'))
+
+    def test_turn_and_unrepresentable_output_rates_stay_unavailable(self):
+        event = self.event('tiny', duration_ms=5e-324)
+        record(self.work, event)
+        turn = self.event('turn', measurement_scope='agent_turn', duration_ms=1000)
+        turn['usage']['kind'] = 'per_turn'
+        record(self.work, turn)
+        groups = {g['measurement_scope']: g for g in report(self.work).data['groups']}
+        for scope, reason in [('model_call', 'unrepresentable_rate'),
+                              ('agent_turn', 'not_model_call')]:
+            rate = groups[scope]['output_rate']
+            self.assertIsNone(rate['tokens_per_call_second'])
+            self.assertEqual(0, rate['paired_observations'])
+            self.assertEqual({reason: 1}, rate['excluded_observations'])
+            self.assertIsNone(rate['paired_output_tokens'])
+
     def test_agent_turns_never_mix_with_model_calls_for_the_same_workload(self):
         legacy = self.event()
         record(self.work, legacy)

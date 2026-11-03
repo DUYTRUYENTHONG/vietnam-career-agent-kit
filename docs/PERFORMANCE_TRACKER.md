@@ -68,6 +68,21 @@ not extract native chat telemetry, dispatch chats or prove faster submissions.
 - Charges must be observed decimal amounts with currency. Currencies are kept
   separate; there is no implicit conversion, rate card or dollar-saving claim.
   API spending is not a measure of a subscription's remaining quota.
+- `output_rate` pairs output tokens with positive duration from the **same model
+  call**. It divides their paired token sum by their paired measured seconds;
+  it never divides independently available group token/time totals. For example,
+  fictional calls of 10 tokens/100 ms and 180 tokens/900 ms report 190 tokens per
+  call-second, not the unweighted average of their individual rates.
+  This includes the source's entire measured call duration, not just decoding.
+  It is not tokens per generation-second, time to first token, user-visible speed
+  or a quality/acceptance score. Reasoning tokens are already included in output.
+  All recorded statuses participate when measurements qualify; use the existing
+  status/acceptance counts when interpreting a group. Failed-call output is not
+  a successful CV. Agent turns, missing output/time, zero duration and numeric
+  rates that cannot be represented as finite values are excluded with counts.
+  Measured zero output with positive time remains an observed zero rate. With no
+  usable pair, the rate and paired sums stay `null`. JSON includes paired sums
+  and exclusion reasons; Markdown/CSV show rate and paired/excluded coverage.
 - A source hash proves the selected bytes at import, not who produced them or
   that their claims are true. Reports preserve historical values and do not
   silently reread or authenticate a changed/deleted source.
@@ -75,6 +90,8 @@ not extract native chat telemetry, dispatch chats or prove faster submissions.
 ## Storage and limits
 
 Observations are opt-in append-only records in the same private `workflow.sqlite3`.
+The computed output-rate fields are additive report output only: observation
+schema, source bytes, stored history and performance feature versions do not change.
 Application schema remains 1–6; the optional performance tables have their own
 format version 1 for call-only history. Importing an agent turn advances only
 the performance feature marker to version 2, within the same transaction as

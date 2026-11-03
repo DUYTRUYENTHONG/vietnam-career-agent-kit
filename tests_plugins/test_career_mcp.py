@@ -18,8 +18,10 @@ class CareerMCPTests(unittest.TestCase):
         from mcp import ClientSession, StdioServerParameters
         from mcp.client.stdio import stdio_client
         async def check(workspace):
-            server = StdioServerParameters(command=sys.executable,
-                args=[str(ROOT/'scripts/serve_plugin.py'), 'career', '--data-dir', str(workspace)])
+            config = json.loads((workspace/'configured-plugins/mcp-servers.example.json').read_text())
+            self.assertEqual({'career-career'}, set(config['mcpServers']))
+            entry = config['mcpServers']['career-career']
+            server = StdioServerParameters(command=entry['command'], args=entry['args'])
             async with asyncio.timeout(45):
                 async with stdio_client(server) as (read, write):
                     async with ClientSession(read, write) as session:
@@ -85,4 +87,9 @@ class CareerMCPTests(unittest.TestCase):
             configured = generate(work, sys.executable, include_career=True)
             self.assertEqual(3, len(configured['packages']))
             self.assertFalse(configured['host_settings_changed'])
+            career_only = generate(work, sys.executable, career_only=True)
+            self.assertEqual(1, len(career_only['packages']))
+            # Switching previews never deletes previously generated packages.
+            self.assertTrue((workspace/'configured-plugins/career-email').is_dir())
+            self.assertTrue((workspace/'configured-plugins/career-browser').is_dir())
             asyncio.run(check(workspace))

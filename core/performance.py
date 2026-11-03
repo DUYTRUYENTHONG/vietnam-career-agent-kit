@@ -140,6 +140,32 @@ def record(work, event) -> Outcome:
         'reused': reused, 'provenance': 'caller-reported observation bound to source hash; provider identity not authenticated'}, [])
 
 
+def _output_rate(events):
+    """Pair observed output and time; this is not decoder-only throughput."""
+    pairs, excluded = [], defaultdict(int)
+    for event in events:
+        tokens, duration = event['usage']['output_tokens'], event['duration_ms']
+        if event.get('measurement_scope', 'model_call') != 'model_call':
+            reason = 'not_model_call'
+        elif tokens is None:
+            reason = 'missing_output_tokens'
+        elif duration is None:
+            reason = 'missing_duration'
+        elif duration == 0:
+            reason = 'zero_duration'
+        elif not math.isfinite(tokens*1000/duration):
+            reason = 'unrepresentable_rate'
+        else:
+            pairs.append((tokens, duration))
+            continue
+        excluded[reason] += 1
+    tokens = sum(p[0] for p in pairs) if pairs else None
+    duration = sum(p[1] for p in pairs) if pairs else None
+    return {'tokens_per_call_second': tokens*1000/duration if pairs else None,
+            'paired_observations': len(pairs), 'paired_output_tokens': tokens,
+            'paired_duration_ms': duration, 'excluded_observations': dict(excluded)}
+
+
 def report(work, *, model_id=None, phase=None, workload_id=None) -> Outcome:
     _workspace(work)
     filters = {k: v for k, v in [('model_id', model_id), ('phase', phase), ('workload_id', workload_id)] if v is not None}
@@ -181,6 +207,7 @@ def report(work, *, model_id=None, phase=None, workload_id=None) -> Outcome:
                 'p95': durations[math.ceil(len(durations)*.95)-1] if durations else None,
                 'sum_observed': sum(durations) if durations else None},
             'known_tokens': known, 'token_coverage': coverage,
+            'output_rate': _output_rate(events),
             'known_charges': {currency: format(amount, 'f') for currency, amount in sorted(charges.items())},
             'missing_charge_observations': sum(e['cost'] is None for e in events)})
     return Outcome('ok', {'schema_version': '1.0', 'record_count': len(rows), 'groups': groups,
@@ -200,7 +227,8 @@ def render(data, format='md') -> str:
     columns = ['provider', 'model', 'effort', 'phase', 'workload', 'measurement_scope', 'observations', 'accepted',
                'input_tokens_known', 'input_missing', 'output_tokens_known', 'output_missing',
                'cached_input_known', 'reasoning_known', 'duration_p50_ms', 'duration_p95_ms',
-               'duration_missing', 'observed_charges', 'charge_missing']
+               'duration_missing', 'output_tokens_per_call_second', 'output_rate_paired_observations',
+               'output_rate_excluded_observations', 'observed_charges', 'charge_missing']
     rows = []
     for group in data['groups']:
         rows.append([group['provider_id'], group['model_id'], group['effort'], group['phase'],
@@ -209,6 +237,8 @@ def render(data, format='md') -> str:
             group['known_tokens']['output_tokens'], group['token_coverage']['output_tokens']['missing'],
             group['known_tokens']['cached_input_tokens'], group['known_tokens']['reasoning_tokens'],
             group['duration_ms']['p50'], group['duration_ms']['p95'], group['duration_ms']['missing'],
+            group['output_rate']['tokens_per_call_second'], group['output_rate']['paired_observations'],
+            json.dumps(group['output_rate']['excluded_observations'], sort_keys=True),
             json.dumps(group['known_charges'], sort_keys=True), group['missing_charge_observations']])
     rows = [['unavailable' if value is None else str(value) for value in row] for row in rows]
     if format == 'csv':
@@ -218,6 +248,7 @@ def render(data, format='md') -> str:
         return stream.getvalue()
     columns = ['provider / model / effort', 'phase / workload / scope', 'observations / accepted',
                'input / output tokens (missing observations)', 'p50 / p95 ms (missing observations)',
+               'output tokens / call-second (paired / excluded observations)',
                'observed charges (missing observations)']
     rows = []
     for g in data['groups']:
@@ -228,6 +259,8 @@ def render(data, format='md') -> str:
             ' / '.join(value(g['known_tokens'][k])+' ('+str(g['token_coverage'][k]['missing'])+')'
                        for k in ('input_tokens', 'output_tokens')),
             value(g['duration_ms']['p50'])+' / '+value(g['duration_ms']['p95'])+' ('+str(g['duration_ms']['missing'])+')',
+            value(g['output_rate']['tokens_per_call_second'])+' ('+str(g['output_rate']['paired_observations'])+
+                ' / '+str(sum(g['output_rate']['excluded_observations'].values()))+')',
             json.dumps(g['known_charges'], sort_keys=True)+' ('+str(g['missing_charge_observations'])+')'])
     return ('# Model performance observations\n\n'+data['scope']+'\n\n'+
         'Observations: '+str(data['record_count'])+'\n\n| '+' | '.join(columns)+' |\n| '+

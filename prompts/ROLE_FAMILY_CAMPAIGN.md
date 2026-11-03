@@ -6,8 +6,9 @@ attach your own CV. This guides work; it does not authorize disclosures.
 ```text
 This is my explicit job-seeker request for Vietnam Career Agent Kit.
 Clone: [path]. Existing or new external private workspace: [path].
-Target families and level: [Applied AI Engineer / AI Product Owner /
-AI Project Manager, or my own choices; junior/associate/etc.].
+Target families and level: [Software Engineer / Applied AI Engineer /
+AI Automation Engineer / AI Business Analyst / Solutions Consultant,
+or my own choices; junior/associate/etc.].
 Domain/specialties: [choices]. Locations/remote eligibility: [choices].
 Employment types/exclusions: [choices]. Previous applications: [tracker].
 Reuse confirmed contacts, notice/start date, work eligibility and salary basis;
@@ -40,6 +41,22 @@ For each suitable unique job:
 Use source-bound RAG where available. Plans and model outputs are not experience.
 Fine-tuning needs reviewed data and held-out evaluation, without automatic
 wording promotion or promises of improved hiring outcomes.
+For software roles, prioritize evidenced implementation, APIs, interfaces,
+data validation, debugging and tests. For AI roles, prioritize evidenced model
+integration, retrieval, evaluation and failure handling. These are selection
+criteria, not permission to add missing technologies or production claims.
+Keep an AI target headline separate from historical software titles and tenure.
+Use one source inventory with separate JD-specific outputs, not a keyword-heavy
+CV claiming every role family. Record unmet requirements alongside each draft.
+
+When refreshing real training data, pair an exact captured requirement with
+the relevant confirmed fact quote and a reviewed rewrite or matching label.
+Keep provenance, candidate approval and editorial review separate. Group sibling
+facts and employer requirements before splitting; new employer tests must not
+leak into training. Quarantine new pairs pending review, deduplicate against
+previous versions, and retain the untouched base/adapter comparison set.
+Changes to role preferences are retrieval context, not experience to memorize.
+Do not retrain for unchanged inputs or label submissions as proof of CV quality.
 Return a concise tracker with status, blocker, next action and update time.
 CV updates and interviews are separate from new confirmed submissions.
 ```
