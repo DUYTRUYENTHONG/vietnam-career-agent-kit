@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Retrieve writing evidence from requirements before introductions
+
+- CV/email briefs now prioritize recorded mandatory/hard requirement clauses
+  over raw-JD company preambles within the existing lexical query bounds.
+- Keep direct retrieval unchanged, current source checks and full-job draft
+  fingerprints intact. Regenerate affected briefs; no complete-JD coverage,
+  semantic match, model quality or submission-speed improvement is implied.
+
 ## Unreleased - Distinguish software and AI tailoring evidence
 
 - Extend the role-family prompt with separate software/AI evidence priorities,
