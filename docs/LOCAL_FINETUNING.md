@@ -125,6 +125,10 @@ Export only reviewed examples with complete JD mapping and source-backed details
 Contact headers are omitted by the exporter, but facts can still identify people.
 The split groups job revisions/exact output duplicates; semantic leakage is still
 possible and needs dataset review. Email training examples are not implemented.
+Inspect `split_overlap` in the export/check response before interpreting a
+held-out score: it reports exact reused input facts and source hashes. A zero
+exact-overlap count does not establish semantic independence or new-candidate
+generalization. See the [counting rules and limits](CAREER_MEMORY.md).
 
 Check that the complete raw JD and its structured requirements describe the same
 job before dataset review. Structural/source-hash checks cannot prove semantic

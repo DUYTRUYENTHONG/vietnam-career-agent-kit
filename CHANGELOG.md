@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased - Report evidence overlap in reviewed CV datasets
+
+- Return exact input-fact/source overlap counts from learning export and check,
+  making reused candidate evidence visible alongside a disjoint job split.
+- Recompute counts from validated examples without rewriting historical files,
+  changing partition policy or claiming semantic/cross-candidate independence.
+
 ## Unreleased - Preserve contribution scope during RAG CV drafting
 
 - Reject missing recognized AI-assistance and personal-project qualifiers in

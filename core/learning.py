@@ -86,6 +86,29 @@ def _split(examples):
             [e for i, e in enumerate(examples) if i in evaluation], len(components))
 
 
+def _split_overlap(train, evaluation):
+    """Describe exact input-evidence reuse; never certify semantic independence."""
+    def evidence(rows):
+        facts, sources = set(), set()
+        for row in rows:
+            inputs = json.loads(row['messages'][1]['content'])
+            for fact in inputs['facts']:
+                source_hash = row['provenance']['source_hashes'][fact['source_id']]
+                sources.add(source_hash)
+                facts.add(canonical_hash({'source_hash': source_hash,
+                    **{key: fact[key] for key in ('field', 'quote', 'locator')}}))
+        return facts, sources
+
+    train_facts, train_sources = evidence(train)
+    eval_facts, eval_sources = evidence(evaluation)
+    return {'training_unique_fact_count': len(train_facts),
+        'evaluation_unique_fact_count': len(eval_facts),
+        'shared_fact_count': len(train_facts & eval_facts),
+        'shared_source_count': len(train_sources & eval_sources),
+        'evaluation_fact_count_not_exactly_in_training': len(eval_facts - train_facts),
+        'semantic_independence_verified': False}
+
+
 def _directory(work, value):
     if not isinstance(value, str) or not value.strip():
         raise ContractError('Select a new private datasets/ directory')
@@ -142,6 +165,7 @@ def export_reviewed(work, job_ids: list[int], output: str) -> Outcome:
         json.dump(manifest, stream, ensure_ascii=False, indent=2)
     return Outcome('ok', {'directory': str(target.relative_to(work.data_dir)),
         'manifest_fingerprint': manifest['manifest_fingerprint'], 'example_count': len(examples),
+        'split_overlap': _split_overlap(train, evaluation),
         'ready_for_split': bool(train), 'training_performed': False, 'provider_calls': 0},
         [] if train else ['Collected reviewed examples, but fewer than two independent groups: no training/evaluation split was produced.'])
 
@@ -205,5 +229,6 @@ def check_export(work, directory: str) -> Outcome:
             manifest.get('evaluation_example_ids') != [e['example_id'] for e in evaluation]):
         raise WorkflowError('blocked', 'Dataset counts or split assignments changed')
     return Outcome('ok', {'manifest_fingerprint': fingerprint, 'example_count': manifest['example_count'],
+        'split_overlap': _split_overlap(train, evaluation),
         'ready_for_split': manifest['ready_for_split'], 'current_evidence_checked': True,
         'training_performed': False, 'provider_calls': 0}, [])

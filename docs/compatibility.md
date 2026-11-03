@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+Reviewed CV dataset export/check now returns an **Experimental** computed input
+evidence-overlap report. Fictional tests exercise repeated facts, different facts
+from one source and export/check agreement. Existing split/file/manifest contracts
+are unchanged. This is not semantic deduplication, source-family isolation,
+cross-candidate evaluation or measured model-quality improvement.
+
 RAG CV drafting and v2 wording share **Experimental** bounded English/Vietnamese
 phrase-preservation checks for explicit AI-assistance and personal-project scope.
 Fictional core tests exercise omission, retained translations and word boundaries.
