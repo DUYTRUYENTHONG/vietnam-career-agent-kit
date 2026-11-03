@@ -51,7 +51,9 @@ class TrainingPreflightTests(unittest.TestCase):
             self.assertEqual({'train': 2, 'evaluation': 2}, result['assistant_tokens'])
             for key in ('training_performed', 'model_weights_loaded', 'memory_fit_verified', 'promoted'):
                 self.assertIs(result[key], False)
-            loader.from_pretrained.assert_called_once_with(str(model), local_files_only=True,
+            # Windows hosted runners may supply an 8.3 short temp path; prepare
+            # deliberately resolves the selected directory before SDK loading.
+            loader.from_pretrained.assert_called_once_with(str(model.resolve(strict=True)), local_files_only=True,
                                                            trust_remote_code=False)
             self.assertEqual(before, {str(p): p.read_bytes() for p in Path(tmp).rglob('*') if p.is_file()})
             self.assertFalse(work.inside('training').exists())

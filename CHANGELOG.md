@@ -8,6 +8,8 @@
   run directory, changing application state or silently falling back from CUDA.
 - Keep weight compatibility, memory fit, kernels and wording quality unverified;
   this does not acquire Colab compute or promote a model.
+- Compare the resolved model path in the preflight regression, including Windows
+  runner short-path aliases; retain offline/no-remote-code argument checks.
 
 ## Unreleased - Assess tailoring evidence at the stated requirement level
 
