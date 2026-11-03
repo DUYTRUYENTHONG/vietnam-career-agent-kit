@@ -75,6 +75,21 @@ the text actually follows from them: even a structurally valid draft returns
 `semantic_truth_verified: false` and `review_required: true`. Do not insert
 unprovided contact details into greetings/signatures. Unknown keys are rejected.
 
+CV-bullet validation also reuses the wording engine's bounded contribution
+alarms: when the cited quote explicitly says AI-assisted or personal project,
+the generated bullet must retain a recognized English/Vietnamese phrase for
+each applicable qualifier. Generic assistance or generic project wording is
+insufficient. These phrase checks do not read surrounding employment context,
+understand arbitrary paraphrases, establish independent contribution or detect
+negated/irrelevant qualifier mentions. Independent factual review remains
+required. Multi-fact email bodies retain citation-only checks; no per-claim
+attribution is inferred from one qualifier somewhere in an email.
+
+Updated CV brief instructions change its fingerprint, so retrieve a fresh brief
+and regenerate/review dependent drafts. Existing v2 wording is also rechecked
+for omitted personal-project phrases at use time. Historical submissions are
+unchanged. No new schema, dependency, model call or automatic promotion is added.
+
 ## Optional Python LangChain automation
 
 Install the separate hash-locked additive profile in an explicit virtual

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Preserve contribution scope during RAG CV drafting
+
+- Reject missing recognized AI-assistance and personal-project qualifiers in
+  single-fact CV bullets before a RAG/LangChain draft is returned for review.
+  Reuse the wording engine's bounded bilingual alarms; v2 wording now also
+  preserves explicit personal-project phrases.
+- Refresh CV brief fingerprints after the instruction update. Email attribution,
+  independent semantic review, historical submissions and disclosure gates remain
+  unchanged; these phrase checks do not certify factual entailment.
+
 ## Unreleased - Record the completed 100/7 private training pilot
 
 - Replace the later run's GPU-blocked status with observed completion and scoped

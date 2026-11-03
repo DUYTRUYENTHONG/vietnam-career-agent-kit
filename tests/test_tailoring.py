@@ -12,7 +12,7 @@ from core.contracts import ContractError
 from core.ledger import canonical_hash
 from core.manifests import Campaign
 from core.rendering import paragraphs
-from core.tailoring import alarms
+from core.tailoring import alarms, contribution_alarms
 from core.workflow import WorkflowError
 from scripts.demo_wording import fictional_review, seed
 from test_documents import fake_render
@@ -83,6 +83,21 @@ class WordingTests(unittest.TestCase):
         ]:
             with self.subTest(target=target):
                 self.assertNotIn('AI-assistance qualifier omitted', alarms(source, target))
+
+    def test_personal_project_scope_cannot_be_replaced_by_generic_project_scope(self):
+        for source in ['Built a personal project.', 'Built personal-projects.',
+                       'Built a personal\u2011prototype.', 'Xây dựng dự án cá nhân.']:
+            with self.subTest(source=source):
+                self.assertIn('Personal-project qualifier omitted',
+                              alarms(source, 'Built a project.'))
+        for source, target in [
+            ('Built a personal project.', 'Xây dựng dự án cá nhân.'),
+            ('Xây dựng nguyên mẫu cá nhân.', 'Built a personal prototype.'),
+            ('Built a project.', 'Built a project.'),
+            ('Used impersonal project descriptions.', 'Used project descriptions.'),
+        ]:
+            with self.subTest(source=source, target=target):
+                self.assertEqual([], contribution_alarms(source, target))
 
     def test_import_and_existing_review_recheck_ai_assistance(self):
         profile = self.work.inspect_profile().data['profile']
