@@ -43,6 +43,30 @@ class LangChainCareerTests(unittest.TestCase):
             return draft
         with self.assertRaises(WorkflowError): run_drafting(self.work, self.request, change)
 
+    def test_real_lcel_rejects_dropped_personal_project_scope(self):
+        profile = self.work.inspect_profile().data['profile']
+        for fact in profile['facts']:
+            fact['source_id'] = 'CV_SCOPE'
+        fact = next(f for f in profile['facts'] if f['id'] == 'F1')
+        fact['claim'] = fact['quote'] = 'Queried an AI-assisted personal project dataset using SQL.'
+        source = self.work.atomic_text('inputs/scope-fixture.md',
+                                      '\n'.join(f['quote'] for f in profile['facts']))
+        self.work.import_cv(source, 'CV_SCOPE')
+        fingerprint = self.work.import_profile(profile).data['fingerprint']
+        self.work.confirm_profile(fingerprint, self.work.atomic_text(
+            'inputs/scope-confirmation.txt', 'CONFIRM PROFILE '+fingerprint))
+        self.work.assess(1, {'schema_version': '1.0', 'rows': [
+            {'requirement_id': 'R1', 'match': 'direct', 'fact_ids': ['F1'], 'reason': 'Fictional SQL project.'},
+            {'requirement_id': 'R2', 'match': 'missing', 'fact_ids': [], 'reason': 'No certification.'}]})
+
+        def omit_scope(brief):
+            return {'schema_version': '1.0', 'brief_fingerprint': brief['brief_fingerprint'],
+                    'blocks': [{'kind': 'cv_bullet', 'text': 'Queried an AI-assisted dataset using SQL.',
+                                'fact_ids': ['F1']}]}
+        with patch('socket.socket.connect', side_effect=AssertionError('Unexpected network')):
+            with self.assertRaisesRegex(WorkflowError, 'Personal-project qualifier omitted'):
+                run_drafting(self.work, self.request, omit_scope)
+
     def test_host_failure_not_retried_and_tracing_fails_closed(self):
         calls = []
         def fail(brief):

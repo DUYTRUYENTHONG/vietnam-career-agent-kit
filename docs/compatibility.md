@@ -1,5 +1,12 @@
 # Runtime compatibility evidence
 
+RAG CV drafting and v2 wording share **Experimental** bounded English/Vietnamese
+phrase-preservation checks for explicit AI-assistance and personal-project scope.
+Fictional core tests exercise omission, retained translations and word boundaries.
+These are local content checks, not installed native hooks, semantic entailment,
+email per-claim attribution or evidence of improved recruiter response. Existing
+current-draft checks apply; historical submission snapshots remain unchanged.
+
 [Downloaded checkpoint verification](MODEL_CHECKPOINTS.md) is **Experimental**
 standard-library Python/CLI validation, with fictional ZIP tests targeting the required
 CI platforms. It verifies selected bytes without extraction or SDK loading; no

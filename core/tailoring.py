@@ -35,6 +35,9 @@ SENSITIVE = re.compile(r'\b(?:led|owned|managed|architected|fluent|certified|exp
 AI_ASSISTANCE = re.compile(
     r'(?<!\w)(?:ai[\s\-\u2010\u2011\u2013\u2014]+(?:assisted|assistance|supported|hỗ trợ)'
     r'|(?:assisted|supported)\s+by\s+ai|hỗ trợ\s+(?:của|bởi)\s+ai)(?!\w)')
+PERSONAL_PROJECT = re.compile(
+    r'(?<!\w)(?:personal[\s\-\u2010\u2011\u2013\u2014]+(?:projects?|prototypes?)'
+    r'|(?:dự án|nguyên mẫu)\s+cá nhân)(?!\w)')
 ACTION_WORDS = set('Used Built Developed Documented Supported Assisted Queried Created Tested '
                    'Completed Translated Maintained Configured Analyzed Analysed Wrote '
                    'Đã Sử Xây Phát Ghi Hỗ Hoàn Kiểm Dùng Tham'.split())
@@ -45,10 +48,18 @@ def normalized(value):
     return ' '.join(unicodedata.normalize('NFC', value).casefold().split())
 
 
-def alarms(source, target):
+def contribution_alarms(source, target):
+    """Bounded phrase-preservation alarms, not semantic or ownership verification."""
     findings = []
-    if AI_ASSISTANCE.search(normalized(source)) and not AI_ASSISTANCE.search(normalized(target)):
-        findings.append('AI-assistance qualifier omitted')
+    source, target = normalized(source), normalized(target)
+    for pattern, label in [(AI_ASSISTANCE, 'AI-assistance'), (PERSONAL_PROJECT, 'Personal-project')]:
+        if pattern.search(source) and not pattern.search(target):
+            findings.append(label+' qualifier omitted')
+    return findings
+
+
+def alarms(source, target):
+    findings = contribution_alarms(source, target)
     if set(re.findall(r'\d[\w./:%+-]*', target)) - set(re.findall(r'\d[\w./:%+-]*', source)):
         findings.append('Changed number/date')
     source_words = set(re.findall(r'\w+', source))

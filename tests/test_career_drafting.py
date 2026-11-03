@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from core.career_drafting import writing_brief, check_draft
 from core.execution import Executor
@@ -86,6 +87,29 @@ class DraftingTests(unittest.TestCase):
         self.assertFalse(result.data['semantic_truth_verified'])
         self.assertTrue(result.data['review_required'])
         self.assertIn('independent', result.issues[0])
+
+    def test_cv_scope_qualifiers_are_checked_before_returning_a_draft(self):
+        request = dict(self.request, kind='cv')
+        fresh = writing_brief(self.work, **request)
+        fact = fresh.data['context']['facts'][0]
+        fact['quote'] = 'Built an AI-assisted personal project for reporting.'
+        for wording, missing in [
+            ('Built a personal project for reporting.', 'AI-assistance'),
+            ('Built an AI-assisted reporting system.', 'Personal-project'),
+        ]:
+            draft = {'schema_version': '1.0',
+                     'brief_fingerprint': fresh.data['brief_fingerprint'],
+                     'blocks': [{'kind': 'cv_bullet', 'text': wording, 'fact_ids': [fact['id']]}]}
+            with self.subTest(wording=wording), patch(
+                    'core.career_drafting.writing_brief', return_value=fresh):
+                with self.assertRaisesRegex(WorkflowError, missing):
+                    check_draft(self.work, request, draft)
+
+        draft['blocks'][0]['text'] = 'Xây dựng dự án cá nhân với sự hỗ trợ của AI để báo cáo.'
+        with patch('core.career_drafting.writing_brief', return_value=fresh):
+            result = check_draft(self.work, request, draft)
+        self.assertTrue(result.data['review_required'])
+        self.assertFalse(result.data['semantic_truth_verified'])
 
     def test_cli_roundtrip_checks_private_packet(self):
         cli = Path(__file__).resolve().parents[1]/'scripts/kit.py'
