@@ -34,13 +34,17 @@ def benchmark(fact_count=1000, samples=10):
         fingerprint = work.import_profile(profile).data['fingerprint']
         # Explicitly fictional only, never a helper for approving real candidate evidence.
         work.confirm_profile(fingerprint, work.atomic_text('fictional-benchmark-review.txt', 'CONFIRM PROFILE '+fingerprint))
-        times = []
+        times, stage_times = [], {}
         for _ in range(samples):
             start = time.perf_counter_ns()
             result = retrieve(work, 'tiếp thị SQL', limit=1)
             times.append((time.perf_counter_ns()-start)/1_000_000)
             if result.outcome != 'ok' or result.data['facts'][0]['id'] != 'B0':
                 raise RuntimeError('Fictional multilingual gold query failed')
+            for stage in result.data['performance']['stages']:
+                if stage['status'] != 'ok':
+                    raise RuntimeError('Retrieval stage failed: '+stage['name'])
+                stage_times.setdefault(stage['name'], []).append(stage['duration_ms'])
         evaluation = evaluate(work, {'schema_version': '1.0', 'limit': 1, 'cases': [
             {'id': 'vietnamese', 'query': 'tiếp thị SQL', 'expected_fact_ids': ['B0']},
             {'id': 'diacritics', 'query': 'tiep thi', 'expected_fact_ids': ['B0']},
@@ -48,9 +52,16 @@ def benchmark(fact_count=1000, samples=10):
             {'id': 'missing', 'query': 'unconfirmedKubernetes', 'expected_fact_ids': []}]}).data
         return {'fictional_only': True, 'fact_count': fact_count, 'samples': samples,
             'python': platform.python_version(), 'os': platform.system(), 'sqlite': sqlite3.sqlite_version,
-            'wall_duration_ms': {'p50': round(median(times), 3), 'max': round(max(times), 3)},
+            'wall_duration_ms': {'p50': round(median(times), 3), 'max': round(max(times), 3),
+                                 'sum': round(sum(times), 3)},
+            'stage_samples': {name: {'observations': len(values),
+                'min_ms': min(values), 'p50_ms': round(median(values), 3),
+                'max_ms': max(values), 'sum_ms': round(sum(values), 3)}
+                for name, values in stage_times.items()},
             'evaluation': evaluation, 'provider_calls': 0, 'model_tokens': None,
             'scope': 'Synthetic single-candidate corpus. Includes current source/profile validation and new in-memory index each call. '
+                     'Stage samples come from measured retrieval calls only; evaluation queries and setup are excluded. '
+                     'Named stages do not cover all wall time; millisecond values are rounded. '
                      'Four authored query labels, not real CV quality or production throughput. No baseline latency speedup claim.'}
 
 
