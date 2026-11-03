@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+Pre-import `check-lead-identities` is **Experimental** portable Python/CLI behavior.
+Fictional tests exercise bounded whole-batch validation, one read-only metadata
+snapshot, identity signals, uncertainty, workspace isolation and no job/event
+writes. No database migration, browser integration, complete deduplication,
+candidate-cache or measured application-rate improvement is implied.
+
 Reviewed CV dataset export/check now returns an **Experimental** computed input
 evidence-overlap report. Fictional tests exercise repeated facts, different facts
 from one source and export/check agreement. Existing split/file/manifest contracts

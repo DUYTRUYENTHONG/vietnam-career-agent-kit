@@ -5,14 +5,16 @@ import hashlib
 import html
 import json
 import os
+from contextlib import closing
 from pathlib import Path
 import re
+import sqlite3
 import tempfile
 from typing import Any
 
 from .contracts import (ContractError, Outcome, choice, normalize_city, object_fields,
                         strings, text, validate_job, validate_profile, version)
-from .ledger import Kit, _key, canonical_hash, utc_now
+from .ledger import Kit, _https, _key, canonical_hash, utc_now
 
 
 class WorkflowError(ValueError):
@@ -23,6 +25,63 @@ class WorkflowError(ValueError):
 
 class Preparation(Kit):
     """Local-only, one-candidate preparation. Does not operate a browser."""
+
+    def check_lead_identities(self, payload: dict) -> Outcome:
+        """Match bounded pre-import identities in one read-only tracker snapshot."""
+        object_fields(payload, {'schema_version', 'leads'}, set(), 'lead identities')
+        version(payload, 'lead identities')
+        leads = payload['leads']
+        if not isinstance(leads, list) or not 1 <= len(leads) <= 50:
+            raise ContractError('leads: use 1-50 explicit identities')
+        fields = {'id', 'platform', 'platform_job_id', 'employer', 'req_id', 'title', 'city', 'url'}
+        seen = set()
+        for lead in leads:
+            object_fields(lead, fields, set(), 'lead')
+            for key in fields:
+                text(lead[key], 'lead.'+key, empty=key not in {'id', 'url'})
+                if len(lead[key]) > (2048 if key == 'url' else 500):
+                    raise ContractError('lead.'+key+': too long')
+            _https(lead['url'], 'lead.url')
+            if lead['id'] in seen:
+                raise ContractError('lead.id: duplicate value')
+            seen.add(lead['id'])
+        if not self.db_path.is_file():
+            raise WorkflowError('needs_input', 'Initialize the selected private workspace first')
+        # mode=ro also prevents a disappearing database from being recreated.
+        with closing(sqlite3.connect(self.db_path.as_uri()+'?mode=ro', uri=True)) as db:
+            db.row_factory = sqlite3.Row
+            db.execute('BEGIN')
+            rows = db.execute('SELECT id,platform,platform_job_id,employer,employer_key,req_id,'
+                              'title,city,url,state,liveness FROM jobs ORDER BY id').fetchall()
+        rows = [(row, _key(row['title']), normalize_city(row['city'])) for row in rows]
+        results = []
+        for lead in leads:
+            employer, title, city = _key(lead['employer']), _key(lead['title']), normalize_city(lead['city'])
+            candidates = []
+            for row, recorded_title, recorded_city in rows:
+                signals = []
+                if (lead['platform'].strip() and lead['platform_job_id'].strip()
+                        and (row['platform'], row['platform_job_id']) == (lead['platform'], lead['platform_job_id'])):
+                    signals.append('same_platform_job_id')
+                if employer and row['employer_key'] == employer and lead['req_id'].strip() and row['req_id'] == lead['req_id']:
+                    signals.append('same_employer_requisition')
+                if row['url'] == lead['url']:
+                    signals.append('same_url')
+                if (employer and title and city and row['employer_key'] == employer
+                        and recorded_title == title and recorded_city == city):
+                    signals.append('same_employer_title_city')
+                if signals:
+                    candidate = {key: row[key] for key in ('id','platform','platform_job_id',
+                                 'employer','req_id','title','city','url','state','liveness')}
+                    candidate.update(signals=signals, prior_attempt_needs_reconciliation=row['state'] in {
+                        'confirmed_submitted','user_reported_submitted','submission_uncertain'})
+                    candidates.append(candidate)
+            results.append({'id': lead['id'], 'candidates': candidates, 'requires_identity_review': bool(candidates)})
+        matched = sum(bool(row['candidates']) for row in results)
+        return Outcome('ok', {'leads': results, 'checked_count': len(leads), 'matched_leads': matched,
+            'unmatched_leads': len(leads)-matched, 'deduplication_complete': False,
+            'external_history_checked': False, 'external_actions': 0, 'job_records_added': 0},
+            ['Recorded identity hints only. Unmatched is not clearance; verify current requisitions, receipts, fit and authority.'])
 
     def duplicate_candidates(self, job_id: int) -> Outcome:
         """Read stored URL or same-employer hints without merging or validating artifacts."""

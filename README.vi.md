@@ -154,6 +154,10 @@ trả bước tiếp theo trong một lệnh, `tracker` xuất bảng trạng th
 phản ánh dữ liệu đã ghi, không kiểm tra lại tệp hay quyền gửi hồ sơ.
 Xem [kiến trúc và số đo](docs/PERFORMANCE.md); chưa đo tốc độ ứng tuyển thực tế.
 
+Trước khi nhập JD, có thể chạy `check-lead-identities --file FILE` cho 1–50 đầu
+mối để đối chiếu dữ liệu đã ghi trong tracker. Lệnh chỉ đọc, không tự kết luận
+trùng hay cấp quyền nộp hồ sơ. [Hợp đồng và giới hạn](docs/LEAD_IDENTITY_CHECK.md).
+
 Trước khi chỉnh CV, chạy `duplicate-candidates --job-id ID` để xem việc cùng nhà
 tuyển dụng có URL hoặc tên/địa điểm trùng và trạng thái nộp đã ghi. Lệnh chỉ đọc,
 không tự gộp hay xác nhận chưa từng ứng tuyển. [Giới hạn](docs/DUPLICATE_CANDIDATES.md).
