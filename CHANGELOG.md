@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Align discovery instructions with implemented provider modes
+
+- Replace the stale TinyFish-unsupported statement with the existing experimental
+  public Fetch preview/setup path. Keep Firecrawl research and TinyFish Fetch
+  separate from the guest-form Browser adapter and its additional scope.
+- Preserve finite plan approval, source permissions, private-data exclusions and
+  uncertain-task reconciliation. Instruction correction only; no adapter,
+  dependency, live provider certification, automatic install or new authority.
+
 ## Unreleased - Expose measured retrieval stages in the local benchmark
 
 - Report observed validation, indexing, query and context-assembly timings from
