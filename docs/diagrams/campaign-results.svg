@@ -1,21 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1040" height="500" viewBox="0 0 1040 500" role="img" aria-labelledby="title desc">
-<title id="title">100-application milestone: 120 confirmed submissions</title>
-<desc id="desc">29 October 2026. Three interview invitations, one assessment request, three rejections, thirty-nine acknowledgments, sixty-seven without a matching reply in checked scope and seven pending response review. No offers observed. Incremental host-assisted campaign snapshot.</desc>
+<title id="title">100-application milestone: 140 confirmed submissions</title>
+<desc id="desc">Submission checkpoint on 3 November 2026: 140 confirmed, seven uncertain attempts and one user-reported application excluded. Separate historical response review on 29 October: three interview invitations and one assessment request. No current full inbox review or offer count. Host-assisted, not a speed benchmark.</desc>
 <rect width="1040" height="500" rx="24" fill="#f3f7fc"/>
 <g font-family="Arial, Helvetica, sans-serif" fill="#172c46">
 <text x="40" y="54" font-size="28" font-weight="700">100-application milestone reached</text>
-<text x="40" y="86" font-size="17">29 October 2026 · host-assisted campaign · incremental reply checks</text>
+<text x="40" y="86" font-size="17">3 November 2026 · host-assisted submission checkpoint</text>
 <rect x="40" y="114" width="960" height="110" rx="16" fill="#172c46"/>
-<text x="65" y="176" font-size="52" font-weight="700" fill="white">120</text>
+<text x="65" y="176" font-size="52" font-weight="700" fill="white">140</text>
 <text x="204" y="157" font-size="23" font-weight="700" fill="white">confirmed submissions</text>
-<text x="204" y="192" font-size="16" fill="#dce8f8">Submission is not delivery, an interview or an offer. No offers observed.</text>
-<text x="40" y="280" font-size="20" font-weight="700">Latest recorded response stages</text>
-<text x="40" y="322" font-size="18">3 interview invitations</text>
-<text x="40" y="361" font-size="18">1 assessment / recorded-interview request</text>
-<text x="40" y="400" font-size="18">3 rejections</text>
-<text x="585" y="322" font-size="18">39 acknowledgments</text>
-<text x="585" y="361" font-size="18">67 no matching reply in checked scope</text>
-<text x="585" y="400" font-size="18">7 response reviews pending</text>
-<text x="40" y="453" font-size="16">Private evidence retained. Not a full fresh inbox audit or a 100/hour benchmark.</text>
-<text x="40" y="480" font-size="14" fill="#455e7a">Made by DUYTRUYENTHONG · MIT · free community sharing</text>
+<text x="204" y="192" font-size="16" fill="#dce8f8">7 uncertain + 1 user-reported excluded; immediate delivery failures excluded.</text>
+<text x="40" y="270" font-size="20" font-weight="700">Historical recruiter observations · 29 October 2026</text>
+<text x="40" y="312" font-size="18">3 interview invitations</text>
+<text x="480" y="312" font-size="18">1 assessment / recorded-interview request</text>
+<text x="40" y="355" font-size="16">These belong to the older 120-submission snapshot, not a current breakdown.</text>
+<text x="40" y="389" font-size="16">No new full inbox review or current offer count. Invitations do not prove attendance.</text>
+<text x="40" y="443" font-size="16">Private evidence retained. Submission is not delivery, an interview or an offer.</text>
+<text x="40" y="478" font-size="14" fill="#455e7a">Made by DUYTRUYENTHONG · MIT · free community sharing · no speed guarantee</text>
 </g></svg>

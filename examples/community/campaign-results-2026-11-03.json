@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-11-03",
+  "kind": "real_host_assisted_campaign_anonymized_submission_checkpoint",
+  "author": "DUYTRUYENTHONG",
+  "confirmed_new_submissions": 140,
+  "milestone_submissions": 100,
+  "uncertain_attempts_excluded": 7,
+  "prior_user_reported_excluded": 1,
+  "response_counts": null,
+  "offers_observed": null,
+  "response_review_as_of": null,
+  "historical_response_snapshot": "campaign-results-2026-10-29.json",
+  "frozen_strong_or_plausible_fit_count": null,
+  "privacy": "Aggregate counts only. No candidate or recruiter contacts, employer identities, private URLs, messages, CVs or receipt paths.",
+  "count_scope": "Unique confirmed submissions or verified email sending under the historically approved original, adjacent and stretch scope. Immediate delivery failures and uncertain attempts are excluded. Sending does not establish employer delivery.",
+  "provenance": "Maintainer reconciliation of the private canonical ledger and verification of immutable snapshot hashes. Raw evidence remains private; this is not an independent public audit.",
+  "measurement_limits": [
+    "Submission checkpoint only; no new comprehensive inbox review",
+    "Do not carry historical response counts or zero-offer observations forward as current",
+    "Not a homogeneous Strong/Plausible-fit cohort",
+    "Host-assisted campaign, not an autonomous kit replay",
+    "No measured 100/hour or 100x speedup",
+    "Public snapshots must never populate another user's tracker"
+  ]
+}

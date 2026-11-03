@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Dated 140-submission community checkpoint
+
+- Refresh the anonymized public submission checkpoint and EN/VI entry links to
+  140 confirmed submissions on 3 November 2026; exclude seven uncertain attempts
+  and one historical user-reported application.
+- Keep the 29 October response breakdown and earlier milestones immutable and
+  explicitly dated. No new inbox audit, current response rate, offer count,
+  homogeneous fit classification or application-speed claim is inferred.
+
 ## Unreleased - Inspect local training inputs without starting a run
 
 - Add opt-in `adapters.local_finetuning --preflight` for current reviewed splits,

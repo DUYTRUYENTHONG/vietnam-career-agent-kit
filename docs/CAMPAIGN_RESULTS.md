@@ -1,12 +1,23 @@
 # Real campaign results — public, anonymized snapshot
 
-**100-application milestone reached; 120 confirmed submissions as of 29 October
-2026.** The private tracker records three interview invitations and one assessment
-request. These are recruiter/TA response outcomes, not job offers or completed
-interviews. Raw CVs, recruiter contacts, messages, receipts, employer identities
-and account details remain private.
+**100-application milestone reached; 140 confirmed submissions as of 3 November
+2026.** Seven uncertain attempts and one historical user-reported application are
+excluded. A sent email followed by an immediate delivery failure is also excluded
+from successful submissions. This checkpoint does not include a new comprehensive
+inbox review or a current offer count.
 
-![120 confirmed submissions and latest recorded response stages](diagrams/campaign-results.svg)
+The separate **29 October** response snapshot recorded three interview invitations
+and one assessment request. Those dated outcomes are not job offers or completed
+interviews, and are not a current response breakdown for all 140 submissions.
+Raw CVs, recruiter contacts, messages, receipts, employer identities and account
+details remain private.
+
+![140 confirmed submissions on 3 November, with separate historical response observations](diagrams/campaign-results.svg)
+
+## Historical response breakdown — 29 October 2026
+
+The following table describes its original 120-submission checkpoint only. Its
+rows and dates have not been extrapolated to the newer 140-submission total.
 
 | Latest recorded response stage | Applications | What it means |
 |---|---:|---|
@@ -16,25 +27,27 @@ and account details remain private.
 | Receipt / screening acknowledgment | 39 | Acknowledgment, not a shortlist or interview |
 | No matching reply found | 67 | No match within the recorded mailbox-review scope |
 | Recently sent; response review pending | 7 | Sending verified; no comprehensive response review yet |
-| **Total confirmed submissions** | **120** | **No job offers observed** |
+| **Historical total confirmed submissions** | **120** | **No job offers observed in that dated review** |
 
-Four uncertain attempts and one historical user-reported application are excluded.
+At that checkpoint, four uncertain attempts and one historical user-reported
+application were excluded.
 Response checks are incremental and retain their individual dates: this is not a
 fresh full-inbox audit of all 120 applications. A pending review differs from a
 review that found no matching reply.
 
-[Current aggregate JSON](../examples/community/campaign-results-2026-10-29.json) ·
+[Current submission aggregate JSON](../examples/community/campaign-results-2026-11-03.json) ·
+[29 October response snapshot](../examples/community/campaign-results-2026-10-29.json) ·
 [Archived 27 October 100-row tracker](../examples/community/campaign-tracker-2026-10-27.md) ·
 [Archived CSV](../examples/community/campaign-tracker-2026-10-27.csv) ·
 [Archived 100-application summary](../examples/community/campaign-results-2026-10-27.json)
 
 The archived rows remain a dated milestone snapshot; they are not the live
-120-application tracker. Public snapshots never become another user's progress.
+140-application tracker. Public snapshots never become another user's progress.
 
 ## Recruiter / TA contact and next steps
 
-The campaign received interview invitations for three applications and an
-assessment request for one. Private records preserve the sender, exact role,
+The 29 October snapshot recorded interview invitations for three applications and
+an assessment request for one. Private records preserve the sender, exact role,
 message date, timezone, requested action and evidence. No recruiter email list or
 private correspondence is distributed with this kit.
 
@@ -68,7 +81,7 @@ through every runtime, provider or employer. It does not establish 100/hour, a
 100x speedup, employer delivery for every sent email or 100 employment offers.
 
 The historical scope included explicitly approved adjacent and stretch roles.
-It has **not** been reclassified as 120 Strong/Plausible-fit applications. The new
+It has **not** been reclassified as 140 Strong/Plausible-fit applications. The new
 default goal uses the user's reviewed Strong/Plausible-fit scope; those stricter
 criteria must be recorded prospectively rather than retrofitted to this example.
 

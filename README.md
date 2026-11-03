@@ -26,7 +26,7 @@ python scripts/kit.py --data-dir ../my-career-private start-campaign --cv /path/
 
 Paste the [short start prompt](prompts/COMMUNITY_START.md) into your agent.
 PDF/DOCX extraction requires a supported host tool; the starter records a path/hash.
-Read [the 100-application milestone, 120 confirmed submissions and recruiter outcomes](docs/CAMPAIGN_RESULTS.md).
+Read [the 100-application milestone, 140 confirmed submissions and dated recruiter outcomes](docs/CAMPAIGN_RESULTS.md).
 
 ![Real host-assisted campaign results and response breakdown](docs/diagrams/campaign-results.svg)
 
