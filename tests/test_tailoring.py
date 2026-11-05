@@ -99,6 +99,42 @@ class WordingTests(unittest.TestCase):
             with self.subTest(source=source, target=target):
                 self.assertEqual([], contribution_alarms(source, target))
 
+    def test_personal_artifact_paraphrases_retain_scope_without_literal_project(self):
+        # Fictional wording: the artifact noun may change without losing scope.
+        source = 'Built an AI-assisted personal project.'
+        for target in [
+            'Built an AI-assisted personal guide.',
+            'Built an AI-assisted personal Node.js guide.',
+            'Built an AI-assisted personal import workflow.',
+            'Built an AI-assisted personal warehouse snapshot.',
+            'Built an AI-assisted personal warehouse.',
+            'Built an AI-assisted personal Python toolkit.',
+            'Built an AI-assisted personal model experiment.',
+            'Built an AI-assisted personal data pipeline.',
+            'Built an AI-assisted personal\u2011reporting\u2011dashboard.',
+            'Xây dựng công cụ cá nhân có AI hỗ trợ.',
+            'Xây dựng thử nghiệm cá nhân có AI hỗ trợ.',
+        ]:
+            with self.subTest(target=target):
+                self.assertEqual([], contribution_alarms(source, target))
+
+    def test_personal_artifact_sources_still_require_explicit_artifact_scope(self):
+        for source in [
+            'Built an AI-assisted personal data workflow.',
+            'Built an AI-assisted personal model experiment.',
+            'Xây dựng công cụ cá nhân có AI hỗ trợ.',
+        ]:
+            for target in [
+                'Built an AI-assisted workflow.',
+                'Built an AI-assisted tool with a personal contribution.',
+                'Built an AI-assisted tool matching personal preferences.',
+                'Personally built an AI-assisted workflow.',
+                'Built an AI-assisted impersonal guide.',
+            ]:
+                with self.subTest(source=source, target=target):
+                    self.assertIn('Personal-project qualifier omitted',
+                                  contribution_alarms(source, target))
+
     def test_import_and_existing_review_recheck_ai_assistance(self):
         profile = self.work.inspect_profile().data['profile']
         for item in profile['facts']:

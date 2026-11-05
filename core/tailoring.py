@@ -46,8 +46,14 @@ AI_ASSISTANCE = re.compile(
     r'(?<!\w)(?:ai[\s\-\u2010\u2011\u2013\u2014]+(?:assisted|assistance|supported|hỗ trợ)'
     r'|(?:assisted|supported)\s+by\s+ai|hỗ trợ\s+(?:của|bởi)\s+ai)(?!\w)')
 PERSONAL_PROJECT = re.compile(
-    r'(?<!\w)(?:personal[\s\-\u2010\u2011\u2013\u2014]+(?:projects?|prototypes?)'
-    r'|(?:dự án|nguyên mẫu)\s+cá nhân)(?!\w)')
+    # Explicit artifact scope, not "personally" or a generic personal contribution.
+    # Allow bounded descriptive modifiers; arbitrary intervening words are unsafe.
+    r'(?<!\w)(?:personal[\s\-\u2010\u2011\u2013\u2014]+'
+    r'(?:(?:local|software|data|web|api|model|python|node\.js|reporting|import|warehouse)'
+    r'[\s\-\u2010\u2011\u2013\u2014]+){0,2}'
+    r'(?:projects?|prototypes?|guides?|experiments?|workflows?|pipelines?|'
+    r'tools?|toolkits?|apps?|applications?|dashboards?|snapshots?|warehouses?)'
+    r'|(?:dự án|nguyên mẫu|công cụ|ứng dụng|thử nghiệm|quy trình)\s+cá nhân)(?!\w)')
 ACTION_WORDS = set('Used Built Developed Documented Supported Assisted Queried Created Tested '
                    'Completed Translated Maintained Configured Analyzed Analysed Wrote '
                    'Đã Sử Xây Phát Ghi Hỗ Hoàn Kiểm Dùng Tham'.split())

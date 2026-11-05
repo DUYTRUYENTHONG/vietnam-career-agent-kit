@@ -121,6 +121,14 @@ Exact matching is not a requirement for a good paraphrase, and passing linkage
 checks is not proof of entailment. Invalid output remains invalid even when a
 caller supplies a positive review. Inspect both contract validity and reviews.
 
+The shared contribution alarm recognizes explicit personal artifact scope in
+bounded English/Vietnamese phrases, including a personal guide, data workflow
+or model experiment. It does not require the literal words `personal project`.
+Generic personal contributions/preferences and `personally` do not preserve that
+scope. The same check applies when the source uses these artifact descriptions;
+dropping them remains an alarm. This phrase check does not establish ownership,
+semantic equivalence, truth or model quality, and does not replace separate review.
+
 ### Observed token and timing summaries
 
 Each variant also has `observed_metrics_summary`, over **all** recorded held-out
