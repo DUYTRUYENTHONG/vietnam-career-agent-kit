@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Export actual CV review grades as a separate task
+
+- Add explicit `cv-review` CLI/MCP export of current recorded editorial grades,
+  with one six-dimension example per CV/job, existing grouped splits and exact
+  review/source/rubric bindings. Preserve default and legacy wording exports.
+- Expose the rubric digest in wording packets and accept an optional explicit
+  digest in v2 reviews. Unbound legacy grades require reassessment before grading
+  export; normal legacy wording/review behavior remains unchanged.
+- Support explicit review-task validation in the optional local LoRA runner;
+  overlength prompts fail without truncation. No grades, models, candidate facts
+  or application outcomes are generated or promoted by export.
+
 ## Unreleased - Minimal forkable career MCP distribution
 
 - Add a dedicated career launcher with read-only preflight and JSON/Codex

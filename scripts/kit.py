@@ -97,9 +97,11 @@ def parser() -> Parser:
     context.add_argument('--file',type=Path,required=True,help='private JSON with request and draft')
     context=commands.add_parser('career-evaluate',help='evaluate labelled queries and a token-overlap baseline locally')
     context.add_argument('--file',type=Path,required=True)
-    learning=commands.add_parser('learning-export',help='export only independently reviewed current CV wording; no training/upload')
+    learning=commands.add_parser('learning-export',help='export current reviewed CV wording or explicit recorded grades; no training/upload')
     learning.add_argument('--job-id',type=int,action='append',required=True)
     learning.add_argument('--output',required=True,help='new datasets/ subdirectory in the private workspace')
+    learning.add_argument('--task',choices=['cv-wording','cv-review'],default='cv-wording',
+                          help='wording generation or recorded editorial-review labels; never infer grades')
     learning=commands.add_parser('learning-check',help='recheck dataset bytes, evidence, reviews and split consistency')
     learning.add_argument('--directory',required=True)
     for name in ['growth-context','growth-capture']:
@@ -308,7 +310,7 @@ def execute(args) -> Outcome:
         return evaluate(work,work.private_json(args.file))
     if command in {'learning-export','learning-check'}:
         from core.learning import export_reviewed, check_export
-        if command=='learning-export':return export_reviewed(work,args.job_id,args.output)
+        if command=='learning-export':return export_reviewed(work,args.job_id,args.output,task=args.task)
         return check_export(work,args.directory)
     if command in {'growth-context','growth-capture','growth-plan','growth-review','growth-check',
                    'growth-evidence','growth-export','growth-check-export'}:

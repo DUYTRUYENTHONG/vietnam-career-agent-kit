@@ -1,5 +1,11 @@
 # Runtime compatibility evidence
 
+[Recorded CV review exports](REVIEW_LEARNING.md) are **Experimental** explicit
+CLI/MCP/local-training task contracts. Fictional regressions cover source/review
+and rubric changes, exact labels, grouping, task mismatch and no ledger changes.
+This is export/validation acceptance, not a trained or independently calibrated
+CV grader, rendered-layout model, recruiter-outcome predictor or hiring gain.
+
 The [minimal career MCP launcher](MCP_SERVER.md) has **Verified** local Windows
 Python 3.12 / SDK 1.30.0 stdio acceptance: clean dependency isolation, handshake,
 20-tool listing, retrieval, writing brief, policy resource and invalid input.

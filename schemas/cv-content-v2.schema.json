@@ -55,6 +55,7 @@
       "required":["schema_version","fingerprint","policy","reviewer","independent_pass","statements","editorial"],
       "properties":{"schema_version":{"const":"2.0"},"fingerprint":{"type":"string","pattern":"^[a-f0-9]{64}$"},
         "policy":{"const":"wording-review-1"},"reviewer":{"type":"string","minLength":1},"independent_pass":{"const":true},
+        "rubric_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
         "statements":{"type":"object","minProperties":1,"additionalProperties":{"$ref":"#/$defs/statement_review"}},
         "editorial":{"type":"object","additionalProperties":false,
           "required":["relevance","specificity","coverage","clarity","concision","readability"],

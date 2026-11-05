@@ -8,6 +8,10 @@ does not replace normal profile/job-bound writing validation.
 For fingerprinted CV/email briefs, current draft-citation checks and optional
 LCEL orchestration using your own AI host, see [LangChain RAG](LANGCHAIN_RAG.md).
 
+For actual recorded editorial grades rather than generated wording targets,
+use the separate [review-learning task](REVIEW_LEARNING.md). No automatic grade
+generation, model training or promotion follows an export.
+
 Use your existing agent to write. The optional career MCP server provides cited
 context and measured feedback without adding a second model API. It runs locally
 over stdio against one explicitly selected private workspace. Nothing here sends
