@@ -14,6 +14,12 @@ Select and order relevant facts; improve readability without adding experience.
 
 Current assessment, job ID, explicit language and ordered confirmed fact IDs.
 
+For explicitly requested bulk JD collection, use ../../../docs/REQUIREMENTS_PIPELINE.md.
+Collect and clean captured sources privately before selecting exact quote
+candidates. The corpus and its caller classifications remain pending extraction
+review; use the existing complete JD, assessment and independent wording review
+before supervised learning export. Raw requirements never become candidate facts.
+
 ## Required capabilities
 
 Local prepare command for source-bound Markdown, followed by optional render and explicit document review for DOCX/PDF. See docs/documents-and-approval.md for requirements and limits.

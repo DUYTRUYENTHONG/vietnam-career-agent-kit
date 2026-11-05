@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Captured requirements pipeline
+
+- Add a bounded private JSONL/legacy-ledger collector and conservative cleaner,
+  retaining raw hashes and all provenance during exact-text deduplication.
+- Add hash-bound extraction sidecars, explicit classification conflicts and a
+  pending review queue. Existing supervised export/training gates stay unchanged.
+- Add standard-library CLI, input schema, fictional regressions and pipeline guide.
+  No fetching, tracker migration, candidate facts, model calls or training added.
+
 ## Unreleased - Summarize observed wording-model tokens and timing
 
 - Add per-variant measurement coverage and complete token/time totals to offline
