@@ -67,7 +67,26 @@ def _observed_metrics_summary(results):
     return summary
 
 
-def compare(work, directory, runs):
+def _candidate_sections(candidate, example, task):
+    """Adapt an explicitly selected bullet to the canonical v2 validator."""
+    if task == 'cv-wording':
+        object_fields(candidate, {'language', 'sections'}, set(), 'generated wording')
+        return candidate
+    object_fields(candidate, {'language', 'section_kind', 'context_fact_id', 'statement'}, set(), 'generated bullet')
+    inputs = strict_json(example['messages'][1]['content'])
+    statement = candidate['statement']
+    if not isinstance(statement, dict):
+        raise ValueError('Generated bullet statement must be an object')
+    if (any(candidate[key] != inputs[key] for key in ('language', 'section_kind', 'context_fact_id')) or
+            statement.get('id') != inputs['statement_id'] or
+            statement.get('source_fact_ids') != [inputs['statement_fact_id']] or
+            statement.get('requirement_ids') != [r['id'] for r in inputs['requirements']]):
+        raise ValueError('Generated bullet differs from its selected language, placement, statement, fact or requirements')
+    return {'language': candidate['language'], 'sections': [{'kind': candidate['section_kind'],
+        'groups': [{'context_fact_id': candidate['context_fact_id'], 'statements': [statement]}]}]}
+
+
+def compare(work, directory, runs, *, task='cv-wording'):
     """Validate recorded base/adapter outputs against CURRENT reviewed held-out JDs.
 
     Semantic scores are optional caller-provided independent-review observations,
@@ -76,8 +95,10 @@ def compare(work, directory, runs):
     """
     checked = check_export(work, directory).data
     manifest = work.private_json(work.inside(directory)/'manifest.json')
-    if manifest.get('task', 'cv-wording') != 'cv-wording':
-        raise ValueError('This comparison requires a full-CV wording dataset; select its explicit task interface')
+    if task not in ('cv-wording', 'cv-bullet-wording'):
+        raise ValueError('Select cv-wording or cv-bullet-wording explicitly')
+    if manifest.get('task', 'cv-wording') != task:
+        raise ValueError('Dataset task mismatch; full-CV wording is the default, bullet wording needs explicit selection')
     if not checked['ready_for_split']:
         raise ValueError('A reviewed held-out split is required')
     root = work.inside(directory)
@@ -109,10 +130,10 @@ def compare(work, directory, runs):
                    'review': None, 'metrics': output.get('metrics'), 'issues': []}
             try:
                 candidate = strict_json(raw)
-                object_fields(candidate, {'language', 'sections'}, set(), 'generated wording')
+                validated_candidate = _candidate_sections(candidate, example, task)
                 job_id = example['provenance']['job_id']
                 profile, job, _, assessment = work.wording_context(job_id)
-                model = {**candidate, 'schema_version': '2.0', 'candidate_id': profile['profile']['candidate_id'],
+                model = {**validated_candidate, 'schema_version': '2.0', 'candidate_id': profile['profile']['candidate_id'],
                     'job_id': job_id, 'author': 'recorded-generator', 'prompt_version': 'heldout-evaluation-1',
                     'model_configuration': run['model_identity']}
                 validate(model, profile['profile'], job, assessment)
@@ -166,7 +187,7 @@ def compare(work, directory, runs):
                 'caller_reported_qualifier_rate', 'caller_reported_specificity_mean'):
         base, adapter = summaries['base'][key], summaries['adapter'][key]
         deltas[key] = None if base is None or adapter is None else adapter-base
-    return {'dataset_fingerprint': checked['manifest_fingerprint'], 'heldout_examples': len(heldout),
+    return {'task': task, 'dataset_fingerprint': checked['manifest_fingerprint'], 'heldout_examples': len(heldout),
         'adapter_minus_base': deltas,
         'runs': summaries, 'reviewer_identity_authenticated': False, 'semantic_truth_verified': False,
         'promotion_performed': False, 'authority_granted': False, 'provider_calls': 0, 'sent': False,

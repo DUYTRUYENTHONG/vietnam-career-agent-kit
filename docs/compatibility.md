@@ -8,7 +8,10 @@ Windows Python 3.12.14 / MCP SDK 1.30.0 stdio accepted export/check on disposabl
 fictional data. Offline pinned Qwen3-8B tokenizer preflight accepted the same
 two-example fixture (900/902 total tokens), without loading weights or training.
 Native host discovery, semantic model quality and hiring improvement are unverified.
-The full-CV paired runner does not consume this task.
+The paired runner, recorded comparator and blinded-review helper accept this task
+only with explicit selection. Fictional protocol tests cover scope bindings,
+reference isolation, strict JSON, review hashes and ledger preservation. Actual
+bullet-model generation quality and cross-employer generalization remain unverified.
 
 [Recorded CV review exports](REVIEW_LEARNING.md) are **Experimental** explicit
 CLI/MCP/local-training task contracts. Fictional regressions cover source/review

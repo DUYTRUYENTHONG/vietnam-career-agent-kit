@@ -142,8 +142,10 @@ For explicitly requested fact/bullet-to-JD learning, use
 ../../../docs/BULLET_TRAINING.md and task `cv-bullet-wording`. Export only current
 independently reviewed mapped statements with their exact group-context facts;
 do not turn raw extraction candidates, drafts or recruiter responses into labels.
-Keep this task separate from full-CV generation and recorded grades. Its optional
-trainer selection is explicit; full-CV paired generation rejects bullet datasets.
+Keep this task separate from full-CV generation and recorded grades. Select
+`cv-bullet-wording` explicitly for its optional trainer, paired generator,
+recorded comparison and blinded-review packet; the full-CV default rejects it.
+Bullet contract validity and reference matching do not establish semantic quality.
 
 For paired recorded base/adapter generations, follow
 ../../../docs/WORDING_EVALUATION.md. Evaluate every current held-out example;

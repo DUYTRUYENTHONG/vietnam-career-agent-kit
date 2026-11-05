@@ -31,6 +31,13 @@ export**. This is a matched in-export holdout experiment, not a generic external
 OOD benchmark. Unchanged legacy training records without a task label retain
 the original CV-wording meaning; explicit career-growth runs are rejected.
 
+For a reviewed bullet export and its matching completed bullet training record,
+add `--task cv-bullet-wording`. Both tasks use the same two-pass local generator,
+raw-output capture, token/timing measurements and failure/no-resume rules.
+The default `cv-wording` does not infer a task from files. Review-learning and
+career-growth tasks remain unsupported here. Bullet experiment quality has not
+been established by the fictional protocol tests or earlier full-CV runtime smoke.
+
 ```sh
 python -m adapters.local_pair_generation \
   --data-dir ../my-private --dataset datasets/reviewed-v1 \

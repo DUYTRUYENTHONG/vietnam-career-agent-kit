@@ -14,6 +14,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument('--dataset', required=True)
+    parser.add_argument('--task', choices=['cv-wording', 'cv-bullet-wording'], default='cv-wording')
     parser.add_argument('--runs', required=True, help='Recorded paired runs JSON inside selected private workspace')
     parser.add_argument('--output', required=True, help='New evaluations/ report JSON inside that workspace')
     args = parser.parse_args(argv)
@@ -22,7 +23,7 @@ def main(argv=None):
     if target.exists() or not target.is_relative_to(work.inside('evaluations')) or target == work.inside('evaluations'):
         raise ValueError('Select a new evaluations/ report; existing artifacts are never overwritten')
     runs = work.private_json(work.inside(args.runs))
-    report = compare(work, args.dataset, runs)
+    report = compare(work, args.dataset, runs, task=args.task)
     target.parent.mkdir(parents=True, exist_ok=True)
     with target.open('x', encoding='utf8') as stream:
         json.dump(report, stream, ensure_ascii=False, indent=2, allow_nan=False)

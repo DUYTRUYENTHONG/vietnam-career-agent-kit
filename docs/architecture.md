@@ -4,7 +4,9 @@
 task `cv-bullet-wording`. It selects mapped single statements, carries exact source
 group context, reconstructs current review bindings and co-groups employers and
 normalized exact wording. CLI/MCP and optional local trainer share manifest 1.3;
-full-CV paired generation/evaluation rejects this separate output interface.
+paired generation/evaluation and blinded review accept this separate output
+interface only through explicit task selection. The evaluator adapts one bound
+statement to canonical v2 validation without importing it or creating reviews.
 See [contract and limits](BULLET_TRAINING.md).
 
 `core/requirement_corpus.py` and `scripts/requirements_corpus.py` implement bounded

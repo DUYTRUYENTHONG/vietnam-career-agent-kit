@@ -13,6 +13,13 @@ added an unsupported result and fenced its JSON. This report separates strict
 output-contract/linkage checks from independently reviewed factuality and useful
 detail. See [observed smoke findings](LOCAL_FINETUNING_QA.md).
 
+The default is whole-CV `cv-wording`. For reviewed single-statement exports,
+select `--task cv-bullet-wording` on the comparison and blinded-review commands
+(or pass `task='cv-bullet-wording'` to their Python functions). The report records
+the task. [Bullet bindings and limits](BULLET_TRAINING.md) retain the original
+section/context, statement, fact and requirement selection before canonical v2
+validation. A valid bullet is not a complete CV or proof of semantic truth.
+
 ```mermaid
 flowchart LR
   A[Current reviewed export] --> B[Held-out job and output groups]
