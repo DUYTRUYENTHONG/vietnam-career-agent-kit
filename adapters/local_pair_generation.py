@@ -43,10 +43,12 @@ def run(work, directory, model_directory, training_directory, output, *,
     if target == evaluation_root or not target.is_relative_to(evaluation_root) or target.exists():
         raise ValueError('Use a new private evaluations/ subdirectory; never overwrite or resume')
     checked = check_export(work, directory).data
+    manifest = work.private_json(work.inside(directory)/'manifest.json')
+    if manifest.get('task', 'cv-wording') != 'cv-wording':
+        raise ValueError('This paired generator requires a full-CV wording dataset; no bullet-task substitution')
     if not checked['ready_for_split']:
         raise ValueError('A current reviewed held-out split is required')
     source = work.inside(directory)
-    manifest = work.private_json(source/'manifest.json')
     all_examples = [json.loads(line) for line in (source/'examples.jsonl').read_text(encoding='utf8').splitlines()]
     examples = [row for row in all_examples if row['example_id'] in manifest['evaluation_example_ids']]
     if not 1 <= len(examples) <= max_examples:

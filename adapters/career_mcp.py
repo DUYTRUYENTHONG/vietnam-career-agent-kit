@@ -82,7 +82,7 @@ def make_career_server(work):
 
     @server.tool(annotations={'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': False})
     def learning_export(job_ids: list[int], output: str, task: str = 'cv-wording') -> dict:
-        """Export current reviewed wording or explicit cv-review judgments; never generate grades or train."""
+        """Export cv-wording, cv-bullet-wording or cv-review from current reviews; never generate labels or train."""
         return safe(learning.export_reviewed, work, job_ids, output, task=task)
 
     @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})

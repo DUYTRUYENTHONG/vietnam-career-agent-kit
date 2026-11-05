@@ -75,10 +75,12 @@ def compare(work, directory, runs):
     are private; this function changes no drafts, reviews, facts or ledger rows.
     """
     checked = check_export(work, directory).data
+    manifest = work.private_json(work.inside(directory)/'manifest.json')
+    if manifest.get('task', 'cv-wording') != 'cv-wording':
+        raise ValueError('This comparison requires a full-CV wording dataset; select its explicit task interface')
     if not checked['ready_for_split']:
         raise ValueError('A reviewed held-out split is required')
     root = work.inside(directory)
-    manifest = work.private_json(root/'manifest.json')
     examples = [json.loads(line) for line in (root/'examples.jsonl').read_text(encoding='utf8').splitlines()]
     heldout = {e['example_id']: e for e in examples if e['example_id'] in manifest['evaluation_example_ids']}
     object_fields(runs, {'base', 'adapter'}, set(), 'paired runs')

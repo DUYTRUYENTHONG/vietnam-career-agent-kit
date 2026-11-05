@@ -5,6 +5,11 @@ and professional-email preparation. This is a source-checkout distribution,
 not a hosted service or a published Python package. Python 3.11+ is required.
 Docker, Gmail, Chromium and another model API are not required.
 
+`learning_export` also accepts explicit task `cv-bullet-wording` for current
+[reviewed fact/bullet-to-requirement examples](BULLET_TRAINING.md). `learning_check`
+revalidates their manifest 1.3 and source/review bindings. The server never trains
+or uploads a model, and extraction queues are not supervised labels.
+
 ## 1. Install the minimal optional environment
 
 Clone your fork, open its directory and create a dedicated environment. Keep

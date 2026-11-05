@@ -1,5 +1,15 @@
 # Runtime compatibility evidence
 
+[Reviewed bullet learning](BULLET_TRAINING.md) is **Experimental** standard-library
+export/check plus explicit CLI/MCP/local-trainer task selection. Fictional tests
+cover source/context selection, current independent review, stale/tampered files,
+employer/text grouping, bounded private exports and early task mismatch. Native
+Windows Python 3.12.14 / MCP SDK 1.30.0 stdio accepted export/check on disposable
+fictional data. Offline pinned Qwen3-8B tokenizer preflight accepted the same
+two-example fixture (900/902 total tokens), without loading weights or training.
+Native host discovery, semantic model quality and hiring improvement are unverified.
+The full-CV paired runner does not consume this task.
+
 [Recorded CV review exports](REVIEW_LEARNING.md) are **Experimental** explicit
 CLI/MCP/local-training task contracts. Fictional regressions cover source/review
 and rubric changes, exact labels, grouping, task mismatch and no ledger changes.
