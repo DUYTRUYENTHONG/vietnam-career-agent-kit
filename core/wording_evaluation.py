@@ -27,6 +27,46 @@ def strict_json(value):
     return json.loads(value, object_pairs_hook=pairs, parse_constant=nonfinite)
 
 
+def _observed_metrics_summary(results):
+    """Summarize already-validated rows, including structurally invalid outputs.
+
+    Complete totals are separate from coverage; unknown is never inferred as zero.
+    Loading-inclusive/mixed timing is not generation-only throughput.
+    """
+    n = len(results)
+    summary = {'examples': n}
+    for key in ('input_tokens', 'output_tokens', 'generation_ms'):
+        values = [r['metrics'][key] for r in results
+                  if r['metrics'] is not None and r['metrics'][key] is not None]
+        summary[key+'_observed_examples'] = len(values)
+        total = None
+        if n and len(values) == n:
+            try:
+                total = math.fsum(values) if key == 'generation_ms' else sum(values)
+                if not math.isfinite(total):
+                    raise ValueError('Metric totals must remain finite')
+            except OverflowError as error:
+                raise ValueError('Metric totals must remain finite') from error
+        summary[key+'_total'] = total
+    flags = {r['metrics']['load_time_included'] for r in results
+             if r['metrics'] is not None and r['metrics']['generation_ms'] is not None}
+    scope = ('incomplete' if summary['generation_ms_total'] is None else
+             'mixed' if len(flags) != 1 else
+             'includes_model_loading' if True in flags else 'generation_only')
+    summary['timing_scope'] = scope
+    rate = None
+    if (scope == 'generation_only' and summary['output_tokens_total'] is not None
+            and summary['generation_ms_total'] > 0):
+        try:
+            rate = (summary['output_tokens_total']/summary['generation_ms_total'])*1000.0
+            if not math.isfinite(rate):
+                raise ValueError('Derived token throughput must remain finite')
+        except OverflowError as error:
+            raise ValueError('Derived token throughput must remain finite') from error
+    summary['generation_output_tokens_per_second'] = rate
+    return summary
+
+
 def compare(work, directory, runs):
     """Validate recorded base/adapter outputs against CURRENT reviewed held-out JDs.
 
@@ -109,6 +149,7 @@ def compare(work, directory, runs):
         n = len(results)
         reviewed = [r for r in results if r['review'] is not None]
         summaries[variant] = {'model_identity': run['model_identity'], 'examples': results,
+            'observed_metrics_summary': _observed_metrics_summary(results),
             'contract_valid_rate': sum(r['contract_valid'] for r in results)/n,
             'reference_exact_match_rate': sum(r['reference_exact_match'] for r in results)/n,
             'review_record_count': len(reviewed),

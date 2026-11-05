@@ -103,6 +103,22 @@ class WordingEvaluationTests(unittest.TestCase):
             runs['base']['outputs'][0]['metrics'][key] = value
             with self.assertRaises(ValueError): compare(self.work, 'datasets/test', runs)
 
+    def test_invalid_output_metrics_remain_visible_without_quality_approval(self):
+        output = self.runs['adapter']['outputs'][0]
+        output['text'] = 'not JSON'
+        output['metrics'] = {'input_tokens': 100, 'output_tokens': 20,
+                             'generation_ms': 250, 'load_time_included': False}
+        before = deepcopy(self.runs)
+        report = compare(self.work, 'datasets/test', self.runs)
+        summary = report['runs']['adapter']['observed_metrics_summary']
+        self.assertEqual(0, report['runs']['adapter']['contract_valid_rate'])
+        self.assertEqual(100, summary['input_tokens_total'])
+        self.assertEqual(80, summary['generation_output_tokens_per_second'])
+        self.assertIsNone(report['runs']['base']['observed_metrics_summary']['input_tokens_total'])
+        self.assertIsNone(report['runs']['adapter']['caller_reported_factuality_rate'])
+        self.assertFalse(report['promotion_performed'])
+        self.assertEqual(before, self.runs)
+
     def test_overflowing_recorded_metrics_are_validation_errors_without_draft_changes(self):
         before = self.work.wording_packet(1).data['fingerprint']
         for key in ('input_tokens', 'output_tokens', 'generation_ms'):

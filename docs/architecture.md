@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`core/wording_evaluation.py` summarizes validated recorded token/timing fields
+with per-metric coverage. Complete totals retain invalid generations; unknown
+measurements stay null and loading-inclusive/mixed timing has no generation-only
+throughput. This additive report field introduces no model call, state change,
+new input contract or promotion decision. See [wording evaluation](WORDING_EVALUATION.md).
+
 `core/learning.py` also exports the explicitly selected `cv-review` task from
 existing exact v2 reviews. It reuses source/profile/JD/wording bindings, private
 file handling and grouped splits; manifest 1.2 separates grade targets and rubric

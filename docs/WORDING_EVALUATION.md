@@ -114,6 +114,32 @@ Exact matching is not a requirement for a good paraphrase, and passing linkage
 checks is not proof of entailment. Invalid output remains invalid even when a
 caller supplies a positive review. Inspect both contract validity and reviews.
 
+### Observed token and timing summaries
+
+Each variant also has `observed_metrics_summary`, over **all** recorded held-out
+outputs, including invalid JSON. Excluding failures would bias performance totals.
+For `input_tokens`, `output_tokens` and `generation_ms`, the report includes
+`*_observed_examples` and `*_total`. A total is null unless every example supplies
+that measurement. A recorded zero stays zero; a missing measurement stays unknown.
+Coverage is per metric, so complete output-token counts cannot fill missing input
+counts or times. Overflowing totals or derived rates are validation errors.
+
+`timing_scope` is `incomplete`, `mixed`, `includes_model_loading` or
+`generation_only`, based on the recorded timing flags and coverage. The report
+provides `generation_output_tokens_per_second` only with complete output tokens,
+complete positive timing and generation-only scope. It divides total output
+tokens by total seconds, rather than averaging per-example rates. Zero total time,
+missing observations and loading-inclusive/mixed timing produce a null rate.
+
+These are descriptive caller-recorded measurements, not automatically accepted
+task performance, API cost or proof of comparable hardware, tokenizers, prompts,
+decoding or output lengths. A faster invalid answer is still invalid. Totals with
+different timing scopes must not be interpreted as a model speed comparison.
+No loss, rate or token count grants factual review or model promotion. Existing
+run inputs, CLI flags and review contracts are unchanged; this is an additive
+report field. Fictional regressions cover missing/zero measurements, uneven
+latencies, loading scope, failed outputs and aggregate overflow.
+
 Records of model identity, metrics and reviewer identity are caller supplied,
 not authenticated observations. The report cannot prove actual generation,
 review independence, semantic independence of splits or unseen-JD generalization.

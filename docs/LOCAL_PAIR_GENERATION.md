@@ -73,6 +73,9 @@ Use a **new** `evaluations/<name>/` inside the selected workspace:
   milliseconds. The existing inference timer excludes model loading.
 - `comparison.json`: existing strict JSON/source-link checks and exact-reference
   matching. Semantic scores remain null until all outputs have explicit reviews.
+  Per-variant observed-metric summaries include failed outputs and measurement
+  coverage; incomplete totals stay null. See [timing scope and throughput
+  limits](WORDING_EVALUATION.md#observed-token-and-timing-summaries).
 - `completed.json`: final runtime marker and artifact hashes, `model_loads_completed`,
   and per-call `call_wall_ms`, `includes_model_load` and `model_load_ms`.
   The first call in each variant includes loading/imports; later calls reuse that
