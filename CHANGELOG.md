@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Preserve explicit personal artifact scope
+
+- Recognize bounded personal guide/workflow/experiment and related artifact
+  phrases in the shared EN/VI contribution alarm, avoiding false omissions when
+  a faithful paraphrase does not literally say `personal project`.
+- Apply the same preservation rule to those source phrases. Generic personal
+  contributions/preferences and `personally` remain insufficient. AI-assistance,
+  source binding, independent review and model-promotion boundaries are unchanged.
+
 ## Unreleased - Explicit read-only MCP source mode
 
 - Add `--source-memory` to the minimal MCP launcher, preflight and JSON/Codex

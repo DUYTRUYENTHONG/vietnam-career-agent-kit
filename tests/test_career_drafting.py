@@ -117,11 +117,17 @@ class DraftingTests(unittest.TestCase):
                 with self.assertRaisesRegex(WorkflowError, missing):
                     check_draft(self.work, request, draft)
 
-        draft['blocks'][0]['text'] = 'Xây dựng dự án cá nhân với sự hỗ trợ của AI để báo cáo.'
-        with patch('core.career_drafting.writing_brief', return_value=fresh):
-            result = check_draft(self.work, request, draft)
-        self.assertTrue(result.data['review_required'])
-        self.assertFalse(result.data['semantic_truth_verified'])
+        for wording in [
+            'Xây dựng dự án cá nhân với sự hỗ trợ của AI để báo cáo.',
+            'Built an AI-assisted personal reporting workflow.',
+            'Xây dựng công cụ cá nhân có AI hỗ trợ để báo cáo.',
+        ]:
+            draft['blocks'][0]['text'] = wording
+            with self.subTest(wording=wording), patch(
+                    'core.career_drafting.writing_brief', return_value=fresh):
+                result = check_draft(self.work, request, draft)
+            self.assertTrue(result.data['review_required'])
+            self.assertFalse(result.data['semantic_truth_verified'])
 
     def test_cli_roundtrip_checks_private_packet(self):
         cli = Path(__file__).resolve().parents[1]/'scripts/kit.py'
