@@ -1,5 +1,10 @@
 # Vertical-slice roadmap
 
+The [minimal MCP distribution](MCP_SERVER.md) reuses the existing career server
+with a dedicated hash-locked environment and setup/configuration checks. Actual
+local SDK stdio acceptance is complete; native host discovery, macOS acceptance
+and community installation feedback remain separate gates.
+
 Experimental [career growth](CAREER_GROWTH.md) implements current gap capture,
 retrieval-augmented planning context, reviewed private plans/evidence proposals
 and separate reviewed training exports with explicit offline task selection.

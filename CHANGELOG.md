@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Minimal forkable career MCP distribution
+
+- Add a dedicated career launcher with read-only preflight and JSON/Codex
+  configuration previews; startup never initializes or migrates a tracker.
+- Reuse the existing 20 tools with a minimal hash-locked SDK profile, avoiding
+  Gmail/browser packages. Document private setup, troubleshooting and limits.
+- Exercise real stdio protocol and clean dependency isolation in the existing
+  four-platform CI matrix; preserve all six required jobs and full plugin QA.
+
 ## Unreleased - Bind fact quotes to the verified source bytes
 
 - Hash and decode each evidence source from one operation-local byte snapshot.

@@ -1,5 +1,13 @@
 # Runtime compatibility evidence
 
+The [minimal career MCP launcher](MCP_SERVER.md) has **Verified** local Windows
+Python 3.12 / SDK 1.30.0 stdio acceptance: clean dependency isolation, handshake,
+20-tool listing, retrieval, writing brief, policy resource and invalid input.
+Fictional launcher tests cover config serialization, legacy/corrupt/unsupported
+workspaces and no initialization. Windows/Linux 3.11/3.12 CI acceptance is pending
+until its actual runs pass. macOS and native Codex/Claude discovery are unverified;
+no HTTP service or semantic writing-quality guarantee is implied.
+
 Pre-import `check-lead-identities` is **Experimental** portable Python/CLI behavior.
 Fictional tests exercise bounded whole-batch validation, one read-only metadata
 snapshot, identity signals, uncertainty, workspace isolation and no job/event

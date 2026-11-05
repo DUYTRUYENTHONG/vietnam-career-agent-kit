@@ -1,5 +1,23 @@
 # Community references and attribution
 
+## Minimal career MCP distribution, 5 November 2026
+
+The new profile reuses the existing reviewed **mcp 1.30.0** SDK and 29 transitive
+packages, with no copied upstream code. Each pin, wheel hash and package metadata
+entry comes from the existing plugin profile; `pywin32` is Windows-only. The
+versioned [subset registry](../adapters/career-mcp.source.json) binds the prior
+metadata registry and new lock by SHA256, retaining metadata URLs and licenses.
+See the [official Python SDK source](https://github.com/modelcontextprotocol/python-sdk)
+for the protocol; current upstream main is not permission to upgrade this pin.
+
+Local Windows Python 3.12 acceptance uses a separately installed minimal
+hash-locked environment, `pip check`, and an actual SDK client/server stdio
+handshake against disposable fictional data. It verifies tool inventory,
+retrieval, writing brief, resource access and invalid input; no native host
+installation, live employer interaction or semantic quality improvement is
+claimed. The four-platform CI matrix adds that same minimal-profile acceptance
+without removing document/full-plugin checks. See [setup](MCP_SERVER.md).
+
 ## Local training preflight, 3 November 2026
 
 Reviewed the official [PyTorch CUDA availability contract](https://docs.pytorch.org/docs/stable/generated/torch.cuda.is_available)

@@ -205,5 +205,14 @@
     "auto_install": false,
     "core_dependencies": false,
     "runtime_evidence": "docs/LOCAL_FINETUNING.md"
+  },
+  "optional_career_mcp": {
+    "file": "requirements-mcp.lock",
+    "direct_requirements": "requirements-mcp.in",
+    "sdk_version": "1.30.0",
+    "auto_install": false,
+    "metadata_and_licenses": "adapters/local-plugins.source.json",
+    "scope": "Subset of existing reviewed plugin pins/hashes; pywin32 Windows-only; no email/browser SDKs",
+    "acceptance": "Local Windows Python 3.12 real stdio; CI Windows/Linux Python 3.11/3.12 pending"
   }
 }

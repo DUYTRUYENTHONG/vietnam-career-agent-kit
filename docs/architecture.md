@@ -1,5 +1,12 @@
 # Portable core architecture
 
+`scripts/career_mcp.py` is a source-checkout launcher for the existing
+`adapters/career_mcp.py` server. It validates the selected existing workspace and
+pinned optional SDK, then starts stdio, or prints a configuration preview without
+host changes. `requirements-mcp.lock` isolates that transport from email/browser
+dependencies. No core, schema or submission-authority changes are introduced.
+See [minimal MCP distribution](MCP_SERVER.md).
+
 `check-lead-identities` adds bounded pre-import identity matching to the existing
 preparation layer. It reads recorded job metadata from one read-only SQLite
 snapshot, without importing jobs or opening candidate artifacts. The new input

@@ -1,0 +1,2 @@
+# Career MCP only; reuse the reviewed SDK pin, without Gmail/browser packages.
+mcp==1.30.0

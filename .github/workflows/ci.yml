@@ -37,6 +37,20 @@ jobs:
         run: python scripts/generate_adapters.py --check
       - name: Disposable fictional preparation demo
         run: python scripts/demo_slice1.py
+      - name: Clean minimal MCP profile (Linux)
+        if: runner.os != 'Windows'
+        run: |
+          python -m venv .venv-mcp-ci
+          .venv-mcp-ci/bin/python -m pip install --require-hashes --only-binary=:all: -r requirements-mcp.lock
+          .venv-mcp-ci/bin/python -m pip check
+          .venv-mcp-ci/bin/python -m unittest discover -s tests_mcp -v
+      - name: Clean minimal MCP profile (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          python -m venv .venv-mcp-ci
+          .venv-mcp-ci/Scripts/python.exe -m pip install --require-hashes --only-binary=:all: -r requirements-mcp.lock
+          .venv-mcp-ci/Scripts/python.exe -m pip check
+          .venv-mcp-ci/Scripts/python.exe -m unittest discover -s tests_mcp -v
   document-integration:
     # Render acceptance is verified on LibreOffice 24.2 from Ubuntu 24.04.
     # Ubuntu 26.04/LibreOffice 26.2 currently fails the unchanged font gate.
