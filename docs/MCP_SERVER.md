@@ -33,7 +33,9 @@ python3 -m venv .venv-mcp
 
 The check creates and removes disposable fictional data. It tests an actual
 stdio handshake, 20-tool inventory, retrieval, a CV brief, policy resource and
-invalid input. It does not install host settings or submit an application.
+invalid input. It also starts the separate one-tool source-memory mode and
+checks retrieval, invalid input, changed-source rejection and legacy-ledger
+preservation. It does not install host settings or submit an application.
 The SDK is pinned to **mcp 1.30.0**; do not silently substitute SDK v2.
 
 ## 2. Prepare your own workspace
@@ -51,6 +53,30 @@ for a source-bound writing brief. Never use the fictional demo as your tracker.
 If your older campaign has `applications.sqlite3` instead of `workflow.sqlite3`,
 use the [source-memory bridge](SOURCE_MEMORY.md). This launcher refuses to
 initialize or migrate a second tracker over it.
+
+### Older source packets: select the read-only mode explicitly
+
+The same minimal environment can serve an existing `data/source-facts.json`
+packet without a portable tracker. Do not initialize a second database. Use:
+
+```sh
+python scripts/career_mcp.py --data-dir ../my-career-private --source-memory --check
+python scripts/career_mcp.py --data-dir ../my-career-private --source-memory --config json
+python scripts/career_mcp.py --data-dir ../my-career-private --source-memory --config codex
+```
+
+Use the selected environment's Python. These previews name the server
+`career-source-memory` and retain the explicit flag. Startup and preflight
+validate qualifying evidence hashes without opening either application database.
+Preflight reports counts, exclusions and the packet hash, never candidate quotes.
+Missing or changed qualifying sources fail; excluded records remain excluded.
+Zero qualifying facts are reported with an explanatory issue, not approved.
+
+This mode exposes only `career_source_context`; it cannot read a tracker, create
+writing reviews, export training data or submit applications. Default mode still
+requires a portable workspace and never automatically changes modes. The older
+standalone `scripts/source_memory.py --stdio` entry remains supported. See the
+[packet contract and limits](SOURCE_MEMORY.md) before connecting a trusted host.
 
 ## 3. Check and preview the host configuration
 
@@ -122,3 +148,9 @@ Chạy `--check`, tạo bản cấu hình `--config json` hoặc `--config codex
 MCP hỗ trợ truy xuất bằng chứng và chuẩn bị CV/email; gửi hồ sơ, quyền tiết lộ
 dữ liệu và huấn luyện vẫn là các bước riêng. Không đưa CV hoặc tracker cá nhân
 lên fork công khai.
+
+Workspace cũ dùng `data/source-facts.json`: thêm `--source-memory` vào lệnh
+`--check` và lệnh tạo cấu hình. Chế độ này chỉ có công cụ đọc
+`career_source_context`, không mở hay tạo tracker. Dùng cùng `.venv-mcp` ở bước 1;
+không cần cài thêm gói Gmail hoặc browser. Không tự chuyển chế độ hay sửa nguồn
+để bỏ qua lỗi hash.

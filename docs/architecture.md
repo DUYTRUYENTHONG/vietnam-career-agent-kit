@@ -1,5 +1,12 @@
 # Portable core architecture
 
+`scripts/career_mcp.py --source-memory` explicitly selects the existing read-only
+`scripts/source_memory.py` server within the minimal pinned MCP environment.
+The launcher reuses path isolation and source-hash checks without opening or
+initializing a ledger. Config previews and preflight share that explicit mode;
+default portable tools never auto-downgrade. Stdio QA exercises both separate
+inventories. No new core contract, training/export tool or host installation.
+
 `core/bullet_learning.py` extends the existing reviewed learning path with explicit
 task `cv-bullet-wording`. It selects mapped single statements, carries exact source
 group context, reconstructs current review bindings and co-groups employers and
