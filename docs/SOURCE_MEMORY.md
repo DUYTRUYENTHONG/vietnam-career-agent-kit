@@ -46,12 +46,29 @@ turn that failure into a partial success. See [fictional QA](SOURCE_MEMORY_QA.md
 
 ## Optional MCP
 
-Use an interpreter with the existing hash-locked `requirements-plugins.lock`
-dependencies. Add this entry manually to a compatible host's MCP configuration:
+Use the [minimal hash-locked MCP environment](MCP_SERVER.md) with SDK 1.30.0;
+Gmail, keyring and browser packages are unnecessary. The existing full plugin
+environment remains compatible. Preview a configuration without changing host
+settings:
+
+```sh
+python scripts/career_mcp.py --data-dir /absolute/private-workspace --source-memory --check
+python scripts/career_mcp.py --data-dir /absolute/private-workspace --source-memory --config json
+python scripts/career_mcp.py --data-dir /absolute/private-workspace --source-memory --config codex
+```
+
+Use that environment's Python. The launcher enforces a workspace separate from
+the checkout and revalidates all qualifying source hashes before serving. Its
+preflight exposes counts and the packet hash, not quotes. It does not initialize,
+open or migrate either application database. Select this mode explicitly; the
+default career server keeps its portable-workspace requirement.
+
+For backward compatibility, the standalone entry below still works. Add it
+manually to a compatible host's MCP configuration:
 
 ```json
 {"mcpServers":{"career-source-memory":{
-  "command":"/absolute/plugin-python",
+  "command":"/absolute/mcp-python",
   "args":["/absolute/kit/scripts/source_memory.py","--data-dir","/absolute/private-workspace","--stdio"]
 }}}
 ```

@@ -9,6 +9,10 @@ The [minimal MCP distribution](MCP_SERVER.md) reuses the existing career server
 with a dedicated hash-locked environment and setup/configuration checks. Actual
 local SDK stdio acceptance is complete; native host discovery, macOS acceptance
 and community installation feedback remain separate gates.
+Its explicit `--source-memory` mode serves the existing older source packet with
+one read-only tool; it does not initialize a second tracker, export training data
+or install itself into a host. Separate minimal-profile acceptance covers both
+tool inventories and changed-source rejection.
 
 Experimental [career growth](CAREER_GROWTH.md) implements current gap capture,
 retrieval-augmented planning context, reviewed private plans/evidence proposals

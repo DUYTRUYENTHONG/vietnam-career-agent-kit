@@ -1,5 +1,14 @@
 # Runtime compatibility evidence
 
+The explicit minimal-launcher `--source-memory` mode is **Experimental**. Local
+Windows Python 3.12 / MCP SDK 1.30.0 acceptance covers configuration round trips,
+qualifying-source preflight, a one-tool stdio inventory, cited retrieval, invalid
+input, stale-source rejection and an unchanged fictional legacy sentinel. Ten
+focused standard-library launcher tests and four minimal-profile tests pass.
+Cross-platform required CI remains a separate gate for this increment. This
+does not establish native Codex/Claude discovery, authenticated remote access,
+semantic source truth, training authority or real-employer integration.
+
 [Reviewed bullet learning](BULLET_TRAINING.md) is **Experimental** standard-library
 export/check plus explicit CLI/MCP/local-trainer task selection. Fictional tests
 cover source/context selection, current independent review, stale/tampered files,

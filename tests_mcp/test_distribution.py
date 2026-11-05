@@ -55,6 +55,10 @@ class MCPDistributionTests(unittest.TestCase):
                               capture_output=True,text=True,encoding='utf8',timeout=60)
         self.assertEqual(0,result.returncode,result.stderr)
         self.assertIn('"handshake": "passed"',result.stdout)
+        source=json.loads(result.stdout)['source_memory']
+        self.assertEqual(['career_source_context'],source['tools'])
+        self.assertEqual('rejected',source['stale_source'])
+        self.assertFalse(source['application_database_opened'])
 
     def test_preflight_is_read_only_and_uses_pinned_sdk(self):
         with tempfile.TemporaryDirectory() as temp:

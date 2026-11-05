@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Explicit read-only MCP source mode
+
+- Add `--source-memory` to the minimal MCP launcher, preflight and JSON/Codex
+  previews, reusing the existing one-tool source server and pinned environment.
+- Verify qualifying evidence hashes without opening or creating an application
+  ledger; report counts/exclusions without returning candidate quotes in preflight.
+- Recognize both older ledger layouts in default-mode handoffs. Preserve default
+  portable tools, standalone source entry, disclosure and training boundaries.
+- Extend real minimal-profile stdio QA for source retrieval, invalid input,
+  changed evidence and legacy sentinel preservation. No new dependency, migration,
+  model call, host installation or automatic source repair is introduced.
+
 ## Unreleased - Matched bullet-model evaluation
 
 - Add explicit `cv-bullet-wording` task selection to local paired generation,
