@@ -155,8 +155,12 @@ def _directory(work, value):
 
 
 def export_reviewed(work, job_ids: list[int], output: str, *, task='cv-wording') -> Outcome:
+    if task == 'cv-bullet-wording':
+        from .bullet_learning import export_bullets
+        return export_bullets(work, job_ids, output, source_example=_example,
+                              private_directory=_directory, overlap_report=_split_overlap)
     if task not in {'cv-wording', 'cv-review'}:
-        raise ContractError('task: cv-wording or cv-review')
+        raise ContractError('task: cv-wording, cv-bullet-wording or cv-review')
     prompt_version = REVIEW_PROMPT_VERSION if task == 'cv-review' else PROMPT_VERSION
     if (not isinstance(job_ids, list) or not 1 <= len(job_ids) <= 100 or
             any(type(v) is not int or v < 1 for v in job_ids) or len(set(job_ids)) != len(job_ids)):
@@ -225,6 +229,10 @@ def check_export(work, directory: str, *, task=None) -> Outcome:
     actual_task = manifest.get('task', 'cv-wording')
     if task is not None and task != actual_task:
         raise WorkflowError('blocked', 'Dataset task differs; select its explicit supported training task')
+    if actual_task == 'cv-bullet-wording':
+        from .bullet_learning import check_bullets
+        return check_bullets(work, directory, source_example=_example,
+                             private_directory=_directory, overlap_report=_split_overlap)
     if version in {'1.0', '1.1'} and actual_task != 'cv-wording':
         raise WorkflowError('blocked', 'Legacy wording exports cannot be relabelled as another task')
     if version == '1.0' and 'wording_prompt_version' not in manifest:

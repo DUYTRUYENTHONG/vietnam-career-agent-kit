@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Reviewed bullet-to-requirement learning
+
+- Add explicit `cv-bullet-wording` export/check with original confirmed fact and
+  group context, linked assessed requirements and exact independently reviewed
+  statement targets; no inferred labels or hiring predictions.
+- Keep canonical employers and normalized duplicate text together transitively,
+  retain exact input-overlap reporting and reject stale/rehashed altered exports.
+- Reuse CLI/MCP and optional local trainer under manifest 1.3. Full-CV generation
+  and comparison reject the separate task; no model quality or promotion implied.
+
 ## Unreleased - Captured requirements pipeline
 
 - Add a bounded private JSONL/legacy-ledger collector and conservative cleaner,

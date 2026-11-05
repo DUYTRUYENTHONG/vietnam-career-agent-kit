@@ -97,11 +97,11 @@ def parser() -> Parser:
     context.add_argument('--file',type=Path,required=True,help='private JSON with request and draft')
     context=commands.add_parser('career-evaluate',help='evaluate labelled queries and a token-overlap baseline locally')
     context.add_argument('--file',type=Path,required=True)
-    learning=commands.add_parser('learning-export',help='export current reviewed CV wording or explicit recorded grades; no training/upload')
+    learning=commands.add_parser('learning-export',help='export reviewed full-CV/bullet wording or recorded grades; no training/upload')
     learning.add_argument('--job-id',type=int,action='append',required=True)
     learning.add_argument('--output',required=True,help='new datasets/ subdirectory in the private workspace')
-    learning.add_argument('--task',choices=['cv-wording','cv-review'],default='cv-wording',
-                          help='wording generation or recorded editorial-review labels; never infer grades')
+    learning.add_argument('--task',choices=['cv-wording','cv-bullet-wording','cv-review'],default='cv-wording',
+                          help='full-CV or mapped-bullet wording, or recorded editorial labels; never infer labels')
     learning=commands.add_parser('learning-check',help='recheck dataset bytes, evidence, reviews and split consistency')
     learning.add_argument('--directory',required=True)
     for name in ['growth-context','growth-capture']:

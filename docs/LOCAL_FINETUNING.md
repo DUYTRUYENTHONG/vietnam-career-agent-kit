@@ -44,6 +44,12 @@ reconstructs current plan/review/assessment bindings. The tasks cannot be silent
 interchanged. Growth tests cover preparation boundaries, not a trained coaching
 model's quality or automatic promotion.
 
+Explicit `--task cv-bullet-wording` consumes the current reviewed
+[mapped single-statement export](BULLET_TRAINING.md), manifest 1.3. Its facts,
+section/context placement and reference statement stay bound to existing review;
+it is not interchangeable with full-CV or grading datasets. Preflight/training
+reuse this runner; full-CV paired generation/comparison does not accept the task.
+
 Explicit `--task cv-review` consumes [recorded six-dimension review labels](REVIEW_LEARNING.md)
 from manifest 1.2. It uses a separate validator path and never silently substitutes
 wording labels or invents grades. Full-CV review prompts can exceed a bullet

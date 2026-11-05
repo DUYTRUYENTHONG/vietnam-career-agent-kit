@@ -29,7 +29,9 @@ def validate_dataset(work, directory, task='cv-wording'):
         return check_growth_export(work,directory)
     if task=='cv-review':
         return check_export(work,directory,task='cv-review')
-    raise ValueError('task: cv-wording, cv-review or career-growth')
+    if task=='cv-bullet-wording':
+        return check_export(work,directory,task='cv-bullet-wording')
+    raise ValueError('task: cv-wording, cv-bullet-wording, cv-review or career-growth')
 
 
 def prepare(work, directory, model_directory, output, *, task='cv-wording'):
@@ -243,7 +245,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', required=True)
     parser.add_argument('--directory', required=True, help='Existing reviewed datasets/ export')
-    parser.add_argument('--task', choices=['cv-wording','cv-review','career-growth'], default='cv-wording')
+    parser.add_argument('--task', choices=['cv-wording','cv-bullet-wording','cv-review','career-growth'], default='cv-wording')
     parser.add_argument('--model-directory', required=True)
     parser.add_argument('--output', required=True, help='New training/ subdirectory')
     parser.add_argument('--target-module', action='append', required=True)

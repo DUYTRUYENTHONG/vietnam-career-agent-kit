@@ -1,5 +1,12 @@
 # Portable core architecture
 
+`core/bullet_learning.py` extends the existing reviewed learning path with explicit
+task `cv-bullet-wording`. It selects mapped single statements, carries exact source
+group context, reconstructs current review bindings and co-groups employers and
+normalized exact wording. CLI/MCP and optional local trainer share manifest 1.3;
+full-CV paired generation/evaluation rejects this separate output interface.
+See [contract and limits](BULLET_TRAINING.md).
+
 `core/requirement_corpus.py` and `scripts/requirements_corpus.py` implement bounded
 private captured-JD collection, conservative normalization and exact-text
 deduplication with complete source references. Optional hash-bound quote

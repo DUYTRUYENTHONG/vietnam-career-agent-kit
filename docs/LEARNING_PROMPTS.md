@@ -1,6 +1,10 @@
 # Explicit generation inputs for reviewed CV wording
 
 Status: **Experimental export contract**, not an accepted default model.
+
+The explicit [single-bullet task](BULLET_TRAINING.md), manifest 1.3 and prompt
+`cv-bullet-wording-json-1`, uses a different output wrapper and retains exact
+group context. It is not substituted into this full-CV paired generation path.
 The local paired Qwen3 test returned fenced, incompatible JSON from both base
 and one-step LoRA models. A vague request for "language/sections" did not tell
 the generator the complete nested output shape. This change supplies that shape
