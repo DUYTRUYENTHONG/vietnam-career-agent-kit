@@ -17,10 +17,12 @@ No default model or workflow was changed.
 |---|---|---|
 | 1.0, no wording_prompt_version | Original cv-wording-json-1 instructions and input | Rebuild exact legacy examples from current reviews; never rewrite export bytes |
 | 1.1, wording_prompt_version=cv-wording-json-2 | Explicit output schema and assessed fact links | Rebuild current versioned inputs/targets and recheck exact bytes, provenance and splits |
+| 1.2, task=cv-review, task_prompt_version=cv-review-json-1 | Separate recorded editorial-review task | Reconstruct exact current grades, rubric, source bindings and grouped split; never treat scores as facts |
 | Any other combination | Unsupported | Stop before training/evaluation |
 
-`learning-export` creates only new 1.1 directories. Its CLI/MCP arguments and
-output envelope remain unchanged. The statement content schema is still **2.0**;
+`learning-export` defaults to new 1.1 wording directories. Explicit `--task cv-review`
+creates the separate [recorded-review export](REVIEW_LEARNING.md); the existing
+output envelope remains unchanged. The statement content schema is still **2.0**;
 that is separate from the dataset manifest and prompt versions. Existing model
 weights/adapters are not rewritten, converted or promoted. An adapter trained
 under a legacy prompt is not evidence of quality under a new prompt.

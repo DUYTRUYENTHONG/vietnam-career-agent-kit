@@ -44,6 +44,12 @@ reconstructs current plan/review/assessment bindings. The tasks cannot be silent
 interchanged. Growth tests cover preparation boundaries, not a trained coaching
 model's quality or automatic promotion.
 
+Explicit `--task cv-review` consumes [recorded six-dimension review labels](REVIEW_LEARNING.md)
+from manifest 1.2. It uses a separate validator path and never silently substitutes
+wording labels or invents grades. Full-CV review prompts can exceed a bullet
+pilot's context limit; use preflight without truncation before loading weights.
+Model review accuracy and rendered-layout understanding are not established.
+
 Experimental, opt-in `adapters/local_finetuning.py` trains an adapter over the
 existing independently reviewed `learning-export` dataset. It does not modify
 the standard-library core, confirmation rules, candidate facts or application

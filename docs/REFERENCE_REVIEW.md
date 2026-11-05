@@ -1,5 +1,13 @@
 # Community references and attribution
 
+## Recorded editorial-review export, 5 November 2026
+
+Original standard-library extension of the existing review/learning contracts;
+no upstream code, new package, installer or provider was adopted. The task binds
+the repository's rubric text, existing independently identified v2 review and
+current evidence rather than generating replacement scores. Existing optional
+MCP/LoRA pins remain unchanged. See [contract and acceptance scope](REVIEW_LEARNING.md).
+
 ## Minimal career MCP distribution, 5 November 2026
 
 The new profile reuses the existing reviewed **mcp 1.30.0** SDK and 29 transitive

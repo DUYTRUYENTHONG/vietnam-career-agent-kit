@@ -5,7 +5,9 @@ requires source locators of the form scope#location, reviewed in the profile.
 No model calls, provider access, permission cache or second state store.
 """
 from copy import deepcopy
+import hashlib
 import json
+from pathlib import Path
 import re
 import unicodedata
 
@@ -15,6 +17,14 @@ from .metrics import Trace
 from .workflow import WorkflowError
 
 POLICY = 'wording-review-1'
+RUBRIC_PATH = Path(__file__).resolve().parents[1]/'docs/CV_QUALITY_RUBRIC.md'
+
+
+def review_rubric():
+    raw = RUBRIC_PATH.read_bytes()
+    return {'sha256': hashlib.sha256(raw).hexdigest(), 'text': raw.decode('utf8')}
+
+
 LABELS = {
     'summary': ('Summary', 'Tóm tắt'), 'skills': ('Relevant skills', 'Kỹ năng phù hợp'),
     'employment': ('Experience', 'Kinh nghiệm'), 'projects': ('Selected projects', 'Dự án tiêu biểu'),
@@ -267,6 +277,7 @@ class Wording:
         compact_assessment['rows'] = [{key: row[key] for key in ('requirement_id', 'match', 'fact_ids', 'reason')}
                                      for row in assessment['rows']]
         return Outcome('ok', {'fingerprint': draft['wording_fingerprint'], 'policy': POLICY, 'model': model,
+            'review_rubric_sha256': review_rubric()['sha256'],
             'candidate': {key: profile['profile'].get(key) for key in ('candidate_id', 'name', 'contacts')},
             'job': {key: job[key] for key in ('employer', 'req_id', 'title', 'url', 'raw_jd', 'city',
                                              'country', 'liveness', 'document_language', 'salary')},
@@ -322,7 +333,10 @@ class Wording:
 
 def validate_review(raw, packet):
     object_fields(raw, {'schema_version', 'fingerprint', 'policy', 'reviewer', 'independent_pass',
-        'statements', 'editorial'}, set(), 'wording review')
+        'statements', 'editorial'}, {'rubric_sha256'}, 'wording review')
+    if 'rubric_sha256' in raw and (not isinstance(raw['rubric_sha256'], str) or
+                                  not re.fullmatch(r'[a-f0-9]{64}', raw['rubric_sha256'])):
+        raise ContractError('rubric_sha256: exact lowercase SHA256 of the reviewed rubric bytes')
     if (raw['schema_version'] != '2.0' or raw['fingerprint'] != packet['fingerprint'] or
             raw['policy'] != POLICY or raw['independent_pass'] is not True or
             not isinstance(raw['reviewer'], str) or not raw['reviewer'].strip() or

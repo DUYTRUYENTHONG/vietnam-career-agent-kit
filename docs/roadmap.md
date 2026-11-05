@@ -1,5 +1,10 @@
 # Vertical-slice roadmap
 
+Experimental [review-learning export](REVIEW_LEARNING.md) collects existing
+editorial judgments as a distinct local LoRA task. Actual trained-reviewer
+quality, independent adjudication and cross-candidate evaluation remain pending;
+scores never automatically approve candidate claims or model wording.
+
 The [minimal MCP distribution](MCP_SERVER.md) reuses the existing career server
 with a dedicated hash-locked environment and setup/configuration checks. Actual
 local SDK stdio acceptance is complete; native host discovery, macOS acceptance

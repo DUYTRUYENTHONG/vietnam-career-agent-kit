@@ -1,5 +1,16 @@
 # Portable core architecture
 
+`core/learning.py` also exports the explicitly selected `cv-review` task from
+existing exact v2 reviews. It reuses source/profile/JD/wording bindings, private
+file handling and grouped splits; manifest 1.2 separates grade targets and rubric
+text from unchanged wording manifests. CLI/MCP and the optional LoRA validator
+share the same path. No database or training-authority changes are introduced.
+See [recorded review learning](REVIEW_LEARNING.md).
+
+The existing review packet exposes the current rubric digest. The optional v2
+review field `rubric_sha256` explicitly binds a graded review to those bytes;
+grading export refuses unbound or changed rubrics without weakening legacy reviews.
+
 `scripts/career_mcp.py` is a source-checkout launcher for the existing
 `adapters/career_mcp.py` server. It validates the selected existing workspace and
 pinned optional SDK, then starts stdio, or prints a configuration preview without

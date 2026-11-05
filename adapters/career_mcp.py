@@ -81,9 +81,9 @@ def make_career_server(work):
         return safe(career_memory.evaluate, work, evaluation)
 
     @server.tool(annotations={'readOnlyHint': False, 'destructiveHint': False, 'openWorldHint': False})
-    def learning_export(job_ids: list[int], output: str) -> dict:
-        """Write a NEW private datasets/ directory from current independently reviewed CV wording only."""
-        return safe(learning.export_reviewed, work, job_ids, output)
+    def learning_export(job_ids: list[int], output: str, task: str = 'cv-wording') -> dict:
+        """Export current reviewed wording or explicit cv-review judgments; never generate grades or train."""
+        return safe(learning.export_reviewed, work, job_ids, output, task=task)
 
     @server.tool(annotations={'readOnlyHint': True, 'openWorldHint': False})
     def learning_check(directory: str) -> dict:
