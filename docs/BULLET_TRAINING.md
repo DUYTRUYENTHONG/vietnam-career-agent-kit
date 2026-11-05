@@ -60,9 +60,26 @@ python -m adapters.local_finetuning --task cv-bullet-wording --data-dir ../my-pr
 
 This reuses the optional trainer's tokenizer, sequence-length and assistant-mask
 checks; no truncation is permitted. Remove `--preflight` only for an explicitly
-requested local experiment with compatible local weights/compute. Full-CV paired
-generation/comparison rejects this task before loading weights; model-quality
-evaluation for bullet outputs is not implemented by that interface.
+requested local experiment with compatible local weights/compute. Paired
+generation, recorded comparison and blinded review now accept this task only
+with explicit `--task cv-bullet-wording`; the default remains full-CV wording
+and rejects a bullet dataset before loading weights. See
+[paired generation](LOCAL_PAIR_GENERATION.md) and [recorded comparison](WORDING_EVALUATION.md).
+
+```sh
+python scripts/evaluate_wording.py --task cv-bullet-wording --data-dir ../my-private --dataset datasets/bullets-v1 --runs evaluations/bullet-runs.json --output evaluations/bullet-comparison.json
+python scripts/prepare_wording_review.py --task cv-bullet-wording --data-dir ../my-private --dataset datasets/bullets-v1 --runs evaluations/bullet-runs.json --output evaluations/bullet-blind-001
+```
+
+The evaluator binds language, section/context placement, statement ID, selected
+fact and ordered assessed requirement IDs to the held-out input, then adapts the
+single statement to the existing v2 validator. Original source locators,
+contribution scope and conservative wording alarms still apply. Strict JSON and
+linkage validity do not prove factual entailment or useful specificity. Exact
+reference match compares the original bullet wrapper, never a synthetic full CV.
+Blinded packets include the selected bullet constraints and source context;
+reference answers, variants, model identities and metrics stay out of that packet.
+Review scores remain null until supplied separately, bound to exact output hashes.
 
 Output files are `examples.jsonl`, plus `train.jsonl`/`evaluation.jsonl` only when
 two components remain, and a hash-bound `manifest.json` written last. The user

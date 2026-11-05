@@ -27,7 +27,7 @@ def _save(path, value):
 
 
 def run(work, directory, model_directory, training_directory, output, *,
-        max_examples=10, max_new_tokens=512):
+        max_examples=10, max_new_tokens=512, task='cv-wording'):
     """Generate every held-out example twice; incomplete runs cannot resume.
 
     Hashes bind local bytes, not training authenticity or semantic correctness.
@@ -44,8 +44,10 @@ def run(work, directory, model_directory, training_directory, output, *,
         raise ValueError('Use a new private evaluations/ subdirectory; never overwrite or resume')
     checked = check_export(work, directory).data
     manifest = work.private_json(work.inside(directory)/'manifest.json')
-    if manifest.get('task', 'cv-wording') != 'cv-wording':
-        raise ValueError('This paired generator requires a full-CV wording dataset; no bullet-task substitution')
+    if task not in ('cv-wording', 'cv-bullet-wording'):
+        raise ValueError('Select cv-wording or cv-bullet-wording explicitly')
+    if manifest.get('task', 'cv-wording') != task:
+        raise ValueError('Dataset task mismatch; full-CV wording is the default, bullet wording needs explicit selection')
     if not checked['ready_for_split']:
         raise ValueError('A current reviewed held-out split is required')
     source = work.inside(directory)
@@ -76,7 +78,7 @@ def run(work, directory, model_directory, training_directory, output, *,
     result_path = work.inside(training/'result.json')
     result = work.private_json(result_path)
     if (result.get('training_performed') is not True or
-            result.get('task', 'cv-wording') != 'cv-wording' or
+            result.get('task', 'cv-wording') != task or
             result.get('dataset_fingerprint') != checked['manifest_fingerprint'] or
             result.get('base_model_files') != base_files):
         raise ValueError('Training task, reviewed export or exact base-model files differ')
@@ -93,6 +95,7 @@ def run(work, directory, model_directory, training_directory, output, *,
             raise ValueError('Reviewed export changed during generation')
     current()
     provenance = {'schema_version': '1.0', 'created_utc': datetime.now(timezone.utc).isoformat(),
+        'task': task,
         'dataset_fingerprint': fingerprint, 'dataset_directory': str(source),
         'base_model_files': base_files, 'adapter_files': adapter_files,
         'training_result_sha256': result_hash, 'training_directory': str(training),
@@ -137,10 +140,11 @@ def run(work, directory, model_directory, training_directory, output, *,
         if (model_hashes(model) != base_files or model_hashes(adapter) != adapter_files or
                 hashlib.sha256(result_path.read_bytes()).hexdigest() != result_hash):
             raise ValueError('Base, adapter or training record changed during generation')
-        report = compare(work, directory, runs)
+        report = compare(work, directory, runs, task=task)
         _save(target/'runs.json', runs)
         _save(target/'comparison.json', report)
         completion = {'schema_version': '1.0', 'heldout_examples': len(prompts),
+            'task': task,
             'dataset_fingerprint': fingerprint, 'total_wall_ms': (perf_counter()-started)*1000,
             'calls': timings, 'model_loads_completed': 2,
             'runtime_completed': True, 'semantic_truth_verified': False,
@@ -160,6 +164,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', required=True)
     parser.add_argument('--dataset', required=True)
+    parser.add_argument('--task', choices=['cv-wording', 'cv-bullet-wording'], default='cv-wording')
     parser.add_argument('--model-directory', required=True)
     parser.add_argument('--training-directory', required=True)
     parser.add_argument('--output', required=True)
@@ -168,7 +173,7 @@ def main():
     args = parser.parse_args()
     result = run(Documents(args.data_dir), args.dataset, args.model_directory,
                  args.training_directory, args.output, max_examples=args.max_examples,
-                 max_new_tokens=args.max_new_tokens)
+                 max_new_tokens=args.max_new_tokens, task=args.task)
     print(json.dumps({key: result[key] for key in ('heldout_examples', 'runtime_completed', 'promotion_performed', 'sent')}))
 
 

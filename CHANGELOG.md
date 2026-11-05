@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Matched bullet-model evaluation
+
+- Add explicit `cv-bullet-wording` task selection to local paired generation,
+  recorded comparison and variant-blinded review; full-CV defaults stay unchanged.
+- Bind generated bullets to their selected fact, statement, placement and assessed
+  requirements before reusing canonical v2 validation. Keep raw outputs, observed
+  usage and exact review hashes; no inferred scores, model promotion or CV import.
+- Document the shared interfaces and fictional acceptance scope. No dependency,
+  database migration, cloud upload or actual model-quality gain is introduced.
+
 ## Unreleased - Reviewed bullet-to-requirement learning
 
 - Add explicit `cv-bullet-wording` export/check with original confirmed fact and

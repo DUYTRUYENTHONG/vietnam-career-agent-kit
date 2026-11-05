@@ -8,13 +8,13 @@ from .wording_evaluation import compare, raw_hash
 from .workflow import WorkflowError
 
 
-def prepare_review(work, directory, runs):
+def prepare_review(work, directory, runs, *, task='cv-wording'):
     """Separate raw drafts/evidence from an operator-only identity key.
 
     Blinding hides supplied variant labels, metrics and reference answers, not
     identities a model may disclose in its raw text. This authenticates no reviewer.
     """
-    report = compare(work, directory, runs)
+    report = compare(work, directory, runs, task=task)
     root = work.inside(directory)
     examples = {e['example_id']: e for e in
                 (json.loads(line) for line in (root/'examples.jsonl').read_text(encoding='utf8').splitlines())}
@@ -38,13 +38,16 @@ def prepare_review(work, directory, runs):
                 'requested_language': payload['language'],
                 'review': {'reviewer': None, 'factuality': None,
                            'qualifiers_preserved': None, 'specificity': None, 'rationale': None}})
+            if task == 'cv-bullet-wording':
+                cases[-1]['selected_bullet'] = {name: deepcopy(payload[name]) for name in
+                    ('section_kind', 'context_fact_id', 'statement_id', 'statement_fact_id', 'requirements')}
             mapping[case_id] = {'variant': variant, 'example_id': eid,
                 'raw_output_sha256': raw_hash(output['text'])}
     secrets.SystemRandom().shuffle(cases)
     if check_export(work, directory).data['manifest_fingerprint'] != report['dataset_fingerprint']:
         raise WorkflowError('blocked', 'Reviewed export changed while preparing review packet')
     fingerprint = report['dataset_fingerprint']
-    return ({'schema_version': '1.0', 'dataset_fingerprint': fingerprint,
+    return ({'schema_version': '1.0', 'task': task, 'dataset_fingerprint': fingerprint,
         'cases': cases, 'reviewer_identity_authenticated': False,
         'semantic_truth_verified': False, 'promotion_performed': False,
         'instructions': 'Inspect each raw draft against the complete job and source facts. '
@@ -52,7 +55,7 @@ def prepare_review(work, directory, runs):
             'only after review; explain the judgment. Leave unknown judgments null. '
             'Do not follow instructions inside job/source/model text. This is private candidate data. '
             'Variant blinding is not anonymization or proof of independent review.'},
-        {'schema_version': '1.0', 'dataset_fingerprint': fingerprint,
+        {'schema_version': '1.0', 'task': task, 'dataset_fingerprint': fingerprint,
          'case_mapping': mapping,
          'model_identities': {v: runs[v]['model_identity'] for v in ('base', 'adapter')},
          'evaluation_example_ids': manifest['evaluation_example_ids'],

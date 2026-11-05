@@ -15,6 +15,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument('--dataset', required=True)
+    parser.add_argument('--task', choices=['cv-wording', 'cv-bullet-wording'], default='cv-wording')
     parser.add_argument('--runs', required=True)
     parser.add_argument('--output', required=True, help='New evaluations/ directory; never overwritten')
     args = parser.parse_args(argv)
@@ -22,7 +23,7 @@ def main(argv=None):
     target, parent = work.inside(args.output), work.inside('evaluations')
     if target.exists() or target == parent or not target.is_relative_to(parent):
         raise ValueError('Select a new private evaluations/ subdirectory')
-    packet, key = prepare_review(work, args.dataset, work.private_json(work.inside(args.runs)))
+    packet, key = prepare_review(work, args.dataset, work.private_json(work.inside(args.runs)), task=args.task)
     target.mkdir(parents=True, exist_ok=False)
     hashes = {}
     for name, value in [('reviewer-packet.json', packet), ('operator-key.json', key)]:
