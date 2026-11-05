@@ -430,3 +430,10 @@ public Fetch. Its additive `optional_browser_runtime` data describes repository
 capabilities, not installed dependencies, credentials, connected host sessions or
 live acceptance. Default browser/network execution stays false. No native host
 or cloud readiness claim follows from a successful diagnostic.
+## Recorded wording performance summaries
+
+The offline wording report adds `observed_metrics_summary` without changing
+recorded-run inputs, CLI flags or review contracts. Standard-library fictional
+regressions cover complete/missing/zero measurements, loading scope, invalid
+generations and overflow. This does not establish model quality, native host
+metering, comparable hardware or higher application/interview rates.

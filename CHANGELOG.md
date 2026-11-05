@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - Summarize observed wording-model tokens and timing
+
+- Add per-variant measurement coverage and complete token/time totals to offline
+  wording reports, retaining failed generations and unknown measurements.
+- Report total-output-token throughput only for complete positive generation-only
+  timing; mixed/loading-inclusive timing stays separate. Reject nonfinite derived
+  aggregates. Existing inputs, reviews and promotion boundaries remain unchanged.
+
 ## Unreleased - Export actual CV review grades as a separate task
 
 - Add explicit `cv-review` CLI/MCP export of current recorded editorial grades,
