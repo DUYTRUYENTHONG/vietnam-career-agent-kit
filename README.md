@@ -9,6 +9,10 @@ review an exact application package, and track what actually happened.
 
 ## Start here
 
+**Want an MCP server for your AI host?** Follow the [minimal local MCP setup](docs/MCP_SERVER.md)
+for retrieval, JD-specific CV/email briefs and reviewed exports from your own
+private workspace. No Docker or second model API is required.
+
 **Forking for your own search?** Use the [forker playbook](docs/FORKER_PLAYBOOK.md)
 for setup, role-specific tailoring, skills/browser options and reading results.
 Start with its [copyable role-aware prompt](prompts/ROLE_FAMILY_CAMPAIGN.md).

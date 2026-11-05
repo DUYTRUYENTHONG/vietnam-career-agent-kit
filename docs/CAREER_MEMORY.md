@@ -52,6 +52,9 @@ migration is needed. Existing email/browser configurations keep their defaults.
 
 ## Optional MCP setup
 
+For a forkable career-only environment without email/browser packages, use the
+[standalone MCP setup](MCP_SERVER.md). The full plugin route below remains valid.
+
 Use the project's existing hash-locked optional environment; MCP is pinned to
 **1.30.0**. Follow [local plugin setup](LOCAL_PLUGINS.md) for dependency installation.
 Career-only use does not require downloading Chromium or authorizing Gmail.

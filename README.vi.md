@@ -1,5 +1,9 @@
 # Vietnam Career Agent Kit
 
+**Dùng kit qua MCP:** xem [hướng dẫn MCP tối giản](docs/MCP_SERVER.md).
+Kết nối AI host với workspace riêng để truy xuất bằng chứng và chuẩn bị CV/email;
+không cần Docker, Gmail hoặc API mô hình thứ hai.
+
 **Muốn thử huấn luyện mô hình viết CV?** Xem [hướng dẫn fork và fine-tuning](docs/FINE_TUNING_START.vi.md)
 và [danh mục adapter nghiên cứu](models/README.md). Các adapter hiện tại chưa đạt
 kiểm tra chất lượng để dùng gửi CV thật; dữ liệu cá nhân được giữ ngoài GitHub.
