@@ -437,3 +437,12 @@ recorded-run inputs, CLI flags or review contracts. Standard-library fictional
 regressions cover complete/missing/zero measurements, loading scope, invalid
 generations and overflow. This does not establish model quality, native host
 metering, comparable hardware or higher application/interview rates.
+
+## Requirements corpus pipeline
+
+Experimental standard-library standalone CLI over explicit captured JSONL or one
+older `jobs` ledger. Fictional local tests cover read-only collection, validation,
+exact-quote sidecars and immutable private outputs. It does not fetch sites, infer
+requirements, create CV facts, migrate workspaces or train. Live completeness,
+PII removal, native MCP exposure and model improvement are unverified. See
+[setup and limits](REQUIREMENTS_PIPELINE.md).

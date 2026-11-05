@@ -1,5 +1,13 @@
 # Portable core architecture
 
+`core/requirement_corpus.py` and `scripts/requirements_corpus.py` implement bounded
+private captured-JD collection, conservative normalization and exact-text
+deduplication with complete source references. Optional hash-bound quote
+sidecars create pending extraction candidates. The explicit legacy projection
+is read-only and initializes no workspace. Existing assessment/review/export and
+optional training contracts remain the supervised path; a corpus grants no
+training or disclosure authority. See [the pipeline](REQUIREMENTS_PIPELINE.md).
+
 `core/wording_evaluation.py` summarizes validated recorded token/timing fields
 with per-metric coverage. Complete totals retain invalid generations; unknown
 measurements stay null and loading-inclusive/mixed timing has no generation-only
