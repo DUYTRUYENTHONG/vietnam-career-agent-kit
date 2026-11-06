@@ -13,8 +13,11 @@ Windows Python 3.12 / MCP SDK 1.30.0 acceptance covers configuration round trips
 qualifying-source preflight, a one-tool stdio inventory, cited retrieval, invalid
 input, stale-source rejection and an unchanged fictional legacy sentinel. Ten
 focused standard-library launcher tests and four minimal-profile tests pass.
-Cross-platform required CI remains a separate gate for this increment. This
-does not establish native Codex/Claude discovery, authenticated remote access,
+The Windows/Linux Python 3.11/3.12 minimal-profile CI gate passed in
+[main run 42198198539](https://github.com/DUYTRUYENTHONG/vietnam-career-agent-kit/actions/runs/42198198539),
+commit `3d05895f9e2815e888d498169699e327648088ec`; each matrix job ran
+the locked-profile installation and `tests_mcp` successfully. This does not
+establish native Codex/Claude discovery, authenticated remote access,
 semantic source truth, training authority or real-employer integration.
 
 [Reviewed bullet learning](BULLET_TRAINING.md) is **Experimental** standard-library
@@ -40,8 +43,9 @@ The [minimal career MCP launcher](MCP_SERVER.md) has **Verified** local Windows
 Python 3.12 / SDK 1.30.0 stdio acceptance: clean dependency isolation, handshake,
 20-tool listing, retrieval, writing brief, policy resource and invalid input.
 Fictional launcher tests cover config serialization, legacy/corrupt/unsupported
-workspaces and no initialization. Windows/Linux 3.11/3.12 CI acceptance is pending
-until its actual runs pass. macOS and native Codex/Claude discovery are unverified;
+workspaces and no initialization. Windows/Linux Python 3.11/3.12 locked-profile
+installation and stdio tests passed in the same main run linked above. macOS
+and native tool execution in Codex/Claude are unverified;
 no HTTP service or semantic writing-quality guarantee is implied.
 
 Pre-import `check-lead-identities` is **Experimental** portable Python/CLI behavior.
