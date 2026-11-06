@@ -23,6 +23,8 @@ class ParallelCleanupProgressTests(unittest.TestCase):
 
     def test_slow_confirmed_tab_cleanup_does_not_hold_other_application_lane(self):
         run = self.start(2)
+        action_guard = 120
+        cleanup_guard = 30  # ParallelCleanup caps callback waits at 30 seconds.
         cleanup_started = threading.Event()
         other_verified = threading.Event()
         progressed = []
@@ -34,7 +36,7 @@ class ParallelCleanupProgressTests(unittest.TestCase):
             def perform(self, request):
                 calls.append((request['job_id'], request['action']))
                 if request['job_id'] == 2 and request['action'] == 'inspect':
-                    if not cleanup_started.wait(10):
+                    if not cleanup_started.wait(action_guard):
                         raise TimeoutError('Fictional first cleanup never started')
                 if request['job_id'] == 2 and request['action'] == 'verify':
                     other_verified.set()
@@ -44,14 +46,14 @@ class ParallelCleanupProgressTests(unittest.TestCase):
                 closes.append(request['job_id'])
                 if request['job_id'] == 1:
                     cleanup_started.set()
-                    # This proves progress before cleanup is released, not a
-                    # three-second filesystem/CLI performance target. Bound it
-                    # by the action guard used below; synchronous cleanup still
-                    # fails this event-order assertion.
-                    progressed.append(other_verified.wait(20))
+                    # Prove verification before cleanup releases. Setup can
+                    # include slow provenance checks, so its separate wait uses
+                    # the action guard rather than an unrelated 10-second cap.
+                    # Synchronous cleanup still fails this event-order check.
+                    progressed.append(other_verified.wait(cleanup_guard))
                 return test.ack(request)
 
-        result = run_parallel_with_bridge(self.work, run, Bridge(), action_timeout_seconds=20)
+        result = run_parallel_with_bridge(self.work, run, Bridge(), action_timeout_seconds=action_guard)
         self.assertEqual([True], progressed, 'Cleanup held the unrelated lane until its wait expired')
         self.assertEqual('completed', result.data['state'])
         self.assertEqual([], result.data['worker_errors'])

@@ -121,3 +121,10 @@ Observed fixture ratio: **1.592x**. Both runs performed 60 simulated browser act
 Restarting a completed parallel run also services eligible saved-confirmation cleanup requests when the bridge supplies close_application_tab. Recorded successful closes are not repeated, and application actions are never replayed for cleanup.
 
 The shared research-report, research-status and cancel-research commands can inspect TinyFish records. TinyFish Fetch has no cancellation API in this adapter: cancel-research only reports its persisted state and never polls or cancels it through Firecrawl. Observed TinyFish billing remains unknown. Uncertain requests require reconciliation rather than another POST.
+
+The cleanup progress regression separates its setup/action guard (120 seconds)
+from the existing maximum cleanup callback guard (30 seconds). This prevents a
+10-second pre-cleanup fixture timeout from masquerading as serialized cleanup;
+it still requires the other lane to verify before the cleanup callback releases,
+with unchanged receipt and single-submit assertions. These are test watchdogs,
+not a live application-rate guarantee or a change to runtime timeout policy.

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased - Cleanup QA guard alignment
+
+- Align the cleanup progress regression setup wait with its action guard, rather
+  than misreporting a slow pre-cleanup lane as serialized cleanup. Preserve the
+  event-order, receipt, one-submit and single-writer assertions; runtime limits
+  and uncertain-outcome handling remain unchanged.
+
 ## Unreleased - MCP CI evidence correction
 
 - Replace stale minimal-MCP matrix pending notes with the exact successful main
