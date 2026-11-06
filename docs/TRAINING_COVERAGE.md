@@ -1,5 +1,9 @@
 # External pilot fact coverage
 
+For caller-declared employer/project connections across partitions, use the
+separate [split connectivity diagnostic](TRAINING_SPLIT_AUDIT.md). Neither check
+certifies independent evaluation or authorizes training.
+
 Use this diagnostic before preparing a revised external `candidate_fact` pilot.
 A completed run can contain older fact wording or omit a finalized project's
 facts. Counting rows or finding a fact ID does not establish current coverage.
