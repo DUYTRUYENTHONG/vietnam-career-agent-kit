@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased - External pilot fact coverage
+
+- Add a read-only standard-library audit for explicit current facts versus
+  external `candidate_fact` training/evaluation JSONL, with deliberate ID aliases,
+  missing/evaluation-only facts, text variants and input hash bindings.
+- Keep reports private and diagnostic: no source approval, label changes,
+  training, model promotion, ledger access or native host integration.
+
 ## Unreleased - Preserve explicit personal artifact scope
 
 - Recognize bounded personal guide/workflow/experiment and related artifact
