@@ -1,5 +1,13 @@
 # Runtime compatibility evidence
 
+[Native Codex inventory](CODEX_MCP_ACCEPTANCE.md) is **Verified** only for Windows
+Codex CLI 0.137.0 app-server discovery of both the one-tool source-memory and
+20-tool portable launcher modes on fictional data. Inputs remained unchanged;
+no model turn or global configuration edit occurred. This does not verify native
+tool calls, desktop registration, Claude Code, model quality or isolated host
+configuration. Earlier blanket native-discovery limits below retain those
+untested scopes; these bounded inventory checks are the sole exceptions.
+
 The explicit minimal-launcher `--source-memory` mode is **Experimental**. Local
 Windows Python 3.12 / MCP SDK 1.30.0 acceptance covers configuration round trips,
 qualifying-source preflight, a one-tool stdio inventory, cited retrieval, invalid
