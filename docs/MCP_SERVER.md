@@ -133,9 +133,14 @@ may receive returned facts: review your host/provider privacy choices first.
 - An existing full plugin setup remains supported; do not register both entries
   for the same workspace unintentionally. See [local plugins](LOCAL_PLUGINS.md).
 
+The [native Codex inventory check](CODEX_MCP_ACCEPTANCE.md) additionally verified
+one-tool source-memory and 20-tool portable discovery on Windows Codex CLI
+0.137.0, using temporary process configurations and fictional data. Native tool
+invocation, desktop registration and Claude Code remain unverified.
+
 Local Windows Python 3.12 acceptance covers the clean minimal dependency profile
 and real SDK protocol. CI targets Windows/Linux Python 3.11/3.12. macOS and
-native host discovery remain unverified until separately exercised. A passing
+other native host discovery remain unverified until separately exercised. A passing
 handshake does not establish semantic CV quality or improved hiring outcomes.
 
 ## Hướng dẫn ngắn bằng tiếng Việt

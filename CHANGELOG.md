@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Scoped Codex MCP inventory evidence
+
+- Record Windows Codex CLI 0.137.0 native app-server discovery of the explicit
+  read-only source-memory tool and all 20 portable tools on fictional data,
+  with unchanged input hashes.
+- Distinguish inventory discovery from tool execution, desktop registration,
+  full portable-host acceptance and Claude compatibility. No runtime behavior,
+  dependency, candidate authority or global setting changes.
+
 ## Unreleased - External pilot fact coverage
 
 - Add a read-only standard-library audit for explicit current facts versus
