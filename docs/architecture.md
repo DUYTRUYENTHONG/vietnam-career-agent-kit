@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`core/training_coverage.py` and `scripts/audit_training_coverage.py` provide a
+read-only diagnostic for explicitly selected external `candidate_fact` pilots.
+They compare exact identities and normalized text, report omissions/variants and
+bind inputs without opening a ledger or interpreting assistant labels. This is
+separate from canonical reviewed-export validation. See [contract](TRAINING_COVERAGE.md).
+
 `scripts/career_mcp.py --source-memory` explicitly selects the existing read-only
 `scripts/source_memory.py` server within the minimal pinned MCP environment.
 The launcher reuses path isolation and source-hash checks without opening or
