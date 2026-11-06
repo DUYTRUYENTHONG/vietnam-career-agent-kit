@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`core/training_split_audit.py` and `scripts/audit_training_splits.py` diagnose
+transitive connections across explicitly declared external pilot partitions.
+They consume opaque caller-reviewed groups, not candidate sources or ledgers,
+and never alter canonical exporters, trainers or authority. See the versioned
+[input/report contract](TRAINING_SPLIT_AUDIT.md).
+
 `core/training_coverage.py` and `scripts/audit_training_coverage.py` provide a
 read-only diagnostic for explicitly selected external `candidate_fact` pilots.
 They compare exact identities and normalized text, report omissions/variants and

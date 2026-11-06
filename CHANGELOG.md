@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased - Explicit dataset split connectivity
+
+- Add a private read-only CLI diagnostic for transitive employer/project/source
+  group connections across declared training, development and test partitions.
+- Bind inputs, validate bounded explicit annotations and report cross-partition
+  row components without inferring groups, rewriting splits, authorizing training
+  or certifying semantic independence. Canonical export/training behavior remains
+  unchanged; compatibility is scoped to the local standard-library CLI.
+
 ## Unreleased - Scoped Codex MCP inventory evidence
 
 - Record Windows Codex CLI 0.137.0 native app-server discovery of the explicit
