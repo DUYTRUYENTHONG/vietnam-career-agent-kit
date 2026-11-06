@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased - Cleanup QA guard alignment
+
+- Align the cleanup progress regression setup wait with its action guard, rather
+  than misreporting a slow pre-cleanup lane as serialized cleanup. Preserve the
+  event-order, receipt, one-submit and single-writer assertions; runtime limits
+  and uncertain-outcome handling remain unchanged.
+
+## Unreleased - MCP CI evidence correction
+
+- Replace stale minimal-MCP matrix pending notes with the exact successful main
+  run and commit for Windows/Linux Python 3.11/3.12 locked-profile stdio tests.
+  Native tool execution, macOS and semantic quality remain unverified.
+
 ## Unreleased - Explicit dataset split connectivity
 
 - Add a private read-only CLI diagnostic for transitive employer/project/source
