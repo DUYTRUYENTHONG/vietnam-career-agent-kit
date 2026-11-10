@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased - Before/after CV review diagnostics
+
+- Compare captured rubric-bound CV grades by dimension, flag changed evidence and
+  unchanged-CV review drift, and evaluate grading outputs over the full cohort.
+- Reuse reviewed `cv-review` exports and the existing optional LoRA task; no
+  generated gold labels, automatic training, model promotion or hiring claims.
+
 ## Unreleased - Cleanup QA guard alignment
 
 - Align the cleanup progress regression setup wait with its action guard, rather

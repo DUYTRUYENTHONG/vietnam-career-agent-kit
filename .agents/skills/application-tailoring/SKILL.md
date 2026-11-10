@@ -123,6 +123,13 @@ Reviewed growth-plan exports are task `career-growth`, separate from CV-wording
 exports; select the matching explicit local trainer task. No automatic training,
 model promotion or factual promotion follows plan review.
 
+When explicitly asked to grade fit before and after tailoring, follow
+../../../prompts/GRADE_TAILOR_REGRADE.md and ../../../docs/CV_REVIEW_CYCLE.md.
+Use the same captured JD/rubric, cite exact statements and allow lower scores.
+Keep advisory self/model reviews separate from independently reviewed labels;
+reuse the existing cv-review trainer task rather than inventing a second grader
+dataset or learning from application receipts. New details remain pending review.
+
 Current learning exports supply the canonical nested output schema and assessed
 fact links in a versioned generation input. Follow ../../../docs/LEARNING_PROMPTS.md;
 use only system/user messages for generation, keep older exports immutable and

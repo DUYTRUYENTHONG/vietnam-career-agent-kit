@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`core/review_cycle.py` and `scripts/compare_cv_reviews.py` compare captured
+`cv-review-json-1` judgments and evaluate recorded grading predictions. They
+reuse the six-dimensional rubric/export contract, flag evidence changes, retain
+invalid/missing outputs in full-cohort metrics, and never open a ledger or
+revalidate archived data for training. See [review cycle](CV_REVIEW_CYCLE.md).
+
 `core/training_split_audit.py` and `scripts/audit_training_splits.py` diagnose
 transitive connections across explicitly declared external pilot partitions.
 They consume opaque caller-reviewed groups, not candidate sources or ledgers,
