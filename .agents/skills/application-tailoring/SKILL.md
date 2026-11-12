@@ -26,6 +26,15 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+When the candidate reports poor application results or asks to improve a trained
+tailoring model, follow ../../../docs/TAILORING_OPTIMIZATION.md and
+../../../prompts/ERROR_DRIVEN_TAILORING.md. Audit observed recruitment stages
+before quoting a rate. Improve vacancy/evidence selection and review claim deltas;
+job requirements never supply new experience. Capture model failures privately,
+keep exposed cases in development and independently review corrections before
+supervised export. Do not equate lower loss, a receipt or a model score with a
+successful CV screen. This adds host instructions, not an automatic semantic hook.
+
 For candidates targeting several role families, use
 ../../../docs/FORKER_PLAYBOOK.md and ../../../prompts/ROLE_FAMILY_CAMPAIGN.md.
 Separate engineering, product and delivery evidence against each actual JD.

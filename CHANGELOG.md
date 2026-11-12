@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Error-driven tailoring workflow
+
+- Audit recruitment stages and observation windows before quoting a CV-screen rate.
+- Select source-backed examples for the job's delivery priorities and review claim
+  budgets/deltas to catch requirement copying, inflated ownership and lost qualifiers.
+- Keep exposed model failures in private development records; separate reviewed
+  bullet/grade exports and require matched base/prompt/adapter evaluation.
+- Instruction-only guidance: no new runtime, semantic hook, model promotion or
+  measured admission-rate improvement is implied.
+
 ## Unreleased - Before/after CV review diagnostics
 
 - Compare captured rubric-bound CV grades by dimension, flag changed evidence and
