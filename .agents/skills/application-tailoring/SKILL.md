@@ -26,6 +26,15 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+When the candidate reports poor application results or asks to improve a trained
+tailoring model, follow ../../../docs/TAILORING_OPTIMIZATION.md and
+../../../prompts/ERROR_DRIVEN_TAILORING.md. Audit observed recruitment stages
+before quoting a rate. Improve vacancy/evidence selection and review claim deltas;
+job requirements never supply new experience. Capture model failures privately,
+keep exposed cases in development and independently review corrections before
+supervised export. Do not equate lower loss, a receipt or a model score with a
+successful CV screen. This adds host instructions, not an automatic semantic hook.
+
 For candidates targeting several role families, use
 ../../../docs/FORKER_PLAYBOOK.md and ../../../prompts/ROLE_FAMILY_CAMPAIGN.md.
 Separate engineering, product and delivery evidence against each actual JD.
@@ -122,6 +131,13 @@ propose learning/projects, but only normal confirmed evidence can support a CV.
 Reviewed growth-plan exports are task `career-growth`, separate from CV-wording
 exports; select the matching explicit local trainer task. No automatic training,
 model promotion or factual promotion follows plan review.
+
+When explicitly asked to grade fit before and after tailoring, follow
+../../../prompts/GRADE_TAILOR_REGRADE.md and ../../../docs/CV_REVIEW_CYCLE.md.
+Use the same captured JD/rubric, cite exact statements and allow lower scores.
+Keep advisory self/model reviews separate from independently reviewed labels;
+reuse the existing cv-review trainer task rather than inventing a second grader
+dataset or learning from application receipts. New details remain pending review.
 
 Current learning exports supply the canonical nested output schema and assessed
 fact links in a versioned generation input. Follow ../../../docs/LEARNING_PROMPTS.md;
