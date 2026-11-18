@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+from copy import deepcopy
 
 from .contracts import ContractError, object_fields, strings, text
 from .learning import REVIEW_SYSTEM
@@ -188,3 +189,79 @@ def evaluate(references, predictions):
         'reference_kind': 'Recorded editorial judgments, not authenticated human gold or hiring outcomes',
         'independence_verified': False, 'current_evidence_revalidated': False,
         'training_performed': False, 'model_promoted': False}
+
+
+def judge_inputs(references):
+    """Separate judge inference inputs from captured reference assistant targets."""
+    evaluate(references, [])  # Validate the complete cohort and duplicate identities.
+    requests = [{'example_id': row['example_id'], 'messages': deepcopy(row['messages'][:2])}
+                for row in references]
+    digest = canonical_hash(requests)
+    return {'schema_version': '1.0', 'kind': 'cv_judge_inputs', 'requests': requests,
+            'inputs_sha256': digest, 'reference_targets_included': False,
+            'grader_template': {'grader_id': None, 'model_id': 'unknown', 'model_revision': 'unknown',
+                'inputs_sha256': digest, 'predictions': [{'example_id': row['example_id'],
+                    'editorial': {d: {'score': None, 'statement_ids': [], 'rationale': None}
+                                  for d in sorted(DIMENSIONS)}} for row in references]},
+            'model_calls_performed': 0}
+
+
+def crosscheck(references, graders, writer_model_id='unknown'):
+    """Compare 2..4 captured graders; agreement is not correctness or human gold."""
+    packet = judge_inputs(references)
+    if not isinstance(graders, list) or not 2 <= len(graders) <= 4:
+        raise ContractError('Supply two to four captured grader passes')
+    text(writer_model_id, 'declared writer model or unknown')
+    parsed = {row['example_id']: validate_example(row) for row in references}
+    reports, valid = {}, {}
+    identities = []
+    for grader in graders:
+        object_fields(grader, {'grader_id', 'model_id', 'model_revision', 'inputs_sha256', 'predictions'}, set(), 'grader pass')
+        for key in ('grader_id', 'model_id', 'model_revision'):
+            text(grader[key], key+' or unknown')
+        gid = grader['grader_id']
+        if gid in reports or grader['inputs_sha256'] != packet['inputs_sha256']:
+            raise ContractError('Duplicate grader ID or changed inference inputs')
+        report = evaluate(references, grader['predictions'])
+        reports[gid] = dict(report, model_id=grader['model_id'], model_revision=grader['model_revision'])
+        identities.append(grader['model_id'])
+        valid[gid] = {}
+        for prediction in grader['predictions']:
+            key = prediction['example_id']
+            try:
+                valid[gid][key] = _editorial(prediction['editorial'], _statement_ids(parsed[key][0]))
+            except (ValueError, TypeError, KeyError):
+                pass  # Invalid cases remain in evaluate()'s full-cohort penalties.
+    pairs = []; gids = list(reports)
+    for i, left in enumerate(gids):
+        for right in gids[i+1:]:
+            shared = sorted(set(valid[left]) & set(valid[right]))
+            exact = sum(all(valid[left][key][d]['score'] == valid[right][key][d]['score']
+                            for d in DIMENSIONS) for key in shared)
+            error = sum(abs(valid[left][key][d]['score']-valid[right][key][d]['score'])
+                        for key in shared for d in DIMENSIONS)
+            pairs.append({'graders': [left, right], 'paired_valid_cases': len(shared),
+                'unresolved_cases': len(references)-len(shared),
+                'full_cohort_exact_score_vector_rate': exact/len(references),
+                'valid_pair_mean_absolute_difference': error/(len(shared)*len(DIMENSIONS)) if shared else None})
+    triage = []
+    for key in parsed:
+        present = [valid[gid][key] for gid in gids if key in valid[gid]]
+        missing = [gid for gid in gids if key not in valid[gid]]
+        gaps = {d: max(p[d]['score'] for p in present)-min(p[d]['score'] for p in present)
+                for d in DIMENSIONS} if len(present) >= 2 else None
+        if missing or gaps is None or any(gaps.values()):
+            triage.append({'example_id': key, 'invalid_or_missing_graders': missing,
+                'score_spreads': gaps, 'human_adjudication_required': True})
+    declared_ids = {value.strip().casefold() for value in identities}
+    writer_id = writer_model_id.strip().casefold()
+    return {'schema_version': '1.0', 'kind': 'cv_grader_crosscheck', 'inputs_sha256': packet['inputs_sha256'],
+        'reference_count': len(references), 'graders': reports, 'pairs': pairs, 'triage': triage,
+        'distinct_model_ids_declared': 'unknown' not in declared_ids and len(declared_ids) > 1,
+        'same_writer_model_declared': writer_id != 'unknown' and writer_id in declared_ids,
+        'writer_model_id': writer_model_id, 'model_identity_verified': False,
+        'current_evidence_revalidated': False,
+        'independence_verified': False, 'human_gold_created': False,
+        'reference_kind': 'Recorded editorial judgments, not authenticated human gold or hiring outcomes',
+        'human_review_required': True, 'training_export': False, 'model_promoted': False,
+        'application_authority': False}

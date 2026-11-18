@@ -35,6 +35,15 @@ not a document review, benchmark gold, training approval or application authorit
 Use ../../../docs/CV_REVIEW_AGENTS.md for first-layer evidence, requirement and
 editorial reviewer requests. Preserve model-labelled proposals separately from
 actual human matching and benchmark annotations; no native agents auto-install.
+When the candidate selects the existing agent host for automated first-pass
+review, use ../../../prompts/HOST_REVIEW_AUTOMATION.md. Prepare the current
+CV/JD inputs, run the bounded start/advance cycle and capture each model reply.
+Use the existing host runtime; do not add a model service or change model routing.
+Reuse only exact complete reviews. An outstanding handoff is reconciled, not
+retried. Human labels, document approval and application authority remain separate.
+For explicit evaluation-model cross-checks or benchmark design, route to
+../cv-evaluation/SKILL.md. Use captured grader outputs and independent human
+calibration; do not add unrequested model services or turn consensus into gold.
 
 For a request to improve tailoring through real-data evals or hill-climbing, use
 ../../../prompts/TRUSTED_TAILOR_HILLCLIMB.md and the offline commands in

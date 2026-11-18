@@ -501,3 +501,16 @@ free-GPU execution remain unverified. No new mandatory dependency or ledger.
 First-layer reviewer request preparation/capture is experimental offline CLI;
 native agent installation and automatic dispatch are instruction-only, not
 activated. AI semantic correctness and reviewer independence remain unverified.
+
+## Existing-host reviewer automation
+
+Experimental standard-library coordinator and CLI with fictional callback tests
+for a maximum of three host handoffs, interruption handling, exact cache reuse
+and source/corruption rejection. Real private reuse of an unchanged complete
+advisory is host acceptance only, not native autonomous Codex dispatch or model
+quality evidence. The host must consume new requests; no model service,
+scheduler or human-annotation writer is installed. See [protocol](HOST_REVIEW_AUTOMATION.md).
+The project-local cv-evaluation skill and generated Claude wrapper are source
+adapters; native discovery remains unverified. Offline grader cross-checking
+uses the existing recorded six-dimension contract. Fictional pass comparisons
+prove denominator/input handling, not actual eval-model quality or human gold.

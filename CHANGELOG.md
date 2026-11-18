@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - Existing-host reviewer automation
+
+- Coordinate at most three source-bound AI review handoffs through the existing
+  agent host, with exclusive records, pending-work reconciliation and no retries.
+- Reuse only exact complete advisories; changed inputs/prompts or corrupted
+  replies stop the cycle. AI completion never creates human gold or approval.
+- Add host workflow instructions and callback/CLI acceptance tests without a
+  new model service, scheduler, global hook or application-ledger change.
+- Add the project-local cv-evaluation skill and generated Claude adapter, plus
+  bounded captured-grader cross-checks, reference-free inference inputs and
+  disagreement triage without automatic human labels or model promotion.
+
 ## Unreleased - Evidence retrieval and reviewed CV planning
 
 - Add exact-evidence BM25 retrieval, human-bound requirement matching and bounded

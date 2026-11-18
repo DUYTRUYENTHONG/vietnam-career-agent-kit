@@ -4,6 +4,9 @@ Status: experimental offline request preparation and advisory validation. Three
 portable agent prompts are provided; native agent registration, autonomous model
 dispatch and cloud execution are not installed. The user's host can run each
 role against its exact request using an already authorized model/runtime.
+Use [existing-host automation](HOST_REVIEW_AUTOMATION.md) for bounded sequential
+handoffs, restart handling and exact complete-review reuse. The CLI remains
+provider-free; a host must consume new requests to perform model reasoning.
 
 | Role | First-layer task |
 |---|---|

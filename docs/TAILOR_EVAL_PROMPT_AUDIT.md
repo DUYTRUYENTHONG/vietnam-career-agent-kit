@@ -43,3 +43,11 @@ reviewed single-fact alternatives, mandatory-gap and budget-omission preservatio
 identical comparator prompts and context-bound citation invalidation. Retrieval
 experiments cannot be mislabelled as prompt-only hill-climbs. Fictional tests
 verify these boundaries; semantic relevance and model behavior remain unmeasured.
+
+Existing-host automation scope adds canonical routing and a bounded host prompt,
+not a model-provider switch. A lost reply must not cause repeated model dispatch;
+a cached result must not conceal changed source/prompts. The coordinator stores
+handoff identity before exposure, returns waiting without replay, checks exact
+complete-cache bindings and preserves human-only decisions. Callback exceptions,
+invalid replies and stale sources have discriminating fictional regressions;
+native autonomous dispatch and semantic correctness remain unverified.

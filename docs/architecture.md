@@ -325,3 +325,9 @@ second ledger or model SDK is introduced. See [planning contract](CV_PLANNING.md
 editorial requests and validates captured model proposals. It performs no model
 dispatch and cannot create human annotations, document approvals or training
 exports. See [reviewer roles and limits](CV_REVIEW_AGENTS.md).
+
+`core/reviewer_automation.py` coordinates existing-host review requests using
+exclusive per-role handoffs, source revalidation and exact completed-advisory
+reuse. It adds no model service or second application ledger. Host reasoning is
+separate from the coordinator; pending work is not automatically replayed.
+See [host protocol and acceptance](HOST_REVIEW_AUTOMATION.md).

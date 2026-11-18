@@ -315,3 +315,13 @@ and do not authorize applications or training.
 requirement and editorial agent requests with source-bound advisory capture.
 AI proposals remain separate from human labels; native agents and model calls
 are not automatically installed or dispatched.
+
+[Existing-host review automation](docs/HOST_REVIEW_AUTOMATION.md) coordinates
+the three passes with bounded start/advance handoffs and exact completed-review
+reuse. The current agent host supplies reasoning; pending work is not replayed.
+No new model service, background watcher or human-label automation is installed.
+
+Use the project [cv-evaluation skill](.agents/skills/cv-evaluation/SKILL.md) for
+explicit benchmark and grader-comparison tasks. [Cross-checking eval models](docs/CV_EVAL_CROSSCHECK.md)
+compares captured passes on identical inputs, keeps missing outputs visible and
+routes disagreements to humans. Same-host agreement is not independent validation.

@@ -46,7 +46,7 @@ def prepare(root, preparation, output, statements=None):
         'application_authority': False})
 
 
-def collect(root, requests_directory, responses, output):
+def assess(root, requests_directory, responses):
     folder, manifest = b.verify_bundle(root, requests_directory, 'cv_ai_review_requests')
     inputs = b.read_json(folder/'inputs.json')
     # Revalidate bound source bytes at collection time, not just request time.
@@ -87,6 +87,11 @@ def collect(root, requests_directory, responses, output):
         'document_approved': False, 'application_authority': False,
         'model_identity_verified': False,
         'note': 'Model findings are proposals. Empty findings and multiple roles do not prove correctness or independence.'}
+    return result
+
+
+def collect(root, requests_directory, responses, output):
+    result = assess(root, requests_directory, responses)
     return b.bundle(root, output, {'advisory.json': b.json_bytes(result),
         'captured_model_reviews.jsonl': b.rows_bytes(responses)}, {'schema_version': '1.0',
         'kind': 'cv_ai_review_advisory_bundle', 'human_gold_created': False, 'application_authority': False})
