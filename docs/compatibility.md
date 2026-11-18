@@ -480,3 +480,13 @@ exact-quote sidecars and immutable private outputs. It does not fetch sites, inf
 requirements, create CV facts, migrate workspaces or train. Live completeness,
 PII removal, native MCP exposure and model improvement are unverified. See
 [setup and limits](REQUIREMENTS_PIPELINE.md).
+
+## Trusted tailoring evaluation and hill-climb
+
+Experimental standard-library CLI: source-bound preparation/freeze, offline human
+annotation forms, blinded full-cohort comparisons and bounded development/final
+state records. See [contract and commands](TRUSTED_TAILOR_BENCHMARK.md).
+Deterministic fictional tests do not establish human independence, model quality,
+recruiter outcomes, native host routing or rendered-layout acceptance. Optional
+Qwen3.5 Linux/free-T4 execution is experimental and not GPU-verified; no automatic
+private upload, paid fallback, model promotion or application authority.

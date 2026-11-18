@@ -303,3 +303,13 @@ Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.
 ## Parallel execution update
 
 Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments. [TinyFish Browser](TINYFISH_BROWSER.md) now has an opt-in experimental guest-form adapter; Agent-goal submissions remain unsupported.
+
+
+`core/tailor_benchmark.py` and `core/eval_hillclimb.py` are opt-in, offline,
+source-bound experiment tools. Standalone scripts prepare/freeze human-reviewed
+cases, bind frozen generation messages, blind output review and retain complete
+cohort errors. Hill-climbing consumes development comparisons only; one exclusive
+final report closes the study. `adapters/tailor_study.py` is a separate optional
+Linux/free-T4 runner; it is never imported by the core CLI. No canonical ledger,
+CV review/export, source authority or application execution contract changes.
+See [evaluation design and limits](TRUSTED_TAILOR_BENCHMARK.md).

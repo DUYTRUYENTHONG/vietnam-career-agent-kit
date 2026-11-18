@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased - Trusted tailoring evals and bounded hill-climbing
+
+- Add source-bound benchmark preparation, independent human review gates, frozen
+  inputs, blinded full-cohort comparison and separate prompt/adapter conditions.
+- Record development-only prompt rounds, fixed free-compute budgets and one final
+  test without automatic model promotion or application authority.
+- Add an experimental optional pinned Qwen3.5 free-T4 runner and local human-review
+  forms; real data remains external/private and GPU/model-quality acceptance pending.
+
+
 ## Unreleased - Error-driven tailoring workflow
 
 - Audit recruitment stages and observation windows before quoting a CV-screen rate.

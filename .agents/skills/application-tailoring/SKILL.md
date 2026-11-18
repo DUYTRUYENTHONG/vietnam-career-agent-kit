@@ -26,6 +26,16 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+For a request to improve tailoring through real-data evals or hill-climbing, use
+../../../prompts/TRUSTED_TAILOR_HILLCLIMB.md and the offline commands in
+../../../docs/TRUSTED_TAILOR_BENCHMARK.md. Record any requested pre-application
+hold, freeze reviewed sources and actual human annotations, and keep development
+iterations separate from one final test. Compare the improved-prompt base before
+an adapter; model self-grades, exposed targets and receipts cannot supply human
+gold or hiring proof. Select relevant evidence instead of retaining every master
+bullet. This workflow grants no automatic training, cloud upload, promotion or
+application authority; exact disclosure and current review gates remain intact.
+
 When the candidate reports poor application results or asks to improve a trained
 tailoring model, follow ../../../docs/TAILORING_OPTIMIZATION.md and
 ../../../prompts/ERROR_DRIVEN_TAILORING.md. Audit observed recruitment stages

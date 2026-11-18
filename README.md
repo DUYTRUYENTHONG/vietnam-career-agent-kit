@@ -295,3 +295,12 @@ template and separate verification of actual GitHub enforcement. A checked-in
 configuration does not itself enable server protection.
 
 Opt-in schema6 application lanes and TinyFish public Fetch batches are documented in [the architecture and CLI guide](docs/PARALLEL_APPLICATIONS.md). Use the [detailed agent prompt](prompts/ten-job-batch.md). Requires an authorized host bridge with isolated concurrent sessions for actual simultaneous applications; no live browser driver is bundled.
+
+## Evidence-first tailoring evals
+
+Use the [benchmark and hill-climb guide](docs/TRUSTED_TAILOR_BENCHMARK.md) to
+prepare private real-evidence cases, collect human reviews, compare fixed prompts
+and record bounded development rounds before one final test. The optional
+Qwen3.5 free-T4 runner is experimental and not GPU-verified. No cloud upload,
+model promotion or application happens automatically; hiring improvement remains
+unmeasured. Start with the [refined workflow prompt](prompts/TRUSTED_TAILOR_HILLCLIMB.md).
