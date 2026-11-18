@@ -31,3 +31,15 @@ a free-T4 smoke, actual token budgets and reviewed private data before acceptanc
 The implementation diff is the reviewable proposed/applied patch for this audit;
 existing policy, assistance qualifiers, exact disclosure gates and release QA are
 retained. No downloaded hook, upstream installer or global configuration changed.
+
+## Evidence retrieval and planning extension
+
+Scope: EVIDENCE_TO_CV_PLAN host prompt, canonical tailoring routing and the
+fixed-prompt retrieval comparator. Requirements and exact facts remain data.
+Counterexamples: overlap cannot certify Kubernetes experience; several partial
+facts cannot become one fully demonstrated requirement; a model can guess a
+real fact ID that was absent from its top-K context. Implemented controls:
+reviewed single-fact alternatives, mandatory-gap and budget-omission preservation,
+identical comparator prompts and context-bound citation invalidation. Retrieval
+experiments cannot be mislabelled as prompt-only hill-climbs. Fictional tests
+verify these boundaries; semantic relevance and model behavior remain unmeasured.

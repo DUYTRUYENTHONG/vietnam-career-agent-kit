@@ -197,6 +197,7 @@ class TailorBenchmarkTests(unittest.TestCase):
         self.assertNotIn('https://', html)
         self.assertIn('review_A_completed.jsonl', html)
         self.assertIn('textContent', html)
+        self.assertIn('Requirement source:', html)
         self.assertNotIn('</script><script>alert(1)', html)
         self.assertIn('\\u003c/script\\u003e', html)
         self.assertIn('__ROWS__ __SLOT__', html)

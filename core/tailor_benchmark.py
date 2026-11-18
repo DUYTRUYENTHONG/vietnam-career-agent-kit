@@ -324,9 +324,14 @@ def runs(root, frozen, records):
 
 def blind(root, frozen, records, output, comparison='training'):
     cases, manifest, observed = runs(root, frozen, records)
-    require(comparison in ('prompt', 'training'), 'Unknown comparison')
+    require(comparison in ('prompt', 'training', 'retrieval'), 'Unknown comparison')
+    require((comparison != 'retrieval' or manifest.get('experiment') == 'retrieval') and
+            (manifest.get('experiment') != 'retrieval' or comparison in ('retrieval', 'training')),
+            'Retrieval experiment must use its matched retrieval comparator')
     arms = ARMS if comparison == 'training' else ARMS[:2]
     require(all(r['condition'] in arms for r in records), 'Unexpected condition for comparison')
+    input_rows = read_rows(inside(root, frozen)/'generation_inputs.jsonl')
+    input_by_case = {row['case_id']: row for row in input_rows}
     visible, keys = [], []
     for c in cases:
         for arm in arms:
@@ -336,7 +341,11 @@ def blind(root, frozen, records, output, comparison='training'):
             rid = binding({'manifest': binding(manifest), 'condition': arm,
                            'case': c['case_id'], 'output': oid})[:24]
             try:
-                validate_output(raw, c); error = None
+                value = validate_output(raw, c)
+                context = decode(input_by_case[c['case_id']]['conditions'][arm][1]['content'])
+                require(value['statement'] is None or value['statement']['fact_id'] in
+                    {f['id'] for f in context['facts']}, 'Citation was not supplied in generation context')
+                error = None
             except (ValueError, TypeError, KeyError) as exc:
                 error = str(exc)
             visible.append({'review_id': rid, 'case_id': c['case_id'],

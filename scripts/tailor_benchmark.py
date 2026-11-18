@@ -18,7 +18,7 @@ def main(argv=None):
     a.add_argument('--review-a', required=True); a.add_argument('--review-b', required=True); a.add_argument('--output', required=True)
     a = sub.add_parser('blind'); a.add_argument('--frozen', required=True)
     a.add_argument('--records', required=True); a.add_argument('--output', required=True)
-    a.add_argument('--comparison', choices=['prompt', 'training'], default='training')
+    a.add_argument('--comparison', choices=['prompt', 'training', 'retrieval'], default='training')
     a = sub.add_parser('variant'); a.add_argument('--frozen', required=True)
     a.add_argument('--prompt', required=True); a.add_argument('--output', required=True)
     a = sub.add_parser('compare'); a.add_argument('--frozen', required=True)

@@ -26,6 +26,16 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+For evidence retrieval, requirement matching and content planning, use
+../../../prompts/EVIDENCE_TO_CV_PLAN.md and ../../../docs/CV_PLANNING.md.
+Retrieve candidates without treating overlap as demonstrated experience. Review
+the complete requirement matrix, then select exact scoped facts within an
+explicit bullet budget. Preserve mandatory gaps and budget omissions; a plan is
+not a document review, benchmark gold, training approval or application authority.
+Use ../../../docs/CV_REVIEW_AGENTS.md for first-layer evidence, requirement and
+editorial reviewer requests. Preserve model-labelled proposals separately from
+actual human matching and benchmark annotations; no native agents auto-install.
+
 For a request to improve tailoring through real-data evals or hill-climbing, use
 ../../../prompts/TRUSTED_TAILOR_HILLCLIMB.md and the offline commands in
 ../../../docs/TRUSTED_TAILOR_BENCHMARK.md. Record any requested pre-application

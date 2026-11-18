@@ -38,6 +38,7 @@ const main=document.getElementById('cases');
 function el(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;}
 for(let i=0;i<cases.length;i++){
  const c=cases[i], s=el('section');s.append(el('h2',c.case_id),el('p',c.requirement.text),el('small','Family: '+c.source_group+' | '+c.exposure));
+ s.append(el('small','Requirement source: '+c.requirement.source.path+' # '+c.requirement.source.locator+' | SHA256: '+c.requirement.source.sha256));
  const detail=el('details'), summary=el('summary','Inspect supplied evidence ('+c.facts.length+' facts)');detail.append(summary);
  const selected=[];
  for(const f of c.facts){const label=el('label');label.className='fact';const box=el('input');box.type='checkbox';box.value=f.id;

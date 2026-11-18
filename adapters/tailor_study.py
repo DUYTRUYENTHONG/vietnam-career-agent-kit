@@ -189,7 +189,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root', type=Path, required=True); p.add_argument('--frozen', required=True)
     p.add_argument('--model-directory', type=Path, required=True); p.add_argument('--output', required=True)
-    p.add_argument('--comparison', choices=['prompt', 'training'], default='prompt')
+    p.add_argument('--comparison', choices=['prompt', 'training', 'retrieval'], default='prompt')
     p.add_argument('--training'); p.add_argument('--free-gpu-confirmed', action='store_true')
     p.add_argument('--prior-free-seconds', type=float, required=True)
     p.add_argument('--cumulative-cap-seconds', type=int, required=True)

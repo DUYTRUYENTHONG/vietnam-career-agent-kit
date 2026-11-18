@@ -490,3 +490,14 @@ Deterministic fictional tests do not establish human independence, model quality
 recruiter outcomes, native host routing or rendered-layout acceptance. Optional
 Qwen3.5 Linux/free-T4 execution is experimental and not GPU-verified; no automatic
 private upload, paid fallback, model promotion or application authority.
+
+## Evidence retrieval and CV content planning
+
+Experimental standard-library CLI with deterministic fictional tests for matching
+bindings, exact scope preservation, bounded selection, mandatory gaps, retrieval
+misses and context-bound citations. See [usage and limits](CV_PLANNING.md).
+Semantic matching, native host/MCP routing, model generation quality and actual
+free-GPU execution remain unverified. No new mandatory dependency or ledger.
+First-layer reviewer request preparation/capture is experimental offline CLI;
+native agent installation and automatic dispatch are instruction-only, not
+activated. AI semantic correctness and reviewer independence remain unverified.

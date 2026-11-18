@@ -313,3 +313,15 @@ final report closes the study. `adapters/tailor_study.py` is a separate optional
 Linux/free-T4 runner; it is never imported by the core CLI. No canonical ledger,
 CV review/export, source authority or application execution contract changes.
 See [evaluation design and limits](TRUSTED_TAILOR_BENCHMARK.md).
+
+`core/cv_planning.py` and `scripts/cv_plan.py` add an offline preparation/review/
+content-plan boundary over the existing source-bound case contract. Retrieval
+suggests exact facts without semantic labels; human matching precedes weighted
+coverage selection. Fixed retrieval ablations reuse the frozen benchmark and
+optional GPU worker, with identical prompts and context-bound citations. No
+second ledger or model SDK is introduced. See [planning contract](CV_PLANNING.md).
+
+`core/cv_review_agents.py` prepares portable first-layer evidence/requirements/
+editorial requests and validates captured model proposals. It performs no model
+dispatch and cannot create human annotations, document approvals or training
+exports. See [reviewer roles and limits](CV_REVIEW_AGENTS.md).

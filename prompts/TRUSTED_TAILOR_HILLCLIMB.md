@@ -4,6 +4,11 @@ Consumer: host job-seeking agent. Model experiment: pinned Qwen3.5-4B in the
 optional benchmark runner. This prompt does not change the host model or grant
 cloud, account, application, Git-publication or installation authority.
 
+For retrieval and full-CV evidence selection, first use EVIDENCE_TO_CV_PLAN.md.
+Compare retrieval as a separate fixed experiment with identical system prompts;
+do not label a changed evidence context as a prompt-only improvement. The current
+hill-climb recorder deliberately rejects retrieval reports.
+
 1. Read the current application-tailoring skill and job-seeker policy. When the
    candidate requests evaluation before applying, record that disclosure hold
    privately. Preserve the canonical ledger and immutable submissions. Stop new

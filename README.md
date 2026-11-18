@@ -304,3 +304,14 @@ and record bounded development rounds before one final test. The optional
 Qwen3.5 free-T4 runner is experimental and not GPU-verified. No cloud upload,
 model promotion or application happens automatically; hiring improvement remains
 unmeasured. Start with the [refined workflow prompt](prompts/TRUSTED_TAILOR_HILLCLIMB.md).
+
+[Evidence retrieval and CV planning](docs/CV_PLANNING.md) adds ranked source facts,
+an explicit human-reviewed requirement matrix and a bounded exact-evidence plan.
+It also supports a separate fixed-prompt full-evidence/top-K benchmark. Retrieval
+scores are not semantic fit scores; plans retain missing/partial requirements
+and do not authorize applications or training.
+
+[First-layer CV reviewers](docs/CV_REVIEW_AGENTS.md) provide portable evidence,
+requirement and editorial agent requests with source-bound advisory capture.
+AI proposals remain separate from human labels; native agents and model calls
+are not automatically installed or dispatched.

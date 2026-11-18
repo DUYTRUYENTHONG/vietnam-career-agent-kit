@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased - Evidence retrieval and reviewed CV planning
+
+- Add exact-evidence BM25 retrieval, human-bound requirement matching and bounded
+  CV content selection with mandatory gaps and budget omissions preserved.
+- Add a fixed-prompt full-evidence/top-K Qwen comparator and retrieval hit/recall
+  diagnostics; citations absent from generation context remain invalid.
+- Keep real data private, final tests separate, and model execution/promotion
+  pending actual review, free-runtime and budget evidence.
+- Add source-bound first-layer evidence, requirement and editorial reviewer
+  requests; captured AI proposals cannot become human labels or approvals.
+- Preserve the lexical-v1 control and add a versioned v2 ranking preset with
+  function-word filtering and narrow aliases; semantic improvement is unmeasured.
+
 ## Unreleased - Trusted tailoring evals and bounded hill-climbing
 
 - Add source-bound benchmark preparation, independent human review gates, frozen

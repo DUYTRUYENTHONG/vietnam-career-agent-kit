@@ -127,6 +127,12 @@ Passing reports never promote a model or grant application authority.
 
 ## Hill-climb only on development data
 
+Evidence retrieval and reviewed CV planning are separate optional tools in
+[CV_PLANNING.md](CV_PLANNING.md). A retrieval variant fixes system prompts and
+changes only full versus top-K evidence. Use the explicit retrieval comparison;
+it cannot be consumed as a prompt-only hill-climb report. Planning annotations
+never substitute for benchmark gold or training-target reviews.
+
 Use `scripts/hillclimb_eval.py` to record a fixed plan, bounded rounds and one
 final test. `core/eval_hillclimb.py` rejects test reports as development feedback,
 source-family overlap, changed parents, unreviewed outputs and exhausted budgets.
