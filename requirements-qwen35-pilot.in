@@ -1,0 +1,5 @@
+# Isolated optional profile for local evidence-pairing. No change to the core CLI.
+torch==2.10.0
+transformers==5.3.0
+peft==0.18.1
+accelerate==1.15.0

@@ -1,5 +1,7 @@
 # Runtime compatibility evidence
 
+The [evidence-pairing pilot](EVIDENCE_PAIRING.md) is **Experimental**. A supplied historical report describes Linux CPU Python 3.12 / PyTorch 2.10.0+cpu / Transformers 5.3.0 / PEFT 0.18.1 inference. That runtime has not been reproduced for this integration. Local standard-library tests cover evidence binding, split isolation and invalid outputs; model loading, CUDA, training quality, human utility and real-world accuracy remain unverified.
+
 [Native Codex inventory](CODEX_MCP_ACCEPTANCE.md) is **Verified** only for Windows
 Codex CLI 0.137.0 app-server discovery of both the one-tool source-memory and
 20-tool portable launcher modes on fictional data. Inputs remained unchanged;

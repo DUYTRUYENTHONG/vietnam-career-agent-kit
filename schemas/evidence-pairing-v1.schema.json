@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence pairing v1",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/packet"
+    },
+    {
+      "$ref": "#/$defs/prediction"
+    }
+  ],
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fact": {
+      "type": "object",
+      "required": [
+        "id",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/text"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "source_id": {
+          "$ref": "#/$defs/text"
+        },
+        "locator": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "required": [
+        "id",
+        "text",
+        "mandatory",
+        "hard"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/text"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "hard": {
+          "type": "boolean"
+        }
+      }
+    },
+    "packet": {
+      "type": "object",
+      "required": [
+        "schema",
+        "facts",
+        "requirements"
+      ],
+      "properties": {
+        "schema": {
+          "const": "evidence-pairing-1"
+        },
+        "facts": {
+          "type": "array",
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1024,
+          "items": {
+            "$ref": "#/$defs/requirement"
+          }
+        },
+        "profile_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "job_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "fact_ids"
+      ],
+      "properties": {
+        "label": {
+          "enum": [
+            "direct",
+            "partial",
+            "contradicted",
+            "unknown"
+          ]
+        },
+        "fact_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "label": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fact_ids": {
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "fact_ids": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  }
+}

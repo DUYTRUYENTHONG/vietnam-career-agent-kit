@@ -7,6 +7,8 @@ Created and maintained by DUYTRUYENTHONG, with community contributions welcome. 
 Bring your own agent and CV. Research suitable jobs, prepare truthful documents,
 review an exact application package, and track what actually happened.
 
+An optional [Qwen3.5 evidence-pairing pilot](docs/EVIDENCE_PAIRING.md) pairs requirements with exact CV quotes and includes a reproducible fictional benchmark.
+
 ## Start here
 
 **Want an MCP server for your AI host?** Follow the [minimal local MCP setup](docs/MCP_SERVER.md)

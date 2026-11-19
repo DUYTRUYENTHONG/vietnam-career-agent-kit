@@ -52,6 +52,11 @@
 - Reuse reviewed `cv-review` exports and the existing optional LoRA task; no
   generated gold labels, automatic training, model promotion or hiring claims.
 
+## Unreleased - Local Qwen3.5 evidence-pairing pilot
+
+- Bind observed local checkpoint bytes, explicitly select compute, retain JSON generation token/timing measurements and train with warmup; experimental outputs never promote themselves.
+- Export a confirmed evidence packet for one job, review exact CV suggestions, and compare lexical retrieval with offline Qwen generation and LoRA on a fictional bilingual fixture. The research preview carries no application authority.
+
 ## Unreleased - Cleanup QA guard alignment
 
 - Align the cleanup progress regression setup wait with its action guard, rather

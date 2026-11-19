@@ -34,6 +34,8 @@ def parser() -> Parser:
         discover.add_argument('--board',action='append',required=True)
         discover.add_argument('--workers',type=int,default=3)
         discover.add_argument('--include-content',action='store_true',help='include full untrusted descriptions; default returns compact leads')
+    packet=commands.add_parser('evidence-packet',help='read-only confirmed job and evidence packet for local research')
+    packet.add_argument('--job-id',type=int,required=True)
     doctor=commands.add_parser('doctor',help='read-only runtime diagnosis; no account/browser connection')
     doctor.add_argument('--runtime',choices=['generic','codex','claude','grok'],default='generic')
     commands.add_parser('provider-doctor',help='offline provider configuration; never checks keys remotely')
@@ -279,6 +281,9 @@ def execute(args) -> Outcome:
         return start_campaign(work,args.cv,target=args.target,language=args.language)
     if not work.db_path.is_file():
         raise WorkflowError('needs_input','Workspace not initialized; run init first with this --data-dir')
+    if command=='evidence-packet':
+        from core.evidence_pairing import packet_from_workspace
+        return Outcome('ok',packet_from_workspace(work,args.job_id),[])
     legacy={'status','add-job','check-package','check-approval','record-approval','invalidate'}
     if command not in legacy:
         with work._db() as db:
