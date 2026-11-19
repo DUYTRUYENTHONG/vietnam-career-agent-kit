@@ -140,3 +140,7 @@ the current source-bound draft. Existing schema 3 databases and old immutable
 snapshots remain unchanged. Missing historical fit is counted separately, never
 retrofitted. Window counts use unique confirmed submission records and frozen
 Strong/Plausible fit only. See THROUGHPUT.md for exact boundaries and limitations.
+
+## Read-only requirement evidence
+
+The optional research packet and model answer follow [evidence-pairing v1](../schemas/evidence-pairing-v1.schema.json). The runner validates evidence IDs, abstention and citation cardinality. Source-bound exports select exact confirmed quotes and attach profile/JD fingerprints. Separate preview JSON carries no draft or submission authority. See [usage and limitations](EVIDENCE_PAIRING.md).

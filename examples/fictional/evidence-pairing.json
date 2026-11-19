@@ -1,0 +1,493 @@
+{
+  "schema": "evidence-benchmark-1",
+  "provenance": "synthetic_qa",
+  "cases": [
+    {
+      "id": "course",
+      "partition": "train",
+      "language": "mixed",
+      "groups": [
+        "candidate:course",
+        "employer:course",
+        "source-family:course"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "Viết truy vấn SQL trong đồ án ở trường."
+          },
+          {
+            "id": "F2",
+            "text": "I am available only on weekdays this term."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "SQL coursework",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Commercial SQL experience",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R3",
+            "text": "Available this term on weekends",
+            "mandatory": true,
+            "hard": true
+          },
+          {
+            "id": "R4",
+            "text": "Tableau dashboard development",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "direct",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R2": {
+          "label": "partial",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R3": {
+          "label": "contradicted",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R4": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    },
+    {
+      "id": "venue",
+      "partition": "train",
+      "language": "vi",
+      "groups": [
+        "candidate:venue",
+        "employer:venue",
+        "source-family:venue"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "Tôi hỗ trợ quản lý chuẩn bị lịch cho hai sự kiện."
+          },
+          {
+            "id": "F2",
+            "text": "Tôi sử dụng Excel để lập bảng chi phí."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Sử dụng Excel lập bảng chi phí",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Chủ trì lập lịch sự kiện",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R3",
+            "text": "Giao tiếp tiếng Đức B2",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "direct",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R2": {
+          "label": "partial",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R3": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    },
+    {
+      "id": "retail",
+      "partition": "train",
+      "language": "en",
+      "groups": [
+        "candidate:retail",
+        "employer:retail",
+        "source-family:retail"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "I processed in-store exchanges."
+          },
+          {
+            "id": "F2",
+            "text": "I currently have no forklift licence."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Handled exchanges in a shop",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Hold a current forklift licence",
+            "mandatory": true,
+            "hard": true
+          },
+          {
+            "id": "R3",
+            "text": "Maintain the payroll ledger",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "direct",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R2": {
+          "label": "contradicted",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R3": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    },
+    {
+      "id": "sound",
+      "partition": "development",
+      "language": "en",
+      "groups": [
+        "candidate:sound",
+        "employer:sound",
+        "source-family:sound"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "Mixed audio for a student film."
+          },
+          {
+            "id": "F2",
+            "text": "For this contract I can travel only within Hanoi."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Professional film audio mixing",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Available to travel abroad for this contract",
+            "mandatory": true,
+            "hard": true
+          },
+          {
+            "id": "R3",
+            "text": "Experience running a casting call",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "partial",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R2": {
+          "label": "contradicted",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R3": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    },
+    {
+      "id": "shop",
+      "partition": "test",
+      "language": "mixed",
+      "groups": [
+        "candidate:shop",
+        "employer:shop",
+        "source-family:shop"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "Đã trả lời khách hàng bằng tiếng Anh qua live chat."
+          },
+          {
+            "id": "F2",
+            "text": "Tôi hỗ trợ trưởng nhóm thiết kế kịch bản livestream."
+          },
+          {
+            "id": "F3",
+            "text": "Tôi chỉ có thể làm ca ngày trong quý này."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Answer customer questions in English via live chat",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Tự chịu trách nhiệm toàn bộ kịch bản livestream",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R3",
+            "text": "Có thể làm ca đêm trong quý này",
+            "mandatory": true,
+            "hard": true
+          },
+          {
+            "id": "R4",
+            "text": "Administer a Shopify theme repository",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "direct",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R2": {
+          "label": "partial",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R3": {
+          "label": "contradicted",
+          "fact_ids": [
+            "F3"
+          ]
+        },
+        "R4": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    },
+    {
+      "id": "studio",
+      "partition": "test",
+      "language": "en",
+      "groups": [
+        "candidate:studio",
+        "employer:studio",
+        "source-family:studio"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "I made a storyboard for a class animation."
+          },
+          {
+            "id": "F2",
+            "text": "I edited product clips using DaVinci Resolve."
+          },
+          {
+            "id": "F3",
+            "text": "I currently have no commercial drone licence."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Edit product clips using DaVinci Resolve",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Professional animation storyboarding experience",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R3",
+            "text": "Possess a valid commercial drone licence",
+            "mandatory": true,
+            "hard": true
+          },
+          {
+            "id": "R4",
+            "text": "Operate a motion-capture studio",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "direct",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R2": {
+          "label": "partial",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R3": {
+          "label": "contradicted",
+          "fact_ids": [
+            "F3"
+          ]
+        },
+        "R4": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    },
+    {
+      "id": "warehouse",
+      "partition": "test",
+      "language": "vi",
+      "groups": [
+        "candidate:warehouse",
+        "employer:warehouse",
+        "source-family:warehouse"
+      ],
+      "packet": {
+        "schema": "evidence-pairing-1",
+        "facts": [
+          {
+            "id": "F1",
+            "text": "Đối soát tồn kho mỗi tuần bằng bảng tính."
+          },
+          {
+            "id": "F2",
+            "text": "Tôi đã hướng dẫn một đồng nghiệp mới kiểm đếm hàng."
+          },
+          {
+            "id": "F3",
+            "text": "Tôi hiện chỉ có thể làm tại Đà Nẵng."
+          }
+        ],
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Đối soát tồn kho định kỳ",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R2",
+            "text": "Quản lý đội kiểm đếm hàng",
+            "mandatory": true,
+            "hard": false
+          },
+          {
+            "id": "R3",
+            "text": "Làm việc trực tiếp tại Hà Nội ngay hiện tại",
+            "mandatory": true,
+            "hard": true
+          },
+          {
+            "id": "R4",
+            "text": "Khai báo hải quan điện tử",
+            "mandatory": true,
+            "hard": false
+          }
+        ]
+      },
+      "gold": {
+        "R1": {
+          "label": "direct",
+          "fact_ids": [
+            "F1"
+          ]
+        },
+        "R2": {
+          "label": "partial",
+          "fact_ids": [
+            "F2"
+          ]
+        },
+        "R3": {
+          "label": "contradicted",
+          "fact_ids": [
+            "F3"
+          ]
+        },
+        "R4": {
+          "label": "unknown",
+          "fact_ids": []
+        }
+      }
+    }
+  ]
+}

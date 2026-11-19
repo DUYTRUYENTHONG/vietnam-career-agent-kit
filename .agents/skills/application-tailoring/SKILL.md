@@ -26,6 +26,44 @@ Local prepare command for source-bound Markdown, followed by optional render and
 
 ## Steps
 
+For evidence retrieval, requirement matching and content planning, use
+../../../prompts/EVIDENCE_TO_CV_PLAN.md and ../../../docs/CV_PLANNING.md.
+Retrieve candidates without treating overlap as demonstrated experience. Review
+the complete requirement matrix, then select exact scoped facts within an
+explicit bullet budget. Preserve mandatory gaps and budget omissions; a plan is
+not a document review, benchmark gold, training approval or application authority.
+Use ../../../docs/CV_REVIEW_AGENTS.md for first-layer evidence, requirement and
+editorial reviewer requests. Preserve model-labelled proposals separately from
+actual human matching and benchmark annotations; no native agents auto-install.
+When the candidate selects the existing agent host for automated first-pass
+review, use ../../../prompts/HOST_REVIEW_AUTOMATION.md. Prepare the current
+CV/JD inputs, run the bounded start/advance cycle and capture each model reply.
+Use the existing host runtime; do not add a model service or change model routing.
+Reuse only exact complete reviews. An outstanding handoff is reconciled, not
+retried. Human labels, document approval and application authority remain separate.
+For explicit evaluation-model cross-checks or benchmark design, route to
+../cv-evaluation/SKILL.md. Use captured grader outputs and independent human
+calibration; do not add unrequested model services or turn consensus into gold.
+
+For a request to improve tailoring through real-data evals or hill-climbing, use
+../../../prompts/TRUSTED_TAILOR_HILLCLIMB.md and the offline commands in
+../../../docs/TRUSTED_TAILOR_BENCHMARK.md. Record any requested pre-application
+hold, freeze reviewed sources and actual human annotations, and keep development
+iterations separate from one final test. Compare the improved-prompt base before
+an adapter; model self-grades, exposed targets and receipts cannot supply human
+gold or hiring proof. Select relevant evidence instead of retaining every master
+bullet. This workflow grants no automatic training, cloud upload, promotion or
+application authority; exact disclosure and current review gates remain intact.
+
+When the candidate reports poor application results or asks to improve a trained
+tailoring model, follow ../../../docs/TAILORING_OPTIMIZATION.md and
+../../../prompts/ERROR_DRIVEN_TAILORING.md. Audit observed recruitment stages
+before quoting a rate. Improve vacancy/evidence selection and review claim deltas;
+job requirements never supply new experience. Capture model failures privately,
+keep exposed cases in development and independently review corrections before
+supervised export. Do not equate lower loss, a receipt or a model score with a
+successful CV screen. This adds host instructions, not an automatic semantic hook.
+
 For candidates targeting several role families, use
 ../../../docs/FORKER_PLAYBOOK.md and ../../../prompts/ROLE_FAMILY_CAMPAIGN.md.
 Separate engineering, product and delivery evidence against each actual JD.
@@ -122,6 +160,13 @@ propose learning/projects, but only normal confirmed evidence can support a CV.
 Reviewed growth-plan exports are task `career-growth`, separate from CV-wording
 exports; select the matching explicit local trainer task. No automatic training,
 model promotion or factual promotion follows plan review.
+
+When explicitly asked to grade fit before and after tailoring, follow
+../../../prompts/GRADE_TAILOR_REGRADE.md and ../../../docs/CV_REVIEW_CYCLE.md.
+Use the same captured JD/rubric, cite exact statements and allow lower scores.
+Keep advisory self/model reviews separate from independently reviewed labels;
+reuse the existing cv-review trainer task rather than inventing a second grader
+dataset or learning from application receipts. New details remain pending review.
 
 Current learning exports supply the canonical nested output schema and assessed
 fact links in a versioned generation input. Follow ../../../docs/LEARNING_PROMPTS.md;

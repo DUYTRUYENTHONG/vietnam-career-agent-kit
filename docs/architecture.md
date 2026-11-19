@@ -1,5 +1,11 @@
 # Portable core architecture
 
+`core/review_cycle.py` and `scripts/compare_cv_reviews.py` compare captured
+`cv-review-json-1` judgments and evaluate recorded grading predictions. They
+reuse the six-dimensional rubric/export contract, flag evidence changes, retain
+invalid/missing outputs in full-cohort metrics, and never open a ledger or
+revalidate archived data for training. See [review cycle](CV_REVIEW_CYCLE.md).
+
 `core/training_split_audit.py` and `scripts/audit_training_splits.py` diagnose
 transitive connections across explicitly declared external pilot partitions.
 They consume opaque caller-reviewed groups, not candidate sources or ledgers,
@@ -297,3 +303,31 @@ Run `python -m unittest discover -s tests -v`, `python scripts/check_repository.
 ## Parallel execution update
 
 Schema 6 adds opt-in independent application lanes and public TinyFish Fetch batches. See [PARALLEL_APPLICATIONS.md](PARALLEL_APPLICATIONS.md) for commands, host requirements and measured-versus-unverified limits. Earlier sequential-only/TinyFish-unsupported descriptions apply to previous increments. [TinyFish Browser](TINYFISH_BROWSER.md) now has an opt-in experimental guest-form adapter; Agent-goal submissions remain unsupported.
+
+
+`core/tailor_benchmark.py` and `core/eval_hillclimb.py` are opt-in, offline,
+source-bound experiment tools. Standalone scripts prepare/freeze human-reviewed
+cases, bind frozen generation messages, blind output review and retain complete
+cohort errors. Hill-climbing consumes development comparisons only; one exclusive
+final report closes the study. `adapters/tailor_study.py` is a separate optional
+Linux/free-T4 runner; it is never imported by the core CLI. No canonical ledger,
+CV review/export, source authority or application execution contract changes.
+See [evaluation design and limits](TRUSTED_TAILOR_BENCHMARK.md).
+
+`core/cv_planning.py` and `scripts/cv_plan.py` add an offline preparation/review/
+content-plan boundary over the existing source-bound case contract. Retrieval
+suggests exact facts without semantic labels; human matching precedes weighted
+coverage selection. Fixed retrieval ablations reuse the frozen benchmark and
+optional GPU worker, with identical prompts and context-bound citations. No
+second ledger or model SDK is introduced. See [planning contract](CV_PLANNING.md).
+
+`core/cv_review_agents.py` prepares portable first-layer evidence/requirements/
+editorial requests and validates captured model proposals. It performs no model
+dispatch and cannot create human annotations, document approvals or training
+exports. See [reviewer roles and limits](CV_REVIEW_AGENTS.md).
+
+`core/reviewer_automation.py` coordinates existing-host review requests using
+exclusive per-role handoffs, source revalidation and exact completed-advisory
+reuse. It adds no model service or second application ledger. Host reasoning is
+separate from the coordinator; pending work is not automatically replayed.
+See [host protocol and acceptance](HOST_REVIEW_AUTOMATION.md).

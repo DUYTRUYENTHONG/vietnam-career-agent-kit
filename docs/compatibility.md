@@ -1,5 +1,7 @@
 # Runtime compatibility evidence
 
+The [evidence-pairing pilot](EVIDENCE_PAIRING.md) is **Experimental**. A supplied historical report describes Linux CPU Python 3.12 / PyTorch 2.10.0+cpu / Transformers 5.3.0 / PEFT 0.18.1 inference. That runtime has not been reproduced for this integration. Local standard-library tests cover evidence binding, split isolation and invalid outputs; model loading, CUDA, training quality, human utility and real-world accuracy remain unverified.
+
 [Native Codex inventory](CODEX_MCP_ACCEPTANCE.md) is **Verified** only for Windows
 Codex CLI 0.137.0 app-server discovery of both the one-tool source-memory and
 20-tool portable launcher modes on fictional data. Inputs remained unchanged;
@@ -480,3 +482,37 @@ exact-quote sidecars and immutable private outputs. It does not fetch sites, inf
 requirements, create CV facts, migrate workspaces or train. Live completeness,
 PII removal, native MCP exposure and model improvement are unverified. See
 [setup and limits](REQUIREMENTS_PIPELINE.md).
+
+## Trusted tailoring evaluation and hill-climb
+
+Experimental standard-library CLI: source-bound preparation/freeze, offline human
+annotation forms, blinded full-cohort comparisons and bounded development/final
+state records. See [contract and commands](TRUSTED_TAILOR_BENCHMARK.md).
+Deterministic fictional tests do not establish human independence, model quality,
+recruiter outcomes, native host routing or rendered-layout acceptance. Optional
+Qwen3.5 Linux/free-T4 execution is experimental and not GPU-verified; no automatic
+private upload, paid fallback, model promotion or application authority.
+
+## Evidence retrieval and CV content planning
+
+Experimental standard-library CLI with deterministic fictional tests for matching
+bindings, exact scope preservation, bounded selection, mandatory gaps, retrieval
+misses and context-bound citations. See [usage and limits](CV_PLANNING.md).
+Semantic matching, native host/MCP routing, model generation quality and actual
+free-GPU execution remain unverified. No new mandatory dependency or ledger.
+First-layer reviewer request preparation/capture is experimental offline CLI;
+native agent installation and automatic dispatch are instruction-only, not
+activated. AI semantic correctness and reviewer independence remain unverified.
+
+## Existing-host reviewer automation
+
+Experimental standard-library coordinator and CLI with fictional callback tests
+for a maximum of three host handoffs, interruption handling, exact cache reuse
+and source/corruption rejection. Real private reuse of an unchanged complete
+advisory is host acceptance only, not native autonomous Codex dispatch or model
+quality evidence. The host must consume new requests; no model service,
+scheduler or human-annotation writer is installed. See [protocol](HOST_REVIEW_AUTOMATION.md).
+The project-local cv-evaluation skill and generated Claude wrapper are source
+adapters; native discovery remains unverified. Offline grader cross-checking
+uses the existing recorded six-dimension contract. Fictional pass comparisons
+prove denominator/input handling, not actual eval-model quality or human gold.

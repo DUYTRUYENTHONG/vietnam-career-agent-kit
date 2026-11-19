@@ -1,5 +1,9 @@
 # Learn from recorded CV reviews
 
+For before/after tailoring comparisons and full-cohort ordinal evaluation of a
+grading model, use [the review cycle](CV_REVIEW_CYCLE.md). It reuses the exports
+below; archived diagnostic reports never bypass current training-data checks.
+
 `learning-export --task cv-review` collects the existing six editorial grades
 and cited rationales from an exact, current independently reviewed v2 CV. It
 does not invent scores, call a model, inspect an inbox or infer recruiter results.

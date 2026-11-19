@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Archived CV review diagnostics 1.0",
+  "description": "Diagnostic shape only. Does not authenticate reviewers, revalidate current evidence or authorize training.",
+  "type": "object",
+  "required": ["schema_version", "kind", "training_performed", "current_evidence_revalidated"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "kind": {"enum": ["recorded_review_comparison", "recorded_grader_evaluation"]},
+    "training_performed": {"const": false},
+    "current_evidence_revalidated": {"const": false},
+    "input_files": {"type": "array", "items": {"type": "object", "required": ["path", "sha256"], "properties": {"path": {"type": "string"}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}, "additionalProperties": false}}
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "recorded_review_comparison"}}},
+     "then": {"required": ["before_example_id", "after_example_id", "group_id", "evidence_changed", "same_cv", "same_reviewer_claim", "dimensions", "interpretation", "reviewer_identity_authenticated", "application_authority", "training_note"],
+       "properties": {"dimensions": {"type": "object", "required": ["relevance", "specificity", "coverage", "clarity", "concision", "readability"], "additionalProperties": {"type": "object", "required": ["before", "after", "delta"], "properties": {"before": {"$ref": "cv-content-v2.schema.json#/$defs/dimension"}, "after": {"$ref": "cv-content-v2.schema.json#/$defs/dimension"}, "delta": {"type": "integer", "minimum": -3, "maximum": 3}}, "additionalProperties": false}}, "reviewer_identity_authenticated": {"const": false}, "application_authority": {"const": false}}}},
+    {"if": {"properties": {"kind": {"const": "recorded_grader_evaluation"}}},
+     "then": {"required": ["reference_count", "valid_count", "invalid_or_missing_count", "invalid_or_missing_example_ids", "full_cohort_exact_score_vector_rate", "valid_only_mae", "full_cohort_penalized_mae", "penalty", "reference_kind", "independence_verified", "model_promoted"],
+       "properties": {"reference_count": {"type": "integer", "minimum": 1, "maximum": 100}, "valid_count": {"type": "integer", "minimum": 0}, "invalid_or_missing_count": {"type": "integer", "minimum": 0}, "full_cohort_exact_score_vector_rate": {"type": "number", "minimum": 0, "maximum": 1}, "valid_only_mae": {"$ref": "#/$defs/errors"}, "full_cohort_penalized_mae": {"$ref": "#/$defs/errors"}, "independence_verified": {"const": false}, "model_promoted": {"const": false}}}}
+  ],
+  "$defs": {"errors": {"type": "object", "required": ["relevance", "specificity", "coverage", "clarity", "concision", "readability"], "additionalProperties": {"type": ["number", "null"], "minimum": 0, "maximum": 3}}}
+}

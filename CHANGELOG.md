@@ -1,5 +1,62 @@
 # Changelog
 
+## Unreleased - Existing-host reviewer automation
+
+- Coordinate at most three source-bound AI review handoffs through the existing
+  agent host, with exclusive records, pending-work reconciliation and no retries.
+- Reuse only exact complete advisories; changed inputs/prompts or corrupted
+  replies stop the cycle. AI completion never creates human gold or approval.
+- Add host workflow instructions and callback/CLI acceptance tests without a
+  new model service, scheduler, global hook or application-ledger change.
+- Add the project-local cv-evaluation skill and generated Claude adapter, plus
+  bounded captured-grader cross-checks, reference-free inference inputs and
+  disagreement triage without automatic human labels or model promotion.
+
+## Unreleased - Evidence retrieval and reviewed CV planning
+
+- Add exact-evidence BM25 retrieval, human-bound requirement matching and bounded
+  CV content selection with mandatory gaps and budget omissions preserved.
+- Add a fixed-prompt full-evidence/top-K Qwen comparator and retrieval hit/recall
+  diagnostics; citations absent from generation context remain invalid.
+- Keep real data private, final tests separate, and model execution/promotion
+  pending actual review, free-runtime and budget evidence.
+- Add source-bound first-layer evidence, requirement and editorial reviewer
+  requests; captured AI proposals cannot become human labels or approvals.
+- Preserve the lexical-v1 control and add a versioned v2 ranking preset with
+  function-word filtering and narrow aliases; semantic improvement is unmeasured.
+
+## Unreleased - Trusted tailoring evals and bounded hill-climbing
+
+- Add source-bound benchmark preparation, independent human review gates, frozen
+  inputs, blinded full-cohort comparison and separate prompt/adapter conditions.
+- Record development-only prompt rounds, fixed free-compute budgets and one final
+  test without automatic model promotion or application authority.
+- Add an experimental optional pinned Qwen3.5 free-T4 runner and local human-review
+  forms; real data remains external/private and GPU/model-quality acceptance pending.
+
+
+## Unreleased - Error-driven tailoring workflow
+
+- Audit recruitment stages and observation windows before quoting a CV-screen rate.
+- Select source-backed examples for the job's delivery priorities and review claim
+  budgets/deltas to catch requirement copying, inflated ownership and lost qualifiers.
+- Keep exposed model failures in private development records; separate reviewed
+  bullet/grade exports and require matched base/prompt/adapter evaluation.
+- Instruction-only guidance: no new runtime, semantic hook, model promotion or
+  measured admission-rate improvement is implied.
+
+## Unreleased - Before/after CV review diagnostics
+
+- Compare captured rubric-bound CV grades by dimension, flag changed evidence and
+  unchanged-CV review drift, and evaluate grading outputs over the full cohort.
+- Reuse reviewed `cv-review` exports and the existing optional LoRA task; no
+  generated gold labels, automatic training, model promotion or hiring claims.
+
+## Unreleased - Local Qwen3.5 evidence-pairing pilot
+
+- Bind observed local checkpoint bytes, explicitly select compute, retain JSON generation token/timing measurements and train with warmup; experimental outputs never promote themselves.
+- Export a confirmed evidence packet for one job, review exact CV suggestions, and compare lexical retrieval with offline Qwen generation and LoRA on a fictional bilingual fixture. The research preview carries no application authority.
+
 ## Unreleased - Cleanup QA guard alignment
 
 - Align the cleanup progress regression setup wait with its action guard, rather

@@ -7,6 +7,8 @@ Created and maintained by DUYTRUYENTHONG, with community contributions welcome. 
 Bring your own agent and CV. Research suitable jobs, prepare truthful documents,
 review an exact application package, and track what actually happened.
 
+An optional [Qwen3.5 evidence-pairing pilot](docs/EVIDENCE_PAIRING.md) pairs requirements with exact CV quotes and includes a reproducible fictional benchmark.
+
 ## Start here
 
 **Want an MCP server for your AI host?** Follow the [minimal local MCP setup](docs/MCP_SERVER.md)
@@ -295,3 +297,33 @@ template and separate verification of actual GitHub enforcement. A checked-in
 configuration does not itself enable server protection.
 
 Opt-in schema6 application lanes and TinyFish public Fetch batches are documented in [the architecture and CLI guide](docs/PARALLEL_APPLICATIONS.md). Use the [detailed agent prompt](prompts/ten-job-batch.md). Requires an authorized host bridge with isolated concurrent sessions for actual simultaneous applications; no live browser driver is bundled.
+
+## Evidence-first tailoring evals
+
+Use the [benchmark and hill-climb guide](docs/TRUSTED_TAILOR_BENCHMARK.md) to
+prepare private real-evidence cases, collect human reviews, compare fixed prompts
+and record bounded development rounds before one final test. The optional
+Qwen3.5 free-T4 runner is experimental and not GPU-verified. No cloud upload,
+model promotion or application happens automatically; hiring improvement remains
+unmeasured. Start with the [refined workflow prompt](prompts/TRUSTED_TAILOR_HILLCLIMB.md).
+
+[Evidence retrieval and CV planning](docs/CV_PLANNING.md) adds ranked source facts,
+an explicit human-reviewed requirement matrix and a bounded exact-evidence plan.
+It also supports a separate fixed-prompt full-evidence/top-K benchmark. Retrieval
+scores are not semantic fit scores; plans retain missing/partial requirements
+and do not authorize applications or training.
+
+[First-layer CV reviewers](docs/CV_REVIEW_AGENTS.md) provide portable evidence,
+requirement and editorial agent requests with source-bound advisory capture.
+AI proposals remain separate from human labels; native agents and model calls
+are not automatically installed or dispatched.
+
+[Existing-host review automation](docs/HOST_REVIEW_AUTOMATION.md) coordinates
+the three passes with bounded start/advance handoffs and exact completed-review
+reuse. The current agent host supplies reasoning; pending work is not replayed.
+No new model service, background watcher or human-label automation is installed.
+
+Use the project [cv-evaluation skill](.agents/skills/cv-evaluation/SKILL.md) for
+explicit benchmark and grader-comparison tasks. [Cross-checking eval models](docs/CV_EVAL_CROSSCHECK.md)
+compares captured passes on identical inputs, keeps missing outputs visible and
+routes disagreements to humans. Same-host agreement is not independent validation.

@@ -365,3 +365,24 @@ and [Qwen3-8B model card](https://huggingface.co/Qwen/Qwen3-8B) were checked on
 distribution does not relicense the base model, grant candidate-data rights or
 certify model quality. The 8B pilot is report-only, not a distributed checkpoint.
 See [catalog and actual assets](../models/README.md).
+
+
+## 2026-11-18 — evaluation design and hill-climb concept review
+
+Reviewed Anthropic skills commit `e4bb5d960d87126ff3b3a8af1a104b7db67560ba`:
+
+- `skills/claude-api/shared/evals/eval-hillclimb.md`, SHA256
+  `315ae8540ebaeb9f1d7de5efa49625e6137ead255dc3a545b63393df89375588`.
+- `skills/claude-api/shared/evals/build-eval.md`, SHA256
+  `c8f6ae960867f6b3b35557aec75361553888ae7168f268365444bf6a4e09a5d7`.
+- `skills/claude-api/LICENSE.txt`, Apache2.0, SHA256
+  `bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362`.
+
+Conceptual references only. No upstream code, skill files or hook is copied,
+installed or executed. Original MIT kit implementation adapts fixed development/
+held-out evaluation, focused diffs, bounded spending and raw-output review.
+Claude-specific pricing, model routing, automatic run-resume and mandatory
+interview choreography are not adopted. Qwen consumer/precision remains explicit.
+Official OpenAI evaluation guidance and the Qwen3.5-4B model card were also read;
+provider-specific runtime compatibility is still unverified. Acceptance evidence
+is the fictional regression suite and scoped prompt audit, not a live-model gain.
